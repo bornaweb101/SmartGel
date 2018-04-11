@@ -32,13 +32,11 @@
     CGRect prevFrame;
 }
 
-@property (strong, nonatomic) IBOutlet UIImageView *takenImageView;
 @property (strong, nonatomic) IBOutlet UILabel *valueLabel;
 @property (strong, nonatomic) IBOutlet UILabel *dirtyvalueLabel;
 
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *locationLabel;
-@property (strong, nonatomic) IBOutlet UILabel *notificationLabel;
 
 @property (strong, nonatomic) IBOutlet UIButton *showCleanAreaButton;
 @property (strong, nonatomic) IBOutlet UIButton *addManualAreaButton;
@@ -49,6 +47,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *tagLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *tagImageView;
 
+@property (strong, nonatomic) IBOutlet UIView *manualModeView;
 @property (strong, nonatomic) IBOutlet SGCleanEditView *cleanEditView;
 //@property (strong, nonatomic) SGCleanEditView *cleanEditView;
 

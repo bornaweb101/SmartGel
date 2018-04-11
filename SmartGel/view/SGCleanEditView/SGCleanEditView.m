@@ -11,7 +11,9 @@
 #import "SGConstant.h"
 #import "DirtyExtractor.h"
 
-@implementation SGCleanEditView
+@implementation SGCleanEditView{
+    UIPanGestureRecognizer *panTapGesure;
+}
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
@@ -36,14 +38,21 @@
 
 -(void)initViewWithImage:(UIImage *)image{
     [self.scrollView setZoomScale:1];
-    [self.imgview removeFromSuperview];
     CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.scrollView takenImage:image];
+    [self.imgview removeFromSuperview];
     self.imgview =  [[UIImageView alloc] initWithFrame:rect];
     self.imgview.image = image;
     self.takenImage = image;
     [self.scrollView addSubview:self.imgview];
-    UIPanGestureRecognizer *singleTap = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
-    [self.scrollView addGestureRecognizer:singleTap];
+}
+
+-(void)addPanGesture{
+    panTapGesure = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
+    [self.scrollView addGestureRecognizer:panTapGesure];
+}
+
+-(void)removePanGesture{
+    [self.scrollView removeGestureRecognizer:panTapGesure];
 }
 
 /************************************************************************************************************************************

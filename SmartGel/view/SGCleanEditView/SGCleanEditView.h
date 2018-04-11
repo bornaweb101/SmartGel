@@ -42,4 +42,7 @@
 
 -(void)addManualNonGelArea:(int)touchPosition withCleanArray:(NSMutableArray *)cleanArray;
 
+-(void)addPanGesture;
+-(void)removePanGesture;
+
 @end

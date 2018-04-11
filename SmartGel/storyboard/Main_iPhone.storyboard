@@ -398,7 +398,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="showHideCleanArea" destination="BYZ-38-t0r" eventType="touchUpInside" id="3O6-Az-z0E"/>
+                                            <action selector="autoDectectClicked" destination="BYZ-38-t0r" eventType="touchUpInside" id="8fL-5o-7WM"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto detect" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z21-7M-zV5">
@@ -427,7 +427,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="showHideCleanArea" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kvq-Fc-Vas"/>
+                                            <action selector="manualModeClicked" destination="BYZ-38-t0r" eventType="touchUpInside" id="JBc-oj-3Ef"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manual Mode" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ulI-8p-Wja">
@@ -692,7 +692,7 @@
                         <outlet property="dateLabel" destination="7wL-2c-Txc" id="k1G-Q3-0rM"/>
                         <outlet property="dirtyvalueLabel" destination="854-Yh-x7d" id="aeP-2f-e6J"/>
                         <outlet property="locationLabel" destination="A8I-5h-BTo" id="HbW-vt-Zur"/>
-                        <outlet property="showCleanAreaButton" destination="MGE-Nh-JIh" id="4M0-eF-22p"/>
+                        <outlet property="manualModeView" destination="7fU-z5-9Y5" id="3Fq-0y-wG8"/>
                         <outlet property="tagImageView" destination="bhD-7U-EzC" id="7A5-Dj-U8L"/>
                         <outlet property="tagLabel" destination="jnk-gN-FLo" id="Ucw-3U-QWQ"/>
                         <outlet property="takePhotoButton" destination="M1e-FX-kfH" id="vSb-kn-hAj"/>

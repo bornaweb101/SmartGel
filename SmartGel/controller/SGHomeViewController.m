@@ -39,11 +39,10 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     if(isTakenPhoto){
-        [self initDataUiWithImage];
         isTakenPhoto = false;
-        [hud hideAnimated:false];
-        [self showAlertdialog:@"" message:@"Please touch any grid cell to choose non-gel areas"];
-        isShowedAddingCleanAlert = false;
+        [self initAutoDetectDataUiWithImage:^(NSString *result) {
+            [hud hideAnimated:false];
+        }];
     }
 }
 
@@ -197,10 +196,6 @@
  *************************************************************************************************************************************/
 
 -(void)setLabelsWithEstimateData{
-    if(!self.notificationLabel.isHidden)
-        [self.notificationLabel setHidden:YES];
-    [self.takenImageView setImage:self.estimateImage.image];
-    [self.dateLabel setText:[[SGUtil sharedUtil] getCurrentTimeString]];
     [self.valueLabel setText:[NSString stringWithFormat:@"%.2f", self.estimateImage.cleanValue]];
     [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.estimateImage.cleanValue]];
 }
@@ -209,22 +204,35 @@
  * show/hide clean area
  *************************************************************************************************************************************/
 
--(IBAction)showHideCleanArea{
+-(IBAction)autoDectectClicked{
     if(self.estimateImage.image == nil){
-        [self showAlertdialog:nil message:@"Please take a photo."];
+        [self showAlertdialog:nil message:@"Please take or choose a photo."];
         return;
     }
-    if(isShowDirtyArea)
-        [self hideDirtyArea];
-    else
-        [self showCleanAndDirtyArea];
+    [self onSetAutoDetectMode];
 }
+
+-(void)onSetAutoDetectMode{
+    [self.manualModeView setAlpha:0.2];
+    [self.cleanEditView removePanGesture];
+//    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    if(isShowDirtyArea)
+//        [self hideDirtyArea];
+//    [self initDataUiWithImage];
+//    [self.cleanEditView showCleanArea:^(NSString *result) {
+//
+//        [hud hideAnimated:false];
+//    }];
+}
+
+-(IBAction)manualModeClicked{
+    [self.manualModeView setAlpha:1.0];
+}
+
 
 -(void)showCleanAndDirtyArea{
     isShowDirtyArea = true;
-    [self.notificationLabel setHidden:YES];
     [self.showCleanAreaLabel setText:@"Hide clean area"];
-//    [self.showCleanAreaButton setBackgroundColor:SGColorDarkGreen];
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self.cleanEditView showCleanArea:^(NSString *result) {
         [hud hideAnimated:false];
@@ -237,7 +245,6 @@
 
 -(void)hideDirtyArea{
     isShowDirtyArea = false;
-    [self.notificationLabel setHidden:NO];
     [self.showCleanAreaLabel setText:@"Show clean area"];
 //    [self.showCleanAreaButton setBackgroundColor:SGColorDarkPink];
     [self.cleanEditView hideCleanArea:self.engine.areaCleanState];
@@ -282,17 +289,17 @@
  *************************************************************************************************************************************/
 
 -(IBAction)resetNonGelAreaTapped:(id)sender{
-    if(self.estimateImage.image == nil){
-        [self showAlertdialog:nil message:@"Please take a photo."];
-        return;
-    }
-    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if(isShowDirtyArea)
-            [self hideDirtyArea];
-        [self initDataUiWithImage];
-        [hud hideAnimated:false];
-    });
+//    if(self.estimateImage.image == nil){
+//        [self showAlertdialog:nil message:@"Please take a photo."];
+//        return;
+//    }
+//    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        if(isShowDirtyArea)
+//            [self hideDirtyArea];
+//        [self initDataUiWithImage];
+//        [hud hideAnimated:false];
+//    });
 }
 
 /************************************************************************************************************************************
@@ -307,18 +314,6 @@
     if(isShowDirtyArea)
         [self hideDirtyArea];
     [self showPhotoChooseActionSheet];
-//    self.estimateImage = [[EstimateImageModel alloc] init];
-//    self.estimateImage.image = [UIImage imageNamed:@"image001.png"];
-//    isTakenPhoto = true;
-//    [self initDataUiWithImage];
-
-//    NSString* imageURL = [self getImageUrl:3];
-//    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
-//                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//                              if(error==nil){
-//                                  [self initDataUiWithImage:image];
-//                              }
-//                          }];
 }
 
 -(void)showPhotoChooseActionSheet{
@@ -370,6 +365,7 @@
         UIImageWriteToSavedPhotosAlbum(image,nil,nil,nil);
     }
     isTakenPhoto = true;
+    [self.dateLabel setText:[[SGUtil sharedUtil] getCurrentTimeString]];
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -378,12 +374,15 @@
  * init data and UI from choose image
  *************************************************************************************************************************************/
 
--(void)initDataUiWithImage{
+-(void)initAutoDetectDataUiWithImage:(void (^)(NSString *result))completionHandler{
     isSavedImage = false;
     self.engine = [[DirtyExtractor alloc] initWithImage:self.estimateImage.image];
     [self.estimateImage setImageDataModel:self.engine.cleanValue withDate:self.dateLabel.text withTag:self.tagLabel.text withLocation:self.locationLabel.text  withCleanArray:self.engine.areaCleanState];
     [self setLabelsWithEstimateData];
     [self.cleanEditView setImage:self.estimateImage.image withCleanArray:self.engine.areaCleanState];
+    [self.cleanEditView showCleanArea:^(NSString *result) {
+        completionHandler(@"completed");
+    }];
 }
 
 /************************************************************************************************************************************
