@@ -24,11 +24,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (([FIRAuth auth].currentUser)&&(([SGSharedManager.sharedManager isAlreadyRunnded])) ) {
-        [self getCurrentUser];
-    }else{
-        [self anonymouslySignIn];
-    }
+    [self homeScreenInit];
+//    if (([FIRAuth auth].currentUser)&&(([SGSharedManager.sharedManager isAlreadyRunnded])) ) {
+//        [self getCurrentUser];
+//    }else{
+//        [self anonymouslySignIn];
+//    }
 }
 
 - (void)viewDidLayoutSubviews {
@@ -223,7 +224,7 @@
     isShowDirtyArea = true;
     [self.notificationLabel setHidden:YES];
     [self.showCleanAreaLabel setText:@"Hide clean area"];
-    [self.showCleanAreaButton setBackgroundColor:SGColorDarkGreen];
+//    [self.showCleanAreaButton setBackgroundColor:SGColorDarkGreen];
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self.cleanEditView showCleanArea:^(NSString *result) {
         [hud hideAnimated:false];
@@ -238,7 +239,7 @@
     isShowDirtyArea = false;
     [self.notificationLabel setHidden:NO];
     [self.showCleanAreaLabel setText:@"Show clean area"];
-    [self.showCleanAreaButton setBackgroundColor:SGColorDarkPink];
+//    [self.showCleanAreaButton setBackgroundColor:SGColorDarkPink];
     [self.cleanEditView hideCleanArea:self.engine.areaCleanState];
 //    [self showAlertdialog:@"" message:@"Please touch any grid cell to choose non-gel areas"];
 }
@@ -422,7 +423,7 @@
 - (void)onTappedGridView:(int)touchLocation{
     if(isShowDirtyArea){
         if([self.estimateImage isManualCleanlArea:touchLocation]){
-            [self removeMaunalCleanArea:touchLocation];
+//            [self removeMaunalCleanArea:touchLocation];
         }else{
             [self addManualCleanArea:touchLocation];
         }

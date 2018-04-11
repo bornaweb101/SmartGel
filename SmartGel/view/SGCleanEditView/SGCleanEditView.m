@@ -42,7 +42,7 @@
     self.imgview.image = image;
     self.takenImage = image;
     [self.scrollView addSubview:self.imgview];
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
+    UIPanGestureRecognizer *singleTap = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
     [self.scrollView addGestureRecognizer:singleTap];
 }
 
@@ -128,7 +128,7 @@
  * scrollview single tap gestured
  *************************************************************************************************************************************/
 
-- (void)singleTapGestureCaptured:(UITapGestureRecognizer *)gesture
+- (void)singleTapGestureCaptured:(UIPanGestureRecognizer *)gesture
 {
     CGPoint touchPoint=[gesture locationInView:self.gridView];
     if(self.takenImage==nil)
