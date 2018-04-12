@@ -67,13 +67,13 @@
 
 - (void)orientationChanged:(NSNotification *)note
 {
-    if(self.estimateImage!=nil){
-        if(isShowDirtyArea){
-           [self hideDirtyArea];
-        }
+//    if(self.estimateImage!=nil){
+//        if(isShowDirtyArea){
+//           [self hideDirtyArea];
+//        }
 //        [self drawGridView];
 //        [self initCleanareaViews: self.engine.areaCleanState];
-    }
+//    }
 }
 
 - (void)initData{
@@ -83,10 +83,11 @@
     isAddCleanArea = false;
     isShowDirtyArea = false;
     self.cleanEditView.delegate = self;
+    
     self.engine = [[DirtyExtractor alloc] init];
+    self.manualEngine = [[DirtyExtractor alloc] init];
+    
     [self initLocationManager];
-    self.cleanareaViews = [NSMutableArray array];
-    self.orignialcleanareaViews = [NSMutableArray array];
     [self.dateLabel setText:[[SGUtil sharedUtil] getCurrentTimeString]];
 }
 
@@ -209,47 +210,39 @@
         [self showAlertdialog:nil message:@"Please take or choose a photo."];
         return;
     }
-    [self onSetAutoDetectMode];
-}
-
--(void)onSetAutoDetectMode{
     [self.manualModeView setAlpha:0.2];
-    [self.cleanEditView removePanGesture];
-//    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    if(isShowDirtyArea)
-//        [self hideDirtyArea];
-//    [self initDataUiWithImage];
-//    [self.cleanEditView showCleanArea:^(NSString *result) {
-//
-//        [hud hideAnimated:false];
-//    }];
+    [self.cleanEditView onSetAutoDetectMode];
 }
 
 -(IBAction)manualModeClicked{
-    [self.manualModeView setAlpha:1.0];
-}
-
-
--(void)showCleanAndDirtyArea{
-    isShowDirtyArea = true;
-    [self.showCleanAreaLabel setText:@"Hide clean area"];
-    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self.cleanEditView showCleanArea:^(NSString *result) {
-        [hud hideAnimated:false];
-    }];
-    if (isShowedAddingCleanAlert == false){
-        [self showAlertdialog:@"" message:@"Please add manually clean areas by touching cells if you see any undetected clean area."];
-        isShowedAddingCleanAlert = true;
+    if(self.estimateImage.image == nil){
+        [self showAlertdialog:nil message:@"Please take or choose a photo."];
+        return;
     }
+    [self.manualModeView setAlpha:1.0];
+    [self.cleanEditView onSetManualMode];
 }
 
--(void)hideDirtyArea{
-    isShowDirtyArea = false;
-    [self.showCleanAreaLabel setText:@"Show clean area"];
-//    [self.showCleanAreaButton setBackgroundColor:SGColorDarkPink];
-    [self.cleanEditView hideCleanArea:self.engine.areaCleanState];
-//    [self showAlertdialog:@"" message:@"Please touch any grid cell to choose non-gel areas"];
-}
+//-(void)showCleanAndDirtyArea{
+//    isShowDirtyArea = true;
+//    [self.showCleanAreaLabel setText:@"Hide clean area"];
+//    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [self.cleanEditView showCleanArea:^(NSString *result) {
+//        [hud hideAnimated:false];
+//    }];
+//    if (isShowedAddingCleanAlert == false){
+//        [self showAlertdialog:@"" message:@"Please add manually clean areas by touching cells if you see any undetected clean area."];
+//        isShowedAddingCleanAlert = true;
+//    }
+//}
+//
+//-(void)hideDirtyArea{
+//    isShowDirtyArea = false;
+//    [self.showCleanAreaLabel setText:@"Show clean area"];
+////    [self.showCleanAreaButton setBackgroundColor:SGColorDarkPink];
+//    [self.cleanEditView hideCleanArea:self.engine.areaCleanState];
+////    [self showAlertdialog:@"" message:@"Please touch any grid cell to choose non-gel areas"];
+//}
 
 /************************************************************************************************************************************
  * save photo
@@ -311,8 +304,6 @@
     if(!self.selectedTag.tagName){
         self.selectedTag = [[SGTag alloc] init];
     }
-    if(isShowDirtyArea)
-        [self hideDirtyArea];
     [self showPhotoChooseActionSheet];
 }
 
@@ -380,9 +371,7 @@
     [self.estimateImage setImageDataModel:self.engine.cleanValue withDate:self.dateLabel.text withTag:self.tagLabel.text withLocation:self.locationLabel.text  withCleanArray:self.engine.areaCleanState];
     [self setLabelsWithEstimateData];
     [self.cleanEditView setImage:self.estimateImage.image withCleanArray:self.engine.areaCleanState];
-    [self.cleanEditView showCleanArea:^(NSString *result) {
-        completionHandler(@"completed");
-    }];
+    completionHandler(@"completion");
 }
 
 /************************************************************************************************************************************
@@ -411,12 +400,12 @@
  *************************************************************************************************************************************/
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch1 = [touches anyObject];
-    CGPoint location = [touch1 locationInView:self.cleanEditView];
-    if(CGRectContainsPoint(self.tagImageView.frame, location)){
-        [self imgToFullScreen];
-        return ;
-    }
+//    UITouch *touch1 = [touches anyObject];
+//    CGPoint location = [touch1 locationInView:self.cleanEditView];
+//    if(CGRectContainsPoint(self.tagImageView.frame, location)){
+//        [self imgToFullScreen];
+//        return ;
+//    }
 }
 
 - (void)onTappedGridView:(int)touchLocation{

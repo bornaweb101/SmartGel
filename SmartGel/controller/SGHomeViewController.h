@@ -49,16 +49,12 @@
 
 @property (strong, nonatomic) IBOutlet UIView *manualModeView;
 @property (strong, nonatomic) IBOutlet SGCleanEditView *cleanEditView;
-//@property (strong, nonatomic) SGCleanEditView *cleanEditView;
 
 @property (nonatomic, strong) DirtyExtractor *engine;
-@property (nonatomic, strong) DirtyExtractor *partyEngine;
+@property (nonatomic, strong) DirtyExtractor *manualEngine;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) EstimateImageModel *estimateImage;
 
 @property (strong, nonatomic) SGTag *selectedTag;
-@property (strong, nonatomic) NSMutableArray *cleanareaViews;
-@property (strong, nonatomic) NSMutableArray *orignialcleanareaViews;
-
 @end

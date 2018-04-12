@@ -19,31 +19,70 @@
     self = [super initWithCoder:aDecoder];
     if(self){
         self.imgview = [[UIImageView alloc] init];
+        self.manualImgview = [[UIImageView alloc] init];
+        self.autoDetectCleanAreaViews = [NSMutableArray array];
+        self.manualCleanAreaViews = [NSMutableArray array];
     }
     return self;
 }
 
 -(void)setImage:(UIImage *)image
  withCleanArray: (NSMutableArray *)cleanArray{
-    [self initViewWithImage:image];
-    [self initDatas];
-    [self drawGridView];
-    [self initCleanareaViews: cleanArray];
+    
+    [self initViewwithImage:image];
+
+    [self initAutoDetectData:cleanArray];
+    
+    CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.scrollView takenImage:self.takenImage];
+    [self initGridView:rect];
+    [self initAutoDetectImageView:rect];
+//    [self initManualImageView:rect];
+    [self initAutoDetectCleanAreaViews];
 }
 
--(void)initDatas{
-    self.cleanareaViews = [NSMutableArray array];
-    self.orignialcleanareaViews = [NSMutableArray array];
-}
-
--(void)initViewWithImage:(UIImage *)image{
+-(void)initViewwithImage:(UIImage *)image{
     [self.scrollView setZoomScale:1];
-    CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.scrollView takenImage:image];
+    self.takenImage = image;
+}
+
+-(void)initAutoDetectData:(NSMutableArray *)cleanArray{
+    [self.autoDetectCleanAreaViews removeAllObjects];
+    [self.imgview.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
+    self.autoDetectCleanAreaViews = cleanArray;
+}
+
+-(void)initAutoDetectImageView:(CGRect)rect{
     [self.imgview removeFromSuperview];
     self.imgview =  [[UIImageView alloc] initWithFrame:rect];
-    self.imgview.image = image;
-    self.takenImage = image;
+    self.imgview.image = self.takenImage;
+    [self.imgview addSubview:self.gridView];
     [self.scrollView addSubview:self.imgview];
+}
+
+-(void)initManualImageView:(CGRect)rect{
+    [self.manualImgview removeFromSuperview];
+    self.manualImgview =  [[UIImageView alloc] initWithFrame:rect];
+    self.manualImgview.image = self.takenImage;
+    [self.manualImgview addSubview:self.gridView];
+    [self.scrollView addSubview:self.manualImgview];
+}
+
+-(void)initGridView:(CGRect)rect{
+    [self.gridContentView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
+    self.gridView = [[SGGridView alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
+    [self.gridView addGridViews:SGGridCount withColCount:SGGridCount];
+}
+
+-(void)onSetAutoDetectMode{
+    [self.imgview setHidden:NO];
+    [self.manualImgview setHidden:YES];
+    [self removePanGesture];
+}
+
+-(void)onSetManualMode{
+    [self.imgview setHidden:YES];
+    [self.manualImgview setHidden:NO];
+    [self addPanGesture];
 }
 
 -(void)addPanGesture{
@@ -84,25 +123,11 @@
     self.imgview.frame = contentsFrame;
 }
 
-
-/************************************************************************************************************************************
- * Grid View
- *************************************************************************************************************************************/
-
--(void)drawGridView{
-    [self.gridContentView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    self.gridView = [[SGGridView alloc] initWithFrame:CGRectMake(0, 0, self.imgview.frame.size.width, self.imgview.frame.size.height)];
-    [self.gridView addGridViews:SGGridCount withColCount:SGGridCount];
-    [self.imgview addSubview:self.gridView];
-}
-
 /************************************************************************************************************************************
  * init clean area views
  *************************************************************************************************************************************/
 
--(void)initCleanareaViews:(NSMutableArray*)dirtyState{
-    [self.cleanareaViews removeAllObjects];
-    [self.orignialcleanareaViews removeAllObjects];
+-(void)initAutoDetectCleanAreaViews{
     float areaWidth = self.imgview.frame.size.width/AREA_DIVIDE_NUMBER;
     float areaHeight = self.imgview.frame.size.height/AREA_DIVIDE_NUMBER;
     for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
@@ -121,17 +146,27 @@
             y = (AREA_DIVIDE_NUMBER-1)-i%AREA_DIVIDE_NUMBER;
         }
         UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth, y*areaHeight, areaWidth, areaHeight)];
-        if([[dirtyState objectAtIndex:i] intValue] == IS_CLEAN){
+        if([[self.autoDetectCleanAreaViews objectAtIndex:i] intValue] == IS_CLEAN){
             [paintView setBackgroundColor:[UIColor redColor]];
             [paintView setAlpha:0.3];
-        }else if([[dirtyState objectAtIndex:i] intValue] == IS_DIRTY){
+        }else if([[self.autoDetectCleanAreaViews objectAtIndex:i] intValue] == IS_DIRTY){
             [paintView setBackgroundColor:[UIColor blueColor]];
             [paintView setAlpha:0.0];
         }
-        [self.cleanareaViews addObject:paintView];
-        [self.orignialcleanareaViews addObject:paintView];
+        [self.imgview addSubview:paintView];
+        [self.autoDetectCleanAreaViews addObject:paintView];
     }
 }
+
+//-(void)addAutoDetectCleanAreaInImageView{
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        for (int i = 0; i<self.autoDetectCleanAreaViews.count; i++) {
+//            UIView *view = [self.autoDetectCleanAreaViews objectAtIndex:i];
+//            [self.imgview addSubview:view];
+//            completionHandler(@"completed");
+//        }
+//    });
+//}
 
 /************************************************************************************************************************************
  * scrollview single tap gestured
@@ -139,38 +174,38 @@
 
 - (void)singleTapGestureCaptured:(UIPanGestureRecognizer *)gesture
 {
-    CGPoint touchPoint=[gesture locationInView:self.gridView];
-    if(self.takenImage==nil)
-        return;
-    int touchPosition = [self.gridView getContainsFrame:self.takenImage withPoint:touchPoint withRowCount:SGGridCount withColCount:SGGridCount];
-    if(touchPosition != -1){
-        if(self.delegate != nil)
-          [self.delegate onTappedGridView:touchPosition];
-    }
+//    CGPoint touchPoint=[gesture locationInView:self.gridView];
+//    if(self.takenImage==nil)
+//        return;
+//    int touchPosition = [self.gridView getContainsFrame:self.takenImage withPoint:touchPoint withRowCount:SGGridCount withColCount:SGGridCount];
+//    if(touchPosition != -1){
+//        if(self.delegate != nil)
+//          [self.delegate onTappedGridView:touchPosition];
+//    }
 }
 
 /************************************************************************************************************************************
  * show and hide clean area
  *************************************************************************************************************************************/
+//
+//-(void)addAutoDetectCleanAreaInImageView:(void (^)(NSString *result))completionHandler{
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        for (int i = 0; i<self.autoDetectCleanAreaViews.count; i++) {
+//            UIView *view = [self.autoDetectCleanAreaViews objectAtIndex:i];
+//            [self.imgview addSubview:view];
+//            completionHandler(@"completed");
+//        }
+//    });
+//}
 
--(void)showCleanArea:(void (^)(NSString *result))completionHandler{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        for (int i = 0; i<self.cleanareaViews.count; i++) {
-            UIView *view = [self.cleanareaViews objectAtIndex:i];
-            [self.imgview addSubview:view];
-            completionHandler(@"completed");
-        }
-    });
-}
-
--(void)hideCleanArea:(NSMutableArray *)areaCleanState{
-    for (int i = 0; i<self.cleanareaViews.count; i++) {
-        if([[areaCleanState objectAtIndex:i] intValue] != NO_GEL){
-            UIView *view = [self.cleanareaViews objectAtIndex:i];
-            [view removeFromSuperview];
-        }
-    }
-}
+//-(void)hideCleanArea:(NSMutableArray *)areaCleanState{
+//    for (int i = 0; i<self.autoDetectCleanAreaViews.count; i++) {
+//        if([[areaCleanState objectAtIndex:i] intValue] != NO_GEL){
+//            UIView *view = [self.autoDetectCleanAreaViews objectAtIndex:i];
+//            [view removeFromSuperview];
+//        }
+//    }
+//}
 
 /************************************************************************************************************************************
  * add/remove maunal clean area
@@ -183,13 +218,13 @@
     for(int i = 0; i<rate;i++){
         for(int j = 0; j< rate; j++){
             NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
-            UIView *view = [self.cleanareaViews objectAtIndex:postion];
+            UIView *view = [self.manualCleanAreaViews objectAtIndex:postion];
             [view removeFromSuperview];
             UIView *manualPinkView = [[UIView alloc] initWithFrame:view.frame];
             [manualPinkView setBackgroundColor:[UIColor redColor]];
             [manualPinkView setAlpha:0.3];
-            [self.cleanareaViews replaceObjectAtIndex:postion withObject:manualPinkView];
-            [self.imgview addSubview:[self.cleanareaViews objectAtIndex:postion]];
+            [self.manualCleanAreaViews replaceObjectAtIndex:postion withObject:manualPinkView];
+            [self.manualImgview addSubview:[self.manualCleanAreaViews objectAtIndex:postion]];
         }
     }
 }
@@ -201,11 +236,11 @@
     for(int i = 0; i<rate;i++){
         for(int j = 0; j< rate; j++){
             NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
-            UIView *view = [self.cleanareaViews objectAtIndex:postion];
+            UIView *view = [self.manualCleanAreaViews objectAtIndex:postion];
             [view removeFromSuperview];
-            UIView *originalview = [self.orignialcleanareaViews objectAtIndex:postion];
-            [self.cleanareaViews replaceObjectAtIndex:postion withObject:originalview];
-            [self.imgview addSubview:originalview];
+            UIView *originalview = [self.manualCleanAreaViews objectAtIndex:postion];
+            [self.manualCleanAreaViews replaceObjectAtIndex:postion withObject:originalview];
+            [self.manualImgview addSubview:originalview];
         }
     }
 }
@@ -220,13 +255,13 @@
     for(int i = 0; i<rate;i++){
         for(int j = 0; j< rate; j++){
             NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
-            UIView *view = [self.cleanareaViews objectAtIndex:postion];
+            UIView *view = [self.manualCleanAreaViews objectAtIndex:postion];
             [view removeFromSuperview];
             if([[cleanArray objectAtIndex:postion] intValue] == NO_GEL){
                 [view setBackgroundColor:[UIColor yellowColor]];
                 [view setAlpha:0.3];
-                [self.cleanareaViews replaceObjectAtIndex:postion withObject:view];
-                [self.imgview addSubview:view];
+                [self.manualCleanAreaViews replaceObjectAtIndex:postion withObject:view];
+                [self.manualImgview addSubview:view];
             }
         }
     }

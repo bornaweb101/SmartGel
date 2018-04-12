@@ -21,28 +21,28 @@
 
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 @property (strong, nonatomic) UIImageView *imgview;
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) UIImageView *manualImgview;
 
+@property (strong, nonatomic) UIImage *takenImage;
+
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *gridContentView;
 
 @property (strong, nonatomic) SGGridView *gridView;
 
-@property (strong, nonatomic) NSMutableArray *cleanareaViews;
-@property (strong, nonatomic) NSMutableArray *orignialcleanareaViews;
-@property (strong, nonatomic) UIImage *takenImage;
+@property (strong, nonatomic) NSMutableArray *autoDetectCleanAreaViews;
+@property (strong, nonatomic) NSMutableArray *manualCleanAreaViews;
 
 @property (nonatomic) BOOL zoomed;
+
 -(void)setImage:(UIImage *)image
  withCleanArray: (NSMutableArray *)cleanArray;
--(void)showCleanArea:(void (^)(NSString *result))completionHandler;
--(void)hideCleanArea:(NSMutableArray *)areaCleanState;
 
 -(void)addManualCleanArea:(int)touchPosition;
 -(void)removeMaunalCleanArea:(int)touchPosition;
-
 -(void)addManualNonGelArea:(int)touchPosition withCleanArray:(NSMutableArray *)cleanArray;
 
--(void)addPanGesture;
--(void)removePanGesture;
+-(void)onSetAutoDetectMode;
+-(void)onSetManualMode;
 
 @end
