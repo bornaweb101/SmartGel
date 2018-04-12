@@ -19,7 +19,6 @@
 
 @property (weak, nonatomic) id<SGCleanEditViewDelegate> delegate;
 
-@property (strong, nonatomic) IBOutlet UIView *contentView;
 @property (strong, nonatomic) UIImageView *imgview;
 @property (strong, nonatomic) UIImageView *manualImgview;
 
@@ -29,6 +28,7 @@
 @property (strong, nonatomic) IBOutlet UIView *gridContentView;
 
 @property (strong, nonatomic) SGGridView *gridView;
+@property (strong, nonatomic) SGGridView *manualGridView;
 
 @property (strong, nonatomic) NSMutableArray *autoDetectCleanAreaViews;
 @property (strong, nonatomic) NSMutableArray *manualCleanAreaViews;

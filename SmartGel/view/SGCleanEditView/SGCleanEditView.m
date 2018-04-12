@@ -22,27 +22,37 @@
         self.manualImgview = [[UIImageView alloc] init];
         self.autoDetectCleanAreaViews = [NSMutableArray array];
         self.manualCleanAreaViews = [NSMutableArray array];
+        panTapGesure = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
     }
     return self;
 }
 
 -(void)setImage:(UIImage *)image
  withCleanArray: (NSMutableArray *)cleanArray{
-    
     [self initViewwithImage:image];
-
-    [self initAutoDetectData:cleanArray];
-    
     CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.scrollView takenImage:self.takenImage];
-    [self initGridView:rect];
-    [self initAutoDetectImageView:rect];
-//    [self initManualImageView:rect];
-    [self initAutoDetectCleanAreaViews];
+    [self initAutoDetect:rect withCleanArray:cleanArray];
+    [self initManualMode:rect];
 }
 
 -(void)initViewwithImage:(UIImage *)image{
     [self.scrollView setZoomScale:1];
     self.takenImage = image;
+}
+
+/************************************************************************************************************************************
+ * init data and view for auto detect
+ *************************************************************************************************************************************/
+
+-(void)initAutoDetect:(CGRect)rect
+      withCleanArray : (NSMutableArray *)cleanArray{
+    
+    [self initAutoDetectData:cleanArray];
+    [self initAutoDetectGridView:rect];
+    [self initAutoDetectImageView:rect];
+    //    [self initManualImageView:rect];
+    [self initAutoDetectCleanAreaViews];
+
 }
 
 -(void)initAutoDetectData:(NSMutableArray *)cleanArray{
@@ -59,24 +69,70 @@
     [self.scrollView addSubview:self.imgview];
 }
 
--(void)initManualImageView:(CGRect)rect{
-    [self.manualImgview removeFromSuperview];
-    self.manualImgview =  [[UIImageView alloc] initWithFrame:rect];
-    self.manualImgview.image = self.takenImage;
-    [self.manualImgview addSubview:self.gridView];
-    [self.scrollView addSubview:self.manualImgview];
-}
-
--(void)initGridView:(CGRect)rect{
-    [self.gridContentView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
+-(void)initAutoDetectGridView:(CGRect)rect{
     self.gridView = [[SGGridView alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
     [self.gridView addGridViews:SGGridCount withColCount:SGGridCount];
 }
+
+// init auto detect clean area views
+-(void)initAutoDetectCleanAreaViews{
+    float areaWidth = self.imgview.frame.size.width/AREA_DIVIDE_NUMBER;
+    float areaHeight = self.imgview.frame.size.height/AREA_DIVIDE_NUMBER;
+    for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
+        int x,y;
+        if(self.takenImage.imageOrientation == UIImageOrientationLeft){
+            y = (AREA_DIVIDE_NUMBER-1) - i/AREA_DIVIDE_NUMBER;
+            x = i%AREA_DIVIDE_NUMBER;
+        }else if(self.takenImage.imageOrientation == UIImageOrientationRight){
+            y = i/AREA_DIVIDE_NUMBER;
+            x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
+        }else if(self.takenImage.imageOrientation == UIImageOrientationUp){
+            x = i/AREA_DIVIDE_NUMBER;
+            y = i%AREA_DIVIDE_NUMBER;
+        }else{
+            x = (AREA_DIVIDE_NUMBER-1)-i/AREA_DIVIDE_NUMBER;
+            y = (AREA_DIVIDE_NUMBER-1)-i%AREA_DIVIDE_NUMBER;
+        }
+        UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth, y*areaHeight, areaWidth, areaHeight)];
+        if([[self.autoDetectCleanAreaViews objectAtIndex:i] intValue] == IS_CLEAN){
+            [paintView setBackgroundColor:[UIColor redColor]];
+            [paintView setAlpha:0.3];
+        }else if([[self.autoDetectCleanAreaViews objectAtIndex:i] intValue] == IS_DIRTY){
+            [paintView setBackgroundColor:[UIColor blueColor]];
+            [paintView setAlpha:0.0];
+        }
+        [self.imgview addSubview:paintView];
+        [self.autoDetectCleanAreaViews addObject:paintView];
+    }
+}
+
 
 -(void)onSetAutoDetectMode{
     [self.imgview setHidden:NO];
     [self.manualImgview setHidden:YES];
     [self removePanGesture];
+}
+
+/************************************************************************************************************************************
+ * init data and view for manual mode
+ *************************************************************************************************************************************/
+
+-(void)initManualMode:(CGRect)rect{
+    [self initManualGridView:rect];
+    [self initManualImageView:rect];
+}
+
+-(void)initManualGridView:(CGRect)rect{
+    self.manualGridView = [[SGGridView alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
+    [self.manualGridView addGridViews:SGGridCount withColCount:SGGridCount];
+}
+
+-(void)initManualImageView:(CGRect)rect{
+    [self.manualImgview removeFromSuperview];
+    self.manualImgview =  [[UIImageView alloc] initWithFrame:rect];
+    self.manualImgview.image = self.takenImage;
+    [self.manualImgview addSubview:self.manualGridView];
+    [self.scrollView addSubview:self.manualImgview];
 }
 
 -(void)onSetManualMode{
@@ -85,8 +141,12 @@
     [self addPanGesture];
 }
 
+/************************************************************************************************************************************
+ * init panGesture
+ *************************************************************************************************************************************/
+
 -(void)addPanGesture{
-    panTapGesure = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
+//    panTapGesure = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
     [self.scrollView addGestureRecognizer:panTapGesure];
 }
 
@@ -123,50 +183,6 @@
     self.imgview.frame = contentsFrame;
 }
 
-/************************************************************************************************************************************
- * init clean area views
- *************************************************************************************************************************************/
-
--(void)initAutoDetectCleanAreaViews{
-    float areaWidth = self.imgview.frame.size.width/AREA_DIVIDE_NUMBER;
-    float areaHeight = self.imgview.frame.size.height/AREA_DIVIDE_NUMBER;
-    for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
-        int x,y;
-        if(self.takenImage.imageOrientation == UIImageOrientationLeft){
-            y = (AREA_DIVIDE_NUMBER-1) - i/AREA_DIVIDE_NUMBER;
-            x = i%AREA_DIVIDE_NUMBER;
-        }else if(self.takenImage.imageOrientation == UIImageOrientationRight){
-            y = i/AREA_DIVIDE_NUMBER;
-            x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
-        }else if(self.takenImage.imageOrientation == UIImageOrientationUp){
-            x = i/AREA_DIVIDE_NUMBER;
-            y = i%AREA_DIVIDE_NUMBER;
-        }else{
-            x = (AREA_DIVIDE_NUMBER-1)-i/AREA_DIVIDE_NUMBER;
-            y = (AREA_DIVIDE_NUMBER-1)-i%AREA_DIVIDE_NUMBER;
-        }
-        UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth, y*areaHeight, areaWidth, areaHeight)];
-        if([[self.autoDetectCleanAreaViews objectAtIndex:i] intValue] == IS_CLEAN){
-            [paintView setBackgroundColor:[UIColor redColor]];
-            [paintView setAlpha:0.3];
-        }else if([[self.autoDetectCleanAreaViews objectAtIndex:i] intValue] == IS_DIRTY){
-            [paintView setBackgroundColor:[UIColor blueColor]];
-            [paintView setAlpha:0.0];
-        }
-        [self.imgview addSubview:paintView];
-        [self.autoDetectCleanAreaViews addObject:paintView];
-    }
-}
-
-//-(void)addAutoDetectCleanAreaInImageView{
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        for (int i = 0; i<self.autoDetectCleanAreaViews.count; i++) {
-//            UIView *view = [self.autoDetectCleanAreaViews objectAtIndex:i];
-//            [self.imgview addSubview:view];
-//            completionHandler(@"completed");
-//        }
-//    });
-//}
 
 /************************************************************************************************************************************
  * scrollview single tap gestured
