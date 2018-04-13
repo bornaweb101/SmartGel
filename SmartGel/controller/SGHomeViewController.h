@@ -19,6 +19,13 @@
 #import "SGTagViewController.h"
 #import "SGCleanEditView.h"
 
+typedef enum {
+    NonGel,
+    Clean,
+    Dirty,
+    Erase
+} AddingType;
+
 @interface SGHomeViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate,SGTagViewControllerDelegate,SGCleanEditViewDelegate>{
     bool isShowDirtyArea;
     bool isSavedImage;
@@ -38,11 +45,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *locationLabel;
 
-@property (strong, nonatomic) IBOutlet UIButton *showCleanAreaButton;
-@property (strong, nonatomic) IBOutlet UIButton *addManualAreaButton;
-@property (strong, nonatomic) IBOutlet UILabel *addManualAreaLabel;
-@property (strong, nonatomic) IBOutlet UILabel *showCleanAreaLabel;
-@property (strong, nonatomic) IBOutlet UIButton *takePhotoButton;
+@property (strong, nonatomic) IBOutlet UIButton *nonGelButton;
+@property (strong, nonatomic) IBOutlet UIButton *cleanButton;
+@property (strong, nonatomic) IBOutlet UIButton *dirtyButton;
+@property (strong, nonatomic) IBOutlet UIButton *eraseButton;
 
 @property (strong, nonatomic) IBOutlet UILabel *tagLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *tagImageView;
@@ -55,6 +61,9 @@
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) EstimateImageModel *estimateImage;
+@property (strong, nonatomic) EstimateImageModel *manualEstimateImage;
 
 @property (strong, nonatomic) SGTag *selectedTag;
+
+@property (assign) int addingType;
 @end

@@ -550,7 +550,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="resetNonGelAreaTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Shn-IV-DGA"/>
+                                            <action selector="nonGelButtonClicked" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Ut-lS-uaq"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Non Gel" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zA-FF-CUe">
@@ -573,7 +573,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="resetNonGelAreaTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qTO-p9-LBC"/>
+                                            <action selector="cleanButtonClicked" destination="BYZ-38-t0r" eventType="touchUpInside" id="toB-Vs-BsS"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clean" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcZ-JG-F2Q">
@@ -596,7 +596,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="resetNonGelAreaTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a4f-K5-rXX"/>
+                                            <action selector="dirtyButtonClicked" destination="BYZ-38-t0r" eventType="touchUpInside" id="FMH-JG-wsH"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dirty" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJO-i0-cdP">
@@ -619,7 +619,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="resetNonGelAreaTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oml-aU-2FR"/>
+                                            <action selector="eraseButtonClicked" destination="BYZ-38-t0r" eventType="touchUpInside" id="SCm-Ya-8xs"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Erase" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0Y-WL-Twu">
@@ -688,14 +688,17 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
+                        <outlet property="cleanButton" destination="a4C-r1-aFk" id="koo-v4-vjR"/>
                         <outlet property="cleanEditView" destination="b2m-nP-ZNq" id="rD1-eN-EcP"/>
                         <outlet property="dateLabel" destination="7wL-2c-Txc" id="k1G-Q3-0rM"/>
+                        <outlet property="dirtyButton" destination="0Un-6D-IeW" id="Fsz-ir-aul"/>
                         <outlet property="dirtyvalueLabel" destination="854-Yh-x7d" id="aeP-2f-e6J"/>
+                        <outlet property="eraseButton" destination="9Zv-Iq-vMj" id="6eT-tL-FGl"/>
                         <outlet property="locationLabel" destination="A8I-5h-BTo" id="HbW-vt-Zur"/>
                         <outlet property="manualModeView" destination="7fU-z5-9Y5" id="3Fq-0y-wG8"/>
+                        <outlet property="nonGelButton" destination="ww9-7w-oVu" id="I9s-4X-QUn"/>
                         <outlet property="tagImageView" destination="bhD-7U-EzC" id="7A5-Dj-U8L"/>
                         <outlet property="tagLabel" destination="jnk-gN-FLo" id="Ucw-3U-QWQ"/>
-                        <outlet property="takePhotoButton" destination="M1e-FX-kfH" id="vSb-kn-hAj"/>
                         <outlet property="valueLabel" destination="XlK-fN-2iW" id="ziB-1A-6fv"/>
                     </connections>
                 </viewController>

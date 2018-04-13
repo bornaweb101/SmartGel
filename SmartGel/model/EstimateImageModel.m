@@ -11,6 +11,27 @@
 
 @implementation EstimateImageModel
 
+-(instancetype)initWithImage:(UIImage *) image{
+    self = [super init];
+    if(self){
+        self.cleanValue = 0;
+        self.image = image;
+        self.imageUrl = @"";
+        self.tag = @"";
+        self.tagImageUrl = @"";
+        self.date = @"";
+        self.location = @"";
+        self.cleanArea = @"";
+        self.nonGelArea = @"";
+        self.coloroffset = 0;
+        self.cleanArea = [self getStringFromArray:[self nonGelAreaArrayInit]];
+        self.nonGelArea = [self getStringFromArray:[self nonGelAreaArrayInit]];
+        self.manualCleanlArea = [self getStringFromArray:[self nonGelAreaArrayInit]];
+    }
+    return self;
+}
+
+
 -(instancetype)initWithSnapshot:(FIRDataSnapshot *) snapshot{
     self = [super init];
     if(self){

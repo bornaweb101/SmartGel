@@ -17,6 +17,7 @@
 @property (assign) float cleanValue;
 @property (strong, nonatomic) NSString *location;
 @property (strong, nonatomic) NSString *date;
+
 @property (strong, nonatomic) NSString *cleanArea;
 @property (strong, nonatomic) NSString *dirtyArea;
 @property (strong, nonatomic) NSString *nonGelArea;
@@ -31,6 +32,7 @@
 @property (nonatomic,strong) NSDictionary *data;
 
 -(instancetype)initWithSnapshot:(FIRDataSnapshot *) snapshot;
+-(instancetype)initWithImage:(UIImage *) image;
 
 - (void)setImageDataModel:(float)vaule
                  withDate:(NSString*)dateString

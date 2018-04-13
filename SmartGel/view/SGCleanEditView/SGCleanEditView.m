@@ -103,6 +103,8 @@
         }
         [self.imgview addSubview:paintView];
         [self.autoDetectCleanAreaViews addObject:paintView];
+        [self.manualCleanAreaViews addObject:paintView];
+
     }
 }
 
@@ -190,14 +192,14 @@
 
 - (void)singleTapGestureCaptured:(UIPanGestureRecognizer *)gesture
 {
-//    CGPoint touchPoint=[gesture locationInView:self.gridView];
-//    if(self.takenImage==nil)
-//        return;
-//    int touchPosition = [self.gridView getContainsFrame:self.takenImage withPoint:touchPoint withRowCount:SGGridCount withColCount:SGGridCount];
-//    if(touchPosition != -1){
-//        if(self.delegate != nil)
-//          [self.delegate onTappedGridView:touchPosition];
-//    }
+    CGPoint touchPoint=[gesture locationInView:self.manualGridView];
+    if(self.takenImage==nil)
+        return;
+    int touchPosition = [self.manualGridView getContainsFrame:self.takenImage withPoint:touchPoint withRowCount:SGGridCount withColCount:SGGridCount];
+    if(touchPosition != -1){
+        if(self.delegate != nil)
+          [self.delegate onTappedGridView:touchPosition];
+    }
 }
 
 /************************************************************************************************************************************

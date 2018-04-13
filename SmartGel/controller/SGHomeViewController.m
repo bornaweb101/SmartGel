@@ -40,7 +40,7 @@
     [super viewDidAppear:animated];
     if(isTakenPhoto){
         isTakenPhoto = false;
-        [self initAutoDetectDataUiWithImage:^(NSString *result) {
+        [self initDataUiWithTakenImage:^(NSString *result) {
             [hud hideAnimated:false];
         }];
     }
@@ -196,9 +196,9 @@
  * Set labels from estimage data
  *************************************************************************************************************************************/
 
--(void)setLabelsWithEstimateData{
-    [self.valueLabel setText:[NSString stringWithFormat:@"%.2f", self.estimateImage.cleanValue]];
-    [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.estimateImage.cleanValue]];
+-(void)setLabelsWithEstimateData:(EstimateImageModel *)estimateImage{
+    [self.valueLabel setText:[NSString stringWithFormat:@"%.2f", estimateImage.cleanValue]];
+    [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - estimateImage.cleanValue]];
 }
 
 /************************************************************************************************************************************
@@ -212,6 +212,7 @@
     }
     [self.manualModeView setAlpha:0.2];
     [self.cleanEditView onSetAutoDetectMode];
+    [self setLabelsWithEstimateData:self.estimateImage];
 }
 
 -(IBAction)manualModeClicked{
@@ -221,28 +222,9 @@
     }
     [self.manualModeView setAlpha:1.0];
     [self.cleanEditView onSetManualMode];
+    [self setLabelsWithEstimateData:self.manualEstimateImage];
 }
 
-//-(void)showCleanAndDirtyArea{
-//    isShowDirtyArea = true;
-//    [self.showCleanAreaLabel setText:@"Hide clean area"];
-//    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    [self.cleanEditView showCleanArea:^(NSString *result) {
-//        [hud hideAnimated:false];
-//    }];
-//    if (isShowedAddingCleanAlert == false){
-//        [self showAlertdialog:@"" message:@"Please add manually clean areas by touching cells if you see any undetected clean area."];
-//        isShowedAddingCleanAlert = true;
-//    }
-//}
-//
-//-(void)hideDirtyArea{
-//    isShowDirtyArea = false;
-//    [self.showCleanAreaLabel setText:@"Show clean area"];
-////    [self.showCleanAreaButton setBackgroundColor:SGColorDarkPink];
-//    [self.cleanEditView hideCleanArea:self.engine.areaCleanState];
-////    [self showAlertdialog:@"" message:@"Please touch any grid cell to choose non-gel areas"];
-//}
 
 /************************************************************************************************************************************
  * save photo
@@ -350,8 +332,9 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
-    self.estimateImage = [[EstimateImageModel alloc] init];
-    self.estimateImage.image = image;
+    self.estimateImage = [[EstimateImageModel alloc] initWithImage:image];
+    self.manualEstimateImage = [[EstimateImageModel alloc] initWithImage:image];
+    
     if(isSelectedFromCamera){
         UIImageWriteToSavedPhotosAlbum(image,nil,nil,nil);
     }
@@ -365,13 +348,18 @@
  * init data and UI from choose image
  *************************************************************************************************************************************/
 
--(void)initAutoDetectDataUiWithImage:(void (^)(NSString *result))completionHandler{
+-(void)initDataUiWithTakenImage:(void (^)(NSString *result))completionHandler{
     isSavedImage = false;
+    [self initAutoDetectData];
+    self.manualEngine = [[DirtyExtractor alloc] initWithImage:self.estimateImage.image];
+    [self.cleanEditView setImage:self.estimateImage.image withCleanArray:self.engine.areaCleanState];
+    [self autoDectectClicked];
+    completionHandler(@"completion");
+}
+
+-(void)initAutoDetectData{
     self.engine = [[DirtyExtractor alloc] initWithImage:self.estimateImage.image];
     [self.estimateImage setImageDataModel:self.engine.cleanValue withDate:self.dateLabel.text withTag:self.tagLabel.text withLocation:self.locationLabel.text  withCleanArray:self.engine.areaCleanState];
-    [self setLabelsWithEstimateData];
-    [self.cleanEditView setImage:self.estimateImage.image withCleanArray:self.engine.areaCleanState];
-    completionHandler(@"completion");
 }
 
 /************************************************************************************************************************************
@@ -380,19 +368,6 @@
  *************************************************************************************************************************************/
 
 -(IBAction)addManualAreaButtonTapped{
-    if(self.estimateImage.image == nil){
-        [self showAlertdialog:nil message:@"Please take a photo."];
-        return;
-    }
-    if(isAddCleanArea){
-        isAddCleanArea = false;
-        [self.addManualAreaLabel setText:@"Add Clean Area"];
-        [self.addManualAreaButton setBackgroundColor:SGColorDarkPink];
-    }else{
-        isAddCleanArea = true;
-        [self.addManualAreaLabel setText:@"Add Non-Gel Area"];
-        [self.addManualAreaButton setBackgroundColor:SGColorLigtGray];
-    }
 }
 
 /************************************************************************************************************************************
@@ -400,36 +375,77 @@
  *************************************************************************************************************************************/
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-//    UITouch *touch1 = [touches anyObject];
-//    CGPoint location = [touch1 locationInView:self.cleanEditView];
-//    if(CGRectContainsPoint(self.tagImageView.frame, location)){
-//        [self imgToFullScreen];
-//        return ;
-//    }
+    UITouch *touch1 = [touches anyObject];
+    CGPoint location = [touch1 locationInView:self.cleanEditView];
+    if(CGRectContainsPoint(self.tagImageView.frame, location)){
+        [self imgToFullScreen];
+        return ;
+    }
+}
+
+
+
+/************************************************************************************************************************************
+ * Manual Mode Functions
+ *************************************************************************************************************************************/
+
+-(IBAction)nonGelButtonClicked{
+    [self deselectAllButton];
+    self.nonGelButton.backgroundColor = SGColorDarkGreen;
+    self.addingType = NonGel;
+}
+
+-(IBAction)cleanButtonClicked{
+    [self deselectAllButton];
+    self.cleanButton.backgroundColor = SGColorDarkGreen;
+    self.addingType = Clean;
+}
+
+-(IBAction)dirtyButtonClicked{
+    [self deselectAllButton];
+    self.dirtyButton.backgroundColor = SGColorDarkGreen;
+    self.addingType = Dirty;
+}
+
+-(IBAction)eraseButtonClicked{
+    [self deselectAllButton];
+    self.eraseButton.backgroundColor = SGColorDarkGreen;
+    self.addingType = Erase;
+}
+
+-(void)deselectAllButton{
+    self.nonGelButton.backgroundColor = SGColorButtonGray;
+    self.cleanButton.backgroundColor = SGColorButtonGray;
+    self.dirtyButton.backgroundColor = SGColorButtonGray;
+    self.eraseButton.backgroundColor = SGColorButtonGray;
 }
 
 - (void)onTappedGridView:(int)touchLocation{
-    if(isShowDirtyArea){
-        if([self.estimateImage isManualCleanlArea:touchLocation]){
-//            [self removeMaunalCleanArea:touchLocation];
-        }else{
-            [self addManualCleanArea:touchLocation];
-        }
-    }else{
+    
+    if(self.addingType == NonGel){
         [self addManualNonGelArea:touchLocation];
+    }else if(self.addingType == Clean){
+        [self addManualCleanArea:touchLocation];
+    }else if(self.addingType == Dirty){
+        [self addManualDirtyArea:touchLocation];
+    }else if(self.addingType == Erase){
+        [self eraseManualArea:touchLocation];
     }
 }
+
 
 /************************************************************************************************************************************
  * add non-gel area
  *************************************************************************************************************************************/
 
 -(void)addManualNonGelArea:(int)touchPosition{
-    [self.estimateImage updateNonGelAreaString:touchPosition];
-    [self.engine setNonGelAreaState:[self.estimateImage getNonGelAreaArray]];
-    [self.estimateImage setCleanAreaWithArray:self.engine.areaCleanState];
-    [self.cleanEditView addManualNonGelArea:touchPosition withCleanArray:self.engine.areaCleanState];
-    [self updateValueLabels];
+    [self.manualEstimateImage updateNonGelAreaString:touchPosition];
+    [self.manualEngine setNonGelAreaState:[self.manualEstimateImage getNonGelAreaArray]];
+    [self.manualEstimateImage setCleanAreaWithArray:self.manualEngine.areaCleanState];
+    [self.cleanEditView addManualNonGelArea:touchPosition withCleanArray:self.manualEngine.areaCleanState];
+    
+    [self setLabelsWithEstimateData:self.manualEstimateImage];
+    self.manualEstimateImage.cleanValue = self.manualEngine.cleanValue;
 }
 
 /************************************************************************************************************************************
@@ -437,27 +453,33 @@
  *************************************************************************************************************************************/
 
 -(void)addManualCleanArea:(int)touchPosition{
-    [self.engine addCleanArea:touchPosition];
-    [self.estimateImage addNonGelAreaString:touchPosition withState:false];
-    [self.estimateImage updateManualCleanAreaString:touchPosition];
-    [self.estimateImage setCleanAreaWithArray:self.engine.areaCleanState];
+    [self.manualEngine addCleanArea:touchPosition];
+    [self.manualEstimateImage addNonGelAreaString:touchPosition withState:false];
+    [self.manualEstimateImage updateManualCleanAreaString:touchPosition];
+    [self.manualEstimateImage setCleanAreaWithArray:self.manualEngine.areaCleanState];
     [self.cleanEditView addManualCleanArea:touchPosition];
-    [self updateValueLabels];
+    
+    [self setLabelsWithEstimateData:self.manualEstimateImage];
+    self.manualEstimateImage.cleanValue = self.manualEngine.cleanValue;
 }
+
+-(void)addManualDirtyArea:(int)touchPosition{
+}
+
+-(void)eraseManualArea:(int)touchPosition{
+}
+
 
 -(void)removeMaunalCleanArea:(int)touchPosition{
     [self.engine removeManualCleanArea:touchPosition];
     [self.estimateImage updateManualCleanAreaString:touchPosition];
     [self.estimateImage setCleanAreaWithArray:self.engine.areaCleanState];
     [self.cleanEditView removeMaunalCleanArea:touchPosition];
-    [self updateValueLabels];
+    
+    [self setLabelsWithEstimateData:self.manualEstimateImage];
+    self.manualEstimateImage.cleanValue = self.manualEngine.cleanValue;
 }
 
--(void)updateValueLabels{
-    [self.valueLabel setText:[NSString stringWithFormat:@"%.2f", self.engine.cleanValue]];
-    [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.engine.cleanValue]];
-    self.estimateImage.cleanValue = self.engine.cleanValue;
-}
 
 /************************************************************************************************************************************
  * select tag
