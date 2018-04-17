@@ -39,8 +39,9 @@
  withCleanArray: (NSMutableArray *)cleanArray;
 
 -(void)addManualCleanArea:(int)touchPosition;
--(void)removeMaunalCleanArea:(int)touchPosition;
--(void)addManualNonGelArea:(int)touchPosition withCleanArray:(NSMutableArray *)cleanArray;
+-(void)addManualDirtyArea:(int)touchPosition;
+-(void)addManualNonGelArea:(int)touchPosition;
+-(void)removeMaunalArea:(int)touchPosition;
 
 -(void)onSetAutoDetectMode;
 -(void)onSetManualMode;

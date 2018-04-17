@@ -315,6 +315,20 @@
     [self calculateDirtyValue];
 }
 
+-(void)addDirtyArea:(int)touchPosition{
+    int pointX = touchPosition/SGGridCount;
+    int pointY = touchPosition%SGGridCount;
+    int rate = AREA_DIVIDE_NUMBER/SGGridCount;
+    for(int i = 0; i<rate;i++){
+        for(int j = 0; j< rate; j++){
+            NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
+            [_areaCleanState replaceObjectAtIndex:postion withObject:@(IS_DIRTY)];
+        }
+    }
+    [self calculateDirtyValue];
+}
+
+
 -(void)removeManualCleanArea:(int)touchPosition{
     int pointX = touchPosition/SGGridCount;
     int pointY = touchPosition%SGGridCount;

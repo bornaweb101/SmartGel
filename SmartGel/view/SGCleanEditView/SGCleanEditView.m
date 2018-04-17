@@ -94,6 +94,7 @@
             y = (AREA_DIVIDE_NUMBER-1)-i%AREA_DIVIDE_NUMBER;
         }
         UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth, y*areaHeight, areaWidth, areaHeight)];
+        UIView *manualPaintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth, y*areaHeight, areaWidth, areaHeight)];
         if([[self.autoDetectCleanAreaViews objectAtIndex:i] intValue] == IS_CLEAN){
             [paintView setBackgroundColor:[UIColor redColor]];
             [paintView setAlpha:0.3];
@@ -101,10 +102,11 @@
             [paintView setBackgroundColor:[UIColor blueColor]];
             [paintView setAlpha:0.0];
         }
-        [self.imgview addSubview:paintView];
         [self.autoDetectCleanAreaViews addObject:paintView];
-        [self.manualCleanAreaViews addObject:paintView];
-
+        [self.imgview addSubview:paintView];
+        
+        [manualPaintView setAlpha:0.0];
+        [self.manualCleanAreaViews addObject:manualPaintView];
     }
 }
 
@@ -203,30 +205,7 @@
 }
 
 /************************************************************************************************************************************
- * show and hide clean area
- *************************************************************************************************************************************/
-//
-//-(void)addAutoDetectCleanAreaInImageView:(void (^)(NSString *result))completionHandler{
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        for (int i = 0; i<self.autoDetectCleanAreaViews.count; i++) {
-//            UIView *view = [self.autoDetectCleanAreaViews objectAtIndex:i];
-//            [self.imgview addSubview:view];
-//            completionHandler(@"completed");
-//        }
-//    });
-//}
-
-//-(void)hideCleanArea:(NSMutableArray *)areaCleanState{
-//    for (int i = 0; i<self.autoDetectCleanAreaViews.count; i++) {
-//        if([[areaCleanState objectAtIndex:i] intValue] != NO_GEL){
-//            UIView *view = [self.autoDetectCleanAreaViews objectAtIndex:i];
-//            [view removeFromSuperview];
-//        }
-//    }
-//}
-
-/************************************************************************************************************************************
- * add/remove maunal clean area
+ * add maunal clean area
  *************************************************************************************************************************************/
 
 -(void)addManualCleanArea:(int)touchPosition{
@@ -247,7 +226,11 @@
     }
 }
 
--(void)removeMaunalCleanArea:(int)touchPosition{
+/************************************************************************************************************************************
+ * add manual dirty area
+ *************************************************************************************************************************************/
+
+-(void)addManualDirtyArea:(int)touchPosition{
     int pointX = touchPosition/SGGridCount;
     int pointY = touchPosition%SGGridCount;
     int rate = AREA_DIVIDE_NUMBER/SGGridCount;
@@ -256,17 +239,19 @@
             NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
             UIView *view = [self.manualCleanAreaViews objectAtIndex:postion];
             [view removeFromSuperview];
-            UIView *originalview = [self.manualCleanAreaViews objectAtIndex:postion];
-            [self.manualCleanAreaViews replaceObjectAtIndex:postion withObject:originalview];
-            [self.manualImgview addSubview:originalview];
+            UIView *manualPinkView = [[UIView alloc] initWithFrame:view.frame];
+            [manualPinkView setBackgroundColor:[UIColor greenColor]];
+            [manualPinkView setAlpha:0.3];
+            [self.manualCleanAreaViews replaceObjectAtIndex:postion withObject:manualPinkView];
+            [self.manualImgview addSubview:[self.manualCleanAreaViews objectAtIndex:postion]];
         }
     }
 }
 
 /************************************************************************************************************************************
- * add/remove non-gel area
+ * add manual non-gel area
  *************************************************************************************************************************************/
--(void)addManualNonGelArea:(int)touchPosition withCleanArray:(NSMutableArray *)cleanArray{
+-(void)addManualNonGelArea:(int)touchPosition{
     int pointX = touchPosition/SGGridCount;
     int pointY = touchPosition%SGGridCount;
     int rate = AREA_DIVIDE_NUMBER/SGGridCount;
@@ -275,15 +260,32 @@
             NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
             UIView *view = [self.manualCleanAreaViews objectAtIndex:postion];
             [view removeFromSuperview];
-            if([[cleanArray objectAtIndex:postion] intValue] == NO_GEL){
-                [view setBackgroundColor:[UIColor yellowColor]];
-                [view setAlpha:0.3];
-                [self.manualCleanAreaViews replaceObjectAtIndex:postion withObject:view];
-                [self.manualImgview addSubview:view];
-            }
+            [view setBackgroundColor:[UIColor yellowColor]];
+            [view setAlpha:0.3];
+            [self.manualCleanAreaViews replaceObjectAtIndex:postion withObject:view];
+            [self.manualImgview addSubview:view];
         }
     }
 }
 
+/************************************************************************************************************************************
+ * remove manual area
+ *************************************************************************************************************************************/
+
+-(void)removeMaunalArea:(int)touchPosition{
+    int pointX = touchPosition/SGGridCount;
+    int pointY = touchPosition%SGGridCount;
+    int rate = AREA_DIVIDE_NUMBER/SGGridCount;
+    for(int i = 0; i<rate;i++){
+        for(int j = 0; j< rate; j++){
+            NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
+            UIView *view = [self.manualCleanAreaViews objectAtIndex:postion];
+            [view removeFromSuperview];
+            //            UIView *originalview = [self.manualCleanAreaViews objectAtIndex:postion];
+            //            [self.manualCleanAreaViews replaceObjectAtIndex:postion withObject:originalview];
+            //            [self.manualImgview addSubview:originalview];
+        }
+    }
+}
 
 @end

@@ -433,7 +433,6 @@
     }
 }
 
-
 /************************************************************************************************************************************
  * add non-gel area
  *************************************************************************************************************************************/
@@ -442,7 +441,7 @@
     [self.manualEstimateImage updateNonGelAreaString:touchPosition];
     [self.manualEngine setNonGelAreaState:[self.manualEstimateImage getNonGelAreaArray]];
     [self.manualEstimateImage setCleanAreaWithArray:self.manualEngine.areaCleanState];
-    [self.cleanEditView addManualNonGelArea:touchPosition withCleanArray:self.manualEngine.areaCleanState];
+    [self.cleanEditView addManualNonGelArea:touchPosition];
     
     [self setLabelsWithEstimateData:self.manualEstimateImage];
     self.manualEstimateImage.cleanValue = self.manualEngine.cleanValue;
@@ -464,22 +463,23 @@
 }
 
 -(void)addManualDirtyArea:(int)touchPosition{
+    [self.manualEngine addDirtyArea:touchPosition];
+    [self.cleanEditView addManualDirtyArea:touchPosition];
 }
 
 -(void)eraseManualArea:(int)touchPosition{
+    [self.cleanEditView removeMaunalArea:touchPosition];
 }
-
 
 -(void)removeMaunalCleanArea:(int)touchPosition{
     [self.engine removeManualCleanArea:touchPosition];
     [self.estimateImage updateManualCleanAreaString:touchPosition];
     [self.estimateImage setCleanAreaWithArray:self.engine.areaCleanState];
-    [self.cleanEditView removeMaunalCleanArea:touchPosition];
+//    [self.cleanEditView removeMaunalCleanArea:touchPosition];
     
     [self setLabelsWithEstimateData:self.manualEstimateImage];
     self.manualEstimateImage.cleanValue = self.manualEngine.cleanValue;
 }
-
 
 /************************************************************************************************************************************
  * select tag

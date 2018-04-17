@@ -67,6 +67,7 @@ typedef struct
 - (void)        extract;
 - (void) setNonGelAreaState:(NSMutableArray *)nonGelAreaArray;
 -(void)addCleanArea:(int)touchPosition;
+-(void)addDirtyArea:(int)touchPosition;
 -(void)removeManualCleanArea:(int)touchPosition;
 
 -(instancetype)initWithImage:(UIImage *)image;
