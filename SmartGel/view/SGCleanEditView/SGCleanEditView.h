@@ -35,15 +35,19 @@
 
 @property (nonatomic) BOOL zoomed;
 
+@property (nonatomic) BOOL isAutoDetect;
+
 -(void)setImage:(UIImage *)image
  withCleanArray: (NSMutableArray *)cleanArray;
 
 -(void)addManualCleanArea:(int)touchPosition;
 -(void)addManualDirtyArea:(int)touchPosition;
--(void)addManualNonGelArea:(int)touchPosition;
 -(void)removeMaunalArea:(int)touchPosition;
 
 -(void)onSetAutoDetectMode;
 -(void)onSetManualMode;
+
+-(void)addPanGesture;
+-(void)removePanGesture;
 
 @end

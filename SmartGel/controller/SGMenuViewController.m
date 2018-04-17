@@ -67,7 +67,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
         case 0:
-            self.sgHomeViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGHomeViewController"];
+            self.sgHomeViewController = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"SGHomeViewController"];
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgHomeViewController]
                                                          animated:YES];
             break;

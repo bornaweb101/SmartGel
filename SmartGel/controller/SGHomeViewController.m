@@ -363,14 +363,6 @@
 }
 
 /************************************************************************************************************************************
- * launch photo picker controller
- * choose image from camera or gallery
- *************************************************************************************************************************************/
-
--(IBAction)addManualAreaButtonTapped{
-}
-
-/************************************************************************************************************************************
  * touch action
  *************************************************************************************************************************************/
 
@@ -391,26 +383,29 @@
 
 -(IBAction)nonGelButtonClicked{
     [self deselectAllButton];
+    [self.cleanEditView addPanGesture];
     self.nonGelButton.backgroundColor = SGColorDarkGreen;
     self.addingType = NonGel;
 }
 
 -(IBAction)cleanButtonClicked{
     [self deselectAllButton];
+    [self.cleanEditView addPanGesture];
     self.cleanButton.backgroundColor = SGColorDarkGreen;
     self.addingType = Clean;
 }
 
 -(IBAction)dirtyButtonClicked{
     [self deselectAllButton];
+    [self.cleanEditView addPanGesture];
     self.dirtyButton.backgroundColor = SGColorDarkGreen;
     self.addingType = Dirty;
 }
 
--(IBAction)eraseButtonClicked{
+-(IBAction)zoomButtonClicked{
     [self deselectAllButton];
-    self.eraseButton.backgroundColor = SGColorDarkGreen;
-    self.addingType = Erase;
+    [self.cleanEditView removePanGesture];
+    self.eraseButton.backgroundColor = SGColorDarkGreen;    
 }
 
 -(void)deselectAllButton{
@@ -428,9 +423,10 @@
         [self addManualCleanArea:touchLocation];
     }else if(self.addingType == Dirty){
         [self addManualDirtyArea:touchLocation];
-    }else if(self.addingType == Erase){
-        [self eraseManualArea:touchLocation];
     }
+//    }else if(self.addingType == Erase){
+//        [self eraseManualArea:touchLocation];
+//    }
 }
 
 /************************************************************************************************************************************
@@ -441,7 +437,7 @@
     [self.manualEstimateImage updateNonGelAreaString:touchPosition];
     [self.manualEngine setNonGelAreaState:[self.manualEstimateImage getNonGelAreaArray]];
     [self.manualEstimateImage setCleanAreaWithArray:self.manualEngine.areaCleanState];
-    [self.cleanEditView addManualNonGelArea:touchPosition];
+    [self.cleanEditView removeMaunalArea:touchPosition];
     
     [self setLabelsWithEstimateData:self.manualEstimateImage];
     self.manualEstimateImage.cleanValue = self.manualEngine.cleanValue;
@@ -464,7 +460,13 @@
 
 -(void)addManualDirtyArea:(int)touchPosition{
     [self.manualEngine addDirtyArea:touchPosition];
+    [self.manualEstimateImage addNonGelAreaString:touchPosition withState:false];
+    [self.manualEstimateImage updateManualCleanAreaString:touchPosition];
+    [self.manualEstimateImage setCleanAreaWithArray:self.manualEngine.areaCleanState];
     [self.cleanEditView addManualDirtyArea:touchPosition];
+    
+    [self setLabelsWithEstimateData:self.manualEstimateImage];
+    self.manualEstimateImage.cleanValue = self.manualEngine.cleanValue;
 }
 
 -(void)eraseManualArea:(int)touchPosition{

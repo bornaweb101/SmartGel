@@ -23,6 +23,7 @@
         self.autoDetectCleanAreaViews = [NSMutableArray array];
         self.manualCleanAreaViews = [NSMutableArray array];
         panTapGesure = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
+        self.isAutoDetect = false;
     }
     return self;
 }
@@ -112,9 +113,10 @@
 
 
 -(void)onSetAutoDetectMode{
+    [self.scrollView setZoomScale:1];
     [self.imgview setHidden:NO];
     [self.manualImgview setHidden:YES];
-    [self removePanGesture];
+    self.isAutoDetect = true;
 }
 
 /************************************************************************************************************************************
@@ -140,9 +142,10 @@
 }
 
 -(void)onSetManualMode{
+    [self.scrollView setZoomScale:1];
     [self.imgview setHidden:YES];
     [self.manualImgview setHidden:NO];
-    [self addPanGesture];
+    self.isAutoDetect = false;
 }
 
 /************************************************************************************************************************************
@@ -163,7 +166,10 @@
 *************************************************************************************************************************************/
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
-    return self.imgview;
+    if(self.isAutoDetect)
+        return self.imgview;
+    else
+        return self.manualImgview;
 }
 
 -(void)scrollViewDidZoom:(UIScrollView *)scrollView {
@@ -172,7 +178,11 @@
 
 - (void)centerScrollViewContents {
     CGSize boundsSize = self.scrollView.bounds.size;
-    CGRect contentsFrame = self.imgview.frame;
+    CGRect contentsFrame;
+    if(self.isAutoDetect)
+        contentsFrame = self.imgview.frame;
+    else
+        contentsFrame = self.manualImgview.frame;
     if (contentsFrame.size.width < boundsSize.width) {
         contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2.0;
     } else {
@@ -184,7 +194,10 @@
     } else {
         contentsFrame.origin.y = 0.0;
     }
-    self.imgview.frame = contentsFrame;
+    if(self.isAutoDetect)
+        self.imgview.frame = contentsFrame;
+    else
+        self.manualImgview.frame = contentsFrame;
 }
 
 
@@ -248,28 +261,28 @@
     }
 }
 
-/************************************************************************************************************************************
- * add manual non-gel area
- *************************************************************************************************************************************/
--(void)addManualNonGelArea:(int)touchPosition{
-    int pointX = touchPosition/SGGridCount;
-    int pointY = touchPosition%SGGridCount;
-    int rate = AREA_DIVIDE_NUMBER/SGGridCount;
-    for(int i = 0; i<rate;i++){
-        for(int j = 0; j< rate; j++){
-            NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
-            UIView *view = [self.manualCleanAreaViews objectAtIndex:postion];
-            [view removeFromSuperview];
-            [view setBackgroundColor:[UIColor yellowColor]];
-            [view setAlpha:0.3];
-            [self.manualCleanAreaViews replaceObjectAtIndex:postion withObject:view];
-            [self.manualImgview addSubview:view];
-        }
-    }
-}
+///************************************************************************************************************************************
+// * add manual non-gel area
+// *************************************************************************************************************************************/
+//-(void)addManualNonGelArea:(int)touchPosition{
+//    int pointX = touchPosition/SGGridCount;
+//    int pointY = touchPosition%SGGridCount;
+//    int rate = AREA_DIVIDE_NUMBER/SGGridCount;
+//    for(int i = 0; i<rate;i++){
+//        for(int j = 0; j< rate; j++){
+//            NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
+//            UIView *view = [self.manualCleanAreaViews objectAtIndex:postion];
+//            [view removeFromSuperview];
+//            [view setBackgroundColor:[UIColor yellowColor]];
+//            [view setAlpha:0.3];
+//            [self.manualCleanAreaViews replaceObjectAtIndex:postion withObject:view];
+//            [self.manualImgview addSubview:view];
+//        }
+//    }
+//}
 
 /************************************************************************************************************************************
- * remove manual area
+ * remove Manual area
  *************************************************************************************************************************************/
 
 -(void)removeMaunalArea:(int)touchPosition{
@@ -281,9 +294,6 @@
             NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
             UIView *view = [self.manualCleanAreaViews objectAtIndex:postion];
             [view removeFromSuperview];
-            //            UIView *originalview = [self.manualCleanAreaViews objectAtIndex:postion];
-            //            [self.manualCleanAreaViews replaceObjectAtIndex:postion withObject:originalview];
-            //            [self.manualImgview addSubview:originalview];
         }
     }
 }
