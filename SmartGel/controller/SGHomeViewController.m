@@ -563,4 +563,16 @@
         return;
     }
 }
+
+
+-(IBAction)cropButtonClicked{
+    UIImage *image = [self.cleanEditView croppIngimageByImageName];
+    self.estimateImage = [[EstimateImageModel alloc] initWithImage:image];
+    self.manualEstimateImage = [[EstimateImageModel alloc] initWithImage:image];
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self initDataUiWithTakenImage:^(NSString *result) {
+        [hud hideAnimated:false];
+    }];
+
+}
 @end

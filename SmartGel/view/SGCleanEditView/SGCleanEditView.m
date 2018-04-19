@@ -304,4 +304,17 @@
     }
 }
 
+- (UIImage *)croppIngimageByImageName
+{
+    float scale = 1.0f/self.scrollView.zoomScale;
+    CGRect visibleRect;
+    visibleRect.origin.x = self.scrollView.contentOffset.x * scale;
+    visibleRect.origin.y = self.scrollView.contentOffset.y * scale;
+    visibleRect.size.width = self.scrollView.bounds.size.width * scale;
+    visibleRect.size.height = self.scrollView.bounds.size.height * scale;
+    CGImageRef imageRef = CGImageCreateWithImageInRect([self.takenImage CGImage], visibleRect);
+    UIImage *cropped = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    return cropped;
+}
 @end

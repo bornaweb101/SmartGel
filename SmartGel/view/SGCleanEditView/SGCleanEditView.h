@@ -49,5 +49,6 @@
 
 -(void)addPanGesture;
 -(void)removePanGesture;
+- (UIImage *)croppIngimageByImageName;
 
 @end
