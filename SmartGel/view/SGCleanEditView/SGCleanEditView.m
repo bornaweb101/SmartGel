@@ -32,8 +32,8 @@
  withCleanArray: (NSMutableArray *)cleanArray{
     [self initViewwithImage:image];
     CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.scrollView takenImage:self.takenImage];
-    [self initAutoDetect:rect withCleanArray:cleanArray];
     [self initManualMode:rect];
+    [self initAutoDetect:rect withCleanArray:cleanArray];
 }
 
 -(void)initViewwithImage:(UIImage *)image{
@@ -97,17 +97,23 @@
         UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth, y*areaHeight, areaWidth, areaHeight)];
         UIView *manualPaintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth, y*areaHeight, areaWidth, areaHeight)];
         if([[self.autoDetectCleanAreaViews objectAtIndex:i] intValue] == IS_CLEAN){
+            [manualPaintView setBackgroundColor:[UIColor redColor]];
+            [manualPaintView setAlpha:0.3];
+
             [paintView setBackgroundColor:[UIColor redColor]];
             [paintView setAlpha:0.3];
         }else if([[self.autoDetectCleanAreaViews objectAtIndex:i] intValue] == IS_DIRTY){
+            [manualPaintView setBackgroundColor:[UIColor blueColor]];
+            [manualPaintView setAlpha:0.0];
+
             [paintView setBackgroundColor:[UIColor blueColor]];
             [paintView setAlpha:0.0];
         }
         [self.autoDetectCleanAreaViews addObject:paintView];
         [self.imgview addSubview:paintView];
         
-        [manualPaintView setAlpha:0.0];
         [self.manualCleanAreaViews addObject:manualPaintView];
+        [self.manualImgview addSubview:manualPaintView];
     }
 }
 

@@ -352,6 +352,7 @@
     isSavedImage = false;
     [self initAutoDetectData];
     self.manualEngine = [[DirtyExtractor alloc] initWithImage:self.estimateImage.image];
+    [self.manualEstimateImage setImageDataModel:self.manualEngine.cleanValue withDate:self.dateLabel.text withTag:self.tagLabel.text withLocation:self.locationLabel.text  withCleanArray:self.manualEngine.areaCleanState];
     [self.cleanEditView setImage:self.estimateImage.image withCleanArray:self.engine.areaCleanState];
     [self autoDectectClicked];
     completionHandler(@"completion");
