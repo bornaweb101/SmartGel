@@ -48,12 +48,19 @@
 -(void)initAutoDetect:(CGRect)rect
       withCleanArray : (NSMutableArray *)cleanArray{
     
+    [self initDataAndViews];
     [self initAutoDetectData:cleanArray];
     [self initAutoDetectGridView:rect];
     [self initAutoDetectImageView:rect];
-    //    [self initManualImageView:rect];
+    [self initManualImageView:rect];
     [self initAutoDetectCleanAreaViews];
+}
 
+-(void)initDataAndViews{
+    [self.autoDetectCleanAreaViews removeAllObjects];
+    [self.manualCleanAreaViews removeAllObjects];
+    [self.imgview removeFromSuperview];
+    [self.manualImgview removeFromSuperview];
 }
 
 -(void)initAutoDetectData:(NSMutableArray *)cleanArray{
@@ -306,13 +313,31 @@
 
 - (UIImage *)croppIngimageByImageName
 {
-    float scale = 1.0f/self.scrollView.zoomScale;
-    CGRect visibleRect;
-    visibleRect.origin.x = self.scrollView.contentOffset.x * scale;
-    visibleRect.origin.y = self.scrollView.contentOffset.y * scale;
-    visibleRect.size.width = self.scrollView.bounds.size.width * scale;
-    visibleRect.size.height = self.scrollView.bounds.size.height * scale;
-    CGImageRef imageRef = CGImageCreateWithImageInRect([self.takenImage CGImage], visibleRect);
+    CGRect Fi_iv = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.manualImgview takenImage:self.takenImage];
+    //Frame ImageView in self.view coordinates
+    CGRect Fiv_sv = self.manualImgview.frame;
+    
+    //Frame Image in self.view coordinates
+    CGRect Fi_sv = CGRectMake(Fi_iv.origin.x + Fiv_sv.origin.x
+                              ,Fi_iv.origin.y + Fiv_sv.origin.y,
+                              Fi_iv.size.width, Fi_iv.size.height);
+    //ScrollView offset
+    CGPoint offset = self.scrollView.contentOffset;
+    
+    //Frame Image in offset coordinates
+    CGRect Fi_of = CGRectMake(Fi_sv.origin.x - offset.x,
+                              Fi_sv.origin.y - offset.y,
+                              Fi_sv.size.width,
+                              Fi_sv.size.height);
+    
+    CGFloat scale = self.manualImgview.image.size.width/Fi_of.size.width;
+    
+    //the crop frame in image offset coordinates
+    CGRect Fcrop_iof = CGRectMake((self.gridContentView.frame.origin.x - Fi_of.origin.x)*scale,
+                                  (self.gridContentView.frame.origin.y - Fi_of.origin.y)*scale,
+                                  self.gridContentView.frame.size.width*scale,
+                                  self.gridContentView.frame.size.height*scale);
+    CGImageRef imageRef = CGImageCreateWithImageInRect([self.takenImage CGImage], Fcrop_iof);
     UIImage *cropped = [UIImage imageWithCGImage:imageRef];
     CGImageRelease(imageRef);
     return cropped;

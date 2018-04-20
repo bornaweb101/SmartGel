@@ -211,6 +211,7 @@
         return;
     }
     [self.manualModeView setAlpha:0.2];
+    [self disableAllButtons];
     [self.cleanEditView onSetAutoDetectMode];
     [self setLabelsWithEstimateData:self.estimateImage];
 }
@@ -221,6 +222,7 @@
         return;
     }
     [self.manualModeView setAlpha:1.0];
+    [self enableAllButtons];
     [self.cleanEditView onSetManualMode];
     [self setLabelsWithEstimateData:self.manualEstimateImage];
 }
@@ -406,14 +408,26 @@
 -(IBAction)zoomButtonClicked{
     [self deselectAllButton];
     [self.cleanEditView removePanGesture];
-    self.eraseButton.backgroundColor = SGColorDarkGreen;    
+    self.zoomButton.backgroundColor = SGColorDarkGreen;
+}
+
+-(IBAction)resetButtonClicked{
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIImage *image = self.cleanEditView.takenImage;
+        self.estimateImage = [[EstimateImageModel alloc] initWithImage:image];
+        self.manualEstimateImage = [[EstimateImageModel alloc] initWithImage:image];
+        [self initDataUiWithTakenImage:^(NSString *result) {
+            [hud hideAnimated:false];
+        }];
+    });
 }
 
 -(void)deselectAllButton{
     self.nonGelButton.backgroundColor = SGColorButtonGray;
     self.cleanButton.backgroundColor = SGColorButtonGray;
     self.dirtyButton.backgroundColor = SGColorButtonGray;
-    self.eraseButton.backgroundColor = SGColorButtonGray;
+    self.zoomButton.backgroundColor = SGColorButtonGray;
 }
 
 - (void)onTappedGridView:(int)touchLocation{
@@ -564,15 +578,35 @@
     }
 }
 
+//Edit Buttons operation
+
+-(void)disableAllButtons{
+    self.nonGelButton.enabled = false;
+    self.cleanButton.enabled = false;
+    self.dirtyButton.enabled = false;
+    self.zoomButton.enabled = false;
+    self.resetButton.enabled = false;
+    self.cropButton.enabled = false;
+}
+
+-(void)enableAllButtons{
+    self.nonGelButton.enabled = true;
+    self.cleanButton.enabled = true;
+    self.dirtyButton.enabled = true;
+    self.zoomButton.enabled = true;
+    self.resetButton.enabled = true;
+    self.cropButton.enabled = true;
+}
 
 -(IBAction)cropButtonClicked{
-    UIImage *image = [self.cleanEditView croppIngimageByImageName];
-    self.estimateImage = [[EstimateImageModel alloc] initWithImage:image];
-    self.manualEstimateImage = [[EstimateImageModel alloc] initWithImage:image];
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self initDataUiWithTakenImage:^(NSString *result) {
-        [hud hideAnimated:false];
-    }];
-
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIImage *image = [self.cleanEditView croppIngimageByImageName];
+        self.estimateImage = [[EstimateImageModel alloc] initWithImage:image];
+        self.manualEstimateImage = [[EstimateImageModel alloc] initWithImage:image];
+        [self initDataUiWithTakenImage:^(NSString *result) {
+            [hud hideAnimated:false];
+        }];
+    });
 }
 @end
