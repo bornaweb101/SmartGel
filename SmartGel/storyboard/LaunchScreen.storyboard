@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -112,6 +112,12 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.0.2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qjd-Ng-vfk">
+                                <rect key="frame" x="336.5" y="563.5" width="96.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.14901960780000001" green="0.1764705882" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -126,7 +132,9 @@
                             <constraint firstItem="pJH-b5-hNN" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="14" id="aTR-cp-g87"/>
                             <constraint firstItem="Ur1-ix-9qa" firstAttribute="leading" secondItem="2rD-Lb-QJd" secondAttribute="trailing" constant="8" id="gtV-wy-QN1"/>
                             <constraint firstItem="pJH-b5-hNN" firstAttribute="top" secondItem="Nmh-f6-3zt" secondAttribute="bottom" constant="20" id="hK3-vt-lLL"/>
+                            <constraint firstItem="qjd-Ng-vfk" firstAttribute="top" secondItem="pJH-b5-hNN" secondAttribute="bottom" constant="50" id="rtC-zz-kr9"/>
                             <constraint firstItem="pJH-b5-hNN" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="sCZ-xC-9f2"/>
+                            <constraint firstItem="qjd-Ng-vfk" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="t0z-JH-CDx"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="Ur1-ix-9qa" secondAttribute="bottom" constant="34" id="vCO-el-SlU"/>
                         </constraints>
                     </view>

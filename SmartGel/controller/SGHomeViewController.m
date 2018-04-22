@@ -24,12 +24,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self homeScreenInit];
-//    if (([FIRAuth auth].currentUser)&&(([SGSharedManager.sharedManager isAlreadyRunnded])) ) {
-//        [self getCurrentUser];
-//    }else{
-//        [self anonymouslySignIn];
-//    }
+//    [self homeScreenInit];
+    if (([FIRAuth auth].currentUser)&&(([SGSharedManager.sharedManager isAlreadyRunnded])) ) {
+        [self getCurrentUser];
+    }else{
+        [self anonymouslySignIn];
+    }
 }
 
 - (void)viewDidLayoutSubviews {
@@ -223,6 +223,8 @@
     }
     [self.manualModeView setAlpha:1.0];
     [self enableAllButtons];
+    [self deselectAllButton];
+    [self nonGelButtonClicked];
     [self.cleanEditView onSetManualMode];
     [self setLabelsWithEstimateData:self.manualEstimateImage];
 }
@@ -247,36 +249,34 @@
 
 - (void)saveResultImage{
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[SGFirebaseManager sharedManager] saveResultImage:self.estimateImage
-                                            selectedTag:self.selectedTag
-                                    engineColorOffset :self.engine.m_colorOffset
-                                     completionHandler:^(NSError *error) {
-                                         [hud hideAnimated:false];
-                                         if(error == nil){
-                                             isSavedImage = true;
-                                             [self showAlertdialog:@"Image Uploading Success!" message:error.localizedDescription];
-                                         }else{
-                                             [self showAlertdialog:@"Image Uploading Failed!" message:error.localizedDescription];
-                                         }
-                                     }];
-}
+    if(self.cleanEditView.isAutoDetect){
+        [[SGFirebaseManager sharedManager] saveResultImage:self.estimateImage
+                                                selectedTag:self.selectedTag
+                                        engineColorOffset :self.engine.m_colorOffset
+                                         completionHandler:^(NSError *error) {
+                                             [hud hideAnimated:false];
+                                             if(error == nil){
+                                                 isSavedImage = true;
+                                                 [self showAlertdialog:@"Image Uploading Success!" message:error.localizedDescription];
+                                             }else{
+                                                 [self showAlertdialog:@"Image Uploading Failed!" message:error.localizedDescription];
+                                             }
+                                         }];
+    }else{
+        [[SGFirebaseManager sharedManager] saveResultImage:self.manualEstimateImage
+                                               selectedTag:self.selectedTag
+                                        engineColorOffset :self.engine.m_colorOffset
+                                         completionHandler:^(NSError *error) {
+                                             [hud hideAnimated:false];
+                                             if(error == nil){
+                                                 isSavedImage = true;
+                                                 [self showAlertdialog:@"Image Uploading Success!" message:error.localizedDescription];
+                                             }else{
+                                                 [self showAlertdialog:@"Image Uploading Failed!" message:error.localizedDescription];
+                                             }
+                                         }];
 
-/************************************************************************************************************************************
- * reset non-gel area
- *************************************************************************************************************************************/
-
--(IBAction)resetNonGelAreaTapped:(id)sender{
-//    if(self.estimateImage.image == nil){
-//        [self showAlertdialog:nil message:@"Please take a photo."];
-//        return;
-//    }
-//    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        if(isShowDirtyArea)
-//            [self hideDirtyArea];
-//        [self initDataUiWithImage];
-//        [hud hideAnimated:false];
-//    });
+    }
 }
 
 /************************************************************************************************************************************
@@ -407,7 +407,7 @@
 
 -(IBAction)zoomButtonClicked{
     [self deselectAllButton];
-//    [self.cleanEditView removePanGesture];
+    [self.cleanEditView removePanGesture];
     self.zoomButton.backgroundColor = SGColorDarkGreen;
 }
 
@@ -608,6 +608,7 @@
         [self initDataUiWithTakenImage:^(NSString *result) {
             [hud hideAnimated:false];
             [self manualModeClicked];
+            [self nonGelButtonClicked];
         }];
     });
 }

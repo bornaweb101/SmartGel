@@ -126,7 +126,9 @@
 
 
 -(void)onSetAutoDetectMode{
+    [self removePanGesture];
     [self.scrollView setZoomScale:1];
+    [self.scrollView setMaximumZoomScale:3];
     [self.imgview setHidden:NO];
     [self.manualImgview setHidden:YES];
     self.isAutoDetect = true;
@@ -157,7 +159,6 @@
 -(void)onSetManualMode{
     [self addPanGesture];
     [self.scrollView setZoomScale:1];
-    [self.scrollView setMaximumZoomScale:1];
     [self.imgview setHidden:YES];
     [self.manualImgview setHidden:NO];
     self.isAutoDetect = false;
@@ -168,12 +169,18 @@
  *************************************************************************************************************************************/
 
 -(void)addPanGesture{
-    panTapGesure = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
-    [self.scrollView addGestureRecognizer:panTapGesure];
+    if(![self.scrollView.gestureRecognizers containsObject:panTapGesure]){
+        panTapGesure = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
+        [self.scrollView addGestureRecognizer:panTapGesure];
+    }
+    [self.scrollView setMaximumZoomScale:1];
 }
 
 -(void)removePanGesture{
-    [self.scrollView removeGestureRecognizer:panTapGesure];
+//    for(UIPanGestureRecognizer *recognizer in self.scrollView.gestureRecognizers){
+        [self.scrollView removeGestureRecognizer:panTapGesure];
+//    }
+    [self.scrollView setMaximumZoomScale:3];
 }
 
 /************************************************************************************************************************************
