@@ -110,11 +110,11 @@
             [paintView setBackgroundColor:[UIColor redColor]];
             [paintView setAlpha:0.3];
         }else if([[self.autoDetectCleanAreaViews objectAtIndex:i] intValue] == IS_DIRTY){
-            [manualPaintView setBackgroundColor:[UIColor blueColor]];
-            [manualPaintView setAlpha:0.0];
+            [manualPaintView setBackgroundColor:[UIColor greenColor]];
+            [manualPaintView setAlpha:0.2];
 
-            [paintView setBackgroundColor:[UIColor blueColor]];
-            [paintView setAlpha:0.0];
+            [paintView setBackgroundColor:[UIColor greenColor]];
+            [paintView setAlpha:0.2];
         }
         [self.autoDetectCleanAreaViews addObject:paintView];
         [self.imgview addSubview:paintView];

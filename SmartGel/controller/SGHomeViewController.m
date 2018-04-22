@@ -418,6 +418,7 @@
         self.estimateImage = [[EstimateImageModel alloc] initWithImage:image];
         self.manualEstimateImage = [[EstimateImageModel alloc] initWithImage:image];
         [self initDataUiWithTakenImage:^(NSString *result) {
+            [self manualModeClicked];
             [hud hideAnimated:false];
         }];
     });
