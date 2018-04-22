@@ -155,7 +155,9 @@
 }
 
 -(void)onSetManualMode{
+    [self addPanGesture];
     [self.scrollView setZoomScale:1];
+    [self.scrollView setMaximumZoomScale:1];
     [self.imgview setHidden:YES];
     [self.manualImgview setHidden:NO];
     self.isAutoDetect = false;
@@ -166,7 +168,7 @@
  *************************************************************************************************************************************/
 
 -(void)addPanGesture{
-//    panTapGesure = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
+    panTapGesure = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
     [self.scrollView addGestureRecognizer:panTapGesure];
 }
 
@@ -220,6 +222,9 @@
 
 - (void)singleTapGestureCaptured:(UIPanGestureRecognizer *)gesture
 {
+    if(self.isAutoDetect){
+        return;
+    }
     CGPoint touchPoint=[gesture locationInView:self.manualGridView];
     if(self.takenImage==nil)
         return;
@@ -245,7 +250,7 @@
             [view removeFromSuperview];
             UIView *manualPinkView = [[UIView alloc] initWithFrame:view.frame];
             [manualPinkView setBackgroundColor:[UIColor redColor]];
-            [manualPinkView setAlpha:0.3];
+            [manualPinkView setAlpha:0.2];
             [self.manualCleanAreaViews replaceObjectAtIndex:postion withObject:manualPinkView];
             [self.manualImgview addSubview:[self.manualCleanAreaViews objectAtIndex:postion]];
         }
@@ -267,7 +272,7 @@
             [view removeFromSuperview];
             UIView *manualPinkView = [[UIView alloc] initWithFrame:view.frame];
             [manualPinkView setBackgroundColor:[UIColor greenColor]];
-            [manualPinkView setAlpha:0.3];
+            [manualPinkView setAlpha:0.2];
             [self.manualCleanAreaViews replaceObjectAtIndex:postion withObject:manualPinkView];
             [self.manualImgview addSubview:[self.manualCleanAreaViews objectAtIndex:postion]];
         }

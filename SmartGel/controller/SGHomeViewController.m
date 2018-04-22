@@ -407,7 +407,7 @@
 
 -(IBAction)zoomButtonClicked{
     [self deselectAllButton];
-    [self.cleanEditView removePanGesture];
+//    [self.cleanEditView removePanGesture];
     self.zoomButton.backgroundColor = SGColorDarkGreen;
 }
 
@@ -607,6 +607,7 @@
         self.manualEstimateImage = [[EstimateImageModel alloc] initWithImage:image];
         [self initDataUiWithTakenImage:^(NSString *result) {
             [hud hideAnimated:false];
+            [self manualModeClicked];
         }];
     });
 }
