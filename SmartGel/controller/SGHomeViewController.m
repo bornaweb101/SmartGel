@@ -199,8 +199,8 @@
  *************************************************************************************************************************************/
 
 -(void)setLabelsWithEstimateData:(EstimateImageModel *)estimateImage{
-    [self.valueLabel setText:[NSString stringWithFormat:@"%.2f", estimateImage.cleanValue]];
-    [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - estimateImage.cleanValue]];
+    [self.valueLabel setText:[NSString stringWithFormat:@"%.1f%@", estimateImage.cleanValue,@"%"]];
+    [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.1f", CLEAN_MAX_VALUE - estimateImage.cleanValue]];
 }
 
 /************************************************************************************************************************************
@@ -336,6 +336,7 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
+    self.originalImage = image;
     self.estimateImage = [[EstimateImageModel alloc] initWithImage:image];
     self.manualEstimateImage = [[EstimateImageModel alloc] initWithImage:image];
     
@@ -416,9 +417,8 @@
 -(IBAction)resetButtonClicked{
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIImage *image = self.cleanEditView.takenImage;
-        self.estimateImage = [[EstimateImageModel alloc] initWithImage:image];
-        self.manualEstimateImage = [[EstimateImageModel alloc] initWithImage:image];
+        self.estimateImage = [[EstimateImageModel alloc] initWithImage:self.originalImage];
+        self.manualEstimateImage = [[EstimateImageModel alloc] initWithImage:self.originalImage];
         [self initDataUiWithTakenImage:^(NSString *result) {
             [self manualModeClicked];
             [hud hideAnimated:false];

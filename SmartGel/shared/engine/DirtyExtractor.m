@@ -234,7 +234,7 @@
     }
     float totalCount = (float)((AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER)-m_nNoGelCount);
     if(totalCount!=0)
-        _cleanValue =  10*(float)m_nPinkCount / totalCount;
+        _cleanValue =  100*(float)m_nPinkCount / totalCount;
     else
         _cleanValue = 0;
 }

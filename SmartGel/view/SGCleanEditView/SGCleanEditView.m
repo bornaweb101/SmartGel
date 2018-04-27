@@ -349,7 +349,26 @@
                                   (self.gridContentView.frame.origin.y - Fi_of.origin.y)*scale,
                                   self.gridContentView.frame.size.width*scale,
                                   self.gridContentView.frame.size.height*scale);
-    CGImageRef imageRef = CGImageCreateWithImageInRect([self.takenImage CGImage], Fcrop_iof);
+    
+    CGAffineTransform rectTransform;
+    switch (self.takenImage.imageOrientation)
+    {
+        case UIImageOrientationLeft:
+            rectTransform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(M_PI_2), 0, -self.takenImage.size.height);
+            break;
+        case UIImageOrientationRight:
+            rectTransform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(-M_PI_2), -self.takenImage.size.width, 0);
+            break;
+        case UIImageOrientationDown:
+            rectTransform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(-M_PI), -self.takenImage.size.width, -self.takenImage.size.height);
+            break;
+        default:
+            rectTransform = CGAffineTransformIdentity;
+    };
+    rectTransform = CGAffineTransformScale(rectTransform, self.takenImage.scale, self.takenImage.scale);
+
+    
+    CGImageRef imageRef = CGImageCreateWithImageInRect([self.takenImage CGImage], CGRectApplyAffineTransform(Fcrop_iof, rectTransform));
     UIImage *cropped = [UIImage imageWithCGImage:imageRef];
     CGImageRelease(imageRef);
     return cropped;
