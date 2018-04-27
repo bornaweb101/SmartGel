@@ -30,6 +30,8 @@
     }else{
         [self anonymouslySignIn];
     }
+    [self.manualModeView setAlpha:0.2];
+    [self disableAllButtons];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -387,14 +389,14 @@
 -(IBAction)nonGelButtonClicked{
     [self deselectAllButton];
     [self.cleanEditView addPanGesture];
-    self.nonGelButton.backgroundColor = SGColorDarkGreen;
+    self.nonGelButton.backgroundColor = SGColorDarkYellow;
     self.addingType = NonGel;
 }
 
 -(IBAction)cleanButtonClicked{
     [self deselectAllButton];
     [self.cleanEditView addPanGesture];
-    self.cleanButton.backgroundColor = SGColorDarkGreen;
+    self.cleanButton.backgroundColor = SGColorDarkPink;
     self.addingType = Clean;
 }
 
@@ -588,6 +590,13 @@
     self.zoomButton.enabled = false;
     self.resetButton.enabled = false;
     self.cropButton.enabled = false;
+    
+    self.nonGelLargeButton.enabled = false;
+    self.cleanLargeButton.enabled = false;
+    self.dirtyLargeButton.enabled = false;
+    self.zoomLargeButton.enabled = false;
+    self.resetLargeButton.enabled = false;
+    self.cropLargeButton.enabled = false;
 }
 
 -(void)enableAllButtons{
@@ -597,6 +606,13 @@
     self.zoomButton.enabled = true;
     self.resetButton.enabled = true;
     self.cropButton.enabled = true;
+    
+    self.nonGelLargeButton.enabled = true;
+    self.cleanLargeButton.enabled = true;
+    self.dirtyLargeButton.enabled = true;
+    self.zoomLargeButton.enabled = true;
+    self.resetLargeButton.enabled = true;
+    self.cropLargeButton.enabled = true;
 }
 
 -(IBAction)cropButtonClicked{

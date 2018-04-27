@@ -50,6 +50,15 @@ typedef enum {
 @property (strong, nonatomic) IBOutlet UIButton *dirtyButton;
 @property (strong, nonatomic) IBOutlet UIButton *zoomButton;
 
+@property (strong, nonatomic) IBOutlet UIButton *nonGelLargeButton;
+@property (strong, nonatomic) IBOutlet UIButton *cleanLargeButton;
+@property (strong, nonatomic) IBOutlet UIButton *dirtyLargeButton;
+@property (strong, nonatomic) IBOutlet UIButton *resetLargeButton;
+@property (strong, nonatomic) IBOutlet UIButton *cropLargeButton;
+
+@property (strong, nonatomic) IBOutlet UIButton *zoomLargeButton;
+
+
 @property (strong, nonatomic) IBOutlet UIButton *resetButton;
 @property (strong, nonatomic) IBOutlet UIButton *cropButton;
 

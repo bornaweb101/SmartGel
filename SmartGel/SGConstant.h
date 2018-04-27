@@ -20,7 +20,7 @@ alpha:1.0]
 #define SGColorDarkGray UIColorFromRGB(0x323A45)
 #define SGColorDarkGreen UIColorFromRGB(0x3AA7CB)
 #define SGColorDarkPink UIColorFromRGB(0xC04399)
-#define SGColorDarkYellow UIColorFromRGB(0x323A45)
+#define SGColorDarkYellow UIColorFromRGB(0xFCAF17)
 
 #define SGColorButtonGray UIColorFromRGB(0xE0E0E0)
 
