@@ -1380,6 +1380,24 @@
             </objects>
             <point key="canvasLocation" x="1599.21875" y="841.9921875"/>
         </scene>
+        <!--Custom Camera View Controller-->
+        <scene sceneID="ceM-jR-SZb">
+            <objects>
+                <viewController id="cuJ-Ju-dbr" customClass="SGCustomCameraViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="r15-vX-2Ua"/>
+                        <viewControllerLayoutGuide type="bottom" id="HXZ-ub-L0K"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZNp-dT-I8y">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HXp-pa-A91" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2343" y="842"/>
+        </scene>
         <!--Work History-->
         <scene sceneID="X7X-W8-PyR">
             <objects>

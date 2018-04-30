@@ -10,6 +10,9 @@
 		4D9EC0022FB45DA54B97CB5C /* libPods-SmartGel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7E78BA3CDC73ED1A175E361 /* libPods-SmartGel.a */; };
 		8D199ED61FCC4AB300704CE2 /* SGSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D199ED51FCC4AB300704CE2 /* SGSettingViewController.m */; };
 		8D199ED91FCD56E200704CE2 /* SGHistoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D199ED81FCD56E200704CE2 /* SGHistoryDetailViewController.m */; };
+		8D1CC8DB209780D400949745 /* SGCustomCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1CC8DA209780D400949745 /* SGCustomCameraViewController.m */; };
+		8D1CC8E32097821900949745 /* AVCamRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1CC8DF2097821800949745 /* AVCamRecorder.m */; };
+		8D1CC8E42097821900949745 /* AVCamCaptureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1CC8E22097821900949745 /* AVCamCaptureManager.m */; };
 		8D24C5081FC510B300D6C070 /* smartgel-tests.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D24C5071FC510B200D6C070 /* smartgel-tests.json */; };
 		8D24C5111FC5AC0F00D6C070 /* SGGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D24C5101FC5AC0F00D6C070 /* SGGridView.m */; };
 		8D24C5131FC5E3D600D6C070 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D24C5121FC5E3D600D6C070 /* test.png */; };
@@ -72,6 +75,16 @@
 		8D199ED51FCC4AB300704CE2 /* SGSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGSettingViewController.m; path = controller/SGSettingViewController.m; sourceTree = "<group>"; };
 		8D199ED71FCD56E200704CE2 /* SGHistoryDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGHistoryDetailViewController.h; path = controller/SGHistoryDetailViewController.h; sourceTree = "<group>"; };
 		8D199ED81FCD56E200704CE2 /* SGHistoryDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGHistoryDetailViewController.m; path = controller/SGHistoryDetailViewController.m; sourceTree = "<group>"; };
+		8D1CC8D9209780D400949745 /* SGCustomCameraViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGCustomCameraViewController.h; path = controller/SGCustomCameraViewController.h; sourceTree = "<group>"; };
+		8D1CC8DA209780D400949745 /* SGCustomCameraViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGCustomCameraViewController.m; path = controller/SGCustomCameraViewController.m; sourceTree = "<group>"; };
+		8D1CC8DF2097821800949745 /* AVCamRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AVCamRecorder.m; path = vendor/AVCam/AVCamRecorder.m; sourceTree = "<group>"; };
+		8D1CC8E02097821800949745 /* AVCamRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AVCamRecorder.h; path = vendor/AVCam/AVCamRecorder.h; sourceTree = "<group>"; };
+		8D1CC8E12097821800949745 /* AVCamCaptureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AVCamCaptureManager.h; path = vendor/AVCam/AVCamCaptureManager.h; sourceTree = "<group>"; };
+		8D1CC8E22097821900949745 /* AVCamCaptureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AVCamCaptureManager.m; path = vendor/AVCam/AVCamCaptureManager.m; sourceTree = "<group>"; };
+		8D1CC8E5209783AB00949745 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		8D1CC8E7209783B800949745 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		8D1CC8E9209783C500949745 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		8D1CC8EB209783E800949745 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		8D24C5071FC510B200D6C070 /* smartgel-tests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "smartgel-tests.json"; path = "resource/smartgel-tests.json"; sourceTree = "<group>"; };
 		8D24C50F1FC5AC0F00D6C070 /* SGGridView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGGridView.h; sourceTree = "<group>"; };
 		8D24C5101FC5AC0F00D6C070 /* SGGridView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGGridView.m; sourceTree = "<group>"; };
@@ -191,6 +204,10 @@
 		502FE1017807AF3D1749DA47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8D1CC8EB209783E800949745 /* CoreGraphics.framework */,
+				8D1CC8E9209783C500949745 /* Accelerate.framework */,
+				8D1CC8E7209783B800949745 /* CoreVideo.framework */,
+				8D1CC8E5209783AB00949745 /* CoreMedia.framework */,
 				8DB669F01FDB060000BB3966 /* ContactsUI.framework */,
 				8DB669EF1FDB05F800BB3966 /* Contacts.framework */,
 				8DB669EE1FDA8FB400BB3966 /* AddressBookUI.framework */,
@@ -201,6 +218,25 @@
 				D7E78BA3CDC73ED1A175E361 /* libPods-SmartGel.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8D1CC8DD209781C800949745 /* vendor */ = {
+			isa = PBXGroup;
+			children = (
+				8D1CC8DE209781D000949745 /* AVCam */,
+			);
+			name = vendor;
+			sourceTree = "<group>";
+		};
+		8D1CC8DE209781D000949745 /* AVCam */ = {
+			isa = PBXGroup;
+			children = (
+				8D1CC8E12097821800949745 /* AVCamCaptureManager.h */,
+				8D1CC8E22097821900949745 /* AVCamCaptureManager.m */,
+				8D1CC8E02097821800949745 /* AVCamRecorder.h */,
+				8D1CC8DF2097821800949745 /* AVCamRecorder.m */,
+			);
+			name = AVCam;
 			sourceTree = "<group>";
 		};
 		8D26D1451FFCB992002BFAB8 /* SGTagCollectionViewCell */ = {
@@ -285,7 +321,7 @@
 		8DA331F01F7C8F3C0066148E /* SmartGel */ = {
 			isa = PBXGroup;
 			children = (
-				8DD3119620249CA20054DBF2 /* vendor */,
+				8D1CC8DD209781C800949745 /* vendor */,
 				8DD3118F20246D950054DBF2 /* test_image */,
 				8DDC4FD91F944E9D00C92EEB /* resource */,
 				8DB097921F9345210053C203 /* constant */,
@@ -496,6 +532,8 @@
 				8D5662521FD719D1008DFED2 /* SGLaboratoryViewController.m */,
 				8DB669F71FDE8B6100BB3966 /* SGLaboratoryItemViewController.h */,
 				8DB669F81FDE8B6100BB3966 /* SGLaboratoryItemViewController.m */,
+				8D1CC8D9209780D400949745 /* SGCustomCameraViewController.h */,
+				8D1CC8DA209780D400949745 /* SGCustomCameraViewController.m */,
 			);
 			name = laboratory;
 			sourceTree = "<group>";
@@ -508,13 +546,6 @@
 				8DD3119220246DD20054DBF2 /* image003.png */,
 			);
 			name = test_image;
-			sourceTree = "<group>";
-		};
-		8DD3119620249CA20054DBF2 /* vendor */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = vendor;
 			sourceTree = "<group>";
 		};
 		8DD311972024A4090054DBF2 /* SGCleanEditView */ = {
@@ -704,6 +735,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DB097911F933A380053C203 /* SGMenuViewController.m in Sources */,
+				8D1CC8E42097821900949745 /* AVCamCaptureManager.m in Sources */,
 				8D26D1491FFCBC05002BFAB8 /* SGTagCollectionViewCell.m in Sources */,
 				8D24C5111FC5AC0F00D6C070 /* SGGridView.m in Sources */,
 				8DDC4FD21F93C8EE00C92EEB /* SGWebViewController.m in Sources */,
@@ -711,6 +743,7 @@
 				8D199ED61FCC4AB300704CE2 /* SGSettingViewController.m in Sources */,
 				8DB669F41FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.m in Sources */,
 				8DB0978C1F9338880053C203 /* SGMenuTableViewCell.m in Sources */,
+				8D1CC8E32097821900949745 /* AVCamRecorder.m in Sources */,
 				8D26D14D1FFCC146002BFAB8 /* SGTag.m in Sources */,
 				8DA331F61F7C8F3C0066148E /* AppDelegate.m in Sources */,
 				8D84CBB51FE813F2006B2F74 /* SGUser.m in Sources */,
@@ -718,6 +751,7 @@
 				8D5662531FD719D1008DFED2 /* SGLaboratoryViewController.m in Sources */,
 				8D26D1501FFDC197002BFAB8 /* SGSharedManager.m in Sources */,
 				8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */,
+				8D1CC8DB209780D400949745 /* SGCustomCameraViewController.m in Sources */,
 				8DB669F91FDE8B6100BB3966 /* SGLaboratoryItemViewController.m in Sources */,
 				8DA331F31F7C8F3C0066148E /* main.m in Sources */,
 				8DB669EB1FDA236100BB3966 /* LaboratoryDataModel.m in Sources */,
