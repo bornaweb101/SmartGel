@@ -1383,16 +1383,32 @@
         <!--Custom Camera View Controller-->
         <scene sceneID="ceM-jR-SZb">
             <objects>
-                <viewController id="cuJ-Ju-dbr" customClass="SGCustomCameraViewController" sceneMemberID="viewController">
+                <viewController restorationIdentifier="SGCustomCameraViewController" storyboardIdentifier="SGCustomCameraViewController" id="cuJ-Ju-dbr" customClass="SGCustomCameraViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="r15-vX-2Ua"/>
                         <viewControllerLayoutGuide type="bottom" id="HXZ-ub-L0K"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ZNp-dT-I8y">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZyN-No-XNL">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="HXZ-ub-L0K" firstAttribute="top" secondItem="ZyN-No-XNL" secondAttribute="bottom" id="SlZ-oa-JfB"/>
+                            <constraint firstItem="ZyN-No-XNL" firstAttribute="top" secondItem="r15-vX-2Ua" secondAttribute="bottom" id="ltZ-f8-uNj"/>
+                            <constraint firstItem="ZyN-No-XNL" firstAttribute="leading" secondItem="ZNp-dT-I8y" secondAttribute="leading" id="ovP-R2-GIF"/>
+                            <constraint firstAttribute="trailing" secondItem="ZyN-No-XNL" secondAttribute="trailing" id="zDh-bI-MNk"/>
+                        </constraints>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="videoPreviewView" destination="ZyN-No-XNL" id="wp9-gf-arY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HXp-pa-A91" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

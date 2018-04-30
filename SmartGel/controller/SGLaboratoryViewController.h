@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LaboratoryDataModel.h"
 #import "SGBaseViewController.h"
+#import "SGCustomCameraViewController.h"
 #import "MBProgressHUD.h"
 #import "Firebase.h"
 #import <MapKit/MapKit.h>

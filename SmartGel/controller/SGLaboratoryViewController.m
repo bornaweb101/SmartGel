@@ -111,7 +111,10 @@
 
 -(IBAction)launchCameraController{
     if(firstrun){
-        [self capturePhoto];
+        SGCustomCameraViewController *tagVC = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"SGCustomCameraViewController"];
+        [self.navigationController pushViewController:tagVC animated:YES];
+
+//        [self capturePhoto];
     }else{
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
                                                                        message:@"Do you want to save the Result?"

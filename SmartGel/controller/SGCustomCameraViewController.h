@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AVCamCaptureManager.h"
 
-@interface SGCustomCameraViewController : UIViewController
+@interface SGCustomCameraViewController : UIViewController<AVCamCaptureManagerDelegate,AVCaptureVideoDataOutputSampleBufferDelegate>
+
+@property (nonatomic,retain) AVCamCaptureManager *captureManager;
+@property (nonatomic,retain) AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
+
+@property (strong, nonatomic) IBOutlet UIView *videoPreviewView;
 
 @end
