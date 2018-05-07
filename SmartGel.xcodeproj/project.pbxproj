@@ -21,6 +21,9 @@
 		8D26D14D1FFCC146002BFAB8 /* SGTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D26D14C1FFCC146002BFAB8 /* SGTag.m */; };
 		8D26D1501FFDC197002BFAB8 /* SGSharedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D26D14F1FFDC197002BFAB8 /* SGSharedManager.m */; };
 		8D486CE81F87D67100CE0D4B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */; };
+		8D4F0546209F424A00688BC1 /* lab2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8D4F0543209F424A00688BC1 /* lab2.jpg */; };
+		8D4F0547209F424A00688BC1 /* wall.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8D4F0544209F424A00688BC1 /* wall.jpg */; };
+		8D4F0548209F424A00688BC1 /* lab1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8D4F0545209F424A00688BC1 /* lab1.jpeg */; };
 		8D5662531FD719D1008DFED2 /* SGLaboratoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5662521FD719D1008DFED2 /* SGLaboratoryViewController.m */; };
 		8D56625D1FD8247C008DFED2 /* Smiley_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D5662561FD8247A008DFED2 /* Smiley_yellow.png */; };
 		8D56625E1FD8247C008DFED2 /* Smiley_pink.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D5662571FD8247A008DFED2 /* Smiley_pink.png */; };
@@ -97,6 +100,9 @@
 		8D26D14E1FFDC197002BFAB8 /* SGSharedManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGSharedManager.h; path = manager/SGSharedManager.h; sourceTree = "<group>"; };
 		8D26D14F1FFDC197002BFAB8 /* SGSharedManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGSharedManager.m; path = manager/SGSharedManager.m; sourceTree = "<group>"; };
 		8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8D4F0543209F424A00688BC1 /* lab2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lab2.jpg; path = test_image/lab2.jpg; sourceTree = SOURCE_ROOT; };
+		8D4F0544209F424A00688BC1 /* wall.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = wall.jpg; path = test_image/wall.jpg; sourceTree = SOURCE_ROOT; };
+		8D4F0545209F424A00688BC1 /* lab1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lab1.jpeg; path = test_image/lab1.jpeg; sourceTree = SOURCE_ROOT; };
 		8D5662511FD719D1008DFED2 /* SGLaboratoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGLaboratoryViewController.h; path = controller/SGLaboratoryViewController.h; sourceTree = "<group>"; };
 		8D5662521FD719D1008DFED2 /* SGLaboratoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGLaboratoryViewController.m; path = controller/SGLaboratoryViewController.m; sourceTree = "<group>"; };
 		8D5662561FD8247A008DFED2 /* Smiley_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Smiley_yellow.png; path = resource/Smiley_yellow.png; sourceTree = "<group>"; };
@@ -541,6 +547,9 @@
 		8DD3118F20246D950054DBF2 /* test_image */ = {
 			isa = PBXGroup;
 			children = (
+				8D4F0545209F424A00688BC1 /* lab1.jpeg */,
+				8D4F0543209F424A00688BC1 /* lab2.jpg */,
+				8D4F0544209F424A00688BC1 /* wall.jpg */,
 				8DD3119020246DD20054DBF2 /* image001.png */,
 				8DD3119120246DD20054DBF2 /* image002.png */,
 				8DD3119220246DD20054DBF2 /* image003.png */,
@@ -639,9 +648,12 @@
 				8D24C5081FC510B300D6C070 /* smartgel-tests.json in Resources */,
 				8D56625E1FD8247C008DFED2 /* Smiley_pink.png in Resources */,
 				8D486CE81F87D67100CE0D4B /* GoogleService-Info.plist in Resources */,
+				8D4F0546209F424A00688BC1 /* lab2.jpg in Resources */,
 				8D5662621FD8247C008DFED2 /* Smiley_(.png in Resources */,
 				8DDC4FDB1F944ED400C92EEB /* tm_smart_gel.png in Resources */,
+				8D4F0548209F424A00688BC1 /* lab1.jpeg in Resources */,
 				8D56625F1FD8247C008DFED2 /* Smiley_green.png in Resources */,
+				8D4F0547209F424A00688BC1 /* wall.jpg in Resources */,
 				8DB412261FFC84B100ED5550 /* Main.storyboard in Resources */,
 				8DD3119320246DD20054DBF2 /* image001.png in Resources */,
 				8D5662631FD8247C008DFED2 /* Smiley_.png in Resources */,
