@@ -26,17 +26,17 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>This allows $(PRODUCT_NAME) let you take any area sprayed smart gel.</string>
+	<string>This lets you take any area sprayed by smart gel.</string>
 	<key>NSContactsUsageDescription</key>
-	<string>This allows $(PRODUCT_NAME) let you choose which customer to send result.</string>
+	<string>This lets you choose which customer to send result.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This allows $(PRODUCT_NAME) let you get location you take a photo.</string>
+	<string>This lets you share location to use smart gel.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This allows $(PRODUCT_NAME) let you share location to use smart gel.</string>
+	<string>This lets you share location to use smart gel.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>This allows $(PRODUCT_NAME) let you choose a photo to estimate clean value</string>
+	<string>This lets you choose any photo to estimate clean value</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This allows $(PRODUCT_NAME) let you choose any photo sprayed smart gel.</string>
+	<string>This lets you choose any photo to estimate clean value</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
