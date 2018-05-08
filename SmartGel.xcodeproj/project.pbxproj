@@ -60,6 +60,7 @@
 		8DB669F41FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB669F21FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.m */; };
 		8DB669F51FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB669F31FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.xib */; };
 		8DB669F91FDE8B6100BB3966 /* SGLaboratoryItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB669F81FDE8B6100BB3966 /* SGLaboratoryItemViewController.m */; };
+		8DCA168F20A138C300720FB3 /* LaboratoryEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCA168E20A138C300720FB3 /* LaboratoryEngine.m */; };
 		8DD3119320246DD20054DBF2 /* image001.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD3119020246DD20054DBF2 /* image001.png */; };
 		8DD3119420246DD20054DBF2 /* image002.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD3119120246DD20054DBF2 /* image002.png */; };
 		8DD3119520246DD20054DBF2 /* image003.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD3119220246DD20054DBF2 /* image003.png */; };
@@ -162,6 +163,8 @@
 		8DB669F31FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SGLaboratoryCollectionViewCell.xib; path = view/SGLaboratoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		8DB669F71FDE8B6100BB3966 /* SGLaboratoryItemViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGLaboratoryItemViewController.h; path = laboratory/SGLaboratoryItemViewController.h; sourceTree = "<group>"; };
 		8DB669F81FDE8B6100BB3966 /* SGLaboratoryItemViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGLaboratoryItemViewController.m; path = laboratory/SGLaboratoryItemViewController.m; sourceTree = "<group>"; };
+		8DCA168D20A138C300720FB3 /* LaboratoryEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LaboratoryEngine.h; path = manager/LaboratoryEngine.h; sourceTree = "<group>"; };
+		8DCA168E20A138C300720FB3 /* LaboratoryEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = LaboratoryEngine.m; path = manager/LaboratoryEngine.m; sourceTree = "<group>"; };
 		8DD3119020246DD20054DBF2 /* image001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image001.png; path = test_image/image001.png; sourceTree = SOURCE_ROOT; };
 		8DD3119120246DD20054DBF2 /* image002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image002.png; path = test_image/image002.png; sourceTree = SOURCE_ROOT; };
 		8DD3119220246DD20054DBF2 /* image003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image003.png; path = test_image/image003.png; sourceTree = SOURCE_ROOT; };
@@ -397,6 +400,8 @@
 			children = (
 				8DA332101F7C92880066148E /* DirtyExtractor.h */,
 				8DA332111F7C92880066148E /* DirtyExtractor.m */,
+				8DCA168D20A138C300720FB3 /* LaboratoryEngine.h */,
+				8DCA168E20A138C300720FB3 /* LaboratoryEngine.m */,
 			);
 			name = engine;
 			sourceTree = "<group>";
@@ -750,6 +755,7 @@
 				8D1CC8E42097821900949745 /* AVCamCaptureManager.m in Sources */,
 				8D26D1491FFCBC05002BFAB8 /* SGTagCollectionViewCell.m in Sources */,
 				8D24C5111FC5AC0F00D6C070 /* SGGridView.m in Sources */,
+				8DCA168F20A138C300720FB3 /* LaboratoryEngine.m in Sources */,
 				8DDC4FD21F93C8EE00C92EEB /* SGWebViewController.m in Sources */,
 				8DDC4FD51F93E41600C92EEB /* SGPdfViewController.m in Sources */,
 				8D199ED61FCC4AB300704CE2 /* SGSettingViewController.m in Sources */,

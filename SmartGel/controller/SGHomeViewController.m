@@ -24,12 +24,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self homeScreenInit];
-    if (([FIRAuth auth].currentUser)&&(([SGSharedManager.sharedManager isAlreadyRunnded])) ) {
-        [self getCurrentUser];
-    }else{
-        [self anonymouslySignIn];
-    }
+    [self homeScreenInit];
+//    if (([FIRAuth auth].currentUser)&&(([SGSharedManager.sharedManager isAlreadyRunnded])) ) {
+//        [self getCurrentUser];
+//    }else{
+//        [self anonymouslySignIn];
+//    }
     [self.manualModeView setAlpha:0.2];
     [self disableAllButtons];
 }

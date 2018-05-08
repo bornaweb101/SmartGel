@@ -172,7 +172,6 @@
         [_originalAreaCleanState addObject:@(IS_DIRTY)];
         return IS_DIRTY;
     }
-    
 }
 
 - (void)smoothBufferByAverage

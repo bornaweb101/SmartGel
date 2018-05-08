@@ -8,12 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "AVCamCaptureManager.h"
+#import "LaboratoryEngine.h"
 
-@interface SGCustomCameraViewController : UIViewController<AVCamCaptureManagerDelegate,AVCaptureVideoDataOutputSampleBufferDelegate>
+@interface SGCustomCameraViewController : UIViewController<AVCamCaptureManagerDelegate,AVCaptureVideoDataOutputSampleBufferDelegate>{
+    bool isProcessing;
+}
 
 @property (nonatomic,retain) AVCamCaptureManager *captureManager;
 @property (nonatomic,retain) AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
 
 @property (strong, nonatomic) IBOutlet UIView *videoPreviewView;
 
+@property (strong, nonatomic) IBOutlet UILabel *statusLabel;
+@property (strong, nonatomic) LaboratoryEngine *laboratoryEngine;
 @end

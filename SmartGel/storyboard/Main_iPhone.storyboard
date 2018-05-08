@@ -1394,7 +1394,19 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZyN-No-XNL">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DHe-4w-uaE">
+                                        <rect key="frame" x="20" y="20" width="42" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="DHe-4w-uaE" firstAttribute="leading" secondItem="ZyN-No-XNL" secondAttribute="leading" constant="20" id="68F-AA-JYR"/>
+                                    <constraint firstItem="DHe-4w-uaE" firstAttribute="top" secondItem="ZyN-No-XNL" secondAttribute="top" constant="20" id="RBI-oL-xJd"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1407,12 +1419,13 @@
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
-                        <outlet property="videoPreviewView" destination="ZyN-No-XNL" id="wp9-gf-arY"/>
+                        <outlet property="statusLabel" destination="DHe-4w-uaE" id="Rqh-Be-64k"/>
+                        <outlet property="videoPreviewView" destination="ZyN-No-XNL" id="Xeo-ZQ-bRQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HXp-pa-A91" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2343" y="842"/>
+            <point key="canvasLocation" x="2341.5999999999999" y="841.52923538230891"/>
         </scene>
         <!--Work History-->
         <scene sceneID="X7X-W8-PyR">
