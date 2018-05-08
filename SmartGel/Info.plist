@@ -17,7 +17,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>5</string>
+	<string>6</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -26,17 +26,17 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>$(PRODUCT_NAME) uses camera</string>
+	<string>This lets you take any area sprayed by smart gel.</string>
 	<key>NSContactsUsageDescription</key>
-	<string>$(PRODUCT_NAME) get contacts</string>
+	<string>This lets you choose which customer to send result.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>App wants to use your location.</string>
+	<string>This lets you share location to use smart gel.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>App wants to use your location.</string>
+	<string>This lets you share location to use smart gel.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>$(PRODUCT_NAME) add photos</string>
+	<string>This lets you choose any photo to estimate clean value</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>$(PRODUCT_NAME) access photo libarary</string>
+	<string>This lets you choose any photo to estimate clean value</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
