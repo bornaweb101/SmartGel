@@ -61,6 +61,7 @@
 		8DB669F51FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB669F31FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.xib */; };
 		8DB669F91FDE8B6100BB3966 /* SGLaboratoryItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB669F81FDE8B6100BB3966 /* SGLaboratoryItemViewController.m */; };
 		8DCA168F20A138C300720FB3 /* LaboratoryEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCA168E20A138C300720FB3 /* LaboratoryEngine.m */; };
+		8DCA169220A3727A00720FB3 /* AnalyzeEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCA169120A3727A00720FB3 /* AnalyzeEngine.m */; };
 		8DD3119320246DD20054DBF2 /* image001.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD3119020246DD20054DBF2 /* image001.png */; };
 		8DD3119420246DD20054DBF2 /* image002.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD3119120246DD20054DBF2 /* image002.png */; };
 		8DD3119520246DD20054DBF2 /* image003.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD3119220246DD20054DBF2 /* image003.png */; };
@@ -165,6 +166,8 @@
 		8DB669F81FDE8B6100BB3966 /* SGLaboratoryItemViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGLaboratoryItemViewController.m; path = laboratory/SGLaboratoryItemViewController.m; sourceTree = "<group>"; };
 		8DCA168D20A138C300720FB3 /* LaboratoryEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LaboratoryEngine.h; path = manager/LaboratoryEngine.h; sourceTree = "<group>"; };
 		8DCA168E20A138C300720FB3 /* LaboratoryEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = LaboratoryEngine.m; path = manager/LaboratoryEngine.m; sourceTree = "<group>"; };
+		8DCA169020A3727A00720FB3 /* AnalyzeEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AnalyzeEngine.h; path = manager/AnalyzeEngine.h; sourceTree = "<group>"; };
+		8DCA169120A3727A00720FB3 /* AnalyzeEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AnalyzeEngine.m; path = manager/AnalyzeEngine.m; sourceTree = "<group>"; };
 		8DD3119020246DD20054DBF2 /* image001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image001.png; path = test_image/image001.png; sourceTree = SOURCE_ROOT; };
 		8DD3119120246DD20054DBF2 /* image002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image002.png; path = test_image/image002.png; sourceTree = SOURCE_ROOT; };
 		8DD3119220246DD20054DBF2 /* image003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image003.png; path = test_image/image003.png; sourceTree = SOURCE_ROOT; };
@@ -402,6 +405,8 @@
 				8DA332111F7C92880066148E /* DirtyExtractor.m */,
 				8DCA168D20A138C300720FB3 /* LaboratoryEngine.h */,
 				8DCA168E20A138C300720FB3 /* LaboratoryEngine.m */,
+				8DCA169020A3727A00720FB3 /* AnalyzeEngine.h */,
+				8DCA169120A3727A00720FB3 /* AnalyzeEngine.m */,
 			);
 			name = engine;
 			sourceTree = "<group>";
@@ -780,6 +785,7 @@
 				8D56D5531FED090A0051EE76 /* SGFirebaseManager.m in Sources */,
 				8DFCFD791FE665FD0074663B /* SGUserSignUpViewController.m in Sources */,
 				8DA3320D1F7C90430066148E /* SGHomeViewController.m in Sources */,
+				8DCA169220A3727A00720FB3 /* AnalyzeEngine.m in Sources */,
 				8D56D5571FED0CB10051EE76 /* SGUtil.m in Sources */,
 				8D80B2D91F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.m in Sources */,
 				8D72F23D1FE5B97D0047CB66 /* SGUserSigninViewController.m in Sources */,

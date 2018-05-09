@@ -10,9 +10,16 @@
 #import "AVCamCaptureManager.h"
 #import "LaboratoryEngine.h"
 
+@protocol SGCustomCameraViewControllerDelegate <NSObject>
+@required
+- (void)onDetectedImage:(UIImage *)image;
+@end
+
 @interface SGCustomCameraViewController : UIViewController<AVCamCaptureManagerDelegate,AVCaptureVideoDataOutputSampleBufferDelegate>{
     bool isProcessing;
 }
+
+@property (weak, nonatomic) id<SGCustomCameraViewControllerDelegate> delegate;
 
 @property (nonatomic,retain) AVCamCaptureManager *captureManager;
 @property (nonatomic,retain) AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;

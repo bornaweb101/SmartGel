@@ -27,39 +27,50 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 }
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self initVideoCaptureSession];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self releasemanager];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-- (void)orientationChanged:(NSNotification *)note
-{
+- (void)orientationChanged:(NSNotification *)note{
 }
 
+- (void)releasemanager
+{
+    [[self.captureManager session] stopRunning];
+    self.captureManager = nil;
+    self.captureVideoPreviewLayer = nil;
+}
 
 - (void)initVideoCaptureSession{
     if (self.captureManager == nil) {
-        AVCamCaptureManager* manager = [[AVCamCaptureManager alloc] init];
-        [self setCaptureManager:manager];
+        self.captureManager = [[AVCamCaptureManager alloc] init];
+        [self setCaptureManager:self.captureManager];
         self.captureManager.delegate = self;
         [self.captureManager setupCaptureSession];
-        AVCaptureVideoPreviewLayer*newCaptureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.captureManager.session];
+        self.captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.captureManager.session];
         CALayer* viewLayer = self.videoPreviewView.layer;
 
         //[viewLayer setMasksToBounds:YES];
         CGRect bounds = self.videoPreviewView.bounds;
-        [newCaptureVideoPreviewLayer setFrame:bounds];
+        [self.captureVideoPreviewLayer setFrame:bounds];
         
-        [newCaptureVideoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+        [self.captureVideoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
         
-        [viewLayer insertSublayer:newCaptureVideoPreviewLayer
+        [viewLayer insertSublayer:self.captureVideoPreviewLayer
                             below:[viewLayer.sublayers objectAtIndex:0]];
 
-        [self setCaptureVideoPreviewLayer:newCaptureVideoPreviewLayer];
+        [self setCaptureVideoPreviewLayer:self.captureVideoPreviewLayer];
         // Start the session. This is done asychronously since -startRunning doesn't return until the session is running.
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [[self.captureManager session] startRunning];
@@ -72,15 +83,24 @@
         isProcessing = true;
         CIImage *ciImage = [[CIImage alloc] initWithCVImageBuffer:imageBuffer];
         UIImage *uiImage = [self imageFromCIImage:ciImage];
+        __weak typeof(self) wself = self;
         if([self.laboratoryEngine analyzeImage:uiImage]){
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.statusLabel setText:@"detected clean bottles"];
-                UIImageWriteToSavedPhotosAlbum(uiImage,nil,nil,nil);
+                if(wself){
+                    [self.statusLabel setText:@"detected clean bottles"];
+                    UIImageWriteToSavedPhotosAlbum(uiImage,nil,nil,nil);
+                    if(self.delegate){
+                        [self.delegate onDetectedImage:uiImage];
+                    }
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
             });
             isProcessing = false;
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.statusLabel setText:@"no clean bottles"];
+                if(wself){
+                    [self.statusLabel setText:@"no clean bottles"];
+                }
             });
             isProcessing = false;
         }

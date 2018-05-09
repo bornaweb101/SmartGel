@@ -109,24 +109,32 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)onDetectedImage:(UIImage *)image{
+    self.laboratoryDataModel.image = image;
+    self.laboratoryDataModel.date = [[SGUtil sharedUtil] getCurrentTimeString];
+    [self estimateValue:image];
+}
+
+
 -(IBAction)launchCameraController{
-    if(firstrun){
-        SGCustomCameraViewController *tagVC = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"SGCustomCameraViewController"];
-        [self.navigationController pushViewController:tagVC animated:YES];
+//    if(firstrun){
+        SGCustomCameraViewController *customCameraVC = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"SGCustomCameraViewController"];
+        customCameraVC.delegate = self;
+        [self.navigationController pushViewController:customCameraVC animated:YES];
 
 //        [self capturePhoto];
-    }else{
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
-                                                                       message:@"Do you want to save the Result?"
-                                                                preferredStyle:UIAlertControllerStyleAlert]; // 1
-        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [self showSaveAlertView];
-        }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [self capturePhoto];
-        }]];
-        [self presentViewController:alert animated:YES completion:nil];
-    }
+//    }else{
+//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+//                                                                       message:@"Do you want to save the Result?"
+//                                                                preferredStyle:UIAlertControllerStyleAlert]; // 1
+//        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//            [self showSaveAlertView];
+//        }]];
+//        [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//            [self capturePhoto];
+//        }]];
+//        [self presentViewController:alert animated:YES completion:nil];
+//    }
 }
 
 -(IBAction)choosePhotoPickerController{
@@ -247,10 +255,10 @@
         int xb=0,yb=0,rednewbx=0,greennewbx=0,bluenewbx=0,rednewby=0,greennewby=0,bluenewby=0,nb=0;
         //br = (width*width%/100)
         float br,bl,bt,bb;
-        br=(w*20.0/100.0);
-        bl=(w*35.0/100.0);
-        bt=(h*75.0/100.0);//55
-        bb=(h*90.0/100.0);//70
+        br=(w*25.0/100.0);
+        bl=(w*40.0/100.0);
+        bt=(h*40.0/100.0);//55
+        bb=(h*55.0/100.0);//70
         
         for(yb=bt;yb<bb;yb++)
         {
@@ -277,10 +285,10 @@
         
         int xs=0,ys=0,rednewsx=0,greennewsx=0,bluenewsx=0,rednewsy=0,greennewsy=0,bluenewsy=0,ns=0;
         float sr,sl,st,sb;
-        sr=(w*70.0/100.0);
-        sl=(w*85.0/100.0);
-        st=(h*75.0/100.0);//55
-        sb=(h*90.0/100.0);//70
+        sr=(w*60.0/100.0);
+        sl=(w*75.0/100.0);
+        st=(h*40.0/100.0);//55
+        sb=(h*55.0/100.0);//70
         int alpha;
         for(ys=st;ys<sb;ys++)
         {

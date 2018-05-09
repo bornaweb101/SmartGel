@@ -92,9 +92,12 @@
 - (bool)detectCleanBottleArea
 {
     UInt32 * pPixelBuffer = m_donePreprocess ? m_pOutBuffer : m_pInBuffer;
-    int cleanCount = 0;
-    int dirtyCount = 0;
-    int totalCount = 0;
+    float cleanCount = 0;
+    float dirtyCount = 0;
+    float totalCount = 0;
+    
+    float edgeTotalCount = 0;
+    
     for (int y = m_imageHeight/5; y < (4*m_imageHeight/5); y++)
     {
         for (int x = m_imageWidth/4; x < (m_imageWidth/2); x++)
@@ -107,14 +110,29 @@
             UInt32 dirtyPixel = [self getDirtyPixel:&rgba];
             if (dirtyPixel == PINK_DIRTY_PIXEL ){
                 cleanCount ++;
-            }else if(dirtyPixel == BLUE_DIRTY_PIXEL){
-                dirtyCount ++;
             }
         }
     }
     
+    
+    for (int y = m_imageHeight/5; y < (4*m_imageHeight/5); y++)
+    {
+        for (int x = 0; x < (m_imageWidth/4); x++)
+        {
+            int index = y * m_imageWidth + x;
+            RGBA rgba;
+            memcpy(&rgba, &pPixelBuffer[index], sizeof(RGBA));
+            UInt32 dirtyPixel = [self getDirtyPixel:&rgba];
+            if (dirtyPixel != PINK_DIRTY_PIXEL ){
+                dirtyCount ++;
+            }
+        }
+    }
+
+    
     totalCount =(3*m_imageHeight/5)*(m_imageWidth/4);
-    if(cleanCount>totalCount*0.8){
+    edgeTotalCount =(3*m_imageHeight/5)*(m_imageWidth/4);
+    if((cleanCount>totalCount*0.9) && (dirtyCount > edgeTotalCount*0.9)){
         return true;
     }else{
         return false;
@@ -199,6 +217,5 @@
         return BLUE_DIRTY_PIXEL;
     }
 }
-
 
 @end

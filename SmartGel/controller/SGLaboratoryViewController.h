@@ -14,7 +14,7 @@
 #import "Firebase.h"
 #import <MapKit/MapKit.h>
 
-@interface SGLaboratoryViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate>{
+@interface SGLaboratoryViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate,SGCustomCameraViewControllerDelegate>{
     int firstrun;
     float vgood,good,satis,adeq,R,G,B,blankR,blankG,blankB,sampleR,sampleG,sampleB;
     uint DIA;
