@@ -11,18 +11,6 @@
 #import "GPUImage.h"
 #include <math.h>
 
-#define NO_DIRTY_PIXEL          0x0
-#define PINK_DIRTY_PIXEL        0xFF00FFFF
-#define BLUE_DIRTY_PIXEL        0x00FFFFFF
-
-#define PIXEL_STEP              3
-#define AREA_DIRTY_RATE      0.8
-
-#define MAX_DIRTY_VALUE         10.0f
-
-#define MIN_LOCAL_AREA_PERCENT  0.01f
-
-#define PINK_COLOR_OFFSET  25.0f
 
 
 @implementation DirtyExtractor
@@ -146,7 +134,7 @@
             RGBA rgba;
             memcpy(&rgba, &pPixelBuffer[index], sizeof(RGBA));
             
-            UInt32 dirtyPixel = [self getDirtyPixel:&rgba];
+            UInt32 dirtyPixel = [[SGColorUtil sharedColorUtil] getDirtyPixel:&rgba withColorOffset:self.m_colorOffset];
             if (dirtyPixel == PINK_DIRTY_PIXEL ){
                 cleanCount ++;
             }else if(dirtyPixel == BLUE_DIRTY_PIXEL){
@@ -251,37 +239,6 @@
     
     return resultUIImage;
 }
-
-- (UInt32)   getDirtyPixel:(RGBA *)rgba
-{
-    UInt8 minValue = 0x4F;
-    if (rgba->r < minValue && rgba->g < minValue && rgba->b < minValue)
-        return BLUE_DIRTY_PIXEL;
-
-    int yellowValue = rgba->r + rgba->g;
-    int greenValue = rgba->g + rgba->b;
-    int pinkValue = rgba->r + rgba->b;
-
-    BOOL isPinkSerial = pinkValue > greenValue;
-    if (isPinkSerial)
-    {
-        if(pinkValue>(yellowValue-self.m_colorOffset))
-            return PINK_DIRTY_PIXEL;
-        else
-            return BLUE_DIRTY_PIXEL;
-//        float distance = [self getDistanceWithPinkColor:rgba];
-//        if(distance<PINK_COLOR_OFFSET)
-//            return PINK_DIRTY_PIXEL;
-//        else
-//            return NO_DIRTY_PIXEL;
-
-    }
-    else //means green serial
-    {
-        return BLUE_DIRTY_PIXEL;
-    }
-}
-
 
 -(void)setNonGelAreaState:(NSMutableArray *)nonGelAreaArray{
     for(int i=0;i<nonGelAreaArray.count;i++){

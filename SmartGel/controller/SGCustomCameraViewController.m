@@ -20,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.laboratoryEngine = [[LaboratoryEngine alloc] init];
+    self.autoDetectionEngine = [[AutoDetectionEngine alloc] init];
     isProcessing = false;
 }
 
@@ -84,7 +84,7 @@
         CIImage *ciImage = [[CIImage alloc] initWithCVImageBuffer:imageBuffer];
         UIImage *uiImage = [self imageFromCIImage:ciImage];
         __weak typeof(self) wself = self;
-        if([self.laboratoryEngine analyzeImage:uiImage]){
+        if([self.autoDetectionEngine analyzeImage:uiImage]){
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(wself){
                     [self.statusLabel setText:@"detected clean bottles"];

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AVCamCaptureManager.h"
-#import "LaboratoryEngine.h"
+#import "AutoDetectionEngine.h"
 
 @protocol SGCustomCameraViewControllerDelegate <NSObject>
 @required
@@ -27,5 +27,5 @@
 @property (strong, nonatomic) IBOutlet UIView *videoPreviewView;
 
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
-@property (strong, nonatomic) LaboratoryEngine *laboratoryEngine;
+@property (strong, nonatomic) AutoDetectionEngine *autoDetectionEngine;
 @end

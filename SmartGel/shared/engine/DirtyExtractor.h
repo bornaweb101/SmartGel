@@ -9,12 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "SGColorUtil.h"
 
-#define AREA_DIVIDE_NUMBER      100
-#define CLEAN_MAX_VALUE      10
-
-#define IS_CLEAN 1
-#define IS_DIRTY 2
-#define NO_GEL   3
 
 
 @interface DirtyExtractor : NSObject

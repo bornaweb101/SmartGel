@@ -27,6 +27,37 @@
     return self;
 }
 
+- (UInt32)   getDirtyPixel:(RGBA *)rgba
+           withColorOffset:(int)colorOffset
+{
+    UInt8 minValue = 0x4F;
+    if (rgba->r < minValue && rgba->g < minValue && rgba->b < minValue)
+        return BLUE_DIRTY_PIXEL;
+    
+    int yellowValue = rgba->r + rgba->g;
+    int greenValue = rgba->g + rgba->b;
+    int pinkValue = rgba->r + rgba->b;
+    
+    BOOL isPinkSerial = pinkValue > greenValue;
+    if (isPinkSerial)
+    {
+        if(pinkValue>(yellowValue-colorOffset))
+            return PINK_DIRTY_PIXEL;
+        else
+            return BLUE_DIRTY_PIXEL;
+        //        float distance = [self getDistanceWithPinkColor:rgba];
+        //        if(distance<PINK_COLOR_OFFSET)
+        //            return PINK_DIRTY_PIXEL;
+        //        else
+        //            return NO_DIRTY_PIXEL;
+        
+    }
+    else //means green serial
+    {
+        return BLUE_DIRTY_PIXEL;
+    }
+}
+
 -(float)getDistancebetweenColors:(RGBA *)rgba1
                             with:(RGBA *)rgba2{
     
