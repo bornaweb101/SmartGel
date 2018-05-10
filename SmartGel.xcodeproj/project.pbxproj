@@ -49,6 +49,7 @@
 		8DA331FE1F7C8F3C0066148E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DA331FD1F7C8F3C0066148E /* Assets.xcassets */; };
 		8DA3320D1F7C90430066148E /* SGHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA3320C1F7C90430066148E /* SGHomeViewController.m */; };
 		8DA332121F7C92880066148E /* DirtyExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA332111F7C92880066148E /* DirtyExtractor.m */; };
+		8DA69A6C20A474A700BF65EC /* AutoDetectionEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA69A6B20A474A700BF65EC /* AutoDetectionEngine.m */; };
 		8DB0978C1F9338880053C203 /* SGMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0978B1F9338880053C203 /* SGMenuTableViewCell.m */; };
 		8DB0978E1F9338E20053C203 /* SGMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB0978D1F9338E20053C203 /* SGMenuTableViewCell.xib */; };
 		8DB097911F933A380053C203 /* SGMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB097901F933A380053C203 /* SGMenuViewController.m */; };
@@ -62,6 +63,7 @@
 		8DB669F91FDE8B6100BB3966 /* SGLaboratoryItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB669F81FDE8B6100BB3966 /* SGLaboratoryItemViewController.m */; };
 		8DCA168F20A138C300720FB3 /* LaboratoryEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCA168E20A138C300720FB3 /* LaboratoryEngine.m */; };
 		8DCA169220A3727A00720FB3 /* AnalyzeEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCA169120A3727A00720FB3 /* AnalyzeEngine.m */; };
+		8DCA169520A3866B00720FB3 /* SGColorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCA169420A3866B00720FB3 /* SGColorUtil.m */; };
 		8DD3119320246DD20054DBF2 /* image001.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD3119020246DD20054DBF2 /* image001.png */; };
 		8DD3119420246DD20054DBF2 /* image002.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD3119120246DD20054DBF2 /* image002.png */; };
 		8DD3119520246DD20054DBF2 /* image003.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD3119220246DD20054DBF2 /* image003.png */; };
@@ -143,6 +145,8 @@
 		8DA3320C1F7C90430066148E /* SGHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGHomeViewController.m; path = controller/SGHomeViewController.m; sourceTree = "<group>"; };
 		8DA332101F7C92880066148E /* DirtyExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DirtyExtractor.h; path = shared/engine/DirtyExtractor.h; sourceTree = "<group>"; };
 		8DA332111F7C92880066148E /* DirtyExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DirtyExtractor.m; path = shared/engine/DirtyExtractor.m; sourceTree = "<group>"; };
+		8DA69A6A20A474A700BF65EC /* AutoDetectionEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AutoDetectionEngine.h; path = manager/AutoDetectionEngine.h; sourceTree = "<group>"; };
+		8DA69A6B20A474A700BF65EC /* AutoDetectionEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AutoDetectionEngine.m; path = manager/AutoDetectionEngine.m; sourceTree = "<group>"; };
 		8DB0978A1F9338880053C203 /* SGMenuTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGMenuTableViewCell.h; path = view/SGMenuTableViewCell.h; sourceTree = "<group>"; };
 		8DB0978B1F9338880053C203 /* SGMenuTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGMenuTableViewCell.m; path = view/SGMenuTableViewCell.m; sourceTree = "<group>"; };
 		8DB0978D1F9338E20053C203 /* SGMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SGMenuTableViewCell.xib; path = view/SGMenuTableViewCell.xib; sourceTree = "<group>"; };
@@ -168,6 +172,8 @@
 		8DCA168E20A138C300720FB3 /* LaboratoryEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = LaboratoryEngine.m; path = manager/LaboratoryEngine.m; sourceTree = "<group>"; };
 		8DCA169020A3727A00720FB3 /* AnalyzeEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AnalyzeEngine.h; path = manager/AnalyzeEngine.h; sourceTree = "<group>"; };
 		8DCA169120A3727A00720FB3 /* AnalyzeEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AnalyzeEngine.m; path = manager/AnalyzeEngine.m; sourceTree = "<group>"; };
+		8DCA169320A3866B00720FB3 /* SGColorUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGColorUtil.h; path = SGUtil/SGColorUtil.h; sourceTree = "<group>"; };
+		8DCA169420A3866B00720FB3 /* SGColorUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGColorUtil.m; path = SGUtil/SGColorUtil.m; sourceTree = "<group>"; };
 		8DD3119020246DD20054DBF2 /* image001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image001.png; path = test_image/image001.png; sourceTree = SOURCE_ROOT; };
 		8DD3119120246DD20054DBF2 /* image002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image002.png; path = test_image/image002.png; sourceTree = SOURCE_ROOT; };
 		8DD3119220246DD20054DBF2 /* image003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image003.png; path = test_image/image003.png; sourceTree = SOURCE_ROOT; };
@@ -295,6 +301,8 @@
 			children = (
 				8D56D5551FED0CB10051EE76 /* SGUtil.h */,
 				8D56D5561FED0CB10051EE76 /* SGUtil.m */,
+				8DCA169320A3866B00720FB3 /* SGColorUtil.h */,
+				8DCA169420A3866B00720FB3 /* SGColorUtil.m */,
 			);
 			name = SGUtil;
 			sourceTree = "<group>";
@@ -407,6 +415,8 @@
 				8DCA168E20A138C300720FB3 /* LaboratoryEngine.m */,
 				8DCA169020A3727A00720FB3 /* AnalyzeEngine.h */,
 				8DCA169120A3727A00720FB3 /* AnalyzeEngine.m */,
+				8DA69A6A20A474A700BF65EC /* AutoDetectionEngine.h */,
+				8DA69A6B20A474A700BF65EC /* AutoDetectionEngine.m */,
 			);
 			name = engine;
 			sourceTree = "<group>";
@@ -771,6 +781,7 @@
 				8DA331F61F7C8F3C0066148E /* AppDelegate.m in Sources */,
 				8D84CBB51FE813F2006B2F74 /* SGUser.m in Sources */,
 				8D199ED91FCD56E200704CE2 /* SGHistoryDetailViewController.m in Sources */,
+				8DCA169520A3866B00720FB3 /* SGColorUtil.m in Sources */,
 				8D5662531FD719D1008DFED2 /* SGLaboratoryViewController.m in Sources */,
 				8D26D1501FFDC197002BFAB8 /* SGSharedManager.m in Sources */,
 				8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */,
@@ -787,6 +798,7 @@
 				8DA3320D1F7C90430066148E /* SGHomeViewController.m in Sources */,
 				8DCA169220A3727A00720FB3 /* AnalyzeEngine.m in Sources */,
 				8D56D5571FED0CB10051EE76 /* SGUtil.m in Sources */,
+				8DA69A6C20A474A700BF65EC /* AutoDetectionEngine.m in Sources */,
 				8D80B2D91F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.m in Sources */,
 				8D72F23D1FE5B97D0047CB66 /* SGUserSigninViewController.m in Sources */,
 				8DDC4FD81F9445A400C92EEB /* SGBaseViewController.m in Sources */,

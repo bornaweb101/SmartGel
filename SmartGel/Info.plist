@@ -30,9 +30,9 @@
 	<key>NSContactsUsageDescription</key>
 	<string>This lets you choose which customer to send result.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This lets you share location to use smart gel.</string>
+	<string>Your location will be displayed on home screen and saved in server so we can check your location you use smart gel.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This lets you share location to use smart gel.</string>
+	<string>Your location will be displayed on home screen and saved in server so we can check your location you use smart gel.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>This lets you choose any photo to estimate clean value</string>
 	<key>NSPhotoLibraryUsageDescription</key>

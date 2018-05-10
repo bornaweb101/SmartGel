@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SGColorUtil.h"
 
 #define AREA_DIVIDE_NUMBER      100
 #define CLEAN_MAX_VALUE      10
@@ -15,27 +16,6 @@
 #define IS_DIRTY 2
 #define NO_GEL   3
 
-typedef struct
-{
-    UInt8 a;
-    UInt8 b;
-    UInt8 g;
-    UInt8 r;
-}RGBA;
-
-typedef struct
-{
-    float x;
-    float y;
-    float z;
-}XYZ;
-
-typedef struct
-{
-    float l;
-    float a;
-    float b;
-}LAB;
 
 @interface DirtyExtractor : NSObject
 {

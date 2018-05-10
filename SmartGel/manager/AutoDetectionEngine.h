@@ -1,15 +1,14 @@
 //
-//  AnalyzeEngine.h
+//  AutoDetectionEngine.h
 //  SmartGel
 //
-//  Created by jordi on 09/05/2018.
+//  Created by jordi on 10/05/2018.
 //  Copyright © 2018 AFCO. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 #import "SGColorUtil.h"
 
-@interface AnalyzeEngine : NSObject
+@interface AutoDetectionEngine
 
 @end
