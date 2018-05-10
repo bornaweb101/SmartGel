@@ -113,8 +113,12 @@
     if(!self.isLoggedIn)
         return UIInterfaceOrientationMaskPortrait;
     else{
-        if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-            return UIInterfaceOrientationMaskPortrait;
+        if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+            if(self.isLaboratory)
+                return UIInterfaceOrientationMaskAll;
+            else
+                return UIInterfaceOrientationMaskPortrait;
+        }
         else
             return UIInterfaceOrientationMaskAll;
     }

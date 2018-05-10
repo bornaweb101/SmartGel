@@ -16,6 +16,7 @@
 @property (strong, nonatomic) UIStoryboard *storyboard;
 
 @property (assign, nonatomic) bool isLoggedIn;
+@property (assign, nonatomic) bool isLaboratory;
 
 - (void)initMenuViewController;
 -(void)gotoSignInScreen;

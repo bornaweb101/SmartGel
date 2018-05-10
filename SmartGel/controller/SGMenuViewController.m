@@ -67,32 +67,38 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
         case 0:
+            self.appDelegate.isLaboratory = false;
             self.sgHomeViewController = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"SGHomeViewController"];
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgHomeViewController]
                                                          animated:YES];
             break;
         case 1:
+            self.appDelegate.isLaboratory = true;
             self.sgLaboratoryViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGLaboratoryViewController"];
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgLaboratoryViewController]
                                                          animated:YES];
             break;
 
         case 2:
+            self.appDelegate.isLaboratory = false;
             self.sgHistoryViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGHistoryViewController"];
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgHistoryViewController]
                                                          animated:YES];
             break;
         case 3:
+            self.appDelegate.isLaboratory = false;
             self.sgSettingViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGSettingViewController"];
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgSettingViewController]
                                                          animated:YES];
             break;
         case 4:
+            self.appDelegate.isLaboratory = false;
             self.sgWebViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGWebViewController"];
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgWebViewController]
                                                          animated:YES];
             break;
         case 5:
+            self.appDelegate.isLaboratory = false;
             [self logOut];
         default:
             break;
