@@ -12,6 +12,7 @@
 #include <math.h>
 
 @implementation LaboratoryEngine
+
 - (id) init
 {
     self = [super init];
@@ -25,110 +26,165 @@
     return self;
 }
 
--(void)getCropAreaAverageColor:(UIImage *)image
+-(RGBA)getCropAreaAverageColor:(UIImage *)image
                     widthStart:(float)widthStart
                       widthEnd:(float)widthEnd
                    heightStart:(float)heightStart
                      heightEnd:(float)heightEnd{
-    CGContextRef bitmapcrop1 = [[SGColorUtil sharedColorUtil] createARGBBitmapContextFromImage:image.CGImage];
-    if (bitmapcrop1 == NULL){
-        return;
+    [self importImage:image];
+    [self smoothBufferByAverage];
+//    RGBA rgba;
+//    CGImageRef ref = image.CGImage;
+//    CGContextRef bitmapcrop1 = [[SGColorUtil sharedColorUtil] createARGBBitmapContextFromImage:image.CGImage];
+//    size_t width = CGImageGetWidth(ref);
+//    size_t height = CGImageGetHeight(ref);
+//
+//    CGRect rect = {{0,0},{width,height}};
+//    CGContextDrawImage(bitmapcrop1, rect, ref);
+//    unsigned char* data = CGBitmapContextGetData (bitmapcrop1);
+//
+    widthStart=(m_imageWidth*widthStart/100.0);
+    widthEnd=(m_imageWidth*widthEnd/100.0);
+    heightStart=(m_imageHeight*heightStart/100.0);
+    heightEnd=(m_imageHeight*heightEnd/100.0);
+    
+    int sumR = 0, sumG =0, sumB = 0, nCount = 0;
+    
+    if(m_pOutBuffer != NULL){
+        for(int i = heightStart;i<heightEnd;i++){
+            for(int j = widthStart;j<widthEnd;j++){
+                RGBA rgba;
+                int index = i * m_imageWidth + j;
+                memcpy(&rgba, &m_pInBuffer[index], sizeof(RGBA));
+                sumR += rgba.r;
+                sumG += rgba.g;
+                sumB += rgba.b;
+                nCount ++;
+            }
+        }
     }
+    RGBA averageRGB;
+    averageRGB.r = sumR / nCount;
+    averageRGB.g = sumG / nCount;
+    averageRGB.b = sumB / nCount;
+    averageRGB = [self filterPickColors:averageRGB widthStart:widthStart widthEnd:widthEnd heightStart:heightStart heightEnd:heightEnd];
+    [self reset];
+    return averageRGB;
 }
 
--(void)getCleanAreaAverageValue:(UIImage *)image{
-    CGImageRef ref = image.CGImage;
-    CGContextRef bitmapcrop1 = [[SGColorUtil sharedColorUtil] createARGBBitmapContextFromImage:ref];
-    if (bitmapcrop1 == NULL){
-        return;
+- (RGBA) filterPickColors:(RGBA)averageRGB
+               widthStart:(float)widthStart
+                 widthEnd:(float)widthEnd
+              heightStart:(float)heightStart
+                heightEnd:(float)heightEnd{
+    
+    int sumR = 0, sumG =0, sumB = 0, nCount = 0;
+    if(m_pOutBuffer != NULL){
+        for(int i = heightStart;i<heightEnd;i++){
+            for(int j = widthStart;j<widthEnd;j++){
+                RGBA rgba;
+                int index = i * m_imageWidth + j;
+                memcpy(&rgba, &m_pInBuffer[index], sizeof(RGBA));
+                if([[SGColorUtil sharedColorUtil] getDistancebetweenColors:&rgba with:&averageRGB]<50){
+                    sumR += rgba.r;
+                    sumG += rgba.g;
+                    sumB += rgba.b;
+                    nCount ++;
+                }
+            }
+        }
     }
-    size_t w = CGImageGetWidth(ref);
-    size_t h = CGImageGetHeight(ref);
-    CGRect rect = {{0,0},{w,h}};
-    CGContextDrawImage(bitmapcrop1, rect, ref);
-    unsigned char* data = CGBitmapContextGetData (bitmapcrop1);
-    if (data != NULL)
+    RGBA resultRGB;
+    resultRGB.r = sumR / nCount;
+    resultRGB.g = sumG / nCount;
+    resultRGB.b = sumB / nCount;
+    [self reset];
+    return resultRGB;
+}
+
+- (void) importImage:(UIImage *)image
+{
+    m_imageWidth = image.size.width;
+    m_imageHeight = image.size.height;
+    
+    m_pInBuffer = (UInt32 *)calloc(sizeof(UInt32), m_imageWidth * m_imageHeight);
+    m_pOutBuffer = (UInt32 *)calloc(sizeof(UInt32), m_imageWidth * m_imageHeight);
+    
+    int nBytesPerRow = m_imageWidth * 4;
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(m_pInBuffer, m_imageWidth, m_imageHeight, 8, nBytesPerRow, colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaNoneSkipLast);
+    
+    CGContextSetInterpolationQuality(context, kCGInterpolationHigh);
+    CGContextSetShouldAntialias(context, NO);
+    CGContextDrawImage(context, CGRectMake(0, 0, m_imageWidth, m_imageHeight), image.CGImage);
+    CGContextRelease(context);
+    CGColorSpaceRelease(colorSpace);
+}
+
+
+- (void)smoothBufferByAverage
+{
+    int pixelStep = PIXEL_STEP;
+    for (int y = 0; y < m_imageHeight; y += pixelStep)
     {
-        
-        //_________________________________________________________
-        //BLANK Crop
-        
-        int xb=0,yb=0,rednewbx=0,greennewbx=0,bluenewbx=0,rednewby=0,greennewby=0,bluenewby=0,nb=0;
-        //br = (width*width%/100)
-        float br,bl,bt,bb;
-        br=(w*20.0/100.0);
-        bl=(w*35.0/100.0);
-        bt=(h*75.0/100.0);//55
-        bb=(h*90.0/100.0);//70
-        
-        for(yb=bt;yb<bb;yb++)
+        for(int x = 0; x < m_imageWidth; x+= pixelStep)
         {
-            for(xb=br;xb<bl;xb++)
+            int endX = MIN(m_imageWidth, x + pixelStep);
+            int endY = MIN(m_imageHeight, y + pixelStep);
+            
+            int sR = 0;
+            int sG = 0;
+            int sB = 0;
+            int nCount = 0;
+            for (int yy = y; yy < endY; yy++)
             {
-                nb++;
-                int offset = 4*((w*yb)+xb);
-                int redb = data[offset+1];
-                data[offset+1]=255;
-                int greenb = data[offset+2];
-                data[offset+2]=255;
-                int blueb = data[offset+3];
-                data[offset+3]=255;
-                rednewbx=rednewbx+redb;
-                greennewbx=greennewbx+greenb;
-                bluenewbx=bluenewbx+blueb;
+                for (int xx = x; xx < endX; xx++)
+                {
+                    RGBA rgba;
+                    int index = yy * m_imageWidth + xx;
+                    memcpy(&rgba, &m_pInBuffer[index], sizeof(RGBA));
+                    sR += rgba.r;
+                    sG += rgba.g;
+                    sB += rgba.b;
+                    
+                    nCount++;
+                }
             }
-            nb++;
-            rednewby=rednewby+rednewbx;
-            greennewby=greennewby+greennewbx;
-            bluenewby=bluenewby+bluenewbx;
-            rednewbx=0;greennewbx=0;bluenewbx=0;
-        }
-        
-        int xs=0,ys=0,rednewsx=0,greennewsx=0,bluenewsx=0,rednewsy=0,greennewsy=0,bluenewsy=0,ns=0;
-        float sr,sl,st,sb;
-        sr=(w*70.0/100.0);
-        sl=(w*85.0/100.0);
-        st=(h*75.0/100.0);//55
-        sb=(h*90.0/100.0);//70
-        int alpha;
-        for(ys=st;ys<sb;ys++)
-        {
-            for(xs=sr;xs<sl;xs++)
+            
+            RGBA averageRGB;
+            averageRGB.r = sR / nCount;
+            averageRGB.g = sG / nCount;
+            averageRGB.b = sB / nCount;
+            
+            for (int yy = y; yy < endY; yy++)
             {
-                ns++;
-                int offset = 4*((w*ys)+xs);
-                alpha =  data[offset]; //maybe we need it?
-                int reds = data[offset+1];
-                data[offset+1]=255;
-                int greens = data[offset+2];
-                data[offset+1]=255;
-                int blues = data[offset+3];
-                data[offset+1]=255;
-                rednewsx=rednewsx+reds;
-                greennewsx=greennewsx+greens;
-                bluenewsx=bluenewsx+blues;
+                for (int xx = x; xx < endX; xx++)
+                {
+                    int index = yy * m_imageWidth + xx;
+                    memcpy(&m_pOutBuffer[index], &averageRGB, sizeof(RGBA));
+                }
             }
-            ns++;
-            rednewsy=rednewsy+rednewsx;
-            greennewsy=greennewsy+greennewsx;
-            bluenewsy=bluenewsy+bluenewsx;
-            rednewsx=0; greennewsx=0; bluenewsx=0;
         }
-        
-        float sred,sgreen,sblue,bred,bgreen,bblue,ssred,ssgreen,ssblue,bbblue,bbgreen,bbred;
-        bred=rednewby/(nb*255.0f);
-        bgreen=greennewby/(nb*255.0f);
-        bblue=bluenewby/(nb*255.0f);
-        sred=rednewsy/(ns*255.0f);
-        sgreen=greennewsy/(ns*255.0f);
-        sblue=bluenewsy/(ns*255.0f);
+    }
+    m_donePreprocess = YES;
+}
+
+- (void) reset
+{
+    m_imageWidth = 0;
+    m_imageHeight = 0;
+    
+    if (m_pInBuffer)
+    {
+        free (m_pInBuffer);
+        m_pInBuffer = NULL;
     }
     
+    if (m_pOutBuffer)
+    {
+        free (m_pOutBuffer);
+        m_pOutBuffer = NULL;
+    }
 }
-
--(void)getDirtyAreaAverageValue:(UIImage *)image{
-    
-}
-
 
 @end

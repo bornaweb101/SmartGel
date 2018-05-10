@@ -21,6 +21,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.autoDetectionEngine = [[AutoDetectionEngine alloc] init];
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(orientationChanged:)
+     name:UIDeviceOrientationDidChangeNotification
+     object:[UIDevice currentDevice]];
     isProcessing = false;
 }
 
@@ -42,14 +47,19 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)orientationChanged:(NSNotification *)note{
+- (void) orientationChanged:(NSNotification *)note
+{
+    [self releasemanager];
+    [self initVideoCaptureSession];
 }
 
 - (void)releasemanager
 {
     [[self.captureManager session] stopRunning];
     self.captureManager = nil;
+    [self.captureVideoPreviewLayer removeFromSuperlayer];
     self.captureVideoPreviewLayer = nil;
+    
 }
 
 - (void)initVideoCaptureSession{
@@ -69,6 +79,24 @@
         
         [viewLayer insertSublayer:self.captureVideoPreviewLayer
                             below:[viewLayer.sublayers objectAtIndex:0]];
+        UIDevice *device = [UIDevice currentDevice];
+        switch(device.orientation)
+        {
+            case UIDeviceOrientationPortrait:
+                [self.captureVideoPreviewLayer.connection setVideoOrientation:AVCaptureVideoOrientationPortrait];
+                break;
+            case UIDeviceOrientationLandscapeLeft:
+                [self.captureVideoPreviewLayer.connection setVideoOrientation:AVCaptureVideoOrientationLandscapeRight];
+                break;
+            case UIDeviceOrientationLandscapeRight:
+                [self.captureVideoPreviewLayer.connection setVideoOrientation:AVCaptureVideoOrientationLandscapeLeft];
+                break;
+            case UIDeviceOrientationPortraitUpsideDown:
+                [self.captureVideoPreviewLayer.connection setVideoOrientation:AVCaptureVideoOrientationPortraitUpsideDown];
+                break;
+            default:
+                break;
+        };
 
         [self setCaptureVideoPreviewLayer:self.captureVideoPreviewLayer];
         // Start the session. This is done asychronously since -startRunning doesn't return until the session is running.

@@ -12,6 +12,7 @@
 #import "SGCustomCameraViewController.h"
 #import "MBProgressHUD.h"
 #import "Firebase.h"
+#import "LaboratoryEngine.h"
 #import <MapKit/MapKit.h>
 
 @interface SGLaboratoryViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate,SGCustomCameraViewControllerDelegate>{
@@ -40,5 +41,7 @@
 //@property (strong, nonatomic) IBOutlet UILabel *timeLabel;
 
 @property (strong, nonatomic) IBOutlet UIImageView *resultfoxImageView;
+
+@property (strong, nonatomic) LaboratoryEngine *laboratoryEngine;
 
 @end
