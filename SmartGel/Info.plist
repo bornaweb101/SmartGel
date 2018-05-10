@@ -17,7 +17,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>6</string>
+	<string>7</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -28,11 +28,11 @@
 	<key>NSCameraUsageDescription</key>
 	<string>This lets you take any area sprayed by smart gel.</string>
 	<key>NSContactsUsageDescription</key>
-	<string>This lets you choose which customer to send result.</string>
+	<string>This lets you choose any customer to send result with photo for smart gel.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This lets you share location to use smart gel.</string>
+	<string>Your location will be displayed on home screen and saved in server so we can check your location you use smart gel.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This lets you share location to use smart gel.</string>
+	<string>Your location will be displayed on home screen and saved in server so we can check your location you use smart gel.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>This lets you choose any photo to estimate clean value</string>
 	<key>NSPhotoLibraryUsageDescription</key>
