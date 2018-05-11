@@ -50,6 +50,7 @@
 		8DA3320D1F7C90430066148E /* SGHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA3320C1F7C90430066148E /* SGHomeViewController.m */; };
 		8DA332121F7C92880066148E /* DirtyExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA332111F7C92880066148E /* DirtyExtractor.m */; };
 		8DA69A6C20A474A700BF65EC /* AutoDetectionEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA69A6B20A474A700BF65EC /* AutoDetectionEngine.m */; };
+		8DA69A6F20A58CAF00BF65EC /* SGImageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA69A6E20A58CAF00BF65EC /* SGImageUtil.m */; };
 		8DB0978C1F9338880053C203 /* SGMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0978B1F9338880053C203 /* SGMenuTableViewCell.m */; };
 		8DB0978E1F9338E20053C203 /* SGMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB0978D1F9338E20053C203 /* SGMenuTableViewCell.xib */; };
 		8DB097911F933A380053C203 /* SGMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB097901F933A380053C203 /* SGMenuViewController.m */; };
@@ -146,6 +147,8 @@
 		8DA332111F7C92880066148E /* DirtyExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DirtyExtractor.m; path = shared/engine/DirtyExtractor.m; sourceTree = "<group>"; };
 		8DA69A6A20A474A700BF65EC /* AutoDetectionEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AutoDetectionEngine.h; path = manager/AutoDetectionEngine.h; sourceTree = "<group>"; };
 		8DA69A6B20A474A700BF65EC /* AutoDetectionEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AutoDetectionEngine.m; path = manager/AutoDetectionEngine.m; sourceTree = "<group>"; };
+		8DA69A6D20A58CAF00BF65EC /* SGImageUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGImageUtil.h; path = manager/SGImageUtil.h; sourceTree = "<group>"; };
+		8DA69A6E20A58CAF00BF65EC /* SGImageUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGImageUtil.m; path = manager/SGImageUtil.m; sourceTree = "<group>"; };
 		8DB0978A1F9338880053C203 /* SGMenuTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGMenuTableViewCell.h; path = view/SGMenuTableViewCell.h; sourceTree = "<group>"; };
 		8DB0978B1F9338880053C203 /* SGMenuTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGMenuTableViewCell.m; path = view/SGMenuTableViewCell.m; sourceTree = "<group>"; };
 		8DB0978D1F9338E20053C203 /* SGMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SGMenuTableViewCell.xib; path = view/SGMenuTableViewCell.xib; sourceTree = "<group>"; };
@@ -300,6 +303,8 @@
 				8D56D5561FED0CB10051EE76 /* SGUtil.m */,
 				8DCA169320A3866B00720FB3 /* SGColorUtil.h */,
 				8DCA169420A3866B00720FB3 /* SGColorUtil.m */,
+				8DA69A6D20A58CAF00BF65EC /* SGImageUtil.h */,
+				8DA69A6E20A58CAF00BF65EC /* SGImageUtil.m */,
 			);
 			name = SGUtil;
 			sourceTree = "<group>";
@@ -787,6 +792,7 @@
 				8DB4121A1FFC786C00ED5550 /* SGTagViewController.m in Sources */,
 				8D80B2CE1F7CF4BA0025B804 /* SGHistoryViewController.m in Sources */,
 				8DD3119E2024A7CC0054DBF2 /* SGCleanEditView.m in Sources */,
+				8DA69A6F20A58CAF00BF65EC /* SGImageUtil.m in Sources */,
 				8DFCFD7F1FE6764C0074663B /* SGForgotPasswordViewController.m in Sources */,
 				8D56D5531FED090A0051EE76 /* SGFirebaseManager.m in Sources */,
 				8DFCFD791FE665FD0074663B /* SGUserSignUpViewController.m in Sources */,

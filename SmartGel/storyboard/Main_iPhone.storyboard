@@ -1395,26 +1395,23 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZyN-No-XNL">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DHe-4w-uaE">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DHe-4w-uaE">
                                         <rect key="frame" x="20" y="20" width="42" height="20.5"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="DHe-4w-uaE" firstAttribute="leading" secondItem="ZyN-No-XNL" secondAttribute="leading" constant="20" id="68F-AA-JYR"/>
-                                    <constraint firstItem="DHe-4w-uaE" firstAttribute="top" secondItem="ZyN-No-XNL" secondAttribute="top" constant="20" id="RBI-oL-xJd"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="HXZ-ub-L0K" firstAttribute="top" secondItem="ZyN-No-XNL" secondAttribute="bottom" id="SlZ-oa-JfB"/>
-                            <constraint firstItem="ZyN-No-XNL" firstAttribute="top" secondItem="r15-vX-2Ua" secondAttribute="bottom" id="ltZ-f8-uNj"/>
-                            <constraint firstItem="ZyN-No-XNL" firstAttribute="leading" secondItem="ZNp-dT-I8y" secondAttribute="leading" id="ovP-R2-GIF"/>
-                            <constraint firstAttribute="trailing" secondItem="ZyN-No-XNL" secondAttribute="trailing" id="zDh-bI-MNk"/>
+                            <constraint firstAttribute="trailing" secondItem="ZyN-No-XNL" secondAttribute="trailing" id="7eb-G3-CoJ"/>
+                            <constraint firstItem="ZyN-No-XNL" firstAttribute="leading" secondItem="ZNp-dT-I8y" secondAttribute="leading" id="ecl-yx-D8A"/>
+                            <constraint firstItem="ZyN-No-XNL" firstAttribute="top" secondItem="r15-vX-2Ua" secondAttribute="bottom" id="era-Sy-FRV"/>
+                            <constraint firstItem="HXZ-ub-L0K" firstAttribute="top" secondItem="ZyN-No-XNL" secondAttribute="bottom" id="uoE-hD-qpF"/>
                         </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AVCamCaptureManager.h"
 #import "AutoDetectionEngine.h"
+#import "SGImageUtil.h"
 
 @protocol SGCustomCameraViewControllerDelegate <NSObject>
 @required

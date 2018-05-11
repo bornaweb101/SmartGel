@@ -110,7 +110,7 @@
     if(!isProcessing){
         isProcessing = true;
         CIImage *ciImage = [[CIImage alloc] initWithCVImageBuffer:imageBuffer];
-        UIImage *uiImage = [self imageFromCIImage:ciImage];
+        UIImage *uiImage = [[SGImageUtil sharedImageUtil] imageFromCIImage:ciImage];        
         __weak typeof(self) wself = self;
         if([self.autoDetectionEngine analyzeImage:uiImage]){
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -133,14 +133,6 @@
             isProcessing = false;
         }
     }
-}
-
-- (UIImage *)imageFromCIImage:(CIImage *)ciImage {
-    CIContext *ciContext = [CIContext contextWithOptions:nil];
-    CGImageRef cgImage = [ciContext createCGImage:ciImage fromRect:[ciImage extent]];
-    UIImage *image = [UIImage imageWithCGImage:cgImage];
-    CGImageRelease(cgImage);
-    return image;
 }
 
 @end

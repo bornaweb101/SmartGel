@@ -475,7 +475,8 @@
             }
             self.lblugormg.text = @"";
         }
-    [self saveLaboratoryDatas];
+//    [self saveLaboratoryDatas];
+    
 //    if (data)
 //    {
 //        free(data);
