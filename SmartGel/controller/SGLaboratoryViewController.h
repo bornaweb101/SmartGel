@@ -24,6 +24,8 @@
     NSString *vgoodlab, *satislab, *inadeqlab,*thePath;
     bool OPorIN,li,ugormg;
     MBProgressHUD *hud;
+    
+    int testImageIndex;
 }
 
 @property (strong, nonatomic) LaboratoryDataModel *laboratoryDataModel;
@@ -43,5 +45,10 @@
 @property (strong, nonatomic) IBOutlet UIImageView *resultfoxImageView;
 
 @property (strong, nonatomic) LaboratoryEngine *laboratoryEngine;
+
+
+@property (strong, nonatomic)NSArray *testImageArray;
+@property (strong, nonatomic) IBOutlet UILabel *testImageLabel;
+
 
 @end

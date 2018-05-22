@@ -44,6 +44,4 @@
     }
     return self;
 }
-
-
 @end

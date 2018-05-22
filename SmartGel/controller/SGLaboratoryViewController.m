@@ -22,6 +22,35 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    self.testImageArray = [NSArray arrayWithObjects:@"0,5mg/L after 5 min_-0.02.jpeg",@"0,5mg/L after 5min_-0.01.jpeg",@"1mg/L after 5min_0.04_2.jpeg",@"1mg/L after 5min_0.04.jpeg",@"1mg/L after 5min_3.jpeg",@"1mg/L after 5min_4.jpeg",@"2mg nach 1 min_0.01.jpeg",@"2mg/L after 5 min_0.04_2.jpeg",@"2mg/L after 5 min_0.04.jpeg",@"4mg/L after 5min_0.06.jpeg",@"8mg/L after 5min_0.08_2.jpeg",@"8mg/L after 5min_0.08.jpeg",@"8mg/L after 5min_0.16.jpeg",@"10 mg/L after 5min_0.08.jpeg",@"10mg/L after 5 min_0.09.jpeg",@"15mg/L after 5 min_0.09.jpeg",@"15mg/L after 5 min_0.12.jpeg",@"15mg/L after 5min_0.12_2.jpeg",@"20mg/L after 5min_0.11.jpeg",@"20mg/L after 5min_0.16.jpeg",@"20mg/L after 5min_0.17.jpeg",@"20mg/L after 10 min_0.24.jpeg",@"blank_-0.15.jpeg",nil];
+    
+    self.testImageArray = [NSArray arrayWithObjects:@"0.5mg:L_after5min_-0.01.jpeg",
+                           @"0.5mg:L_after5min_0.02.jpeg",
+                           @"1mg:L_after5min_0.04_2.jpeg",
+                           @"1mg:L_after5min_0.04.jpeg",
+                           @"1mg:L_after5min_3.jpeg",
+                           @"1mg:L_after5min_4.jpeg",
+                           @"2mg_nach_1min_0.01.jpeg",
+                           @"2mg:L_after5min_0.04_2.jpeg",
+                           @"2mg:L_after5min_0.04.jpeg",
+                           @"4mg:L_after5min_0.06.jpeg",
+                           @"8mg:L_after5min_0.08_2.jpeg",
+                           @"8mg:L_after5min_0.16.jpeg",
+                           @"8mg:Lafter5min_0.08.jpeg",
+                           @"10mg:L_after5min_0.08.jpeg",
+                           @"10mg:L_after5min_0.09.jpeg",
+                           @"15mg:L_after5min_0.09.jpeg",
+                           @"15mg:L_after5min_0.12_2.jpeg",
+                           @"15mg:L_after5min_0.12.jpeg",
+                           @"20mg:L_after5min_0.11.jpeg",
+                           @"20mg:L_after5min_0.16.jpeg",
+                           @"20mg:L_after5min_0.17.jpeg",
+                           @"20mg:L_after10min_0.24.jpeg",
+                           @"blank_-0.15.jpeg",
+                           nil];
+    testImageIndex = 0;
+    
     self.laboratoryDataModel = [[LaboratoryDataModel alloc] init];
     self.laboratoryEngine = [[LaboratoryEngine alloc] init];
     [self initLocationManager];
@@ -267,8 +296,10 @@
 //        sgreen=greennewsy/(ns*255.0f);
 //        sblue=bluenewsy/(ns*255.0f);
     
-        RGBA sampleBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:25 widthEnd:40 heightStart:40 heightEnd:55];
-        RGBA mixBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:60 widthEnd:75 heightStart:40 heightEnd:55];
+//        RGBA sampleBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:25 widthEnd:40 heightStart:40 heightEnd:55];
+//        RGBA mixBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:60 widthEnd:75 heightStart:40 heightEnd:55];
+    RGBA sampleBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:60 widthEnd:75 heightStart:40 heightEnd:55];
+    RGBA mixBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:25 widthEnd:40 heightStart:40 heightEnd:55];
 
         self.laboratoryDataModel.blankColor =((unsigned)(mixBAverageColor.r) << 16) + ((unsigned)(mixBAverageColor.g) << 8) + ((unsigned)(mixBAverageColor.b) << 0);
         self.laboratoryDataModel.sampleColor = ((unsigned)(sampleBAverageColor.r) << 16) + ((unsigned)(sampleBAverageColor.g) << 8) + ((unsigned)(sampleBAverageColor.b) << 0);
@@ -475,7 +506,7 @@
             }
             self.lblugormg.text = @"";
         }
-        [self saveLaboratoryDatas];
+//        [self saveLaboratoryDatas];
     
 //    if (data)
 //    {
@@ -751,6 +782,18 @@
                                                   }
                                               }
                                           }];
+}
+
+///test function
+
+-(IBAction)testButtonClicked:(id)sender{
+    NSString *imageFileName = [self.testImageArray objectAtIndex:testImageIndex];
+    UIImage *image = [UIImage imageNamed:imageFileName];
+    [self estimateValue:image];
+    self.testImageLabel.text = imageFileName;
+    testImageIndex++;
+    if(testImageIndex == self.testImageArray.count)
+        testImageIndex =0;
 }
 
 @end

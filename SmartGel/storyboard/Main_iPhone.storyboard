@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2Kd-ka-MBi">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2Kd-ka-MBi">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Avenir.ttc">
-            <string>Avenir-Book</string>
-            <string>Avenir-Heavy</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="qxT-h7-M7h">
@@ -1337,18 +1331,38 @@
                                     <action selector="choosePhotoPickerController" destination="o4L-Oo-xZl" eventType="touchUpInside" id="zM0-ve-uvA"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JV-mV-eh9">
+                                <rect key="frame" x="16" y="72" width="30" height="30"/>
+                                <color key="backgroundColor" red="0.31372549020000001" green="0.33725490200000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="test">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="testButtonClicked:" destination="o4L-Oo-xZl" eventType="touchUpInside" id="tRe-DH-Ezo"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mF6-Jp-fWL">
+                                <rect key="frame" x="66" y="72" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="eJF-Zf-Gt4" firstAttribute="width" secondItem="mti-JJ-TNl" secondAttribute="width" id="3VM-XR-Pca"/>
                             <constraint firstItem="eJF-Zf-Gt4" firstAttribute="centerX" secondItem="1Pi-zq-pTs" secondAttribute="centerX" id="6ST-9A-kGF"/>
+                            <constraint firstItem="9JV-mV-eh9" firstAttribute="leading" secondItem="1Pi-zq-pTs" secondAttribute="leading" constant="16" id="7gG-Aq-GoC"/>
                             <constraint firstItem="l5s-OR-tih" firstAttribute="centerX" secondItem="1Pi-zq-pTs" secondAttribute="centerX" id="93k-yf-651"/>
                             <constraint firstItem="l5s-OR-tih" firstAttribute="top" secondItem="5iw-2K-Hjr" secondAttribute="bottom" constant="40" id="DYT-BS-sTt"/>
+                            <constraint firstItem="mF6-Jp-fWL" firstAttribute="leading" secondItem="9JV-mV-eh9" secondAttribute="trailing" constant="20" id="GcP-8v-1P6"/>
                             <constraint firstItem="mti-JJ-TNl" firstAttribute="width" secondItem="l5s-OR-tih" secondAttribute="width" id="IU4-dL-HJU"/>
                             <constraint firstItem="mti-JJ-TNl" firstAttribute="top" secondItem="eJF-Zf-Gt4" secondAttribute="bottom" constant="20" id="LdL-hG-KBV"/>
                             <constraint firstItem="l5s-OR-tih" firstAttribute="width" secondItem="1Pi-zq-pTs" secondAttribute="width" multiplier="0.7" id="Rma-RH-b7I"/>
+                            <constraint firstItem="mF6-Jp-fWL" firstAttribute="top" secondItem="5iw-2K-Hjr" secondAttribute="bottom" constant="8" id="XHS-xZ-9Ho"/>
                             <constraint firstItem="mti-JJ-TNl" firstAttribute="centerX" secondItem="1Pi-zq-pTs" secondAttribute="centerX" id="ayB-i4-Zhk"/>
                             <constraint firstItem="wXQ-QE-nz5" firstAttribute="top" secondItem="mti-JJ-TNl" secondAttribute="bottom" constant="60" id="nmn-Md-YG7"/>
+                            <constraint firstItem="9JV-mV-eh9" firstAttribute="top" secondItem="5iw-2K-Hjr" secondAttribute="bottom" constant="8" id="tOz-42-z4p"/>
                             <constraint firstItem="l5s-OR-tih" firstAttribute="height" secondItem="1Pi-zq-pTs" secondAttribute="height" multiplier="0.5" id="uuC-dV-eL7"/>
                         </constraints>
                     </view>
@@ -1374,11 +1388,12 @@
                         <outlet property="resultValueLabel" destination="2AE-LK-ISj" id="nTv-Dt-ew3"/>
                         <outlet property="resultfoxImageView" destination="2lZ-2n-vBh" id="Rsh-Rc-YFg"/>
                         <outlet property="sampleView" destination="dxx-6W-icy" id="rAH-xf-juT"/>
+                        <outlet property="testImageLabel" destination="mF6-Jp-fWL" id="PMI-ce-qg7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pZA-3u-Mx8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1599.21875" y="841.9921875"/>
+            <point key="canvasLocation" x="1599.2" y="841.52923538230891"/>
         </scene>
         <!--Custom Camera View Controller-->
         <scene sceneID="ceM-jR-SZb">
