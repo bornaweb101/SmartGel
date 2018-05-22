@@ -1209,7 +1209,7 @@
             </objects>
             <point key="canvasLocation" x="1101.5625" y="117.18749999999999"/>
         </scene>
-        <!--SmartGel-->
+        <!--SmartGel-2.0.2-->
         <scene sceneID="Z7y-Zc-fMl">
             <objects>
                 <viewController storyboardIdentifier="SGLaboratoryViewController" id="o4L-Oo-xZl" customClass="SGLaboratoryViewController" sceneMemberID="viewController">
@@ -1331,7 +1331,7 @@
                                     <action selector="choosePhotoPickerController" destination="o4L-Oo-xZl" eventType="touchUpInside" id="zM0-ve-uvA"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JV-mV-eh9">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JV-mV-eh9">
                                 <rect key="frame" x="16" y="72" width="30" height="30"/>
                                 <color key="backgroundColor" red="0.31372549020000001" green="0.33725490200000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="test">
@@ -1341,7 +1341,7 @@
                                     <action selector="testButtonClicked:" destination="o4L-Oo-xZl" eventType="touchUpInside" id="tRe-DH-Ezo"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mF6-Jp-fWL">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mF6-Jp-fWL">
                                 <rect key="frame" x="66" y="72" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1367,7 +1367,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="SmartGel" id="92k-8X-ysZ">
+                    <navigationItem key="navigationItem" title="SmartGel-2.0.2" id="92k-8X-ysZ">
                         <barButtonItem key="leftBarButtonItem" image="ic_menu" id="djQ-aN-Ugw">
                             <connections>
                                 <action selector="presentLeftMenuViewController:" destination="o4L-Oo-xZl" id="1gd-qs-HCK"/>
@@ -1393,7 +1393,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pZA-3u-Mx8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1599.2" y="841.52923538230891"/>
+            <point key="canvasLocation" x="1810" y="842"/>
         </scene>
         <!--Custom Camera View Controller-->
         <scene sceneID="ceM-jR-SZb">
@@ -1410,7 +1410,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZyN-No-XNL">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DHe-4w-uaE">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DHe-4w-uaE">
                                         <rect key="frame" x="20" y="20" width="42" height="20.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1437,7 +1437,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HXp-pa-A91" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2341.5999999999999" y="841.52923538230891"/>
+            <point key="canvasLocation" x="2559" y="841"/>
         </scene>
         <!--Work History-->
         <scene sceneID="X7X-W8-PyR">

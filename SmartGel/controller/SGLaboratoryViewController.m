@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    isSaved = true;
 //    self.testImageArray = [NSArray arrayWithObjects:@"0,5mg/L after 5 min_-0.02.jpeg",@"0,5mg/L after 5min_-0.01.jpeg",@"1mg/L after 5min_0.04_2.jpeg",@"1mg/L after 5min_0.04.jpeg",@"1mg/L after 5min_3.jpeg",@"1mg/L after 5min_4.jpeg",@"2mg nach 1 min_0.01.jpeg",@"2mg/L after 5 min_0.04_2.jpeg",@"2mg/L after 5 min_0.04.jpeg",@"4mg/L after 5min_0.06.jpeg",@"8mg/L after 5min_0.08_2.jpeg",@"8mg/L after 5min_0.08.jpeg",@"8mg/L after 5min_0.16.jpeg",@"10 mg/L after 5min_0.08.jpeg",@"10mg/L after 5 min_0.09.jpeg",@"15mg/L after 5 min_0.09.jpeg",@"15mg/L after 5 min_0.12.jpeg",@"15mg/L after 5min_0.12_2.jpeg",@"20mg/L after 5min_0.11.jpeg",@"20mg/L after 5min_0.16.jpeg",@"20mg/L after 5min_0.17.jpeg",@"20mg/L after 10 min_0.24.jpeg",@"blank_-0.15.jpeg",nil];
     
     self.testImageArray = [NSArray arrayWithObjects:@"0.5mg:L_after5min_-0.01.jpeg",
@@ -133,6 +133,7 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
+    isSaved = false;
     self.laboratoryDataModel.image = image;
     self.laboratoryDataModel.date = [[SGUtil sharedUtil] getCurrentTimeString];
     [self estimateValue:image];
@@ -140,6 +141,7 @@
 }
 
 - (void)onDetectedImage:(UIImage *)image{
+    isSaved = false;
     self.laboratoryDataModel.image = image;
     self.laboratoryDataModel.date = [[SGUtil sharedUtil] getCurrentTimeString];
     [self estimateValue:image];
@@ -147,51 +149,53 @@
 
 
 -(IBAction)launchCameraController{
-//    if(firstrun){
-        SGCustomCameraViewController *customCameraVC = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"SGCustomCameraViewController"];
-        customCameraVC.delegate = self;
-        [self.navigationController pushViewController:customCameraVC animated:YES];
+    if(isSaved){
+//        SGCustomCameraViewController *customCameraVC = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"SGCustomCameraViewController"];
+//        customCameraVC.delegate = self;
+//        [self.navigationController pushViewController:customCameraVC animated:YES];
 
-//        [self capturePhoto];
-//    }else{
-//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
-//                                                                       message:@"Do you want to save the Result?"
-//                                                                preferredStyle:UIAlertControllerStyleAlert]; // 1
-//        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//            [self showSaveAlertView];
-//        }]];
-//        [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//            [self capturePhoto];
-//        }]];
-//        [self presentViewController:alert animated:YES completion:nil];
-//    }
+        [self capturePhoto];
+    }else{
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                       message:@"Do you want to save the Result?"
+                                                                preferredStyle:UIAlertControllerStyleAlert]; // 1
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self showSaveAlertView];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self capturePhoto];
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 -(IBAction)choosePhotoPickerController{
-    [self loadPhoto];
+    if(isSaved){
+        [self loadPhoto];
+    }else{
 
-//    if(firstrun){
-//        [self loadPhoto];
-//    }else{
-//
-//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
-//                                                                       message:@"Do you want to save the Result?"
-//                                                                preferredStyle:UIAlertControllerStyleAlert]; // 1
-//        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//            [self showSaveAlertView];
-//        }]];
-//        [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//            [self loadPhoto];
-//        }]];
-//        [self presentViewController:alert animated:YES completion:nil];
-//    }
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                       message:@"Do you want to save the Result?"
+                                                                preferredStyle:UIAlertControllerStyleAlert]; // 1
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self showSaveAlertView];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self loadPhoto];
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 -(void)capturePhoto{
-        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-        imagePickerController.delegate = self;
-        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-        [self presentViewController:imagePickerController animated:NO completion:nil];
+    SGCustomCameraViewController *customCameraVC = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"SGCustomCameraViewController"];
+    customCameraVC.delegate = self;
+    [self.navigationController pushViewController:customCameraVC animated:YES];
+
+//        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+//        imagePickerController.delegate = self;
+//        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+//        [self presentViewController:imagePickerController animated:NO completion:nil];
 //    UIImage *image = [UIImage imageNamed:@"test.png"];
 //    self.laboratoryDataModel.image = image;
 //    self.laboratoryDataModel.date = [self getCurrentTimeString];
@@ -296,10 +300,10 @@
 //        sgreen=greennewsy/(ns*255.0f);
 //        sblue=bluenewsy/(ns*255.0f);
     
-//        RGBA sampleBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:25 widthEnd:40 heightStart:40 heightEnd:55];
-//        RGBA mixBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:60 widthEnd:75 heightStart:40 heightEnd:55];
-    RGBA sampleBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:60 widthEnd:75 heightStart:40 heightEnd:55];
-    RGBA mixBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:25 widthEnd:40 heightStart:40 heightEnd:55];
+        RGBA sampleBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:25 widthEnd:40 heightStart:40 heightEnd:55];
+        RGBA mixBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:60 widthEnd:75 heightStart:40 heightEnd:55];
+//    RGBA sampleBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:60 widthEnd:75 heightStart:40 heightEnd:55];
+//    RGBA mixBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:25 widthEnd:40 heightStart:40 heightEnd:55];
 
         self.laboratoryDataModel.blankColor =((unsigned)(mixBAverageColor.r) << 16) + ((unsigned)(mixBAverageColor.g) << 8) + ((unsigned)(mixBAverageColor.b) << 0);
         self.laboratoryDataModel.sampleColor = ((unsigned)(sampleBAverageColor.r) << 16) + ((unsigned)(sampleBAverageColor.g) << 8) + ((unsigned)(sampleBAverageColor.b) << 0);
@@ -776,6 +780,7 @@
                                               __strong typeof(wself) sself = wself;
                                               if(sself){
                                                   if(error==nil){
+                                                      isSaved = true;
                                                       [self showAlertdialog:@"Image Uploading Success!" message:nil];
                                                   }else{
                                                       [sself showAlertdialog:@"Image Uploading Failed!" message:error.localizedDescription];

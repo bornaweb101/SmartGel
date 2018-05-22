@@ -24,7 +24,7 @@
     NSString *vgoodlab, *satislab, *inadeqlab,*thePath;
     bool OPorIN,li,ugormg;
     MBProgressHUD *hud;
-    
+    bool isSaved;
     int testImageIndex;
 }
 
