@@ -1242,18 +1242,34 @@
                                                     <constraint firstAttribute="height" constant="90" id="i2j-bb-UYT"/>
                                                 </constraints>
                                             </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vsn-lU-Goc">
+                                                <rect key="frame" x="44" y="223" width="0.0" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zVB-y3-BaS">
+                                                <rect key="frame" x="219" y="223" width="0.0" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" red="0.078431372549019607" green="0.078431372549019607" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="WBi-mO-HMt" firstAttribute="width" secondItem="LW3-Sb-L52" secondAttribute="width" multiplier="0.495" id="1Bs-xG-sf2"/>
+                                            <constraint firstItem="Vsn-lU-Goc" firstAttribute="leading" secondItem="LW3-Sb-L52" secondAttribute="leading" constant="44" id="2F2-9e-uq5"/>
                                             <constraint firstItem="dxx-6W-icy" firstAttribute="top" secondItem="LW3-Sb-L52" secondAttribute="top" id="6mD-Ny-f1m"/>
                                             <constraint firstItem="2lZ-2n-vBh" firstAttribute="centerY" secondItem="LW3-Sb-L52" secondAttribute="centerY" id="Bo8-UM-7FB"/>
+                                            <constraint firstItem="zVB-y3-BaS" firstAttribute="top" secondItem="dxx-6W-icy" secondAttribute="bottom" constant="13.5" id="Eva-Xe-LbK"/>
                                             <constraint firstAttribute="bottom" secondItem="WBi-mO-HMt" secondAttribute="bottom" constant="44" id="IbL-mo-ePC"/>
                                             <constraint firstItem="2lZ-2n-vBh" firstAttribute="centerX" secondItem="LW3-Sb-L52" secondAttribute="centerX" id="QEQ-7l-sol"/>
                                             <constraint firstItem="WBi-mO-HMt" firstAttribute="leading" secondItem="LW3-Sb-L52" secondAttribute="leading" id="Rtv-af-OxW"/>
                                             <constraint firstItem="dxx-6W-icy" firstAttribute="width" secondItem="WBi-mO-HMt" secondAttribute="width" id="W1g-JO-2Ga"/>
+                                            <constraint firstItem="Vsn-lU-Goc" firstAttribute="top" secondItem="WBi-mO-HMt" secondAttribute="bottom" constant="13.5" id="dLP-ud-3EY"/>
                                             <constraint firstAttribute="bottom" secondItem="dxx-6W-icy" secondAttribute="bottom" constant="44" id="dy5-ls-a9b"/>
                                             <constraint firstAttribute="trailing" secondItem="dxx-6W-icy" secondAttribute="trailing" id="jCU-2d-sxt"/>
+                                            <constraint firstAttribute="trailing" secondItem="zVB-y3-BaS" secondAttribute="trailing" constant="43.5" id="n4m-fr-ukP"/>
                                             <constraint firstItem="WBi-mO-HMt" firstAttribute="top" secondItem="LW3-Sb-L52" secondAttribute="top" id="zRw-mv-oth"/>
                                         </constraints>
                                     </view>
@@ -1331,7 +1347,7 @@
                                     <action selector="choosePhotoPickerController" destination="o4L-Oo-xZl" eventType="touchUpInside" id="zM0-ve-uvA"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JV-mV-eh9">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JV-mV-eh9">
                                 <rect key="frame" x="16" y="72" width="30" height="30"/>
                                 <color key="backgroundColor" red="0.31372549020000001" green="0.33725490200000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="test">
@@ -1341,12 +1357,22 @@
                                     <action selector="testButtonClicked:" destination="o4L-Oo-xZl" eventType="touchUpInside" id="tRe-DH-Ezo"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mF6-Jp-fWL">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mF6-Jp-fWL">
                                 <rect key="frame" x="66" y="72" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fe6-68-aR0">
+                                <rect key="frame" x="16" y="110" width="30" height="30"/>
+                                <color key="backgroundColor" red="0.19607843137254902" green="0.22745098039215686" blue="0.27058823529411763" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="-">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="testMinusButtonClicked:" destination="o4L-Oo-xZl" eventType="touchUpInside" id="iRM-JY-qJK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1361,9 +1387,11 @@
                             <constraint firstItem="l5s-OR-tih" firstAttribute="width" secondItem="1Pi-zq-pTs" secondAttribute="width" multiplier="0.7" id="Rma-RH-b7I"/>
                             <constraint firstItem="mF6-Jp-fWL" firstAttribute="top" secondItem="5iw-2K-Hjr" secondAttribute="bottom" constant="8" id="XHS-xZ-9Ho"/>
                             <constraint firstItem="mti-JJ-TNl" firstAttribute="centerX" secondItem="1Pi-zq-pTs" secondAttribute="centerX" id="ayB-i4-Zhk"/>
+                            <constraint firstItem="fe6-68-aR0" firstAttribute="top" secondItem="9JV-mV-eh9" secondAttribute="bottom" constant="8" id="fFO-cF-5oG"/>
                             <constraint firstItem="wXQ-QE-nz5" firstAttribute="top" secondItem="mti-JJ-TNl" secondAttribute="bottom" constant="60" id="nmn-Md-YG7"/>
                             <constraint firstItem="9JV-mV-eh9" firstAttribute="top" secondItem="5iw-2K-Hjr" secondAttribute="bottom" constant="8" id="tOz-42-z4p"/>
                             <constraint firstItem="l5s-OR-tih" firstAttribute="height" secondItem="1Pi-zq-pTs" secondAttribute="height" multiplier="0.5" id="uuC-dV-eL7"/>
+                            <constraint firstItem="fe6-68-aR0" firstAttribute="leading" secondItem="1Pi-zq-pTs" secondAttribute="leadingMargin" id="v9W-pN-KFb"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -1383,8 +1411,10 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="blankView" destination="WBi-mO-HMt" id="Sn2-Kt-Oo4"/>
+                        <outlet property="blueColorLabel" destination="zVB-y3-BaS" id="YZ6-RE-ZtL"/>
                         <outlet property="lbldiam" destination="BlB-3X-Cq7" id="Yti-cl-R4d"/>
                         <outlet property="lblugormg" destination="rQs-fV-BGo" id="hJ6-h4-GRJ"/>
+                        <outlet property="pinkColorLabel" destination="Vsn-lU-Goc" id="fqw-LS-1D7"/>
                         <outlet property="resultValueLabel" destination="2AE-LK-ISj" id="nTv-Dt-ew3"/>
                         <outlet property="resultfoxImageView" destination="2lZ-2n-vBh" id="Rsh-Rc-YFg"/>
                         <outlet property="sampleView" destination="dxx-6W-icy" id="rAH-xf-juT"/>
@@ -1393,7 +1423,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pZA-3u-Mx8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1810" y="842"/>
+            <point key="canvasLocation" x="1808.8" y="841.52923538230891"/>
         </scene>
         <!--Custom Camera View Controller-->
         <scene sceneID="ceM-jR-SZb">

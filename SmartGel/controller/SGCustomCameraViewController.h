@@ -18,6 +18,8 @@
 
 @interface SGCustomCameraViewController : UIViewController<AVCamCaptureManagerDelegate,AVCaptureVideoDataOutputSampleBufferDelegate>{
     bool isProcessing;
+
+    int testImageIndex;
 }
 
 @property (weak, nonatomic) id<SGCustomCameraViewControllerDelegate> delegate;
@@ -29,4 +31,8 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 @property (strong, nonatomic) AutoDetectionEngine *autoDetectionEngine;
+
+///test mode - hard-coded
+@property (strong, nonatomic)NSArray *testImageArray;
+
 @end

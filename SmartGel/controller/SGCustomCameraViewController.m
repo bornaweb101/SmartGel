@@ -21,12 +21,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.autoDetectionEngine = [[AutoDetectionEngine alloc] init];
-    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(orientationChanged:)
-     name:UIDeviceOrientationDidChangeNotification
-     object:[UIDevice currentDevice]];
-    isProcessing = false;
+//    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+//    [[NSNotificationCenter defaultCenter]
+//     addObserver:self selector:@selector(orientationChanged:)
+//     name:UIDeviceOrientationDidChangeNotification
+//     object:[UIDevice currentDevice]];
+//    isProcessing = false;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -35,7 +35,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self initVideoCaptureSession];
+//    [self initVideoCaptureSession];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -134,5 +134,49 @@
         }
     }
 }
+
+
+/// testing mode with test image
+- (void) initTestImage{
+    self.testImageArray = [NSArray arrayWithObjects:@"0.5mg:L_after5min_-0.01.jpeg",
+                           @"0.5mg:L_after5min_0.02.jpeg",
+                           @"1mg:L_after5min_0.04_2.jpeg",
+                           @"1mg:L_after5min_0.04.jpeg",
+                           @"1mg:L_after5min_3.jpeg",
+                           @"1mg:L_after5min_4.jpeg",
+                           @"2mg_nach_1min_0.01.jpeg",
+                           @"2mg:L_after5min_0.04_2.jpeg",
+                           @"2mg:L_after5min_0.04.jpeg",
+                           @"4mg:L_after5min_0.06.jpeg",
+                           @"8mg:L_after5min_0.08_2.jpeg",
+                           @"8mg:L_after5min_0.16.jpeg",
+                           @"8mg:Lafter5min_0.08.jpeg",
+                           @"10mg:L_after5min_0.08.jpeg",
+                           @"10mg:L_after5min_0.09.jpeg",
+                           @"15mg:L_after5min_0.09.jpeg",
+                           @"15mg:L_after5min_0.12_2.jpeg",
+                           @"15mg:L_after5min_0.12.jpeg",
+                           @"20mg:L_after5min_0.11.jpeg",
+                           @"20mg:L_after5min_0.16.jpeg",
+                           @"20mg:L_after5min_0.17.jpeg",
+                           @"20mg:L_after10min_0.24.jpeg",
+                           @"blank_-0.15.jpeg",
+                           nil];
+    testImageIndex = 0;
+}
+
+-(IBAction)testButtonClicked:(id)sender{
+    
+    NSString *imageFileName = [self.testImageArray objectAtIndex:testImageIndex];
+    UIImage *image = [UIImage imageNamed:imageFileName];
+    
+//    if(self.delegate){
+//        [self.delegate onDetectedImage:uiImage];
+//    }
+//    [self.navigationController popViewControllerAnimated:YES];
+    if(testImageIndex == self.testImageArray.count)
+        testImageIndex =0;
+}
+
 
 @end

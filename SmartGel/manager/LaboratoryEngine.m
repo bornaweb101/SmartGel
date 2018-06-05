@@ -33,16 +33,7 @@
                      heightEnd:(float)heightEnd{
     [self importImage:image];
     [self smoothBufferByAverage];
-//    RGBA rgba;
-//    CGImageRef ref = image.CGImage;
-//    CGContextRef bitmapcrop1 = [[SGColorUtil sharedColorUtil] createARGBBitmapContextFromImage:image.CGImage];
-//    size_t width = CGImageGetWidth(ref);
-//    size_t height = CGImageGetHeight(ref);
-//
-//    CGRect rect = {{0,0},{width,height}};
-//    CGContextDrawImage(bitmapcrop1, rect, ref);
-//    unsigned char* data = CGBitmapContextGetData (bitmapcrop1);
-//
+    
     widthStart=(m_imageWidth*widthStart/100.0);
     widthEnd=(m_imageWidth*widthEnd/100.0);
     heightStart=(m_imageHeight*heightStart/100.0);

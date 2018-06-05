@@ -23,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     isSaved = true;
+    
 //    self.testImageArray = [NSArray arrayWithObjects:@"0,5mg/L after 5 min_-0.02.jpeg",@"0,5mg/L after 5min_-0.01.jpeg",@"1mg/L after 5min_0.04_2.jpeg",@"1mg/L after 5min_0.04.jpeg",@"1mg/L after 5min_3.jpeg",@"1mg/L after 5min_4.jpeg",@"2mg nach 1 min_0.01.jpeg",@"2mg/L after 5 min_0.04_2.jpeg",@"2mg/L after 5 min_0.04.jpeg",@"4mg/L after 5min_0.06.jpeg",@"8mg/L after 5min_0.08_2.jpeg",@"8mg/L after 5min_0.08.jpeg",@"8mg/L after 5min_0.16.jpeg",@"10 mg/L after 5min_0.08.jpeg",@"10mg/L after 5 min_0.09.jpeg",@"15mg/L after 5 min_0.09.jpeg",@"15mg/L after 5 min_0.12.jpeg",@"15mg/L after 5min_0.12_2.jpeg",@"20mg/L after 5min_0.11.jpeg",@"20mg/L after 5min_0.16.jpeg",@"20mg/L after 5min_0.17.jpeg",@"20mg/L after 10 min_0.24.jpeg",@"blank_-0.15.jpeg",nil];
     
     self.testImageArray = [NSArray arrayWithObjects:@"0.5mg:L_after5min_-0.01.jpeg",
@@ -212,104 +213,41 @@
 
 - (void)estimateValue:(UIImage *)image{
     firstrun=false;
-//    CGImageRef ref = image.CGImage;
-//    CGContextRef bitmapcrop1 = [[SGColorUtil sharedColorUtil] createARGBBitmapContextFromImage:ref];
-//    if (bitmapcrop1 == NULL)
-//    {
-//        return;
-//    }
-//
-//    size_t w = CGImageGetWidth(ref);
-//    size_t h = CGImageGetHeight(ref);
-//    CGRect rect = {{0,0},{w,h}};
-//    CGContextDrawImage(bitmapcrop1, rect, ref);
-//    unsigned char* data = CGBitmapContextGetData (bitmapcrop1);
-//    if (data != NULL)
-//    {
-//
-//        //_________________________________________________________
-//        //BLANK Crop
-//
-//        int xb=0,yb=0,rednewbx=0,greennewbx=0,bluenewbx=0,rednewby=0,greennewby=0,bluenewby=0,nb=0;
-//        //br = (width*width%/100)
-//        float br,bl,bt,bb;
-//        br=(w*25.0/100.0);
-//        bl=(w*40.0/100.0);
-//        bt=(h*40.0/100.0);//55
-//        bb=(h*55.0/100.0);//70
-//
-//        for(yb=bt;yb<bb;yb++)
-//        {
-//            for(xb=br;xb<bl;xb++)
-//            {
-//                nb++;
-//                int offset = 4*((w*yb)+xb);
-//                int redb = data[offset+1];
-//                data[offset+1]=255;
-//                int greenb = data[offset+2];
-//                data[offset+2]=255;
-//                int blueb = data[offset+3];
-//                data[offset+3]=255;
-//                rednewbx=rednewbx+redb;
-//                greennewbx=greennewbx+greenb;
-//                bluenewbx=bluenewbx+blueb;
-//            }
-//            nb++;
-//            rednewby=rednewby+rednewbx;
-//            greennewby=greennewby+greennewbx;
-//            bluenewby=bluenewby+bluenewbx;
-//            rednewbx=0;greennewbx=0;bluenewbx=0;
-//        }
-//
-//        int xs=0,ys=0,rednewsx=0,greennewsx=0,bluenewsx=0,rednewsy=0,greennewsy=0,bluenewsy=0,ns=0;
-//        float sr,sl,st,sb;
-//        sr=(w*60.0/100.0);
-//        sl=(w*75.0/100.0);
-//        st=(h*40.0/100.0);//55
-//        sb=(h*55.0/100.0);//70
-//        int alpha;
-//        for(ys=st;ys<sb;ys++)
-//        {
-//            for(xs=sr;xs<sl;xs++)
-//            {
-//                ns++;
-//                int offset = 4*((w*ys)+xs);
-//                alpha =  data[offset]; //maybe we need it?
-//                int reds = data[offset+1];
-//                data[offset+1]=255;
-//                int greens = data[offset+2];
-//                data[offset+1]=255;
-//                int blues = data[offset+3];
-//                data[offset+1]=255;
-//                rednewsx=rednewsx+reds;
-//                greennewsx=greennewsx+greens;
-//                bluenewsx=bluenewsx+blues;
-//            }
-//            ns++;
-//            rednewsy=rednewsy+rednewsx;
-//            greennewsy=greennewsy+greennewsx;
-//            bluenewsy=bluenewsy+bluenewsx;
-//            rednewsx=0; greennewsx=0; bluenewsx=0;
-//        }
-//
-//        float sred,sgreen,sblue,bred,bgreen,bblue,ssred,ssgreen,ssblue,bbblue,bbgreen,bbred;
-//        bred=rednewby/(nb*255.0f);
-//        bgreen=greennewby/(nb*255.0f);
-//        bblue=bluenewby/(nb*255.0f);
-//        sred=rednewsy/(ns*255.0f);
-//        sgreen=greennewsy/(ns*255.0f);
-//        sblue=bluenewsy/(ns*255.0f);
-    
-        RGBA sampleBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:25 widthEnd:40 heightStart:40 heightEnd:55];
-        RGBA mixBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:60 widthEnd:75 heightStart:40 heightEnd:55];
-//    RGBA sampleBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:60 widthEnd:75 heightStart:40 heightEnd:55];
-//    RGBA mixBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:25 widthEnd:40 heightStart:40 heightEnd:55];
+
+//        RGBA sampleBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:25 widthEnd:40 heightStart:40 heightEnd:55];
+//        RGBA mixBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:60 widthEnd:75 heightStart:40 heightEnd:55];
+        RGBA sampleBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:60 widthEnd:75 heightStart:40 heightEnd:55];
+        RGBA mixBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:25 widthEnd:40 heightStart:40 heightEnd:55];
 
         self.laboratoryDataModel.blankColor =((unsigned)(mixBAverageColor.r) << 16) + ((unsigned)(mixBAverageColor.g) << 8) + ((unsigned)(mixBAverageColor.b) << 0);
         self.laboratoryDataModel.sampleColor = ((unsigned)(sampleBAverageColor.r) << 16) + ((unsigned)(sampleBAverageColor.g) << 8) + ((unsigned)(sampleBAverageColor.b) << 0);
+    
+    
+//    mixBAverageColor.r = 255;
+//    mixBAverageColor.g = 105;
+//    mixBAverageColor.b = 180;
 
+    self.blueColorLabel.text = [NSString stringWithFormat:@"%d, %d, %d", sampleBAverageColor.r,sampleBAverageColor.g,sampleBAverageColor.b];
+    self.pinkColorLabel.text = [NSString stringWithFormat:@"%d, %d, %d", mixBAverageColor.r,mixBAverageColor.g,mixBAverageColor.b];
+    
         self.blankView.backgroundColor = [UIColor colorWithRed:mixBAverageColor.r/255.0 green:mixBAverageColor.g/255.0 blue:mixBAverageColor.b/255.0 alpha:1];
         self.sampleView.backgroundColor = [UIColor colorWithRed:sampleBAverageColor.r/255.0 green:sampleBAverageColor.g/255.0 blue:sampleBAverageColor.b/255.0 alpha:1];
+    
+//        sampleBAverageColor.g = (sampleBAverageColor.g+120)/2;
+//        sampleBAverageColor.b = (sampleBAverageColor.b+120)/2;
+//
+//        mixBAverageColor.g = (mixBAverageColor.g+120)/2;
+//        mixBAverageColor.b = (mixBAverageColor.b+120)/2;
+
+        float colordistance = [[SGColorUtil sharedColorUtil] getDistancebetweenColors:&sampleBAverageColor with:&mixBAverageColor];
+        self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",colordistance];
+    
+    ////        ssgreen = (ssgreen+120)/2;
+    ////        bbgreen = (bbgreen+120)/2;
+    ////
+    ////        ssblue = (ssblue+140)/2;
+    ////        bbblue = (bbblue+140)/2;
+
     
 //        CGFloat colorDistance = [[SGColorUtil sharedColorUtil] getDistancebetweenColors:&sampleBAverageColor with:&mixBAverageColor];
 //        self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",colorDistance];
@@ -329,187 +267,187 @@
 //        bbgreen=greennewby/nb+G;//-4
 //        bbblue=bluenewby/nb+B;//-7
 
-        float ssred,ssgreen,ssblue,bbblue,bbgreen,bbred;
-        ssred = sampleBAverageColor.r;
-        ssgreen = sampleBAverageColor.g;
-        ssblue = sampleBAverageColor.b;
-
-        bbblue = mixBAverageColor.r;
-        bbgreen = mixBAverageColor.g;
-        bbred = mixBAverageColor.b;
-
-
-        double E535_S,E435_S,E405_S,Mn7_S,Mn6_S,Mn2_S,E535_CS,E435_CS,E405_CS,Mn7_CS,Mn6_CS,Mn2_CS,I,T,RSF,mgl_CH2O,ug_cm2,Mn7R,ERR,maxmgl,maxug,RSFGO;
-        I=4.07;
-        T=8.53;
-        // Diamter Berechnung
-        DIA = [[NSUserDefaults standardUserDefaults] integerForKey:@"DIAMETER"];
-        switch (DIA) {
-            case 1:Diam=0.2;
-                break;
-            case 2:Diam=0.35;
-                break;
-            case 3:Diam=0.5;
-                break;
-            case 4:Diam=0.6;
-                break;
-            case 5:Diam=2.5;
-                break;
-            case 6:Diam=0.3175;
-                break;
-            case 7:Diam=0.47625;
-                break;
-            case 8:Diam=0.635;
-                break;
-            case 9:Diam=0.95252;
-                break;
-            case 10:Diam=1.27;
-                break;
-            default:Diam=0.5;
-                break;
-        }
-
-        switch (DIA) {
-            case 1:_diam=@"4mm";
-                break;
-            case 2:_diam=@"7mm";
-                break;
-            case 3:_diam=@"10mm";
-                break;
-            case 4:_diam=@"12mm";
-                break;
-            case 5:_diam=@"50mm";
-                break;
-            case 6:_diam=@"1/4\"";
-                break;
-            case 7:_diam=@"3/8\"";
-                break;
-            case 8:_diam=@"1/2\"";
-                break;
-            case 9:_diam=@"3/4\"";
-                break;
-            case 10:_diam=@"1\"";
-                break;
-            default:_diam=@"10mm";
-                break;
-        }
-    
-    
-        ssgreen = (ssgreen+120)/2;
-        bbgreen = (bbgreen+120)/2;
-
-        ssblue = (ssblue+140)/2;
-        bbblue = (bbblue+140)/2;
-    
-    
-//         Berechnungsstufe 1_S:
-    
-        E535_S = ((-log10(((ssred/(I-4.0)*((T-4.0)*100.0/16.0*(-0.3327)+107.64)/100.0))/3205.0))*112.0+(-log10(((ssgreen/(I-4.0)*((T-4.0)*100.0/16.0*(-0.3327)+107.64)/100.0))/3205.0))*411.0)/100.0;
-        E435_S = ((-log10(((ssred/(I-4)*((T-4)*100.0/16.0*(-0.3327)+107.64)/100))/3205))*35+(-log10(((ssblue/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*306)/100;
-        E405_S = ((-log10(((ssred/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*130+(-log10(((ssblue/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*200)/100;
-
-        // Berechnungsstufe 2_S:
-
-        Mn7_S = (-1670.2*E535_S-1969.1*E435_S+4201.7*E405_S)/(-26606.7);
-        Mn6_S = (-555.1*E535_S-5931*E435_S+8130.7*E405_S)/(26606.7);
-        Mn2_S = (E535_S-26.6*(-1670.2*E535_S-1969.1*E435_S+4201.7*E405_S)/(-26606.7)-20*(-555.1*E535_S-5931*E435_S+8130.7*E405_S)/(26606.7))/18.3;
-
-        // Berechnungsstufe 1_CS:
-
-        E535_CS = ((-log10(((bbred/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*112+(-log10(((bbgreen/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*411)/100;
-        E435_CS = ((-log10(((bbred/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*35+(-log10(((bbblue/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*306)/100;
-        E405_CS = ((-log10(((bbred/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*130+(-log10(((bbblue/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*200)/100;
-
-        // Berechnungsstufe 2_CS:
-
-        Mn7_CS = (-1670.2*E535_CS-1969.1*E435_CS+4201.7*E405_CS)/(-26606.7);
-        Mn6_CS = (-555.1*E535_CS-5931*E435_CS+8130.7*E405_CS)/(26606.7);
-        Mn2_CS = (E535_CS-26.6*(-1670.2*E535_CS-1969.1*E435_CS+4201.7*E405_CS)/(-26606.7)-20*(-555.1*E535_CS-5931*E435_CS+8130.7*E405_CS)/(26606.7))/18.3;
-
-        // Berechnungsstufe 3:
-
-        RSF = (Mn6_S - Mn6_CS) + ((Mn2_S - Mn2_CS)*4);
-        Mn7R = (Mn7_CS - Mn7_S);
-        ERR = fabs((Mn7R-RSF)*100/Mn7R);
-
-        if(RSF*7.5<0.38)
-        {   RSFGO = (RSF*7.5);
-        }else
-        {
-            RSFGO = (RSF*7.5)*1.5-0.13;
-        }
-        mgl_CH2O = RSFGO;
-        ug_cm2 = (RSFGO*1000)/(2*1000/(Diam));
-
-        maxmgl=0.2*7.5;
-        maxug=(0.2*7.5*1000)/(2*1000/(Diam));
-        li = true;
-        if(li)
-        {
-            if([[NSUserDefaults standardUserDefaults] integerForKey:@"ugormg"]==0)
-            {
-                if(RSF<=0.2)
-                {
-                    self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",ug_cm2];
-                    self.laboratoryDataModel.cleanValue = ug_cm2;
-                }else{
-                    self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",maxug];
-                    self.laboratoryDataModel.cleanValue = maxug;
-
-                }
-                self.lbldiam.text=[NSString stringWithFormat:@"%@", _diam];
-                if(ug_cm2 < vgood)
-                {
-                    self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_pink.png"];
-                    self.laboratoryDataModel.resultState = 1;
-                }else{
-                    if(ug_cm2 < satis){
-                    self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_green.png"];
-                        self.laboratoryDataModel.resultState = 2;
-                    }else{
-                        self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_yellow.png"];
-                        self.laboratoryDataModel.resultState = 3;
-                    }
-                }
-            }
-            else
-            {
-                if(RSF<=0.2)
-                {
-                    self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",mgl_CH2O];
-                    self.laboratoryDataModel.cleanValue = mgl_CH2O;
-
-                }
-                else
-                {
-                    self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",maxmgl];
-                    self.laboratoryDataModel.cleanValue = maxmgl;
-
-                }
-                self.resultfoxImageView.image=nil;
-                self.lbldiam.text=@"";
-            }
-        }
-        else
-        {
-            self.resultValueLabel.text=@"---";
-            if(ug_cm2 <= 0.01)
-            {
-                self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_pink.png"];
-                self.laboratoryDataModel.resultState = 1;
-            }else{
-                if(ug_cm2 < maxug)
-                {
-                    self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_green.png"];
-                    self.laboratoryDataModel.resultState = 2;
-
-                }else{
-                    self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_yellow.png"];
-                    self.laboratoryDataModel.resultState = 3;
-                }
-            }
-            self.lblugormg.text = @"";
-        }
+//        float ssred,ssgreen,ssblue,bbblue,bbgreen,bbred;
+//        ssred = sampleBAverageColor.r;
+//        ssgreen = sampleBAverageColor.g;
+//        ssblue = sampleBAverageColor.b;
+//
+//        bbblue = mixBAverageColor.r;
+//        bbgreen = mixBAverageColor.g;
+//        bbred = mixBAverageColor.b;
+//
+//
+//        double E535_S,E435_S,E405_S,Mn7_S,Mn6_S,Mn2_S,E535_CS,E435_CS,E405_CS,Mn7_CS,Mn6_CS,Mn2_CS,I,T,RSF,mgl_CH2O,ug_cm2,Mn7R,ERR,maxmgl,maxug,RSFGO;
+//        I=4.07;
+//        T=8.53;
+//        // Diamter Berechnung
+//        DIA = [[NSUserDefaults standardUserDefaults] integerForKey:@"DIAMETER"];
+//        switch (DIA) {
+//            case 1:Diam=0.2;
+//                break;
+//            case 2:Diam=0.35;
+//                break;
+//            case 3:Diam=0.5;
+//                break;
+//            case 4:Diam=0.6;
+//                break;
+//            case 5:Diam=2.5;
+//                break;
+//            case 6:Diam=0.3175;
+//                break;
+//            case 7:Diam=0.47625;
+//                break;
+//            case 8:Diam=0.635;
+//                break;
+//            case 9:Diam=0.95252;
+//                break;
+//            case 10:Diam=1.27;
+//                break;
+//            default:Diam=0.5;
+//                break;
+//        }
+//
+//        switch (DIA) {
+//            case 1:_diam=@"4mm";
+//                break;
+//            case 2:_diam=@"7mm";
+//                break;
+//            case 3:_diam=@"10mm";
+//                break;
+//            case 4:_diam=@"12mm";
+//                break;
+//            case 5:_diam=@"50mm";
+//                break;
+//            case 6:_diam=@"1/4\"";
+//                break;
+//            case 7:_diam=@"3/8\"";
+//                break;
+//            case 8:_diam=@"1/2\"";
+//                break;
+//            case 9:_diam=@"3/4\"";
+//                break;
+//            case 10:_diam=@"1\"";
+//                break;
+//            default:_diam=@"10mm";
+//                break;
+//        }
+//
+//
+////        ssgreen = (ssgreen+120)/2;
+////        bbgreen = (bbgreen+120)/2;
+////
+////        ssblue = (ssblue+140)/2;
+////        bbblue = (bbblue+140)/2;
+//
+//
+////         Berechnungsstufe 1_S:
+//
+//        E535_S = ((-log10(((ssred/(I-4.0)*((T-4.0)*100.0/16.0*(-0.3327)+107.64)/100.0))/3205.0))*112.0+(-log10(((ssgreen/(I-4.0)*((T-4.0)*100.0/16.0*(-0.3327)+107.64)/100.0))/3205.0))*411.0)/100.0;
+//        E435_S = ((-log10(((ssred/(I-4)*((T-4)*100.0/16.0*(-0.3327)+107.64)/100))/3205))*35+(-log10(((ssblue/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*306)/100;
+//        E405_S = ((-log10(((ssred/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*130+(-log10(((ssblue/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*200)/100;
+//
+//        // Berechnungsstufe 2_S:
+//
+//        Mn7_S = (-1670.2*E535_S-1969.1*E435_S+4201.7*E405_S)/(-26606.7);
+//        Mn6_S = (-555.1*E535_S-5931*E435_S+8130.7*E405_S)/(26606.7);
+//        Mn2_S = (E535_S-26.6*(-1670.2*E535_S-1969.1*E435_S+4201.7*E405_S)/(-26606.7)-20*(-555.1*E535_S-5931*E435_S+8130.7*E405_S)/(26606.7))/18.3;
+//
+//        // Berechnungsstufe 1_CS:
+//
+//        E535_CS = ((-log10(((bbred/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*112+(-log10(((bbgreen/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*411)/100;
+//        E435_CS = ((-log10(((bbred/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*35+(-log10(((bbblue/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*306)/100;
+//        E405_CS = ((-log10(((bbred/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*130+(-log10(((bbblue/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*200)/100;
+//
+//        // Berechnungsstufe 2_CS:
+//
+//        Mn7_CS = (-1670.2*E535_CS-1969.1*E435_CS+4201.7*E405_CS)/(-26606.7);
+//        Mn6_CS = (-555.1*E535_CS-5931*E435_CS+8130.7*E405_CS)/(26606.7);
+//        Mn2_CS = (E535_CS-26.6*(-1670.2*E535_CS-1969.1*E435_CS+4201.7*E405_CS)/(-26606.7)-20*(-555.1*E535_CS-5931*E435_CS+8130.7*E405_CS)/(26606.7))/18.3;
+//
+//        // Berechnungsstufe 3:
+//
+//        RSF = (Mn6_S - Mn6_CS) + ((Mn2_S - Mn2_CS)*4);
+//        Mn7R = (Mn7_CS - Mn7_S);
+//        ERR = fabs((Mn7R-RSF)*100/Mn7R);
+//
+//        if(RSF*7.5<0.38)
+//        {   RSFGO = (RSF*7.5);
+//        }else
+//        {
+//            RSFGO = (RSF*7.5)*1.5-0.13;
+//        }
+//        mgl_CH2O = RSFGO;
+//        ug_cm2 = (RSFGO*1000)/(2*1000/(Diam));
+//
+//        maxmgl=0.2*7.5;
+//        maxug=(0.2*7.5*1000)/(2*1000/(Diam));
+//        li = true;
+//        if(li)
+//        {
+//            if([[NSUserDefaults standardUserDefaults] integerForKey:@"ugormg"]==0)
+//            {
+//                if(RSF<=0.2)
+//                {
+//                    self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",ug_cm2];
+//                    self.laboratoryDataModel.cleanValue = ug_cm2;
+//                }else{
+//                    self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",maxug];
+//                    self.laboratoryDataModel.cleanValue = maxug;
+//
+//                }
+//                self.lbldiam.text=[NSString stringWithFormat:@"%@", _diam];
+//                if(ug_cm2 < vgood)
+//                {
+//                    self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_pink.png"];
+//                    self.laboratoryDataModel.resultState = 1;
+//                }else{
+//                    if(ug_cm2 < satis){
+//                    self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_green.png"];
+//                        self.laboratoryDataModel.resultState = 2;
+//                    }else{
+//                        self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_yellow.png"];
+//                        self.laboratoryDataModel.resultState = 3;
+//                    }
+//                }
+//            }
+//            else
+//            {
+//                if(RSF<=0.2)
+//                {
+//                    self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",mgl_CH2O];
+//                    self.laboratoryDataModel.cleanValue = mgl_CH2O;
+//
+//                }
+//                else
+//                {
+//                    self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",maxmgl];
+//                    self.laboratoryDataModel.cleanValue = maxmgl;
+//
+//                }
+//                self.resultfoxImageView.image=nil;
+//                self.lbldiam.text=@"";
+//            }
+//        }
+//        else
+//        {
+//            self.resultValueLabel.text=@"---";
+//            if(ug_cm2 <= 0.01)
+//            {
+//                self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_pink.png"];
+//                self.laboratoryDataModel.resultState = 1;
+//            }else{
+//                if(ug_cm2 < maxug)
+//                {
+//                    self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_green.png"];
+//                    self.laboratoryDataModel.resultState = 2;
+//
+//                }else{
+//                    self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_yellow.png"];
+//                    self.laboratoryDataModel.resultState = 3;
+//                }
+//            }
+//            self.lblugormg.text = @"";
+//        }
 //        [self saveLaboratoryDatas];
     
 //    if (data)
@@ -792,13 +730,24 @@
 ///test function
 
 -(IBAction)testButtonClicked:(id)sender{
+    if(testImageIndex<self.testImageArray.count -1)
+        testImageIndex ++;
+    
     NSString *imageFileName = [self.testImageArray objectAtIndex:testImageIndex];
     UIImage *image = [UIImage imageNamed:imageFileName];
     [self estimateValue:image];
     self.testImageLabel.text = imageFileName;
-    testImageIndex++;
-    if(testImageIndex == self.testImageArray.count)
-        testImageIndex =0;
 }
+
+-(IBAction)testMinusButtonClicked:(id)sender{
+    if (testImageIndex>0)
+        testImageIndex--;
+    
+    NSString *imageFileName = [self.testImageArray objectAtIndex:testImageIndex];
+    UIImage *image = [UIImage imageNamed:imageFileName];
+    [self estimateValue:image];
+    self.testImageLabel.text = imageFileName;
+}
+
 
 @end
