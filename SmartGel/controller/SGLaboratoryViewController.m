@@ -98,6 +98,11 @@
     }
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.appDelegate.isLaboratory = false;
+}
+
 -(void)initLocationManager{
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;

@@ -10,13 +10,15 @@
 #import "AVCamCaptureManager.h"
 #import "AutoDetectionEngine.h"
 #import "SGImageUtil.h"
+#import "SGBaseViewController.h"
 
+#define RECT_SIZE 50
 @protocol SGCustomCameraViewControllerDelegate <NSObject>
 @required
 - (void)onDetectedImage:(UIImage *)image;
 @end
 
-@interface SGCustomCameraViewController : UIViewController<AVCamCaptureManagerDelegate,AVCaptureVideoDataOutputSampleBufferDelegate>{
+@interface SGCustomCameraViewController : SGBaseViewController<AVCamCaptureManagerDelegate,AVCaptureVideoDataOutputSampleBufferDelegate>{
     bool isProcessing;
 }
 
@@ -29,4 +31,8 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 @property (strong, nonatomic) AutoDetectionEngine *autoDetectionEngine;
+
+@property (strong, nonatomic) UIView *markView1;
+@property (strong, nonatomic) UIView *markView2;
+
 @end

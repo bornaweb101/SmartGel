@@ -73,7 +73,7 @@
                                                          animated:YES];
             break;
         case 1:
-            self.appDelegate.isLaboratory = true;
+            self.appDelegate.isLaboratory = false;
             self.sgLaboratoryViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGLaboratoryViewController"];
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgLaboratoryViewController]
                                                          animated:YES];
