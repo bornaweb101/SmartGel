@@ -305,10 +305,10 @@
 //        sgreen=greennewsy/(ns*255.0f);
 //        sblue=bluenewsy/(ns*255.0f);
     
-        RGBA sampleBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:25 widthEnd:40 heightStart:40 heightEnd:55];
-        RGBA mixBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:60 widthEnd:75 heightStart:40 heightEnd:55];
-//    RGBA sampleBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:60 widthEnd:75 heightStart:40 heightEnd:55];
-//    RGBA mixBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:25 widthEnd:40 heightStart:40 heightEnd:55];
+//        RGBA sampleBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:25 widthEnd:40 heightStart:40 heightEnd:55];
+//        RGBA mixBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:60 widthEnd:75 heightStart:40 heightEnd:55];
+    RGBA sampleBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:60 widthEnd:75 heightStart:40 heightEnd:55];
+    RGBA mixBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:25 widthEnd:40 heightStart:40 heightEnd:55];
 
         self.laboratoryDataModel.blankColor =((unsigned)(mixBAverageColor.r) << 16) + ((unsigned)(mixBAverageColor.g) << 8) + ((unsigned)(mixBAverageColor.b) << 0);
         self.laboratoryDataModel.sampleColor = ((unsigned)(sampleBAverageColor.r) << 16) + ((unsigned)(sampleBAverageColor.g) << 8) + ((unsigned)(sampleBAverageColor.b) << 0);
