@@ -32,7 +32,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.appDelegate.isLaboratory = true;
+    self.appDelegate.isLaboratory = false;
+    detectedCount = 0;
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -50,8 +51,9 @@
 }
 
 -(void)initMarkView{
-    CGRect rect1 = CGRectMake(self.view.frame.size.width/2 - self.view.frame.size.width/8 - RECT_SIZE , (self.view.frame.size.height*4)/10, RECT_SIZE, RECT_SIZE);
-    CGRect rect2 = CGRectMake(self.view.frame.size.width/2 + self.view.frame.size.width/8, (self.view.frame.size.height*4)/10, RECT_SIZE, RECT_SIZE);
+    CGRect rect1 = CGRectMake(self.view.frame.size.width/2 - self.view.frame.size.width/16 - RECT_SIZE , (self.view.frame.size.height*3)/8, RECT_SIZE, RECT_SIZE);
+    
+    CGRect rect2 = CGRectMake(self.view.frame.size.width/2 + self.view.frame.size.width/16, (self.view.frame.size.height*3)/8, RECT_SIZE, RECT_SIZE);
     
     self.markView1 = [self drawRectangle:rect1];
     self.markView2 = [self drawRectangle:rect2];
@@ -69,8 +71,8 @@
 
 - (void) orientationChanged:(NSNotification *)note
 {
-    [self releasemanager];
-    [self initVideoCaptureSession];
+//    [self releasemanager];
+//    [self initVideoCaptureSession];
     [self.markView1 removeFromSuperview];
     [self.markView2 removeFromSuperview];
     [self initMarkView];
@@ -102,25 +104,7 @@
         
         [viewLayer insertSublayer:self.captureVideoPreviewLayer
                             below:[viewLayer.sublayers objectAtIndex:0]];
-        UIDevice *device = [UIDevice currentDevice];
-        switch(device.orientation)
-        {
-            case UIDeviceOrientationPortrait:
-                [self.captureVideoPreviewLayer.connection setVideoOrientation:AVCaptureVideoOrientationPortrait];
-                break;
-            case UIDeviceOrientationLandscapeLeft:
-                [self.captureVideoPreviewLayer.connection setVideoOrientation:AVCaptureVideoOrientationLandscapeRight];
-                break;
-            case UIDeviceOrientationLandscapeRight:
-                [self.captureVideoPreviewLayer.connection setVideoOrientation:AVCaptureVideoOrientationLandscapeLeft];
-                break;
-            case UIDeviceOrientationPortraitUpsideDown:
-                [self.captureVideoPreviewLayer.connection setVideoOrientation:AVCaptureVideoOrientationPortraitUpsideDown];
-                break;
-            default:
-                break;
-        };
-
+        
         [self setCaptureVideoPreviewLayer:self.captureVideoPreviewLayer];
         // Start the session. This is done asychronously since -startRunning doesn't return until the session is running.
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -136,27 +120,39 @@
         UIImage *uiImage = [[SGImageUtil sharedImageUtil] imageFromCIImage:ciImage];        
         __weak typeof(self) wself = self;
         if([self.autoDetectionEngine analyzeImage:uiImage]){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if(wself){
-                    [self.statusLabel setText:@"detected clean bottles"];
-                    [self markViewHidden:false];
-                    [[self.captureManager session] stopRunning];
-                    
-                    double delayInSeconds = 2.0;
-                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                        UIImageWriteToSavedPhotosAlbum(uiImage,nil,nil,nil);
-                        if(self.delegate){
-                            [self.delegate onDetectedImage:uiImage];
-                        }
-                        [self.navigationController popViewControllerAnimated:YES];
-                    });
-                }
-            });
+            detectedCount++;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if(wself){
+                        [self.statusLabel setText:@"detected clean bottles"];
+                        [self markViewHidden:false];
+//                        if(detectedCount>20){
+//                            [[self.captureManager session] stopRunning];
+//
+//                            UIImageWriteToSavedPhotosAlbum(uiImage,nil,nil,nil);
+//                            if(self.delegate){
+//                                [self.delegate onDetectedImage:uiImage];
+//                            }
+//                            [self.navigationController popViewControllerAnimated:YES];
+//                        }
+                        
+//                        double delayInSeconds = 2.0;
+//                        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+//                        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//                            UIImageWriteToSavedPhotosAlbum(uiImage,nil,nil,nil);
+//                            if(self.delegate){
+//                                [self.delegate onDetectedImage:uiImage];
+//                            }
+//                            [self.navigationController popViewControllerAnimated:YES];
+//                        });
+                    }
+                });
             isProcessing = false;
         }else{
+            detectedCount =  0;
+
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(wself){
+                    [self markViewHidden:true];
                     [self.statusLabel setText:@"no clean bottles"];
                 }
             });

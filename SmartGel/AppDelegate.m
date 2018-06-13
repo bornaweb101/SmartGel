@@ -115,7 +115,7 @@
     else{
         if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
             if(self.isLaboratory)
-                return UIInterfaceOrientationMaskAll;
+                return UIInterfaceOrientationMaskPortrait;
             else
                 return UIInterfaceOrientationMaskPortrait;
         }

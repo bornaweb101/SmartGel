@@ -48,6 +48,7 @@
     heightStart=(m_imageHeight*heightStart/100.0);
     heightEnd=(m_imageHeight*heightEnd/100.0);
     
+
     int sumR = 0, sumG =0, sumB = 0, nCount = 0;
     
     if(m_pOutBuffer != NULL){

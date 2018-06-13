@@ -8,6 +8,8 @@
 
 #import "SGImageUtil.h"
 
+#define DEGREES_RADIANS(angle) ((angle) / 180.0 * M_PI)
+
 @implementation SGImageUtil
 
 + (instancetype)sharedImageUtil {
@@ -32,19 +34,19 @@
     CGImageRef cgImage = [ciContext createCGImage:ciImage fromRect:[ciImage extent]];
     UIImage *image;
     UIDevice *device = [UIDevice currentDevice];
+    image = [UIImage imageWithCGImage:cgImage];
     switch(device.orientation)
     {
         case UIDeviceOrientationPortrait:
-            image = [UIImage imageWithCGImage:cgImage scale:1.0 orientation:UIImageOrientationRight];
+            image = [self rotatedImage:image withDegrees:90];
             break;
         case UIDeviceOrientationLandscapeLeft:
-            image = [UIImage imageWithCGImage:cgImage scale:1.0 orientation:UIImageOrientationUp];
             break;
         case UIDeviceOrientationLandscapeRight:
-            image = [UIImage imageWithCGImage:cgImage scale:1.0 orientation:UIImageOrientationDown];
+            image = [self rotatedImage:image withDegrees:180];
             break;
         case UIDeviceOrientationPortraitUpsideDown:
-            image = [UIImage imageWithCGImage:cgImage scale:1.0 orientation:UIImageOrientationLeft];
+            image = [self rotatedImage:image withDegrees:-90];
             break;
         default:
             break;
@@ -53,5 +55,27 @@
     return image;
 }
 
+- (UIImage *)rotatedImage:(UIImage *)image
+                withDegrees: (CGFloat) degrees // rotation in radians
+{
+    // Calculate Destination Size
+    CGFloat rotation = degrees * M_PI / 180;
+    CGAffineTransform t = CGAffineTransformMakeRotation(rotation);
+    CGRect sizeRect = (CGRect) {.size = image.size};
+    CGRect destRect = CGRectApplyAffineTransform(sizeRect, t);
+    CGSize destinationSize = destRect.size;
+    
+    // Draw image
+    UIGraphicsBeginImageContext(destinationSize);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextTranslateCTM(context, destinationSize.width / 2.0f, destinationSize.height / 2.0f);
+    CGContextRotateCTM(context, rotation);
+    [image drawInRect:CGRectMake(-image.size.width / 2.0f, -image.size.height / 2.0f, image.size.width, image.size.height)];
+    
+    // Save image
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
 
 @end

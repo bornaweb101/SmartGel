@@ -58,6 +58,32 @@
     }
 }
 
+- (UInt32)getDirtyPixelLaboratory:(RGBA *)rgba
+{
+    UInt8 minValue = 0x4F;
+    if (rgba->r < minValue && rgba->g < minValue && rgba->b < minValue)
+        return NO_GEL;
+    
+    int yellowValue = rgba->r + rgba->g;
+    int greenValue = rgba->g + rgba->b;
+    int pinkValue = rgba->r + rgba->b;
+    
+    BOOL isPinkSerial = pinkValue > greenValue;
+    if (isPinkSerial)
+    {
+        if(pinkValue>(yellowValue-5))
+            return IS_CLEAN;
+        else{
+            return NO_GEL;
+        }
+    }
+    else //means green serial
+    {
+        return IS_DIRTY;
+    }
+}
+
+
 -(float)getDistancebetweenColors:(RGBA *)rgba1
                             with:(RGBA *)rgba2{
     

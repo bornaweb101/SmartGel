@@ -45,7 +45,7 @@
 -(bool)analyzeImage:(UIImage *)image{
     [self importImage:image];
     [self smoothBufferByAverage];
-    bool isDetected = [self detectCleanBottleArea];
+    bool isDetected = [self detectCleanBottleAreaNew];
     [self reset];
     return isDetected;
 }
@@ -69,6 +69,72 @@
     CGColorSpaceRelease(colorSpace);
 }
 
+
+- (bool)detectCleanBottleAreaNew
+{
+    UInt32 * pPixelBuffer = m_donePreprocess ? m_pOutBuffer : m_pInBuffer;
+    float sampleBottleAreaCleanCount = 0;
+    float mixBottleAreaDirtyCount = 0;
+    float mixBottleAreaCleanCount = 0;
+    
+//    CGRect rect1 = CGRectMake(self.view.frame.size.width/2 - self.view.frame.size.width/8 - RECT_SIZE , (self.view.frame.size.height*4)/10, RECT_SIZE, RECT_SIZE);
+//    CGRect rect2 = CGRectMake(self.view.frame.size.width/2 + self.view.frame.size.width/8, (self.view.frame.size.height*4)/10, RECT_SIZE, RECT_SIZE);
+
+    int sampleBottleYStart = m_imageHeight*3/8;
+    int sampleBottleXStart = m_imageWidth/2-m_imageWidth/20-RECT_SIZE;
+    
+    
+    int mixBottleYStart = m_imageHeight*3/8;
+    int mixBottleXStart =m_imageWidth/2+m_imageWidth/20;
+
+    int totalCount;
+
+    for (int y = sampleBottleYStart; y < sampleBottleYStart+RECT_SIZE; y++)
+    {
+        for (int x = sampleBottleXStart; x < sampleBottleXStart+RECT_SIZE; x++)
+        {
+            int index = y * m_imageWidth + x;
+            
+            RGBA rgba;
+            memcpy(&rgba, &pPixelBuffer[index], sizeof(RGBA));
+            
+            UInt32 dirtyPixel = [[SGColorUtil sharedColorUtil] getDirtyPixelLaboratory:&rgba];
+            if (dirtyPixel == IS_CLEAN ){
+                sampleBottleAreaCleanCount ++;
+            }
+        }
+    }
+    
+    for (int y = mixBottleYStart; y < mixBottleYStart+RECT_SIZE; y++)
+    {
+        for (int x = mixBottleXStart; x < mixBottleXStart+RECT_SIZE; x++)
+        {
+            int index = y * m_imageWidth + x;
+            
+            RGBA rgba;
+            memcpy(&rgba, &pPixelBuffer[index], sizeof(RGBA));
+            
+            UInt32 dirtyPixel = [[SGColorUtil sharedColorUtil] getDirtyPixelLaboratory:&rgba];
+            if (dirtyPixel == IS_CLEAN ){
+                mixBottleAreaCleanCount ++;
+            }else if(dirtyPixel == IS_DIRTY){
+                mixBottleAreaDirtyCount++;
+            }
+        }
+    }
+    
+    totalCount =RECT_SIZE*RECT_SIZE*MEASURE_OFFSET;
+    
+    if (sampleBottleAreaCleanCount>totalCount){
+        if((mixBottleAreaCleanCount>totalCount)||(mixBottleAreaDirtyCount>totalCount)){
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+
 - (bool)detectCleanBottleArea
 {
     UInt32 * pPixelBuffer = m_donePreprocess ? m_pOutBuffer : m_pInBuffer;
@@ -88,7 +154,7 @@
             memcpy(&rgba, &pPixelBuffer[index], sizeof(RGBA));
             
             UInt32 dirtyPixel = [[SGColorUtil sharedColorUtil] getDirtyPixel:&rgba withColorOffset:0];
-            if (dirtyPixel == PINK_DIRTY_PIXEL ){
+            if (dirtyPixel == IS_CLEAN ){
                 cleanCount ++;
             }
         }
@@ -103,7 +169,7 @@
             RGBA rgba;
             memcpy(&rgba, &pPixelBuffer[index], sizeof(RGBA));
             UInt32 dirtyPixel = [[SGColorUtil sharedColorUtil] getDirtyPixel:&rgba withColorOffset:0];
-            if (dirtyPixel != PINK_DIRTY_PIXEL ){
+            if (dirtyPixel != IS_DIRTY ){
                 dirtyCount ++;
             }
         }

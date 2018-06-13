@@ -12,7 +12,6 @@
 #import "SGImageUtil.h"
 #import "SGBaseViewController.h"
 
-#define RECT_SIZE 50
 @protocol SGCustomCameraViewControllerDelegate <NSObject>
 @required
 - (void)onDetectedImage:(UIImage *)image;
@@ -20,6 +19,7 @@
 
 @interface SGCustomCameraViewController : SGBaseViewController<AVCamCaptureManagerDelegate,AVCaptureVideoDataOutputSampleBufferDelegate>{
     bool isProcessing;
+    int detectedCount;
 }
 
 @property (weak, nonatomic) id<SGCustomCameraViewControllerDelegate> delegate;
