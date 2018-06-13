@@ -81,11 +81,11 @@
 //    CGRect rect2 = CGRectMake(self.view.frame.size.width/2 + self.view.frame.size.width/8, (self.view.frame.size.height*4)/10, RECT_SIZE, RECT_SIZE);
 
     int sampleBottleYStart = m_imageHeight*3/8;
-    int sampleBottleXStart = m_imageWidth/2-m_imageWidth/20-RECT_SIZE;
+    int sampleBottleXStart = m_imageWidth/2-m_imageWidth/8-RECT_SIZE;
     
     
     int mixBottleYStart = m_imageHeight*3/8;
-    int mixBottleXStart =m_imageWidth/2+m_imageWidth/20;
+    int mixBottleXStart =m_imageWidth/2+m_imageWidth/8;
 
     int totalCount;
 
