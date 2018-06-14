@@ -65,7 +65,7 @@
         return NO_GEL;
     
     
-    UInt8 maxValue = 0xA0;
+    UInt8 maxValue = 0xB0;
     if (rgba->r > maxValue && rgba->g > maxValue && rgba->b > maxValue)
         return NO_GEL;
 

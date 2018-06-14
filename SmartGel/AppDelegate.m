@@ -120,7 +120,7 @@
                 return UIInterfaceOrientationMaskPortrait;
         }
         else
-            return UIInterfaceOrientationMaskAll;
+            return UIInterfaceOrientationMaskPortrait;
     }
 }
 
