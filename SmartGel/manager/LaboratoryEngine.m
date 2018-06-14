@@ -86,7 +86,7 @@
                 RGBA rgba;
                 int index = i * m_imageWidth + j;
                 memcpy(&rgba, &m_pInBuffer[index], sizeof(RGBA));
-                UInt8 minValue = 0x8F;
+                UInt8 minValue = 0x4F;
                 if (rgba.r > minValue || rgba.g > minValue || rgba.b > minValue){
                     sumR += rgba.r;
                     sumG += rgba.g;

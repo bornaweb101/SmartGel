@@ -126,7 +126,7 @@
     totalCount =RECT_SIZE*RECT_SIZE*MEASURE_OFFSET;
     
     if (sampleBottleAreaCleanCount>totalCount){
-        if((mixBottleAreaCleanCount>totalCount)||(mixBottleAreaDirtyCount>totalCount)){
+        if((mixBottleAreaCleanCount+mixBottleAreaDirtyCount)>totalCount){
             return true;
         }
     }
