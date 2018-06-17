@@ -25,30 +25,60 @@
     isSaved = true;
 //    self.testImageArray = [NSArray arrayWithObjects:@"0,5mg/L after 5 min_-0.02.jpeg",@"0,5mg/L after 5min_-0.01.jpeg",@"1mg/L after 5min_0.04_2.jpeg",@"1mg/L after 5min_0.04.jpeg",@"1mg/L after 5min_3.jpeg",@"1mg/L after 5min_4.jpeg",@"2mg nach 1 min_0.01.jpeg",@"2mg/L after 5 min_0.04_2.jpeg",@"2mg/L after 5 min_0.04.jpeg",@"4mg/L after 5min_0.06.jpeg",@"8mg/L after 5min_0.08_2.jpeg",@"8mg/L after 5min_0.08.jpeg",@"8mg/L after 5min_0.16.jpeg",@"10 mg/L after 5min_0.08.jpeg",@"10mg/L after 5 min_0.09.jpeg",@"15mg/L after 5 min_0.09.jpeg",@"15mg/L after 5 min_0.12.jpeg",@"15mg/L after 5min_0.12_2.jpeg",@"20mg/L after 5min_0.11.jpeg",@"20mg/L after 5min_0.16.jpeg",@"20mg/L after 5min_0.17.jpeg",@"20mg/L after 10 min_0.24.jpeg",@"blank_-0.15.jpeg",nil];
     
-    self.testImageArray = [NSArray arrayWithObjects:@"0.5mg:L_after5min_-0.01.jpeg",
-                           @"0.5mg:L_after5min_0.02.jpeg",
-                           @"1mg:L_after5min_0.04_2.jpeg",
-                           @"1mg:L_after5min_0.04.jpeg",
-                           @"1mg:L_after5min_3.jpeg",
-                           @"1mg:L_after5min_4.jpeg",
-                           @"2mg_nach_1min_0.01.jpeg",
-                           @"2mg:L_after5min_0.04_2.jpeg",
-                           @"2mg:L_after5min_0.04.jpeg",
-                           @"4mg:L_after5min_0.06.jpeg",
-                           @"8mg:L_after5min_0.08_2.jpeg",
-                           @"8mg:L_after5min_0.16.jpeg",
-                           @"8mg:Lafter5min_0.08.jpeg",
-                           @"10mg:L_after5min_0.08.jpeg",
-                           @"10mg:L_after5min_0.09.jpeg",
-                           @"15mg:L_after5min_0.09.jpeg",
-                           @"15mg:L_after5min_0.12_2.jpeg",
-                           @"15mg:L_after5min_0.12.jpeg",
-                           @"20mg:L_after5min_0.11.jpeg",
-                           @"20mg:L_after5min_0.16.jpeg",
-                           @"20mg:L_after5min_0.17.jpeg",
-                           @"20mg:L_after10min_0.24.jpeg",
-                           @"blank_-0.15.jpeg",
+//    self.testImageArray = [NSArray arrayWithObjects:@"0.5mg:L_after5min_-0.01.jpeg",
+//                           @"0.5mg:L_after5min_0.02.jpeg",
+//                           @"1mg:L_after5min_0.04_2.jpeg",
+//                           @"1mg:L_after5min_0.04.jpeg",
+//                           @"1mg:L_after5min_3.jpeg",
+//                           @"1mg:L_after5min_4.jpeg",
+//                           @"2mg_nach_1min_0.01.jpeg",
+//                           @"2mg:L_after5min_0.04_2.jpeg",
+//                           @"2mg:L_after5min_0.04.jpeg",
+//                           @"4mg:L_after5min_0.06.jpeg",
+//                           @"8mg:L_after5min_0.08_2.jpeg",
+//                           @"8mg:L_after5min_0.16.jpeg",
+//                           @"8mg:Lafter5min_0.08.jpeg",
+//                           @"10mg:L_after5min_0.08.jpeg",
+//                           @"10mg:L_after5min_0.09.jpeg",
+//                           @"15mg:L_after5min_0.09.jpeg",
+//                           @"15mg:L_after5min_0.12_2.jpeg",
+//                           @"15mg:L_after5min_0.12.jpeg",
+//                           @"20mg:L_after5min_0.11.jpeg",
+//                           @"20mg:L_after5min_0.16.jpeg",
+//                           @"20mg:L_after5min_0.17.jpeg",
+//                           @"20mg:L_after10min_0.24.jpeg",
+//                           @"blank_-0.15.jpeg",
+//                           nil];
+    self.testImageArray = [NSArray arrayWithObjects:
+                           
+                           @"2_0.05.jpeg",
+                           @"2_0.06.jpeg",
+                           @"2_0.07_1.jpeg",
+                           @"2_0.07_2.jpeg",
+                           @"2_0.08.jpeg",
+                           
+                           @"4_0.09.jpeg",
+                           @"4_0.11.jpeg",
+                           @"4_0.12.jpeg",
+                           @"4_0.14.jpeg",
+                           
+                           @"10_0.07.jpeg",
+                           @"10_0.08.jpeg",
+                           @"10_0.09.jpeg",
+                           @"10_0.12.jpeg",
+                           
+                           @"15-0.07.jpeg",
+                           @"15-0.08.jpeg",
+                           @"15-0.09.jpeg",
+                           @"15-0.11.jpeg",
+                           @"15-0.12.jpeg",
+                           @"15-0.12_2.jpeg",
+                           @"15-0.13.jpeg",
+                           @"15-0.14.jpeg",
+                           @"15-0.15.jpeg",
+
                            nil];
+
     testImageIndex = 0;
     
     self.laboratoryDataModel = [[LaboratoryDataModel alloc] init];
@@ -231,10 +261,29 @@
     ssgreen = sampleBAverageColor.g;
     ssblue = sampleBAverageColor.b;
 
-    bbblue = mixBAverageColor.r;
+    bbred = mixBAverageColor.r;
     bbgreen = mixBAverageColor.g;
-    bbred = mixBAverageColor.b;
-
+    bbblue = mixBAverageColor.b;
+    
+    float yellowValue = ssred + ssgreen;
+    float greenValue = ssgreen + ssblue;
+    float pinkValue = ssred + ssblue;
+//
+//    float colorDistance;
+//    colorDistance = [[SGColorUtil sharedColorUtil] getDistancebetweenColors:&sampleBAverageColor with:&mixBAverageColor];
+//
+//    if((pinkValue>greenValue)&&(pinkValue>yellowValue)){
+//        colorDistance = [[SGColorUtil sharedColorUtil] getDistancebetweenColors:&sampleBAverageColor with:&mixBAverageColor];
+//    }else{
+////
+////        mixBAverageColor.r = 255;
+////        mixBAverageColor.g = 255;
+////        mixBAverageColor.b = 0;
+//
+//        colorDistance = [[SGColorUtil sharedColorUtil] getDistancebetweenColors:&sampleBAverageColor with:&mixBAverageColor];
+//    }
+//
+//    self.resultValueLabel.text = [NSString stringWithFormat:@"%2f",colorDistance];
 
     double E535_S,E435_S,E405_S,Mn7_S,Mn6_S,Mn2_S,E535_CS,E435_CS,E405_CS,Mn7_CS,Mn6_CS,Mn2_CS,I,T,RSF,mgl_CH2O,ug_cm2,Mn7R,ERR,maxmgl,maxug,RSFGO;
     I=4.07;
@@ -291,14 +340,22 @@
             break;
     }
 
+      if((pinkValue>greenValue)&&(pinkValue>yellowValue)){
+          
+        ssgreen = (ssgreen+120+120)/3;
+        bbgreen = (bbgreen+120+120)/3;
 
-    ssgreen = (ssgreen+120)/2;
-    bbgreen = (bbgreen+120)/2;
+        ssblue = (ssblue+140+140)/3;
+        bbblue = (bbblue+140+140)/3;
+          
+      }else{
+          ssgreen = (ssgreen+100)/4;
+          bbgreen = (bbgreen+100)/4;
 
-    ssblue = (ssblue+140)/2;
-    bbblue = (bbblue+140)/2;
-
-
+          ssblue = (ssblue+120)/4;
+          bbblue = (bbblue+120)/4;
+      }
+    
 //         Berechnungsstufe 1_S:
 
     E535_S = ((-log10(((ssred/(I-4.0)*((T-4.0)*100.0/16.0*(-0.3327)+107.64)/100.0))/3205.0))*112.0+(-log10(((ssgreen/(I-4.0)*((T-4.0)*100.0/16.0*(-0.3327)+107.64)/100.0))/3205.0))*411.0)/100.0;
@@ -407,13 +464,6 @@
         }
         self.lblugormg.text = @"";
     }
-//        [self saveLaboratoryDatas];
-    
-//    if (data)
-//    {
-//        free(data);
-//    }
-//    CGContextRelease(bitmapcrop1);
 }
 
 - (BOOL)licheck

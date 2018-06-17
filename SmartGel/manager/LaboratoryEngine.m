@@ -57,10 +57,24 @@
                 RGBA rgba;
                 int index = i * m_imageWidth + j;
                 memcpy(&rgba, &m_pInBuffer[index], sizeof(RGBA));
-                sumR += rgba.r;
-                sumG += rgba.g;
-                sumB += rgba.b;
-                nCount ++;
+                
+                bool validColor = true;
+                UInt8 minValue = 0x19;
+                if (rgba.r < minValue && rgba.g < minValue && rgba.b < minValue){
+                    validColor = false;
+                }
+                
+                UInt8 maxValue = 0xB0;
+                if (rgba.r > maxValue && rgba.g > maxValue && rgba.b > maxValue){
+                    validColor = false;
+                }
+                
+                if(validColor){
+                    sumR += rgba.r;
+                    sumG += rgba.g;
+                    sumB += rgba.b;
+                    nCount ++;
+                }
             }
         }
     }
