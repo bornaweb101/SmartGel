@@ -13,7 +13,8 @@
 #import "SGUserSigninViewController.h"
 #import "SGConstant.h"
 #import "SGSharedManager.h"
-
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 @interface AppDelegate () <RESideMenuDelegate>
 
 @end
@@ -24,6 +25,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.isLoggedIn = false;
+    [Fabric with:@[[Crashlytics class]]];
+    
     [FIRApp configure];
     [self initNavigationbar];
     [self initStoryBoard];
