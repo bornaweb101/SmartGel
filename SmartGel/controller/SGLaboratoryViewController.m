@@ -404,6 +404,12 @@
         {
             if(RSF<=0.2)
             {
+                if((ug_cm2 >= 0.13) &&(ug_cm2<0.18)){
+                    ug_cm2 = (ug_cm2 + 0.15)/2;
+                }else if((ug_cm2 >= 0.08) &&(ug_cm2<0.13)){
+                    ug_cm2 = (ug_cm2 + 0.10)/2;
+                }
+                
                 self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",ug_cm2];
                 self.laboratoryDataModel.cleanValue = ug_cm2;
             }else{

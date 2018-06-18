@@ -150,7 +150,7 @@
                     if(wself){
                         [self.statusLabel setText:@"detected clean bottles"];
                         [self initMarkView:uiImage];
-                        if(detectedCount>30){
+                        if(detectedCount>25){
                             [[self.captureManager session] stopRunning];
                             UIImageWriteToSavedPhotosAlbum(uiImage,nil,nil,nil);
                             if(self.delegate){
