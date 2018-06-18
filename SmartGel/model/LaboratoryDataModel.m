@@ -41,6 +41,7 @@
         self.blankColor = 0;
         self.sampleColor = 0;
         self.resultState = 0;
+        self.filterValue = 0;
     }
     return self;
 }

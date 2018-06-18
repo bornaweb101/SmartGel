@@ -1232,11 +1232,11 @@
                                                 <color key="backgroundColor" red="0.75294117650000003" green="0.26274509800000001" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dxx-6W-icy">
-                                                <rect key="frame" x="132.5" y="0.0" width="130" height="209.5"/>
+                                                <rect key="frame" x="132" y="0.0" width="130" height="209.5"/>
                                                 <color key="backgroundColor" red="0.27843137254901962" green="0.3411764705882353" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2lZ-2n-vBh">
-                                                <rect key="frame" x="86" y="82.5" width="90" height="90"/>
+                                                <rect key="frame" x="86" y="82" width="90" height="90"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="90" id="JtC-bB-wga"/>
                                                     <constraint firstAttribute="height" constant="90" id="i2j-bb-UYT"/>
@@ -1331,7 +1331,7 @@
                                     <action selector="choosePhotoPickerController" destination="o4L-Oo-xZl" eventType="touchUpInside" id="zM0-ve-uvA"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JV-mV-eh9">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JV-mV-eh9">
                                 <rect key="frame" x="16" y="72" width="30" height="30"/>
                                 <color key="backgroundColor" red="0.31372549020000001" green="0.33725490200000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="test">
@@ -1341,7 +1341,7 @@
                                     <action selector="testButtonClicked:" destination="o4L-Oo-xZl" eventType="touchUpInside" id="tRe-DH-Ezo"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mF6-Jp-fWL">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mF6-Jp-fWL">
                                 <rect key="frame" x="66" y="72" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1837,11 +1837,11 @@
                                                 <color key="backgroundColor" red="0.75294117650000003" green="0.26274509800000001" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bWb-ct-ve7">
-                                                <rect key="frame" x="132.5" y="0.0" width="130" height="219.5"/>
+                                                <rect key="frame" x="132" y="0.0" width="130" height="219.5"/>
                                                 <color key="backgroundColor" red="0.2784313725" green="0.3411764706" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wOg-9c-fwH">
-                                                <rect key="frame" x="86" y="87.5" width="90" height="90"/>
+                                                <rect key="frame" x="86" y="87" width="90" height="90"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="90" id="bf9-nm-qsj"/>
                                                     <constraint firstAttribute="height" constant="90" id="qlB-IL-dGb"/>

@@ -404,14 +404,18 @@
         {
             if(RSF<=0.2)
             {
+                double filter_ug_cm2;
                 if((ug_cm2 >= 0.13) &&(ug_cm2<0.18)){
-                    ug_cm2 = (ug_cm2 + 0.15)/2;
+                    filter_ug_cm2 = (ug_cm2 + 0.15)/2;
+                    
                 }else if((ug_cm2 >= 0.08) &&(ug_cm2<0.13)){
-                    ug_cm2 = (ug_cm2 + 0.10)/2;
+                    filter_ug_cm2 = (ug_cm2 + 0.10)/2;
+                }else{
+                    filter_ug_cm2 = ug_cm2;
                 }
-                
-                self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",ug_cm2];
+                self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",filter_ug_cm2];
                 self.laboratoryDataModel.cleanValue = ug_cm2;
+                self.laboratoryDataModel.filterValue = filter_ug_cm2;
             }else{
                 self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",maxug];
                 self.laboratoryDataModel.cleanValue = maxug;

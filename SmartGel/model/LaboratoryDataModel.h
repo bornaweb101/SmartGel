@@ -15,6 +15,8 @@
 @property (strong, nonatomic) UIImage *image;
 @property (strong, nonatomic) NSString *imageUrl;
 @property (assign, nonatomic) float cleanValue;
+@property (assign, nonatomic) float filterValue;
+
 @property (strong, nonatomic) NSString *location;
 @property (strong, nonatomic) NSString *date;
 @property (strong, nonatomic) NSString *unit;
