@@ -19,6 +19,9 @@ pod 'SCLAlertView-Objective-C'
 pod "PFNavigationDropdownMenu"
 pod 'GLCalendarView', '~> 1.0.0'
 
+pod 'Fabric', '~> 1.7.7'
+pod 'Crashlytics', '~> 3.10.2'
+
 post_install do |installer|
     installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|
