@@ -349,11 +349,11 @@
         bbblue = (bbblue+140+140)/3;
           
       }else{
-          ssgreen = (ssgreen+100)/4;
-          bbgreen = (bbgreen+100)/4;
+          ssgreen = (ssgreen+120)/2;
+          bbgreen = (bbgreen+120)/2;
 
-          ssblue = (ssblue+120)/4;
-          bbblue = (bbblue+120)/4;
+          ssblue = (ssblue+140)/2;
+          bbblue = (bbblue+140)/2;
       }
     
 //         Berechnungsstufe 1_S:
