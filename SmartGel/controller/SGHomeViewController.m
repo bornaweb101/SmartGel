@@ -250,6 +250,13 @@
 }
 
 - (void)saveResultImage{
+    
+    NSString *userID = [FIRAuth auth].currentUser.uid;
+    if(userID == nil){
+        [self showNoConnectionAlertdialogForSaving];
+        return;
+    }
+    
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     if(self.cleanEditView.isAutoDetect){
         [[SGFirebaseManager sharedManager] saveResultImage:self.estimateImage

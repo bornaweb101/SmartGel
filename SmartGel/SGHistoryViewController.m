@@ -76,6 +76,12 @@
 }
 
 -(void)getHistoryArray{
+    NSString *userID = [FIRAuth auth].currentUser.uid;
+    if(userID == nil){
+        [self showNoConnectionAlertdialog];
+        return;
+    }
+
     [self initArrays];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof(self) wself = self;
@@ -95,6 +101,13 @@
 }
 
 -(void)getLabortories{
+    
+    NSString *userID = [FIRAuth auth].currentUser.uid;
+    if(userID == nil){
+        [self showNoConnectionAlertdialog];
+        return;
+    }
+    
     self.laboratoryArray = [[NSMutableArray alloc] init];
     self.laboratoryFilterArray = [[NSMutableArray alloc] init];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
