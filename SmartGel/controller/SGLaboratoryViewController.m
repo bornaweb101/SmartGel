@@ -52,31 +52,53 @@
     self.testImageArray = [NSArray arrayWithObjects:
                            
                            @"2_0.05.jpeg",
-                           @"2_0.06.jpeg",
-                           @"2_0.07_1.jpeg",
-                           @"2_0.07_2.jpeg",
-                           @"2_0.08.jpeg",
+//                           @"2_0.06.jpeg",
+//                           @"2_0.07_1.jpeg",
+//                           @"2_0.07_2.jpeg",
+//                           @"2_0.08.jpeg",
                            
                            @"4_0.09.jpeg",
-                           @"4_0.11.jpeg",
-                           @"4_0.12.jpeg",
-                           @"4_0.14.jpeg",
+//                           @"4_0.11.jpeg",
+//                           @"4_0.12.jpeg",
+//                           @"4_0.14.jpeg",
                            
-                           @"10_0.07.jpeg",
-                           @"10_0.08.jpeg",
-                           @"10_0.09.jpeg",
+//                           @"10_0.07.jpeg",
+//                           @"10_0.08.jpeg",
+//                           @"10_0.09.jpeg",
                            @"10_0.12.jpeg",
                            
-                           @"15-0.07.jpeg",
-                           @"15-0.08.jpeg",
-                           @"15-0.09.jpeg",
-                           @"15-0.11.jpeg",
-                           @"15-0.12.jpeg",
-                           @"15-0.12_2.jpeg",
+//                           @"15-0.07.jpeg",
+//                           @"15-0.08.jpeg",
+//                           @"15-0.09.jpeg",
+//                           @"15-0.11.jpeg",
+//                           @"15-0.12.jpeg",
+//                           @"15-0.12_2.jpeg",
                            @"15-0.13.jpeg",
-                           @"15-0.14.jpeg",
-                           @"15-0.15.jpeg",
+//                           @"15-0.14.jpeg",
+//                           @"15-0.15.jpeg",
+                           
+                           @"20_0.09_1.jpeg",
+//                           @"20_0.12.jpeg",
+                           @"20_0.14.jpeg",
 
+                           @"30_0.17.jpeg",
+//                           @"30_0.17_3.jpeg",
+//                           @"30_0.18.jpeg",
+                           @"30_0.20.jpeg",
+
+                           @"40_0.21.jpeg",
+//                           @"40_0.22.jpeg",
+                           @"40_0.23.jpeg",
+                           @"50_0.23.jpeg",
+//                           @"50_0.23_2.jpeg",
+//                           @"50_0.24.jpeg",
+//                           @"50_0.26.jpeg",
+                           @"50_0.27.jpeg",
+
+                           @"60_0.22.jpeg",
+//                           @"60_0.24.jpeg",
+                           @"60_0.25.jpeg",
+//                           @"60_0.5_2.jpeg",
                            nil];
 
     testImageIndex = 0;
@@ -349,11 +371,11 @@
         bbblue = (bbblue+140+140)/3;
           
       }else{
-          ssgreen = (ssgreen+120)/2;
-          bbgreen = (bbgreen+120)/2;
-
-          ssblue = (ssblue+140)/2;
-          bbblue = (bbblue+140)/2;
+//          ssgreen = (ssgreen+120)/2;
+//          bbgreen = (bbgreen+120)/2;
+//
+//          ssblue = (ssblue+140)/2;
+//          bbblue = (bbblue+140)/2;
       }
     
 //         Berechnungsstufe 1_S:
