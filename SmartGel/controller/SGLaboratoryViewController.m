@@ -750,6 +750,13 @@
 }
 
 -(void)saveLaboratoryDatas{
+    
+    NSString *userID = [FIRAuth auth].currentUser.uid;
+    if(userID == nil){
+        [self showNoConnectionAlertdialogForSaving];
+        return;
+    }
+
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.label.text = @"Uploading image...";
     __weak typeof(self) wself = self;

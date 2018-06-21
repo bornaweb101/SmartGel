@@ -13,4 +13,7 @@
 @property (strong, nonatomic) AppDelegate *appDelegate;
 
 -(void)showAlertdialog:(NSString*)title message:(NSString*)message;
+-(void)showNoConnectionAlertdialog;
+-(void)showNoConnectionAlertdialogForSaving;
+
 @end
