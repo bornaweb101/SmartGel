@@ -10,7 +10,7 @@
 #import "SGColorUtil.h"
 
 #define RECT_SIZE 100
-#define MEASURE_OFFSET 0.95
+#define MEASURE_OFFSET 0.8
 
 @interface AutoDetectionEngine:NSObject{
     UInt32 *    m_pInBuffer;

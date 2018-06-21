@@ -30,10 +30,14 @@
 - (UInt32)   getDirtyPixel:(RGBA *)rgba
            withColorOffset:(int)colorOffset
 {
-    UInt8 minValue = 0x4F;
+    UInt8 minValue = 0xAF;
     if (rgba->r < minValue && rgba->g < minValue && rgba->b < minValue)
         return BLUE_DIRTY_PIXEL;
     
+    UInt8 maxValue = 0xA0;
+    if (rgba->r > maxValue && rgba->g > maxValue && rgba->b > maxValue)
+        return NO_GEL;
+
     int yellowValue = rgba->r + rgba->g;
     int greenValue = rgba->g + rgba->b;
     int pinkValue = rgba->r + rgba->b;
@@ -60,10 +64,15 @@
 
 - (UInt32)getDirtyPixelLaboratory:(RGBA *)rgba
 {
-    UInt8 minValue = 0x19;
-    if (rgba->r < minValue && rgba->g < minValue && rgba->b < minValue)
-        return NO_GEL;
-    
+    UInt8 minValue = 0xAF;
+    if (rgba->r < minValue && rgba->g < minValue && rgba->b < minValue){
+        UInt8 dirtyMaxValue = 0x10;
+        if (rgba->r < dirtyMaxValue && rgba->g < dirtyMaxValue && rgba->b < dirtyMaxValue){
+            return NO_GEL;
+        }else{
+            return IS_DIRTY;
+        }
+    }
     
     UInt8 maxValue = 0xA0;
     if (rgba->r > maxValue && rgba->g > maxValue && rgba->b > maxValue)

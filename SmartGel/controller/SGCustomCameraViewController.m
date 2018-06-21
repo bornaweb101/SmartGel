@@ -54,11 +54,11 @@
     float width = self.view.frame.size.width;
     float height = self.view.frame.size.width;
     if(height>width){
-        detectAread_interval = 30;
-        detectArea_size = width/2-detectAread_interval-20;
+        detectAread_interval = 40;
+        detectArea_size = width/2-detectAread_interval-10;
     }else{
-        detectAread_interval = 30;
-        detectArea_size = height/2-detectAread_interval-20;
+        detectAread_interval = 40;
+        detectArea_size = height/2-detectAread_interval-10;
     }
 }
 
