@@ -27,7 +27,7 @@
      name:UIDeviceOrientationDidChangeNotification
      object:[UIDevice currentDevice]];
     isProcessing = false;
-//    [self initMarkView];
+    [self initDetectAreaSize];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -50,8 +50,19 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)initDetectAreaSize{
+    float width = self.view.frame.size.width;
+    float height = self.view.frame.size.width;
+    if(height>width){
+        detectAread_interval = 30;
+        detectArea_size = width/2-detectAread_interval-20;
+    }else{
+        detectAread_interval = 30;
+        detectArea_size = height/2-detectAread_interval-20;
+    }
+}
+
 -(void)initMarkView:(UIImage *)image{
-    UIDevice *device = [UIDevice currentDevice];
     CGRect rect1,rect2;
     if(self.markView1!=nil){
         [self.markView1 removeFromSuperview];
@@ -60,22 +71,22 @@
         [self.markView2 removeFromSuperview];
     }
 
+    rect1 = CGRectMake(self.view.frame.size.width/2 - detectAread_interval - detectArea_size , (self.view.frame.size.height*3)/8, detectArea_size, detectArea_size);
+    rect2 = CGRectMake(self.view.frame.size.width/2 + detectAread_interval, (self.view.frame.size.height*3)/8, detectArea_size, detectArea_size);
+
+    UIDevice *device = UIDevice.currentDevice;
     if((device.orientation == UIDeviceOrientationPortrait) || (device.orientation == UIDeviceOrientationPortraitUpsideDown)){
-        rect1 = CGRectMake(self.view.frame.size.width/2 - self.view.frame.size.width/8 - RECT_SIZE , (self.view.frame.size.height*3)/8, RECT_SIZE, RECT_SIZE);
-        rect2 = CGRectMake(self.view.frame.size.width/2 + self.view.frame.size.width/8, (self.view.frame.size.height*3)/8, RECT_SIZE, RECT_SIZE);
+        rect1 = CGRectMake(self.view.frame.size.width/2 - detectAread_interval - detectArea_size , (self.view.frame.size.height*3)/8, detectArea_size, detectArea_size);
+        rect2 = CGRectMake(self.view.frame.size.width/2 + detectAread_interval, (self.view.frame.size.height*3)/8, detectArea_size, detectArea_size);
     }else{
-        rect1 = CGRectMake((self.view.frame.size.width*3)/8,self.view.frame.size.height/2 - self.view.frame.size.height/8 - RECT_SIZE ,RECT_SIZE, RECT_SIZE);
-        rect2 = CGRectMake((self.view.frame.size.width*3)/8,self.view.frame.size.height/2 + self.view.frame.size.height/8,  RECT_SIZE, RECT_SIZE);
+        rect1 = CGRectMake((self.view.frame.size.width*3)/8,self.view.frame.size.height/2 - detectAread_interval - detectArea_size ,detectArea_size, detectArea_size);
+        rect2 = CGRectMake((self.view.frame.size.width*3)/8,self.view.frame.size.height/2 + detectAread_interval,  detectArea_size, detectArea_size);
     }
-    
+//
     self.markView1 = [self drawRectangle:rect1];
     self.markView2 = [self drawRectangle:rect2];
-    
     [self.view addSubview:self.markView1];
     [self.view addSubview:self.markView2];
-    
-//    [self.markView1 setHidden:true];
-//    [self.markView2 setHidden:true];
 }
 
 -(void)removeMarkView{
@@ -96,11 +107,9 @@
 
 - (void) orientationChanged:(NSNotification *)note
 {
-//    [self releasemanager];
-//    [self initVideoCaptureSession];
     [self.markView1 removeFromSuperview];
     [self.markView2 removeFromSuperview];
-//    [self initMarkView];
+    [self initDetectAreaSize];
 }
 
 - (void)releasemanager
@@ -144,7 +153,8 @@
         CIImage *ciImage = [[CIImage alloc] initWithCVImageBuffer:imageBuffer];
         UIImage *uiImage = [[SGImageUtil sharedImageUtil] imageFromCIImage:ciImage];        
         __weak typeof(self) wself = self;
-        if([self.autoDetectionEngine analyzeImage:uiImage]){
+
+        if([self.autoDetectionEngine analyzeImage:uiImage withDetectAreaSize:detectArea_size withDetectAreaInterval:detectAread_interval]){
             detectedCount++;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if(wself){

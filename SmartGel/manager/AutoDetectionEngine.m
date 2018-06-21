@@ -42,10 +42,12 @@
     }
 }
 
--(bool)analyzeImage:(UIImage *)image{
+-(bool)analyzeImage:(UIImage *)image
+ withDetectAreaSize:(float)detecSize
+withDetectAreaInterval:(float)interval{
     [self importImage:image];
     [self smoothBufferByAverage];
-    bool isDetected = [self detectCleanBottleAreaNew];
+    bool isDetected = [self detectCleanBottleAreaNew:detecSize withAreaInterval:interval];
     [self reset];
     return isDetected;
 }
@@ -70,7 +72,8 @@
 }
 
 
-- (bool)detectCleanBottleAreaNew
+- (bool)detectCleanBottleAreaNew:(float)rectSize
+                withAreaInterval:(float)interval
 {
     UInt32 * pPixelBuffer = m_donePreprocess ? m_pOutBuffer : m_pInBuffer;
     float sampleBottleAreaCleanCount = 0;
@@ -81,17 +84,17 @@
 //    CGRect rect2 = CGRectMake(self.view.frame.size.width/2 + self.view.frame.size.width/8, (self.view.frame.size.height*4)/10, RECT_SIZE, RECT_SIZE);
 
     int sampleBottleYStart = m_imageHeight*3/8;
-    int sampleBottleXStart = m_imageWidth/2-m_imageWidth/8-RECT_SIZE;
+    int sampleBottleXStart = m_imageWidth/2-interval-rectSize;
     
     
     int mixBottleYStart = m_imageHeight*3/8;
-    int mixBottleXStart =m_imageWidth/2+m_imageWidth/8;
+    int mixBottleXStart =m_imageWidth/2+rectSize;
 
     int totalCount;
 
-    for (int y = sampleBottleYStart; y < sampleBottleYStart+RECT_SIZE; y++)
+    for (int y = sampleBottleYStart; y < sampleBottleYStart+rectSize; y++)
     {
-        for (int x = sampleBottleXStart; x < sampleBottleXStart+RECT_SIZE; x++)
+        for (int x = sampleBottleXStart; x < sampleBottleXStart+rectSize; x++)
         {
             int index = y * m_imageWidth + x;
             
@@ -105,9 +108,9 @@
         }
     }
     
-    for (int y = mixBottleYStart; y < mixBottleYStart+RECT_SIZE; y++)
+    for (int y = mixBottleYStart; y < mixBottleYStart+rectSize; y++)
     {
-        for (int x = mixBottleXStart; x < mixBottleXStart+RECT_SIZE; x++)
+        for (int x = mixBottleXStart; x < mixBottleXStart+rectSize; x++)
         {
             int index = y * m_imageWidth + x;
             
@@ -123,7 +126,7 @@
         }
     }
     
-    totalCount =RECT_SIZE*RECT_SIZE*MEASURE_OFFSET;
+    totalCount =rectSize*rectSize*MEASURE_OFFSET;
     
     if (sampleBottleAreaCleanCount>totalCount){
         if((mixBottleAreaCleanCount+mixBottleAreaDirtyCount)>totalCount){

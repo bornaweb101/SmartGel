@@ -24,6 +24,8 @@
 
 @property (nonatomic, strong)   UIImage  *inputImage;
 @property (nonatomic, assign)   int  colorOffset;
--(bool)analyzeImage:(UIImage *)image;
+-(bool)analyzeImage:(UIImage *)image
+ withDetectAreaSize:(float)detecSize
+withDetectAreaInterval:(float)interval;
 
 @end
