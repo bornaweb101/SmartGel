@@ -27,8 +27,8 @@
      name:UIDeviceOrientationDidChangeNotification
      object:[UIDevice currentDevice]];
     isProcessing = false;
-    [self initDetectAreaSize];
 }
+
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -39,6 +39,7 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self initVideoCaptureSession];
+    [self initDetectAreaSize];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -51,11 +52,11 @@
 }
 
 - (void)initDetectAreaSize{
-    float width = self.view.frame.size.width;
-    float height = self.view.frame.size.height;
-    
+    float width = self.videoPreviewView.bounds.size.width;
+//    float height = self.videoPreviewView.bounds.size.height;
     detectAread_interval = width/10;
     detectArea_size = width/2-detectAread_interval-15;
+    capturedImageSize = self.videoPreviewView.bounds.size;
 }
 
 -(void)initMarkView:(UIImage *)image{
@@ -73,8 +74,8 @@
         rect1 = CGRectMake(self.view.frame.size.width/2 - detectAread_interval - detectArea_size , (self.view.frame.size.height-detectArea_size)/2, detectArea_size, detectArea_size);
         rect2 = CGRectMake(self.view.frame.size.width/2 + detectAread_interval, (self.view.frame.size.height-detectArea_size)/2, detectArea_size, detectArea_size);
     }else{
-        rect1 = CGRectMake((self.view.frame.size.width*3)/8,self.view.frame.size.height/2 - detectAread_interval - detectArea_size ,detectArea_size, detectArea_size);
-        rect2 = CGRectMake((self.view.frame.size.width*3)/8,self.view.frame.size.height/2 + detectAread_interval,  detectArea_size, detectArea_size);
+        rect1 = CGRectMake((self.view.frame.size.width-detectArea_size)/2, self.view.frame.size.height/2 - detectAread_interval - detectArea_size ,detectArea_size, detectArea_size);
+        rect2 = CGRectMake((self.view.frame.size.width-detectArea_size)/2, self.view.frame.size.height/2 + detectAread_interval,  detectArea_size, detectArea_size);
     }
     
     self.markView1 = [self drawRectangle:rect1];
@@ -145,9 +146,10 @@
     if(!isProcessing){
         isProcessing = true;
         CIImage *ciImage = [[CIImage alloc] initWithCVImageBuffer:imageBuffer];
-        UIImage *uiImage = [[SGImageUtil sharedImageUtil] imageFromCIImage:ciImage];        
+        UIImage *uiImage = [[SGImageUtil sharedImageUtil] imageFromCIImage:ciImage withImageSize:capturedImageSize];
+        
         __weak typeof(self) wself = self;
-
+        
         if([self.autoDetectionEngine analyzeImage:uiImage withDetectAreaSize:detectArea_size withDetectAreaInterval:detectAread_interval]){
             detectedCount++;
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -155,14 +157,14 @@
                     [self.statusLabel setText:@"detected clean bottles"];
                     [self initMarkView:uiImage];
                     
-                    if(detectedCount>25){
-                        [[self.captureManager session] stopRunning];
-                        UIImageWriteToSavedPhotosAlbum(uiImage,nil,nil,nil);
-                        if(self.delegate){
-                            [self.delegate onDetectedImage:uiImage];
-                        }
-                        [self.navigationController popViewControllerAnimated:YES];
-                    }
+//                    if(detectedCount>25){
+//                        [[self.captureManager session] stopRunning];
+//                        UIImageWriteToSavedPhotosAlbum(uiImage,nil,nil,nil);
+//                        if(self.delegate){
+//                            [self.delegate onDetectedImage:uiImage];
+//                        }
+//                        [self.navigationController popViewControllerAnimated:YES];
+//                    }
                 }
             });
             isProcessing = false;

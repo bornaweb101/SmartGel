@@ -11,6 +11,6 @@
 @interface SGImageUtil : NSObject
 + (instancetype)sharedImageUtil;
 
-- (UIImage *)imageFromCIImage:(CIImage *)ciImage;
-
+- (UIImage *)imageFromCIImage:(CIImage *)ciImage
+               withImageSize :(CGSize)imageSize;
 @end

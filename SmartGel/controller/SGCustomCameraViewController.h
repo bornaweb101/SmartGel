@@ -23,6 +23,7 @@
     
     float detectArea_size;
     float detectAread_interval;
+    CGSize capturedImageSize;
 }
 
 @property (weak, nonatomic) id<SGCustomCameraViewControllerDelegate> delegate;

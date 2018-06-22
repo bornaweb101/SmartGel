@@ -29,24 +29,31 @@
     return self;
 }
 
-- (UIImage *)imageFromCIImage:(CIImage *)ciImage {    
+- (UIImage *)imageFromCIImage:(CIImage *)ciImage
+               withImageSize :(CGSize)imageSize {
     CIContext *ciContext = [CIContext contextWithOptions:nil];
     CGImageRef cgImage = [ciContext createCGImage:ciImage fromRect:[ciImage extent]];
     UIImage *image;
     UIDevice *device = [UIDevice currentDevice];
     image = [UIImage imageWithCGImage:cgImage];
+    
+    
     switch(device.orientation)
     {
         case UIDeviceOrientationPortrait:
             image = [self rotatedImage:image withDegrees:90];
+            image = [self imageWithImage:image scaledToSize:imageSize];
             break;
         case UIDeviceOrientationLandscapeLeft:
+            image = [self imageWithImage:image scaledToSize:CGSizeMake(imageSize.height, imageSize.width)];
             break;
         case UIDeviceOrientationLandscapeRight:
             image = [self rotatedImage:image withDegrees:180];
+            image = [self imageWithImage:image scaledToSize:CGSizeMake(imageSize.height, imageSize.width)];
             break;
         case UIDeviceOrientationPortraitUpsideDown:
             image = [self rotatedImage:image withDegrees:-90];
+            image = [self imageWithImage:image scaledToSize:imageSize];
             break;
         default:
             break;
@@ -77,5 +84,17 @@
     UIGraphicsEndImageContext();
     return newImage;
 }
+
+- (UIImage*)imageWithImage:(UIImage*)image
+              scaledToSize:(CGSize)newSize
+{
+    UIGraphicsBeginImageContext( newSize );
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
 
 @end
