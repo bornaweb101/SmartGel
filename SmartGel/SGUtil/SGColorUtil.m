@@ -62,9 +62,15 @@
     }
 }
 
-- (UInt32)getDirtyPixelLaboratory:(RGBA *)rgba
+- (UInt32) getDirtyPixelLaboratory:(RGBA *)rgba
 {
-    UInt8 minValue = 0xAF;
+    
+    UInt8 maxValue = 0xA0;
+    if (rgba->r > maxValue && rgba->g > maxValue && rgba->b > maxValue){
+        return NO_GEL;
+    }
+
+    UInt8 minValue = 0xA0;
     if (rgba->r < minValue && rgba->g < minValue && rgba->b < minValue){
         UInt8 dirtyMaxValue = 0x19;
         if (rgba->r < dirtyMaxValue && rgba->g < dirtyMaxValue && rgba->b < dirtyMaxValue){
@@ -73,11 +79,6 @@
             return IS_DIRTY;
         }
     }
-    
-    UInt8 maxValue = 0xA0;
-    if (rgba->r > maxValue && rgba->g > maxValue && rgba->b > maxValue)
-        return NO_GEL;
-
     
     int yellowValue = rgba->r + rgba->g;
     int greenValue = rgba->g + rgba->b;

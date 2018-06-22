@@ -79,22 +79,24 @@ withDetectAreaInterval:(float)interval{
     float sampleBottleAreaCleanCount = 0;
     float mixBottleAreaDirtyCount = 0;
     float mixBottleAreaCleanCount = 0;
-    
+
 //    CGRect rect1 = CGRectMake(self.view.frame.size.width/2 - self.view.frame.size.width/8 - RECT_SIZE , (self.view.frame.size.height*4)/10, RECT_SIZE, RECT_SIZE);
 //    CGRect rect2 = CGRectMake(self.view.frame.size.width/2 + self.view.frame.size.width/8, (self.view.frame.size.height*4)/10, RECT_SIZE, RECT_SIZE);
 
-    int sampleBottleYStart = m_imageHeight*3/8;
-    int sampleBottleXStart = m_imageWidth/2-interval-rectSize;
+    
+    int sampleBottleYStart = (m_imageHeight-rectSize)/2;
+    int sampleBottleXStart = m_imageWidth/2-m_imageWidth/10-rectSize;
     
     
-    int mixBottleYStart = m_imageHeight*3/8;
-    int mixBottleXStart =m_imageWidth/2+rectSize;
+    int mixBottleYStart = (m_imageHeight-rectSize)/2;
+    int mixBottleXStart =m_imageWidth/2+m_imageWidth/10;
 
-    int totalCount;
-
-    for (int y = sampleBottleYStart; y < sampleBottleYStart+rectSize; y++)
+    int totalCount = 0;
+    int mixTotalCount = 0;
+    
+    for (int y = sampleBottleYStart; y < sampleBottleYStart+(int)rectSize; y++)
     {
-        for (int x = sampleBottleXStart; x < sampleBottleXStart+rectSize; x++)
+        for (int x = sampleBottleXStart; x < sampleBottleXStart+(int)rectSize; x++)
         {
             int index = y * m_imageWidth + x;
             
@@ -108,9 +110,11 @@ withDetectAreaInterval:(float)interval{
         }
     }
     
-    for (int y = mixBottleYStart; y < mixBottleYStart+rectSize; y++)
+    int rectCount = (int)rectSize;
+    
+    for (int y = mixBottleYStart; y < mixBottleYStart+rectCount; y++)
     {
-        for (int x = mixBottleXStart; x < mixBottleXStart+rectSize; x++)
+        for (int x = mixBottleXStart; x < mixBottleXStart+rectCount; x++)
         {
             int index = y * m_imageWidth + x;
             
@@ -126,10 +130,11 @@ withDetectAreaInterval:(float)interval{
         }
     }
     
-    totalCount =rectSize*rectSize*MEASURE_OFFSET;
+    totalCount =rectCount*rectCount*SAMPLE_MEASURE_OFFSET;
+    mixTotalCount = rectCount*rectCount*MIX_MEASURE_OFFSET;
     
     if (sampleBottleAreaCleanCount>totalCount){
-        if((mixBottleAreaCleanCount+mixBottleAreaDirtyCount)>totalCount){
+        if((mixBottleAreaCleanCount+mixBottleAreaDirtyCount)>mixTotalCount){
             return true;
         }
     }
@@ -137,56 +142,6 @@ withDetectAreaInterval:(float)interval{
     return false;
 }
 
-
-- (bool)detectCleanBottleArea
-{
-    UInt32 * pPixelBuffer = m_donePreprocess ? m_pOutBuffer : m_pInBuffer;
-    float cleanCount = 0;
-    float dirtyCount = 0;
-    float totalCount = 0;
-    
-    float edgeTotalCount = 0;
-    
-    for (int y = m_imageHeight/5; y < (4*m_imageHeight/5); y++)
-    {
-        for (int x = m_imageWidth/4; x < (m_imageWidth/2); x++)
-        {
-            int index = y * m_imageWidth + x;
-            
-            RGBA rgba;
-            memcpy(&rgba, &pPixelBuffer[index], sizeof(RGBA));
-            
-            UInt32 dirtyPixel = [[SGColorUtil sharedColorUtil] getDirtyPixel:&rgba withColorOffset:0];
-            if (dirtyPixel == IS_CLEAN ){
-                cleanCount ++;
-            }
-        }
-    }
-    
-    
-    for (int y = m_imageHeight/5; y < (4*m_imageHeight/5); y++)
-    {
-        for (int x = 0; x < (m_imageWidth/4); x++)
-        {
-            int index = y * m_imageWidth + x;
-            RGBA rgba;
-            memcpy(&rgba, &pPixelBuffer[index], sizeof(RGBA));
-            UInt32 dirtyPixel = [[SGColorUtil sharedColorUtil] getDirtyPixel:&rgba withColorOffset:0];
-            if (dirtyPixel != IS_DIRTY ){
-                dirtyCount ++;
-            }
-        }
-    }
-    
-    
-    totalCount =(3*m_imageHeight/5)*(m_imageWidth/4);
-    edgeTotalCount =(3*m_imageHeight/5)*(m_imageWidth/4);
-    if((cleanCount>totalCount*0.9) && (dirtyCount > edgeTotalCount*0.9)){
-        return true;
-    }else{
-        return false;
-    }
-}
 
 
 - (void)smoothBufferByAverage

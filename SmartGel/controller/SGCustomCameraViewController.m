@@ -63,22 +63,20 @@
     if(self.markView1!=nil){
         [self.markView1 removeFromSuperview];
     }
+    
     if(self.markView2!=nil){
         [self.markView2 removeFromSuperview];
     }
 
-    rect1 = CGRectMake(self.view.frame.size.width/2 - detectAread_interval - detectArea_size , (self.view.frame.size.height*3)/8, detectArea_size, detectArea_size);
-    rect2 = CGRectMake(self.view.frame.size.width/2 + detectAread_interval, (self.view.frame.size.height*3)/8, detectArea_size, detectArea_size);
-
     UIDevice *device = UIDevice.currentDevice;
     if((device.orientation == UIDeviceOrientationPortrait) || (device.orientation == UIDeviceOrientationPortraitUpsideDown)){
-        rect1 = CGRectMake(self.view.frame.size.width/2 - detectAread_interval - detectArea_size , (self.view.frame.size.height*3)/8, detectArea_size, detectArea_size);
-        rect2 = CGRectMake(self.view.frame.size.width/2 + detectAread_interval, (self.view.frame.size.height*3)/8, detectArea_size, detectArea_size);
+        rect1 = CGRectMake(self.view.frame.size.width/2 - detectAread_interval - detectArea_size , (self.view.frame.size.height-detectArea_size)/2, detectArea_size, detectArea_size);
+        rect2 = CGRectMake(self.view.frame.size.width/2 + detectAread_interval, (self.view.frame.size.height-detectArea_size)/2, detectArea_size, detectArea_size);
     }else{
         rect1 = CGRectMake((self.view.frame.size.width*3)/8,self.view.frame.size.height/2 - detectAread_interval - detectArea_size ,detectArea_size, detectArea_size);
         rect2 = CGRectMake((self.view.frame.size.width*3)/8,self.view.frame.size.height/2 + detectAread_interval,  detectArea_size, detectArea_size);
     }
-//
+    
     self.markView1 = [self drawRectangle:rect1];
     self.markView2 = [self drawRectangle:rect2];
     [self.view addSubview:self.markView1];
@@ -152,20 +150,21 @@
 
         if([self.autoDetectionEngine analyzeImage:uiImage withDetectAreaSize:detectArea_size withDetectAreaInterval:detectAread_interval]){
             detectedCount++;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if(wself){
-                        [self.statusLabel setText:@"detected clean bottles"];
-                        [self initMarkView:uiImage];
-                        if(detectedCount>25){
-                            [[self.captureManager session] stopRunning];
-                            UIImageWriteToSavedPhotosAlbum(uiImage,nil,nil,nil);
-                            if(self.delegate){
-                                [self.delegate onDetectedImage:uiImage];
-                            }
-                            [self.navigationController popViewControllerAnimated:YES];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if(wself){
+                    [self.statusLabel setText:@"detected clean bottles"];
+                    [self initMarkView:uiImage];
+                    
+                    if(detectedCount>25){
+                        [[self.captureManager session] stopRunning];
+                        UIImageWriteToSavedPhotosAlbum(uiImage,nil,nil,nil);
+                        if(self.delegate){
+                            [self.delegate onDetectedImage:uiImage];
                         }
+                        [self.navigationController popViewControllerAnimated:YES];
                     }
-                });
+                }
+            });
             isProcessing = false;
         }else{
             detectedCount =  0;
