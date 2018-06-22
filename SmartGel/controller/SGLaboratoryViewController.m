@@ -52,47 +52,47 @@
     self.testImageArray = [NSArray arrayWithObjects:
                            
                            @"2_0.05.jpeg",
-//                           @"2_0.06.jpeg",
-//                           @"2_0.07_1.jpeg",
-//                           @"2_0.07_2.jpeg",
-//                           @"2_0.08.jpeg",
+                           @"2_0.06.jpeg",
+                           @"2_0.07_1.jpeg",
+                           @"2_0.07_2.jpeg",
+                           @"2_0.08.jpeg",
                            
                            @"4_0.09.jpeg",
-//                           @"4_0.11.jpeg",
-//                           @"4_0.12.jpeg",
-//                           @"4_0.14.jpeg",
+                           @"4_0.11.jpeg",
+                           @"4_0.12.jpeg",
+                           @"4_0.14.jpeg",
                            
-//                           @"10_0.07.jpeg",
-//                           @"10_0.08.jpeg",
-//                           @"10_0.09.jpeg",
+                           @"10_0.07.jpeg",
+                           @"10_0.08.jpeg",
+                           @"10_0.09.jpeg",
                            @"10_0.12.jpeg",
                            
-//                           @"15-0.07.jpeg",
-//                           @"15-0.08.jpeg",
-//                           @"15-0.09.jpeg",
-//                           @"15-0.11.jpeg",
-//                           @"15-0.12.jpeg",
-//                           @"15-0.12_2.jpeg",
+                           @"15-0.07.jpeg",
+                           @"15-0.08.jpeg",
+                           @"15-0.09.jpeg",
+                           @"15-0.11.jpeg",
+                           @"15-0.12.jpeg",
+                           @"15-0.12_2.jpeg",
                            @"15-0.13.jpeg",
-//                           @"15-0.14.jpeg",
-//                           @"15-0.15.jpeg",
+                           @"15-0.14.jpeg",
+                           @"15-0.15.jpeg",
                            
                            @"20_0.09_1.jpeg",
-//                           @"20_0.12.jpeg",
+                           @"20_0.12.jpeg",
                            @"20_0.14.jpeg",
 
                            @"30_0.17.jpeg",
-//                           @"30_0.17_3.jpeg",
-//                           @"30_0.18.jpeg",
+                           @"30_0.17_3.jpeg",
+                           @"30_0.18.jpeg",
                            @"30_0.20.jpeg",
 
                            @"40_0.21.jpeg",
-//                           @"40_0.22.jpeg",
+                           @"40_0.22.jpeg",
                            @"40_0.23.jpeg",
                            @"50_0.23.jpeg",
-//                           @"50_0.23_2.jpeg",
-//                           @"50_0.24.jpeg",
-//                           @"50_0.26.jpeg",
+                           @"50_0.23_2.jpeg",
+                           @"50_0.24.jpeg",
+                           @"50_0.26.jpeg",
                            @"50_0.27.jpeg",
 
                            @"60_0.22.jpeg",
@@ -269,14 +269,14 @@
 
 - (void)estimateValue:(UIImage *)image{
     firstrun=false;
-    RGBA sampleBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:60 widthEnd:75 heightStart:40 heightEnd:55];
-    RGBA mixBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image widthStart:25 widthEnd:40 heightStart:40 heightEnd:55];
+    RGBA sampleBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image isSampleColor:false];
+    RGBA mixBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image isSampleColor:true];
 
-    self.laboratoryDataModel.blankColor =((unsigned)(mixBAverageColor.r) << 16) + ((unsigned)(mixBAverageColor.g) << 8) + ((unsigned)(mixBAverageColor.b) << 0);
     self.laboratoryDataModel.sampleColor = ((unsigned)(sampleBAverageColor.r) << 16) + ((unsigned)(sampleBAverageColor.g) << 8) + ((unsigned)(sampleBAverageColor.b) << 0);
+    self.laboratoryDataModel.blankColor =((unsigned)(mixBAverageColor.r) << 16) + ((unsigned)(mixBAverageColor.g) << 8) + ((unsigned)(mixBAverageColor.b) << 0);
 
-    self.blankView.backgroundColor = [UIColor colorWithRed:mixBAverageColor.r/255.0 green:mixBAverageColor.g/255.0 blue:mixBAverageColor.b/255.0 alpha:1];
     self.sampleView.backgroundColor = [UIColor colorWithRed:sampleBAverageColor.r/255.0 green:sampleBAverageColor.g/255.0 blue:sampleBAverageColor.b/255.0 alpha:1];
+    self.blankView.backgroundColor = [UIColor colorWithRed:mixBAverageColor.r/255.0 green:mixBAverageColor.g/255.0 blue:mixBAverageColor.b/255.0 alpha:1];
 
     float ssred,ssgreen,ssblue,bbblue,bbgreen,bbred;
     ssred = sampleBAverageColor.r;
@@ -371,11 +371,11 @@
         bbblue = (bbblue+140+140)/3;
           
       }else{
-//          ssgreen = (ssgreen+120)/2;
-//          bbgreen = (bbgreen+120)/2;
-//
-//          ssblue = (ssblue+140)/2;
-//          bbblue = (bbblue+140)/2;
+          ssgreen = (ssgreen+120)/2;
+          bbgreen = (bbgreen+120)/2;
+
+          ssblue = (ssblue+140)/2;
+          bbblue = (bbblue+140)/2;
       }
     
 //         Berechnungsstufe 1_S:

@@ -157,14 +157,14 @@
                     [self.statusLabel setText:@"detected clean bottles"];
                     [self initMarkView:uiImage];
                     
-//                    if(detectedCount>25){
-//                        [[self.captureManager session] stopRunning];
-//                        UIImageWriteToSavedPhotosAlbum(uiImage,nil,nil,nil);
-//                        if(self.delegate){
-//                            [self.delegate onDetectedImage:uiImage];
-//                        }
-//                        [self.navigationController popViewControllerAnimated:YES];
-//                    }
+                    if(detectedCount>25){
+                        [[self.captureManager session] stopRunning];
+                        UIImageWriteToSavedPhotosAlbum(uiImage,nil,nil,nil);
+                        if(self.delegate){
+                            [self.delegate onDetectedImage:uiImage];
+                        }
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }
                 }
             });
             isProcessing = false;

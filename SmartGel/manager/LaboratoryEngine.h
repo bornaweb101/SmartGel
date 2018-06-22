@@ -20,9 +20,6 @@
 }
 
 -(RGBA)getCropAreaAverageColor:(UIImage *)image
-                    widthStart:(float)widthStart
-                      widthEnd:(float)widthEnd
-                   heightStart:(float)heightStart
-                     heightEnd:(float)heightEnd;
+                 isSampleColor:(bool)isSampleColor;
 
 @end

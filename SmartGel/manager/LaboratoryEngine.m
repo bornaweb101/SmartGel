@@ -27,95 +27,58 @@
 }
 
 -(RGBA)getCropAreaAverageColor:(UIImage *)image
-                    widthStart:(float)widthStart
-                      widthEnd:(float)widthEnd
-                   heightStart:(float)heightStart
-                     heightEnd:(float)heightEnd{
+                 isSampleColor:(bool)isSampleColor{
     [self importImage:image];
     [self smoothBufferByAverage];
-//    RGBA rgba;
-//    CGImageRef ref = image.CGImage;
-//    CGContextRef bitmapcrop1 = [[SGColorUtil sharedColorUtil] createARGBBitmapContextFromImage:image.CGImage];
-//    size_t width = CGImageGetWidth(ref);
-//    size_t height = CGImageGetHeight(ref);
-//
-//    CGRect rect = {{0,0},{width,height}};
-//    CGContextDrawImage(bitmapcrop1, rect, ref);
-//    unsigned char* data = CGBitmapContextGetData (bitmapcrop1);
-//
-    widthStart=(m_imageWidth*widthStart/100.0);
-    widthEnd=(m_imageWidth*widthEnd/100.0);
-    heightStart=(m_imageHeight*heightStart/100.0);
-    heightEnd=(m_imageHeight*heightEnd/100.0);
     
+    int widthStart = 0;
+    
+    int detectAreaSize = (m_imageWidth/2-m_imageWidth/10 - 15);
+    int calculatAreaSize = detectAreaSize/2;
+    
+    int heightStart = (m_imageHeight-detectAreaSize)/2 + detectAreaSize/4;
+
+    if(isSampleColor){
+        widthStart = (m_imageWidth/2-m_imageWidth/10 - detectAreaSize)+detectAreaSize/4;
+    }else{
+        widthStart = (m_imageWidth/2+m_imageWidth/10)+detectAreaSize/4;
+    }
 
     int sumR = 0, sumG =0, sumB = 0, nCount = 0;
-    
+
     if(m_pOutBuffer != NULL){
-        for(int i = heightStart;i<heightEnd;i++){
-            for(int j = widthStart;j<widthEnd;j++){
+        for(int i = heightStart; i<(heightStart+calculatAreaSize); i++){
+            for(int j = widthStart; j<(widthStart+calculatAreaSize); j++){
+                
                 RGBA rgba;
                 int index = i * m_imageWidth + j;
                 memcpy(&rgba, &m_pInBuffer[index], sizeof(RGBA));
-                
-                bool validColor = true;
-                UInt8 minValue = 0x19;
-                if (rgba.r < minValue && rgba.g < minValue && rgba.b < minValue){
-                    validColor = false;
-                }
-                
-                UInt8 maxValue = 0xB0;
-                if (rgba.r > maxValue && rgba.g > maxValue && rgba.b > maxValue){
-                    validColor = false;
-                }
-                
-                if(validColor){
-                    sumR += rgba.r;
-                    sumG += rgba.g;
-                    sumB += rgba.b;
-                    nCount ++;
+
+                if(isSampleColor){
+                    if([[SGColorUtil sharedColorUtil] getDirtyPixelLaboratory:&rgba] == IS_CLEAN){
+                        sumR += rgba.r;
+                        sumG += rgba.g;
+                        sumB += rgba.b;
+                        nCount ++;
+                    }
+                }else{
+                    if([[SGColorUtil sharedColorUtil] getDirtyPixelLaboratory:&rgba] != NO_GEL){
+                        sumR += rgba.r;
+                        sumG += rgba.g;
+                        sumB += rgba.b;
+                        nCount ++;
+                    }
                 }
             }
         }
     }
+    
     RGBA averageRGB;
     averageRGB.r = sumR / nCount;
     averageRGB.g = sumG / nCount;
     averageRGB.b = sumB / nCount;
-    averageRGB = [self filterPickColors:averageRGB widthStart:widthStart widthEnd:widthEnd heightStart:heightStart heightEnd:heightEnd];
     [self reset];
     return averageRGB;
-}
-
-- (RGBA) filterPickColors:(RGBA)averageRGB
-               widthStart:(float)widthStart
-                 widthEnd:(float)widthEnd
-              heightStart:(float)heightStart
-                heightEnd:(float)heightEnd{
-    
-    int sumR = 0, sumG =0, sumB = 0, nCount = 0;
-    if(m_pOutBuffer != NULL){
-        for(int i = heightStart;i<heightEnd;i++){
-            for(int j = widthStart;j<widthEnd;j++){
-                RGBA rgba;
-                int index = i * m_imageWidth + j;
-                memcpy(&rgba, &m_pInBuffer[index], sizeof(RGBA));
-                UInt8 minValue = 0x4F;
-                if (rgba.r > minValue || rgba.g > minValue || rgba.b > minValue){
-                    sumR += rgba.r;
-                    sumG += rgba.g;
-                    sumB += rgba.b;
-                    nCount ++;
-                }
-            }
-        }
-    }
-    RGBA resultRGB;
-    resultRGB.r = sumR / nCount;
-    resultRGB.g = sumG / nCount;
-    resultRGB.b = sumB / nCount;
-    [self reset];
-    return resultRGB;
 }
 
 - (void) importImage:(UIImage *)image
