@@ -1209,7 +1209,7 @@
             </objects>
             <point key="canvasLocation" x="1101.5625" y="117.18749999999999"/>
         </scene>
-        <!--SmartGel-2.0.2-->
+        <!--SmartGel-2.0.7-->
         <scene sceneID="Z7y-Zc-fMl">
             <objects>
                 <viewController storyboardIdentifier="SGLaboratoryViewController" id="o4L-Oo-xZl" customClass="SGLaboratoryViewController" sceneMemberID="viewController">
@@ -1331,7 +1331,7 @@
                                     <action selector="choosePhotoPickerController" destination="o4L-Oo-xZl" eventType="touchUpInside" id="zM0-ve-uvA"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JV-mV-eh9">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JV-mV-eh9">
                                 <rect key="frame" x="16" y="72" width="30" height="30"/>
                                 <color key="backgroundColor" red="0.31372549020000001" green="0.33725490200000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="test">
@@ -1341,7 +1341,7 @@
                                     <action selector="testButtonClicked:" destination="o4L-Oo-xZl" eventType="touchUpInside" id="tRe-DH-Ezo"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mF6-Jp-fWL">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mF6-Jp-fWL">
                                 <rect key="frame" x="66" y="72" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1367,7 +1367,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="SmartGel-2.0.2" id="92k-8X-ysZ">
+                    <navigationItem key="navigationItem" title="SmartGel-2.0.7" id="92k-8X-ysZ">
                         <barButtonItem key="leftBarButtonItem" image="ic_menu" id="djQ-aN-Ugw">
                             <connections>
                                 <action selector="presentLeftMenuViewController:" destination="o4L-Oo-xZl" id="1gd-qs-HCK"/>
