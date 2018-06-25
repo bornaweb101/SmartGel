@@ -11,7 +11,7 @@
 
 #define RECT_SIZE 100
 #define SAMPLE_MEASURE_OFFSET 0.9
-#define MIX_MEASURE_OFFSET 0.99
+#define MIX_MEASURE_OFFSET 0.85
 
 @interface AutoDetectionEngine:NSObject{
     UInt32 *    m_pInBuffer;

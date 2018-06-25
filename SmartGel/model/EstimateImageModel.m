@@ -97,7 +97,6 @@
     self.nonGelArea = [self getStringFromArray:nonGelAreaArray];
 }
 
-
 -(BOOL)isNonGelArea:(int)position{
     NSMutableArray *nonGelAreaArray = [self getArrayFromString : self.nonGelArea];
     return [[nonGelAreaArray objectAtIndex:position] boolValue];

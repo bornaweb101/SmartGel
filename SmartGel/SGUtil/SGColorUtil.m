@@ -65,8 +65,8 @@
 - (UInt32) getDirtyPixelLaboratory:(RGBA *)rgba
 {
     
-    UInt8 maxValue = 0xA0;
-    if (rgba->r > maxValue && rgba->g > maxValue && rgba->b > maxValue){
+    UInt8 maxValue = 0xD9;
+    if (rgba->r > maxValue && rgba->g > maxValue      && rgba->b > maxValue){
         return NO_GEL;
     }
 
