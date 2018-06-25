@@ -62,4 +62,8 @@ typedef struct
 - (CGContextRef) createARGBBitmapContextFromImage:(CGImageRef) inImage;
 - (UInt32)getDirtyPixelLaboratory:(RGBA *)rgba;
 
+- (RGBA )updateHSBValue:(RGBA )rgbColor
+            withHValue :(float)hValue;
+
+
 @end

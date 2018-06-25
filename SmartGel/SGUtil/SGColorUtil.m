@@ -269,5 +269,32 @@
     return i < 0 ? 0 : sqrt(i);
 }
 
+- (RGBA )updateHSBValue:(RGBA )rgbColor
+             withHValue :(float)hValue{
+    UIColor *color = [UIColor colorWithRed:(float)rgbColor.r/255 green:(float)rgbColor.g/255 blue:(float)rgbColor.b/255 alpha:1.0];
+    
+    CGFloat hue;
+    CGFloat saturation;
+    CGFloat brightness;
+    CGFloat alpha;
+    BOOL success = [color getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
+    NSLog(@"success: %i hue: %0.2f, saturation: %0.2f, brightness: %0.2f, alpha: %0.2f", success, hue, saturation, brightness, alpha);
+    hue = hue - (float)hValue/360;
+    
+    UIColor *newColor = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:alpha];
+
+    CGFloat red;
+    CGFloat blue;
+    CGFloat green;
+
+    [newColor getRed:&red green:&green blue:&blue alpha:&alpha];
+    
+    RGBA newRGBA;
+    newRGBA.r = red * 255;
+    newRGBA.g = green * 255;
+    newRGBA.b = blue * 255;
+
+    return newRGBA;
+}
 
 @end
