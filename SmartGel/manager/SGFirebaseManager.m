@@ -133,7 +133,8 @@
                                                @"nonGelArea": estimateImageModel.nonGelArea,
                                                @"coloroffset": [NSString stringWithFormat:@"%d", colorOffset]
                                                };
-                        NSDictionary *childUpdates = @{[NSString stringWithFormat:@"%@/%@/%@",@"photos", self.currentUser.userID,estimateImageModel.date]: post};
+                        NSString *userID = [FIRAuth auth].currentUser.uid;
+                        NSDictionary *childUpdates = @{[NSString stringWithFormat:@"%@/%@/%@",@"photos", userID,estimateImageModel.date]: post};
                         [self.dataBaseRef updateChildValues:childUpdates];
                         completionHandler(error);
                     }
