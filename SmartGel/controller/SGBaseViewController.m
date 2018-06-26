@@ -41,7 +41,7 @@
 
 -(void)showNoConnectionAlertdialogForSaving{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"ATTENTION"
-                                                                   message:@"No Internet connection, Image will be saved in your photo library. Please check your network settings and reopen app."
+                                                                   message:@"Failed to Uploading, Image will be saved in your photo library. Please check your network settings and reopen app."
                                                             preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
