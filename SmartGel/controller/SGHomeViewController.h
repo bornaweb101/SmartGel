@@ -62,7 +62,10 @@ typedef enum {
 @property (strong, nonatomic) IBOutlet UIButton *resetButton;
 @property (strong, nonatomic) IBOutlet UIButton *cropButton;
 
-@property (strong, nonatomic) IBOutlet UIImage *originalImage;
+@property (strong, nonatomic) UIImage *originalImage;
+
+@property (strong, nonatomic) UIImage *editedShareImage;
+
 
 @property (strong, nonatomic) IBOutlet UILabel *tagLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *tagImageView;
