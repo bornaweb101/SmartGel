@@ -299,6 +299,8 @@
         default:Diam=0.5;
             break;
     }
+    
+    Diam = 1;
 
     switch (DIA) {
         case 1:_diam=@"4mm";
@@ -325,14 +327,16 @@
             break;
     }
 
+
+    pinkValue = pinkValue + 20;
       if((pinkValue>greenValue)&&(pinkValue>yellowValue)){
-          
+
         ssgreen = (ssgreen+120+120)/3;
         bbgreen = (bbgreen+120+120)/3;
 
         ssblue = (ssblue+140+140)/3;
         bbblue = (bbblue+140+140)/3;
-          
+
       }else{
           ssgreen = (ssgreen+120)/2;
           bbgreen = (bbgreen+120)/2;
@@ -371,94 +375,94 @@
     Mn7R = (Mn7_CS - Mn7_S);
     ERR = fabs((Mn7R-RSF)*100/Mn7R);
 
-    if(RSF*7.5<0.38)
-    {   RSFGO = (RSF*7.5);
-    }else
-    {
+
+    if((pinkValue>greenValue)&&(pinkValue>yellowValue)){
+        RSFGO = (RSF*7.5);
+    }else{
         RSFGO = (RSF*7.5)*1.5-0.13;
     }
+    
     mgl_CH2O = RSFGO;
     ug_cm2 = (RSFGO*1000)/(2*1000/(Diam));
 
-    maxmgl=0.2*7.5;
-    maxug=(0.2*7.5*1000)/(2*1000/(Diam));
-    li = true;
-    if(li)
+    if(RSF<=0.1)
     {
-        if([[NSUserDefaults standardUserDefaults] integerForKey:@"ugormg"]==0)
-        {
-            if(RSF<=0.2)
-            {
-                double filter_ug_cm2;
-                if((ug_cm2 >= 0.13) &&(ug_cm2<0.18)){
-                    filter_ug_cm2 = (ug_cm2 + 0.15)/2;
-                    
-                }else if((ug_cm2 >= 0.08) &&(ug_cm2<0.13)){
-                    filter_ug_cm2 = (ug_cm2 + 0.10)/2;
-                }else{
-                    filter_ug_cm2 = ug_cm2;
-                }
-                self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",filter_ug_cm2];
-                self.laboratoryDataModel.cleanValue = ug_cm2;
-                self.laboratoryDataModel.filterValue = filter_ug_cm2;
-            }else{
-                self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",maxug];
-                self.laboratoryDataModel.cleanValue = maxug;
-
-            }
-            self.lbldiam.text=[NSString stringWithFormat:@"%@", _diam];
-            if(ug_cm2 < vgood)
-            {
-                self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_pink.png"];
-                self.laboratoryDataModel.resultState = 1;
-            }else{
-                if(ug_cm2 < satis){
-                self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_green.png"];
-                    self.laboratoryDataModel.resultState = 2;
-                }else{
-                    self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_yellow.png"];
-                    self.laboratoryDataModel.resultState = 3;
-                }
-            }
-        }
-        else
-        {
-            if(RSF<=0.2)
-            {
-                self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",mgl_CH2O];
-                self.laboratoryDataModel.cleanValue = mgl_CH2O;
-
-            }
-            else
-            {
-                self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",maxmgl];
-                self.laboratoryDataModel.cleanValue = maxmgl;
-
-            }
-            self.resultfoxImageView.image=nil;
-            self.lbldiam.text=@"";
-        }
+        self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",ug_cm2/0.4975];
+        self.laboratoryDataModel.cleanValue = ug_cm2/0.4975;
+    }else{
+        self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",1.0];
+        self.laboratoryDataModel.cleanValue = ug_cm2;
+        
     }
-    else
-    {
-        self.resultValueLabel.text=@"---";
-        if(ug_cm2 <= 0.01)
-        {
-            self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_pink.png"];
-            self.laboratoryDataModel.resultState = 1;
-        }else{
-            if(ug_cm2 < maxug)
-            {
-                self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_green.png"];
-                self.laboratoryDataModel.resultState = 2;
 
-            }else{
-                self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_yellow.png"];
-                self.laboratoryDataModel.resultState = 3;
-            }
-        }
-        self.lblugormg.text = @"";
-    }
+//    li = true;
+//    if(li)
+//    {
+//        if([[NSUserDefaults standardUserDefaults] integerForKey:@"ugormg"]==0)
+//        {
+//            if(RSF<=0.1)
+//            {
+//                self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",ug_cm2/0.4975];
+//                self.laboratoryDataModel.cleanValue = ug_cm2/0.4975;
+//            }else{
+//                self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",1.0];
+//                self.laboratoryDataModel.cleanValue = ug_cm2;
+//
+//            }
+//
+//            self.lbldiam.text=[NSString stringWithFormat:@"%@", _diam];
+//            if(ug_cm2 < vgood)
+//            {
+//                self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_pink.png"];
+//                self.laboratoryDataModel.resultState = 1;
+//            }else{
+//                if(ug_cm2 < satis){
+//                self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_green.png"];
+//                    self.laboratoryDataModel.resultState = 2;
+//                }else{
+//                    self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_yellow.png"];
+//                    self.laboratoryDataModel.resultState = 3;
+//                }
+//            }
+//        }
+//        else
+//        {
+//            if(RSF<=0.2)
+//            {
+//                self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",mgl_CH2O];
+//                self.laboratoryDataModel.cleanValue = mgl_CH2O;
+//
+//            }
+//            else
+//            {
+//                self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",maxmgl];
+//                self.laboratoryDataModel.cleanValue = maxmgl;
+//
+//            }
+//            self.resultfoxImageView.image=nil;
+//            self.lbldiam.text=@"";
+//        }
+//    }
+//    else
+//    {
+//        self.resultValueLabel.text=@"---";
+//        if(ug_cm2 <= 0.01)
+//        {
+//            self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_pink.png"];
+//            self.laboratoryDataModel.resultState = 1;
+//        }else{
+//            if(ug_cm2 < maxug)
+//            {
+//                self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_green.png"];
+//                self.laboratoryDataModel.resultState = 2;
+//
+//            }else{
+//                self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_yellow.png"];
+//                self.laboratoryDataModel.resultState = 3;
+//            }
+//        }
+//        self.lblugormg.text = @"";
+//    }
 }
 
 - (BOOL)licheck
