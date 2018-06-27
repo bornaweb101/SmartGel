@@ -217,7 +217,7 @@
         if(isSavedImage)
             [self showAlertdialog:nil message:@"You have already saved this Image."];
         else{
-            [self showSaveAlertView];
+            [self showSaveAlertView:false];
         }
     }
 }
@@ -267,10 +267,18 @@
  *************************************************************************************************************************************/
 
 -(IBAction)launchPhotoPickerController{
-    if(!self.selectedTag.tagName){
-        self.selectedTag = [[SGTag alloc] init];
+//    if(!self.selectedTag.tagName){
+//        self.selectedTag = [[SGTag alloc] init];
+//    }
+    if(self.estimateImage.image == nil){
+        [self showPhotoChooseActionSheet];
+    }else{
+        if(isSavedImage){
+            [self showPhotoChooseActionSheet];
+        }else{
+            [self showSaveAlertView:true];
+        }
     }
-    [self showPhotoChooseActionSheet];
 }
 
 -(void)showPhotoChooseActionSheet{
@@ -492,7 +500,7 @@
     [self.navigationController pushViewController:tagVC animated:YES];
 }
 
-- (void)showSaveAlertView{
+- (void)showSaveAlertView:(bool)isFromPickerPhoto{
     
     SCLAlertView *alert = [[SCLAlertView alloc] init];
     alert.customViewColor = SGColorBlack;
@@ -505,22 +513,33 @@
     alert.labelTitle.textColor = [UIColor whiteColor];
     
     UITextField *tagTextField = [alert addTextField:self.estimateImage.tag];
-    [tagTextField setText:self.estimateImage.tag];
-    [tagTextField setEnabled:false];
+//    [tagTextField setText:self.estimateImage.tag];
+    tagTextField.placeholder = @"Type TAG in here!";
+    [tagTextField setEnabled:true];
     [tagTextField setBackgroundColor:[UIColor clearColor]];
-    [tagTextField setTextColor:[UIColor lightGrayColor]];
+    [tagTextField setTextColor:[UIColor whiteColor]];
 
-    UITextField *customerTextField = [alert addTextField:[SGFirebaseManager sharedManager].currentUser.email];
-    [customerTextField setText:[SGFirebaseManager sharedManager].currentUser.email];
-    [customerTextField setEnabled:false];
-    [customerTextField setBackgroundColor:[UIColor clearColor]];
-    [customerTextField setTextColor:[UIColor lightGrayColor]];
+//    UITextField *customerTextField = [alert addTextField:[SGFirebaseManager sharedManager].currentUser.email];
+//    [customerTextField setText:[SGFirebaseManager sharedManager].currentUser.email];
+//    [customerTextField setEnabled:false];
+//    [customerTextField setBackgroundColor:[UIColor clearColor]];
+//    [customerTextField setTextColor:[UIColor lightGrayColor]];
 
     [alert addButton:@"Done" actionBlock:^(void) {
-        [self saveResultImage];
+        self.estimateImage.location = self.locationLabel.text;
+        self.estimateImage.tag = tagTextField.text;
+        [self shareContent];
+//        [self saveResultImage];
     }];
+    
+    [alert addButton:@"Cancel" actionBlock:^(void) {
+        if(isFromPickerPhoto){
+            [self showPhotoChooseActionSheet];
+        }
+    }];
+
     [alert.viewText setTextColor:[UIColor whiteColor]];
-    [alert showEdit:self title:@"Uploading Image?" subTitle:@"Are you sure want to upload image?" closeButtonTitle:@"Cancel" duration:0.0f];
+    [alert showEdit:self title:@"Save Image?" subTitle:@"Do you want to save and export the result?" closeButtonTitle:nil duration:0.0f];
 }
 
 - (void)didSelectTag:(SGTag *)tag{
@@ -607,5 +626,12 @@
             [self nonGelButtonClicked];
         }];
     });
+}
+
+-(void)shareContent{
+    NSString * message = [NSString stringWithFormat:@"Value : %1f\n Tag: %@\n Location: %@\n",self.engine.cleanValue,self.estimateImage.tag,self.estimateImage.location];
+    NSArray * shareItems = @[message, self.originalImage];
+    UIActivityViewController * avc = [[UIActivityViewController alloc] initWithActivityItems:shareItems applicationActivities:nil];
+    [self presentViewController:avc animated:YES completion:nil];
 }
 @end
