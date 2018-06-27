@@ -23,82 +23,45 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     isSaved = true;
-//    self.testImageArray = [NSArray arrayWithObjects:@"0,5mg/L after 5 min_-0.02.jpeg",@"0,5mg/L after 5min_-0.01.jpeg",@"1mg/L after 5min_0.04_2.jpeg",@"1mg/L after 5min_0.04.jpeg",@"1mg/L after 5min_3.jpeg",@"1mg/L after 5min_4.jpeg",@"2mg nach 1 min_0.01.jpeg",@"2mg/L after 5 min_0.04_2.jpeg",@"2mg/L after 5 min_0.04.jpeg",@"4mg/L after 5min_0.06.jpeg",@"8mg/L after 5min_0.08_2.jpeg",@"8mg/L after 5min_0.08.jpeg",@"8mg/L after 5min_0.16.jpeg",@"10 mg/L after 5min_0.08.jpeg",@"10mg/L after 5 min_0.09.jpeg",@"15mg/L after 5 min_0.09.jpeg",@"15mg/L after 5 min_0.12.jpeg",@"15mg/L after 5min_0.12_2.jpeg",@"20mg/L after 5min_0.11.jpeg",@"20mg/L after 5min_0.16.jpeg",@"20mg/L after 5min_0.17.jpeg",@"20mg/L after 10 min_0.24.jpeg",@"blank_-0.15.jpeg",nil];
-    
-//    self.testImageArray = [NSArray arrayWithObjects:@"0.5mg:L_after5min_-0.01.jpeg",
-//                           @"0.5mg:L_after5min_0.02.jpeg",
-//                           @"1mg:L_after5min_0.04_2.jpeg",
-//                           @"1mg:L_after5min_0.04.jpeg",
-//                           @"1mg:L_after5min_3.jpeg",
-//                           @"1mg:L_after5min_4.jpeg",
-//                           @"2mg_nach_1min_0.01.jpeg",
-//                           @"2mg:L_after5min_0.04_2.jpeg",
-//                           @"2mg:L_after5min_0.04.jpeg",
-//                           @"4mg:L_after5min_0.06.jpeg",
-//                           @"8mg:L_after5min_0.08_2.jpeg",
-//                           @"8mg:L_after5min_0.16.jpeg",
-//                           @"8mg:Lafter5min_0.08.jpeg",
-//                           @"10mg:L_after5min_0.08.jpeg",
-//                           @"10mg:L_after5min_0.09.jpeg",
-//                           @"15mg:L_after5min_0.09.jpeg",
-//                           @"15mg:L_after5min_0.12_2.jpeg",
-//                           @"15mg:L_after5min_0.12.jpeg",
-//                           @"20mg:L_after5min_0.11.jpeg",
-//                           @"20mg:L_after5min_0.16.jpeg",
-//                           @"20mg:L_after5min_0.17.jpeg",
-//                           @"20mg:L_after10min_0.24.jpeg",
-//                           @"blank_-0.15.jpeg",
-//                           nil];
     self.testImageArray = [NSArray arrayWithObjects:
                            
-                           @"2_0.05.jpeg",
-                           @"2_0.06.jpeg",
-                           @"2_0.07_1.jpeg",
-                           @"2_0.07_2.jpeg",
-                           @"2_0.08.jpeg",
-                           
-                           @"4_0.09.jpeg",
-                           @"4_0.11.jpeg",
-                           @"4_0.12.jpeg",
-                           @"4_0.14.jpeg",
-                           
-                           @"10_0.07.jpeg",
-                           @"10_0.08.jpeg",
-                           @"10_0.09.jpeg",
-                           @"10_0.12.jpeg",
-                           
-                           @"15-0.07.jpeg",
-                           @"15-0.08.jpeg",
-                           @"15-0.09.jpeg",
-                           @"15-0.11.jpeg",
-                           @"15-0.12.jpeg",
-                           @"15-0.12_2.jpeg",
-                           @"15-0.13.jpeg",
-                           @"15-0.14.jpeg",
-                           @"15-0.15.jpeg",
-                           
-                           @"20_0.09_1.jpeg",
-                           @"20_0.12.jpeg",
-                           @"20_0.14.jpeg",
+                           @"2mg_0.04.jpeg",
+                           @"5mg_0.05.jpeg",
+                           @"5mg_0.09.jpeg",
 
-                           @"30_0.17.jpeg",
-                           @"30_0.17_3.jpeg",
-                           @"30_0.18.jpeg",
-                           @"30_0.20.jpeg",
+                           @"15mg_0.10.jpeg",
+                           @"15mg_0.11.jpeg",
+                           
+                           @"20mg_0.14.jpeg",
+                           @"20mg_0.15.jpeg",
 
-                           @"40_0.21.jpeg",
-                           @"40_0.22.jpeg",
-                           @"40_0.23.jpeg",
-                           @"50_0.23.jpeg",
-                           @"50_0.23_2.jpeg",
-                           @"50_0.24.jpeg",
-                           @"50_0.26.jpeg",
-                           @"50_0.27.jpeg",
+                           @"30mg_0.16.jpeg",
+                           @"30mg_0.17.jpeg",
+                           @"30mg_0.18.jpeg",
+                           @"30mg_0.19.jpeg",
 
-                           @"60_0.22.jpeg",
-//                           @"60_0.24.jpeg",
-                           @"60_0.25.jpeg",
-//                           @"60_0.5_2.jpeg",
+                           @"40mg_0.20.jpeg",
+                           @"40mg_0.21.jpeg",
+                           @"40mg_0.23.jpeg",
+                           @"40mg_0.25.jpeg",
+
+                           @"50mg_0.23.jpeg",
+                           @"50mg_0.25.jpeg",
+                           @"50mg_0.27.jpeg",
+                           @"50mg_0.29.jpeg",
+                           @"50mg_0.30.jpeg",
+                           @"50mg_0.32.jpeg",
+                           @"50mg_0.33.jpeg",
+
+                           @"60mg_0.23.jpeg",
+                           @"60mg_0.25.jpeg",
+                           @"60mg_0.28.jpeg",
+                           @"60mg_0.29.jpeg",
+                           @"60mg_0.30.jpeg",
+                           @"60mg_0.31.jpeg",
+                           @"60mg_0.33.jpeg",
+
+
                            nil];
 
     testImageIndex = 0;
@@ -786,5 +749,17 @@
     if(testImageIndex == self.testImageArray.count)
         testImageIndex =0;
 }
+
+-(IBAction)testMinusButtonClicked:(id)sender{
+    if(testImageIndex != 0){
+        testImageIndex--;
+        NSString *imageFileName = [self.testImageArray objectAtIndex:testImageIndex];
+        UIImage *image = [UIImage imageNamed:imageFileName];
+        [self estimateValue:image];
+        self.testImageLabel.text = imageFileName;
+    }
+}
+
+
 
 @end
