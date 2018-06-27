@@ -96,5 +96,13 @@
     return newImage;
 }
 
+-(UIImage *)getImageFromUIView:(UIView *)editedImageView{
+    UIGraphicsBeginImageContextWithOptions(editedImageView.bounds.size, NO, 2.0f);
+    [editedImageView drawViewHierarchyInRect:editedImageView.bounds afterScreenUpdates:YES];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
 
 @end

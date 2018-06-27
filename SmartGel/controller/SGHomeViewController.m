@@ -499,6 +499,8 @@
 
 - (void)showSaveAlertView:(bool)isFromPickerPhoto{
     
+    [self getEditedShareImage];
+    
     SCLAlertView *alert = [[SCLAlertView alloc] init];
     alert.customViewColor = SGColorBlack;
     alert.iconTintColor = [UIColor whiteColor];
@@ -625,12 +627,13 @@
     [self presentViewController:avc animated:YES completion:nil];
 }
 
--(UIImage *)getImageFromUIView:(UIView *)editedImageView{
-    UIGraphicsBeginImageContextWithOptions(editedImageView.bounds.size, NO, 2.0f);
-    [editedImageView drawViewHierarchyInRect:editedImageView.bounds afterScreenUpdates:YES];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
+-(void)getEditedShareImage{
+    if(self.cleanEditView.isAutoDetect){
+        self.editedShareImage =[[SGImageUtil sharedImageUtil] getImageFromUIView:self.cleanEditView.imgview];
+    }else{
+        self.editedShareImage =[[SGImageUtil sharedImageUtil] getImageFromUIView:self.cleanEditView.manualImgview];
+    }
 }
+
 
 @end

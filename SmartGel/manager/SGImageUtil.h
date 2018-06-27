@@ -13,4 +13,6 @@
 
 - (UIImage *)imageFromCIImage:(CIImage *)ciImage
                withImageSize :(CGSize)imageSize;
+-(UIImage *)getImageFromUIView:(UIView *)editedImageView;
+
 @end

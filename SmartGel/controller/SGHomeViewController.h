@@ -18,6 +18,7 @@
 #import "UIImageView+WebCache.h"
 #import "SGTagViewController.h"
 #import "SGCleanEditView.h"
+#import "SGImageUtil.h"
 
 typedef enum {
     NonGel,
