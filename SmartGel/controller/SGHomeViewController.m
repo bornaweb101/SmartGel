@@ -621,7 +621,7 @@
 }
 
 -(void)shareContent{
-    NSString * message = [NSString stringWithFormat:@"Value : %1f\n Tag: %@\n Location: %@\n",self.engine.cleanValue,self.estimateImage.tag,self.estimateImage.location];
+    NSString * message = [NSString stringWithFormat:@"Value : %.2f\n Tag: %@\n Location: %@\n",self.engine.cleanValue,self.estimateImage.tag,self.estimateImage.location];
     NSArray * shareItems = @[message, self.originalImage, self.editedShareImage];
     UIActivityViewController * avc = [[UIActivityViewController alloc] initWithActivityItems:shareItems applicationActivities:nil];
     [self presentViewController:avc animated:YES completion:nil];
