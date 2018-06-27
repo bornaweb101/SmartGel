@@ -267,9 +267,6 @@
  *************************************************************************************************************************************/
 
 -(IBAction)launchPhotoPickerController{
-//    if(!self.selectedTag.tagName){
-//        self.selectedTag = [[SGTag alloc] init];
-//    }
     if(self.estimateImage.image == nil){
         [self showPhotoChooseActionSheet];
     }else{
@@ -509,21 +506,14 @@
     alert.backgroundViewColor = SGColorDarkGray;
     alert.view.backgroundColor = SGColorDarkGray;
     alert.backgroundType = SCLAlertViewBackgroundTransparent;
-    
+
     alert.labelTitle.textColor = [UIColor whiteColor];
-    
+
     UITextField *tagTextField = [alert addTextField:self.estimateImage.tag];
-//    [tagTextField setText:self.estimateImage.tag];
     tagTextField.placeholder = @"Type TAG in here!";
     [tagTextField setEnabled:true];
     [tagTextField setBackgroundColor:[UIColor clearColor]];
     [tagTextField setTextColor:[UIColor whiteColor]];
-
-//    UITextField *customerTextField = [alert addTextField:[SGFirebaseManager sharedManager].currentUser.email];
-//    [customerTextField setText:[SGFirebaseManager sharedManager].currentUser.email];
-//    [customerTextField setEnabled:false];
-//    [customerTextField setBackgroundColor:[UIColor clearColor]];
-//    [customerTextField setTextColor:[UIColor lightGrayColor]];
 
     [alert addButton:@"Done" actionBlock:^(void) {
         self.estimateImage.location = self.locationLabel.text;
@@ -531,7 +521,7 @@
         [self shareContent];
 //        [self saveResultImage];
     }];
-    
+
     [alert addButton:@"Cancel" actionBlock:^(void) {
         if(isFromPickerPhoto){
             [self showPhotoChooseActionSheet];
@@ -630,8 +620,17 @@
 
 -(void)shareContent{
     NSString * message = [NSString stringWithFormat:@"Value : %1f\n Tag: %@\n Location: %@\n",self.engine.cleanValue,self.estimateImage.tag,self.estimateImage.location];
-    NSArray * shareItems = @[message, self.originalImage];
+    NSArray * shareItems = @[message, self.originalImage, self.editedShareImage];
     UIActivityViewController * avc = [[UIActivityViewController alloc] initWithActivityItems:shareItems applicationActivities:nil];
     [self presentViewController:avc animated:YES completion:nil];
 }
+
+-(UIImage *)getImageFromUIView:(UIView *)editedImageView{
+    UIGraphicsBeginImageContextWithOptions(editedImageView.bounds.size, NO, 2.0f);
+    [editedImageView drawViewHierarchyInRect:editedImageView.bounds afterScreenUpdates:YES];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
 @end
