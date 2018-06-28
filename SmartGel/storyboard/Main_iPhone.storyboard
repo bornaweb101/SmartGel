@@ -1209,7 +1209,7 @@
             </objects>
             <point key="canvasLocation" x="1101.5625" y="117.18749999999999"/>
         </scene>
-        <!--SmartGel-3.0.1-->
+        <!--SmartGel-3.0.2-->
         <scene sceneID="Z7y-Zc-fMl">
             <objects>
                 <viewController storyboardIdentifier="SGLaboratoryViewController" id="o4L-Oo-xZl" customClass="SGLaboratoryViewController" sceneMemberID="viewController">
@@ -1331,7 +1331,7 @@
                                     <action selector="choosePhotoPickerController" destination="o4L-Oo-xZl" eventType="touchUpInside" id="zM0-ve-uvA"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JV-mV-eh9">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JV-mV-eh9">
                                 <rect key="frame" x="16" y="72" width="30" height="30"/>
                                 <color key="backgroundColor" red="0.31372549020000001" green="0.33725490200000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="+">
@@ -1341,7 +1341,7 @@
                                     <action selector="testButtonClicked:" destination="o4L-Oo-xZl" eventType="touchUpInside" id="tRe-DH-Ezo"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jcd-3M-BUj">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jcd-3M-BUj">
                                 <rect key="frame" x="56" y="72" width="30" height="30"/>
                                 <color key="backgroundColor" red="0.31372549020000001" green="0.33725490200000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -1355,7 +1355,7 @@
                                     <action selector="testMinusButtonClicked:" destination="o4L-Oo-xZl" eventType="touchUpInside" id="6zw-Pr-t7M"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mF6-Jp-fWL">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mF6-Jp-fWL">
                                 <rect key="frame" x="100" y="77" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1383,7 +1383,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="SmartGel-3.0.1" id="92k-8X-ysZ">
+                    <navigationItem key="navigationItem" title="SmartGel-3.0.2" id="92k-8X-ysZ">
                         <barButtonItem key="leftBarButtonItem" image="ic_menu" id="djQ-aN-Ugw">
                             <connections>
                                 <action selector="presentLeftMenuViewController:" destination="o4L-Oo-xZl" id="1gd-qs-HCK"/>
@@ -1853,7 +1853,7 @@
                                                 <color key="backgroundColor" red="0.75294117650000003" green="0.26274509800000001" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bWb-ct-ve7">
-                                                <rect key="frame" x="132" y="0.0" width="129.5" height="219.5"/>
+                                                <rect key="frame" x="133" y="0.0" width="129.5" height="219.5"/>
                                                 <color key="backgroundColor" red="0.2784313725" green="0.3411764706" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wOg-9c-fwH">

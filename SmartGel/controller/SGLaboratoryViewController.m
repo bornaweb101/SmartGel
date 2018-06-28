@@ -69,7 +69,7 @@
     self.laboratoryDataModel = [[LaboratoryDataModel alloc] init];
     self.laboratoryEngine = [[LaboratoryEngine alloc] init];
     [self initLocationManager];
-    li=[self licheck];
+
     DIA = [[NSUserDefaults standardUserDefaults] integerForKey:@"DIAMETER"];
     if( [[NSUserDefaults standardUserDefaults] integerForKey:@"ugormg"]==0)
     {
@@ -253,7 +253,7 @@
     float yellowValue = ssred + ssgreen;
     float greenValue = ssgreen + ssblue;
     float pinkValue = ssred + ssblue;
-//
+
 //    float colorDistance;
 //    colorDistance = [[SGColorUtil sharedColorUtil] getDistancebetweenColors:&sampleBAverageColor with:&mixBAverageColor];
 //
@@ -299,7 +299,7 @@
         default:Diam=0.5;
             break;
     }
-    
+
     Diam = 1;
 
     switch (DIA) {
@@ -344,7 +344,7 @@
           ssblue = (ssblue+140)/2;
           bbblue = (bbblue+140)/2;
       }
-    
+
 //         Berechnungsstufe 1_S:
 
     E535_S = ((-log10(((ssred/(I-4.0)*((T-4.0)*100.0/16.0*(-0.3327)+107.64)/100.0))/3205.0))*112.0+(-log10(((ssgreen/(I-4.0)*((T-4.0)*100.0/16.0*(-0.3327)+107.64)/100.0))/3205.0))*411.0)/100.0;
@@ -381,7 +381,7 @@
     }else{
         RSFGO = (RSF*7.5)*1.5-0.13;
     }
-    
+
     mgl_CH2O = RSFGO;
     ug_cm2 = (RSFGO*1000)/(2*1000/(Diam));
 
@@ -392,279 +392,9 @@
     }else{
         self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",1.0];
         self.laboratoryDataModel.cleanValue = ug_cm2;
-        
-    }
 
-//    li = true;
-//    if(li)
-//    {
-//        if([[NSUserDefaults standardUserDefaults] integerForKey:@"ugormg"]==0)
-//        {
-//            if(RSF<=0.1)
-//            {
-//                self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",ug_cm2/0.4975];
-//                self.laboratoryDataModel.cleanValue = ug_cm2/0.4975;
-//            }else{
-//                self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",1.0];
-//                self.laboratoryDataModel.cleanValue = ug_cm2;
-//
-//            }
-//
-//            self.lbldiam.text=[NSString stringWithFormat:@"%@", _diam];
-//            if(ug_cm2 < vgood)
-//            {
-//                self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_pink.png"];
-//                self.laboratoryDataModel.resultState = 1;
-//            }else{
-//                if(ug_cm2 < satis){
-//                self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_green.png"];
-//                    self.laboratoryDataModel.resultState = 2;
-//                }else{
-//                    self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_yellow.png"];
-//                    self.laboratoryDataModel.resultState = 3;
-//                }
-//            }
-//        }
-//        else
-//        {
-//            if(RSF<=0.2)
-//            {
-//                self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",mgl_CH2O];
-//                self.laboratoryDataModel.cleanValue = mgl_CH2O;
-//
-//            }
-//            else
-//            {
-//                self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",maxmgl];
-//                self.laboratoryDataModel.cleanValue = maxmgl;
-//
-//            }
-//            self.resultfoxImageView.image=nil;
-//            self.lbldiam.text=@"";
-//        }
-//    }
-//    else
-//    {
-//        self.resultValueLabel.text=@"---";
-//        if(ug_cm2 <= 0.01)
-//        {
-//            self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_pink.png"];
-//            self.laboratoryDataModel.resultState = 1;
-//        }else{
-//            if(ug_cm2 < maxug)
-//            {
-//                self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_green.png"];
-//                self.laboratoryDataModel.resultState = 2;
-//
-//            }else{
-//                self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_yellow.png"];
-//                self.laboratoryDataModel.resultState = 3;
-//            }
-//        }
-//        self.lblugormg.text = @"";
-//    }
-}
-
-- (BOOL)licheck
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *lkeyI = [defaults stringForKey:@"lkey"];
-    //    NSString *aresult = [[[UIDevice currentDevice] uniqueIdentifier] stringByReplacingOccurrencesOfString:@"a" withString:@""];
-    NSString *aresult = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"a" withString:@""];
-    NSString *bresult = [aresult stringByReplacingOccurrencesOfString:@"b" withString:@""];
-    NSString *cresult = [bresult stringByReplacingOccurrencesOfString:@"c" withString:@""];
-    NSString *dresult = [cresult stringByReplacingOccurrencesOfString:@"d" withString:@""];
-    NSString *eresult = [dresult stringByReplacingOccurrencesOfString:@"e" withString:@""];
-    NSString *fresult = [eresult stringByReplacingOccurrencesOfString:@"f" withString:@""];
-    
-    int l = [fresult length];
-    
-    NSString *nr1 = [fresult substringFromIndex:l-2];
-    NSString *nr2 = [[fresult substringFromIndex:l-4] substringToIndex:2];
-    NSString *nr3 = [[fresult substringFromIndex:l-6] substringToIndex:2];
-    NSString *nr4 = [[fresult substringFromIndex:l-8] substringToIndex:2];
-    NSString *nr5 = [[fresult substringFromIndex:l-10] substringToIndex:2];
-    NSString *nr6 = [[fresult substringFromIndex:l-12] substringToIndex:2];
-    NSString *nr7 = [[fresult substringFromIndex:l-14] substringToIndex:2];
-    NSString *nr8 = [[fresult substringFromIndex:l-16] substringToIndex:2];
-    NSString *nr9 = [[fresult substringFromIndex:l-18] substringToIndex:2];
-    NSString *nr10 = [fresult substringToIndex:l-(l-2)];
-    
-    NSArray *nrs = [[NSArray alloc] initWithObjects:nr1,nr2,nr3,nr4,nr5,nr6,nr7,nr8,nr9,nr10,nil];
-    int i;
-    NSMutableArray *LK= [[NSMutableArray alloc] init];
-    
-    for(i=0;i<10;i++)
-    {
-        float nrn = [[nrs objectAtIndex:i] floatValue]/99.0*25.0;
-        if(nrn<=0)
-        {
-            [LK addObject:@"A"];
-        }
-        else
-        {
-            if(nrn<=1)
-            {
-                [LK addObject:@"B"];
-            }else
-            {
-                if(nrn<=2)
-                {
-                    [LK addObject:@"C"];
-                }else
-                {
-                    if(nrn<=3)
-                    {
-                        [LK addObject:@"D"];
-                    }else
-                    {
-                        if(nrn<=4)
-                        {
-                            [LK addObject:@"E"];
-                        }else
-                        {
-                            if(nrn<=5)
-                            {
-                                [LK addObject:@"F"];
-                            }else
-                            {
-                                if(nrn<=6)
-                                {
-                                    [LK addObject:@"G"];
-                                }else
-                                {
-                                    if(nrn<=7)
-                                    {
-                                        [LK addObject:@"H"];
-                                    }else
-                                    {
-                                        if(nrn<=8)
-                                        {
-                                            [LK addObject:@"I"];
-                                        }else
-                                        {
-                                            if(nrn<=9)
-                                            {
-                                                [LK addObject:@"J"];
-                                            }else
-                                            {
-                                                if(nrn<=10)
-                                                {
-                                                    [LK addObject:@"K"];
-                                                }else
-                                                {
-                                                    if(nrn<=11)
-                                                    {
-                                                        [LK addObject:@"L"];
-                                                    }else
-                                                    {
-                                                        if(nrn<=12)
-                                                        {
-                                                            [LK addObject:@"M"];
-                                                        }else
-                                                        {
-                                                            if(nrn<=13)
-                                                            {
-                                                                [LK addObject:@"N"];
-                                                            }else
-                                                            {
-                                                                if(nrn<=14)
-                                                                {
-                                                                    [LK addObject:@"O"];
-                                                                }else
-                                                                {
-                                                                    if(nrn<=15)
-                                                                    {
-                                                                        [LK addObject:@"P"];
-                                                                    }else
-                                                                    {
-                                                                        if(nrn<=16)
-                                                                        {
-                                                                            [LK addObject:@"Q"];
-                                                                        }else
-                                                                        {
-                                                                            if(nrn<=17)
-                                                                            {
-                                                                                [LK addObject:@"R"];
-                                                                            }else
-                                                                            {
-                                                                                if(nrn<=18)
-                                                                                {
-                                                                                    [LK addObject:@"S"];
-                                                                                }else
-                                                                                {
-                                                                                    if(nrn<=19)
-                                                                                    {
-                                                                                        [LK addObject:@"T"];
-                                                                                    }else
-                                                                                    {
-                                                                                        if(nrn<=20)
-                                                                                        {
-                                                                                            [LK addObject:@"U"];
-                                                                                        }else
-                                                                                        {
-                                                                                            if(nrn<=21)
-                                                                                            {
-                                                                                                [LK addObject:@"V"];
-                                                                                            }else
-                                                                                            {
-                                                                                                if(nrn<=22)
-                                                                                                {
-                                                                                                    [LK addObject:@"W"];
-                                                                                                }else
-                                                                                                {
-                                                                                                    if(nrn<=23)
-                                                                                                    {
-                                                                                                        [LK addObject:@"X"];
-                                                                                                    }else
-                                                                                                    {
-                                                                                                        if(nrn<=24)
-                                                                                                        {
-                                                                                                            [LK addObject:@"Y"];
-                                                                                                        }else
-                                                                                                        {
-                                                                                                            if(nrn<=25)
-                                                                                                            {
-                                                                                                                [LK addObject:@"Z"];
-                                                                                                            }
-                                                                                                        }
-                                                                                                    }
-                                                                                                }
-                                                                                            }
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    if([LK count]>=10)
-    {
-        if([lkeyI isEqualToString:[NSString stringWithFormat:@"%@%@%@%@-%@%@%@-%@%@%@",[LK objectAtIndex:0],[LK objectAtIndex:1],[LK objectAtIndex:2],[LK objectAtIndex:3],[LK objectAtIndex:4],[LK objectAtIndex:5],[LK objectAtIndex:6],[LK objectAtIndex:7],[LK objectAtIndex:8],[LK objectAtIndex:9]]]){
-            return TRUE;
-        }else{
-            return FALSE;
-        }
-    }else{
-        return FALSE;
     }
 }
-
 
 -(void)customerTextFieldTapped{
     [self launchContactPickerViewController];
