@@ -177,7 +177,7 @@
                 if (error == nil) {
                     NSDictionary *post = @{
                                            @"value": [NSString stringWithFormat:@"%.2f",laboratoryData.cleanValue],
-                                           @"filtervalue": [NSString stringWithFormat:@"%.2f",laboratoryData.filterValue],
+                                           @"filtervalue": @"3.0.2",
                                            @"image": metadata.downloadURL.absoluteString,
                                            @"tag": laboratoryData.tag,
                                            @"islaboratory" : @"1",
