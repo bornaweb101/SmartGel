@@ -377,23 +377,37 @@
     }
 
 
+    int colorHiglight = 0;
     pinkValue = pinkValue + 20;
-      if((pinkValue>greenValue)&&(pinkValue>yellowValue)){
+    if((pinkValue>greenValue)&&(pinkValue>yellowValue)){
+        colorHiglight = RED;
+//        ssgreen = (ssgreen+120+120)/3;
+//        bbgreen = (bbgreen+120+120)/3;
+//
+//        ssblue = (ssblue+140+140)/3;
+//        bbblue = (bbblue+140+140)/3;
 
+    }else{
+        if((ssblue>=ssgreen)&&(ssblue>=ssred)){
+            colorHiglight = BLUE;
+        }else{
+            colorHiglight = GREEN;
+        }
+    }
+    
+    if(colorHiglight == RED){
         ssgreen = (ssgreen+120+120)/3;
         bbgreen = (bbgreen+120+120)/3;
-
+        
         ssblue = (ssblue+140+140)/3;
         bbblue = (bbblue+140+140)/3;
-
-      }else{
-          ssgreen = (ssgreen+120)/2;
-          bbgreen = (bbgreen+120)/2;
-
-          ssblue = (ssblue+140)/2;
-          bbblue = (bbblue+140)/2;
-      }
-
+    }else{
+        ssgreen = (ssgreen+120)/2;
+        bbgreen = (bbgreen+120)/2;
+        
+        ssblue = (ssblue+140)/2;
+        bbblue = (bbblue+140)/2;
+    }
 //         Berechnungsstufe 1_S:
 
     E535_S = ((-log10(((ssred/(I-4.0)*((T-4.0)*100.0/16.0*(-0.3327)+107.64)/100.0))/3205.0))*112.0+(-log10(((ssgreen/(I-4.0)*((T-4.0)*100.0/16.0*(-0.3327)+107.64)/100.0))/3205.0))*411.0)/100.0;
@@ -424,11 +438,12 @@
     Mn7R = (Mn7_CS - Mn7_S);
     ERR = fabs((Mn7R-RSF)*100/Mn7R);
 
-
-    if((pinkValue>greenValue)&&(pinkValue>yellowValue)){
-        RSFGO = (RSF*7.5);
+    if(colorHiglight == GREEN){
+        RSFGO = (RSF*7.5)*1.5-0.08;
+    }else if(colorHiglight == BLUE){
+        RSFGO = (RSF*7.5)/2;
     }else{
-        RSFGO = (RSF*7.5)*1.5-0.13;
+        RSFGO = (RSF*7.5)/2;
     }
 
     mgl_CH2O = RSFGO;
