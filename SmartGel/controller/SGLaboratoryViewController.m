@@ -381,12 +381,6 @@
     pinkValue = pinkValue + 20;
     if((pinkValue>greenValue)&&(pinkValue>yellowValue)){
         colorHiglight = RED;
-//        ssgreen = (ssgreen+120+120)/3;
-//        bbgreen = (bbgreen+120+120)/3;
-//
-//        ssblue = (ssblue+140+140)/3;
-//        bbblue = (bbblue+140+140)/3;
-
     }else{
         if((ssblue>=ssgreen)&&(ssblue>=ssred)){
             colorHiglight = BLUE;
@@ -439,7 +433,8 @@
     ERR = fabs((Mn7R-RSF)*100/Mn7R);
 
     if(colorHiglight == GREEN){
-        RSFGO = (RSF*7.5)*1.5-0.08;
+//        RSFGO = (RSF*7.5)*1-0.08;
+        RSFGO = (RSF*7.5)*2-0.18;
     }else if(colorHiglight == BLUE){
         RSFGO = (RSF*7.5)/2;
     }else{
@@ -448,16 +443,19 @@
 
     mgl_CH2O = RSFGO;
     ug_cm2 = (RSFGO*1000)/(2*1000/(Diam));
+    
+    if(ug_cm2<0){
+        ug_cm2 = 0;
+    }
 
-    if(RSF<=0.1)
-    {
+//    if(RSF<=0.1)
+//    {
         self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",ug_cm2/0.4975];
         self.laboratoryDataModel.cleanValue = ug_cm2/0.4975;
-    }else{
-        self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",1.0];
-        self.laboratoryDataModel.cleanValue = ug_cm2;
-
-    }
+//    }else{
+//        self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",1.0];
+//        self.laboratoryDataModel.cleanValue = ug_cm2;
+//    }
 }
 
 -(void)customerTextFieldTapped{
