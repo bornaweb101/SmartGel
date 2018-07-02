@@ -431,6 +431,10 @@
     RSF = (Mn6_S - Mn6_CS) + ((Mn2_S - Mn2_CS)*4);
     Mn7R = (Mn7_CS - Mn7_S);
     ERR = fabs((Mn7R-RSF)*100/Mn7R);
+    
+    if(RSF>0.1){
+        RSF = 0.1;
+    }
 
     if(colorHiglight == GREEN){
 //        RSFGO = (RSF*7.5)*1-0.08;
@@ -441,21 +445,20 @@
         RSFGO = (RSF*7.5)/2;
     }
 
-    mgl_CH2O = RSFGO;
     ug_cm2 = (RSFGO*1000)/(2*1000/(Diam));
-    
+    maxug = ((0.1*7.5)/2*1000)/(2*1000/(Diam));
+
     if(ug_cm2<0){
         ug_cm2 = 0;
     }
 
-//    if(RSF<=0.1)
-//    {
-        self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",ug_cm2/0.4975];
+    if(RSF == 0.1){
+        self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",1.0];
+        self.laboratoryDataModel.cleanValue = maxug;
+    }else{
+        self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",ug_cm2*1.5];
         self.laboratoryDataModel.cleanValue = ug_cm2/0.4975;
-//    }else{
-//        self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",1.0];
-//        self.laboratoryDataModel.cleanValue = ug_cm2;
-//    }
+    }
 }
 
 -(void)customerTextFieldTapped{
