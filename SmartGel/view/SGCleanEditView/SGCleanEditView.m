@@ -13,6 +13,7 @@
 
 @implementation SGCleanEditView{
     UIPanGestureRecognizer *panTapGesure;
+    UITapGestureRecognizer *tapGesture;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder{
@@ -22,7 +23,8 @@
         self.manualImgview = [[UIImageView alloc] init];
         self.autoDetectCleanAreaViews = [NSMutableArray array];
         self.manualCleanAreaViews = [NSMutableArray array];
-        panTapGesure = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
+        panTapGesure = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureCaptured:)];
+        tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
         self.isAutoDetect = false;
     }
     return self;
@@ -170,15 +172,22 @@
 
 -(void)addPanGesture{
     if(![self.scrollView.gestureRecognizers containsObject:panTapGesure]){
-        panTapGesure = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
+        panTapGesure = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureCaptured:)];
         [self.scrollView addGestureRecognizer:panTapGesure];
     }
+    if(![self.scrollView.gestureRecognizers containsObject:tapGesture]){
+        tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
+        [self.scrollView addGestureRecognizer:tapGesture];
+    }
+
     [self.scrollView setMaximumZoomScale:1];
 }
 
 -(void)removePanGesture{
 //    for(UIPanGestureRecognizer *recognizer in self.scrollView.gestureRecognizers){
         [self.scrollView removeGestureRecognizer:panTapGesure];
+        [self.scrollView removeGestureRecognizer:tapGesture];
+
 //    }
     [self.scrollView setMaximumZoomScale:3];
 }
@@ -224,10 +233,10 @@
 
 
 /************************************************************************************************************************************
- * scrollview single tap gestured
+ * scrollview pan gestured
  *************************************************************************************************************************************/
 
-- (void)singleTapGestureCaptured:(UIPanGestureRecognizer *)gesture
+- (void)panGestureCaptured:(UIPanGestureRecognizer *)gesture
 {
     if(self.isAutoDetect){
         return;
@@ -241,6 +250,26 @@
           [self.delegate onTappedGridView:touchPosition];
     }
 }
+
+/************************************************************************************************************************************
+ * scrollview singleTap gestured
+ *************************************************************************************************************************************/
+
+- (void)singleTapGestureCaptured:(UIPanGestureRecognizer *)gesture
+{
+    if(self.isAutoDetect){
+        return;
+    }
+    CGPoint touchPoint=[gesture locationInView:self.manualGridView];
+    if(self.takenImage==nil)
+        return;
+    int touchPosition = [self.manualGridView getContainsFrame:self.takenImage withPoint:touchPoint withRowCount:SGGridCount withColCount:SGGridCount];
+    if(touchPosition != -1){
+        if(self.delegate != nil)
+            [self.delegate onTappedGridView:touchPosition];
+    }
+}
+
 
 /************************************************************************************************************************************
  * add maunal clean area
