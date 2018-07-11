@@ -229,7 +229,7 @@
                                                                        message:@"Do you want to save the Result?"
                                                                 preferredStyle:UIAlertControllerStyleAlert]; // 1
         [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [self showSaveAlertView];
+            [self showSaveAlertView:false];
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self capturePhoto];
@@ -247,7 +247,7 @@
                                                                        message:@"Do you want to save the Result?"
                                                                 preferredStyle:UIAlertControllerStyleAlert]; // 1
         [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [self showSaveAlertView];
+            [self showSaveAlertView:false];
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self loadPhoto];
@@ -483,10 +483,10 @@
     if(self.laboratoryDataModel.image==nil)
         [self showAlertdialog:nil message:@"Please take a photo."];
     else
-        [self showSaveAlertView];
+        [self showSaveAlertView:true];
 }
 
-- (void)showSaveAlertView{
+- (void)showSaveAlertView:(bool)isExport{
     
     SCLAlertView *alert = [[SCLAlertView alloc] init];
     alert.customViewColor = SGColorBlack;
@@ -506,7 +506,11 @@
     [alert addButton:@"Done" actionBlock:^(void) {
         self.laboratoryDataModel.tag = self.tagTextField.text;
         self.laboratoryDataModel.customer = self.customerTextField.text;
-        [self saveLaboratoryDatas];
+        if(isExport){
+            [self shareContent];
+        }else{
+            [self saveLaboratoryDatas];
+        }
     }];
     [alert showEdit:self title:@"TAG YOUR RESULT" subTitle:nil closeButtonTitle:@"Cancel" duration:0.0f];
 }
@@ -559,6 +563,12 @@
     }
 }
 
+-(void)shareContent{
+    NSString * message = [NSString stringWithFormat:@"Value : %.2f\n Tag: %@\n Location:  %@\n SampleColor: 0x%llX\n BlankColor: 0x%llX\n",self.laboratoryDataModel.cleanValue,self.laboratoryDataModel.tag,self.laboratoryDataModel.location,self.laboratoryDataModel.sampleColor, self.laboratoryDataModel.blankColor];
+    NSArray * shareItems = @[message, self.laboratoryDataModel.image];
+    UIActivityViewController * avc = [[UIActivityViewController alloc] initWithActivityItems:shareItems applicationActivities:nil];
+    [self presentViewController:avc animated:YES completion:nil];
+}
 
 
 @end
