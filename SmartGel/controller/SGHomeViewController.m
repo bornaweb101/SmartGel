@@ -217,7 +217,7 @@
         if(isSavedImage)
             [self showAlertdialog:nil message:@"You have already saved this Image."];
         else{
-            [self showSaveAlertView:false];
+            [self showSaveAlertView:false withTitle:@"Export Image" withMessage:@"Do you want to export the result?"];
         }
     }
 }
@@ -273,7 +273,7 @@
         if(isSavedImage){
             [self showPhotoChooseActionSheet];
         }else{
-            [self showSaveAlertView:true];
+            [self showSaveAlertView:true withTitle:@"Save Image" withMessage:@"Do you want to save and export the result?"];
         }
     }
 }
@@ -497,7 +497,9 @@
     [self.navigationController pushViewController:tagVC animated:YES];
 }
 
-- (void)showSaveAlertView:(bool)isFromPickerPhoto{
+- (void)showSaveAlertView:(bool)isFromPickerPhoto
+                withTitle:(NSString *)title
+              withMessage:(NSString *)message{
     
     [self getEditedShareImage];
     
@@ -520,8 +522,11 @@
     [alert addButton:@"Done" actionBlock:^(void) {
         self.estimateImage.location = self.locationLabel.text;
         self.estimateImage.tag = tagTextField.text;
-        [self shareContent];
-//        [self saveResultImage];
+        if(isFromPickerPhoto){
+            [self saveResultImage];
+        }else{
+            [self shareContent];
+        }
     }];
 
     [alert addButton:@"Cancel" actionBlock:^(void) {
@@ -531,7 +536,9 @@
     }];
 
     [alert.viewText setTextColor:[UIColor whiteColor]];
-    [alert showEdit:self title:@"Save Image?" subTitle:@"Do you want to save and export the result?" closeButtonTitle:nil duration:0.0f];
+//    [alert showEdit:self title:@"Save Image?" subTitle:@"Do you want to save and export the result?" closeButtonTitle:nil duration:0.0f];
+    [alert showEdit:self title:title subTitle:message closeButtonTitle:nil duration:0.0f];
+
 }
 
 - (void)didSelectTag:(SGTag *)tag{
