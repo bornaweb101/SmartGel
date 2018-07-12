@@ -74,9 +74,15 @@
     }
     
     RGBA averageRGB;
-    averageRGB.r = sumR / nCount;
-    averageRGB.g = sumG / nCount;
-    averageRGB.b = sumB / nCount;
+    if (nCount != 0){
+        averageRGB.r = sumR / nCount;
+        averageRGB.g = sumG / nCount;
+        averageRGB.b = sumB / nCount;
+    }else{
+        averageRGB.r = sumR ;
+        averageRGB.g = sumG ;
+        averageRGB.b = sumB ;
+    }
     [self reset];
     return averageRGB;
 }

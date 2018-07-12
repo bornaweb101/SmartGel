@@ -498,11 +498,11 @@
     
     alert.labelTitle.textColor = [UIColor whiteColor];
     self.tagTextField = [alert addTextField:@"Type Tag in here!"];
-    self.customerTextField = [alert addTextField:@"no Customer Selected!"];
-    UITapGestureRecognizer *singleFingerTap =
-    [[UITapGestureRecognizer alloc] initWithTarget:self
-                                            action:@selector(customerTextFieldTapped)];
-    [self.customerTextField addGestureRecognizer:singleFingerTap];
+//    self.customerTextField = [alert addTextField:@"no Customer Selected!"];
+//    UITapGestureRecognizer *singleFingerTap =
+//    [[UITapGestureRecognizer alloc] initWithTarget:self
+//                                            action:@selector(customerTextFieldTapped)];
+//    [self.customerTextField addGestureRecognizer:singleFingerTap];
     [alert addButton:@"Done" actionBlock:^(void) {
         self.laboratoryDataModel.tag = self.tagTextField.text;
         self.laboratoryDataModel.customer = self.customerTextField.text;
