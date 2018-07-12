@@ -26,6 +26,9 @@
     MBProgressHUD *hud;
     bool isSaved;
     int testImageIndex;
+    
+    NSString *prevTag;
+    int sameTagCount;
 }
 
 @property (strong, nonatomic) LaboratoryDataModel *laboratoryDataModel;

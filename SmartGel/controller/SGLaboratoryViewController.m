@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    isSaved = true;
+    [self initFlag];
 //    self.testImageArray = [NSArray arrayWithObjects:
 //
 //                           @"2mg_0.04.jpeg",
@@ -113,7 +113,6 @@
 
                            nil];
 
-    testImageIndex = 0;
     
     self.laboratoryDataModel = [[LaboratoryDataModel alloc] init];
     self.laboratoryEngine = [[LaboratoryEngine alloc] init];
@@ -165,6 +164,13 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.appDelegate.isLaboratory = false;
+}
+
+-(void)initFlag{
+    testImageIndex = 0;
+    prevTag = @"";
+    sameTagCount = 1;
+    isSaved = true;
 }
 
 -(void)initLocationManager{
@@ -451,12 +457,31 @@
     
     alert.labelTitle.textColor = [UIColor whiteColor];
     self.tagTextField = [alert addTextField:@"Type Tag in here!"];
-//    self.customerTextField = [alert addTextField:@"no Customer Selected!"];
-//    UITapGestureRecognizer *singleFingerTap =
-//    [[UITapGestureRecognizer alloc] initWithTarget:self
-//                                            action:@selector(customerTextFieldTapped)];
-//    [self.customerTextField addGestureRecognizer:singleFingerTap];
+    
+    if ((sameTagCount != 1) && (![prevTag isEqualToString:@""])){
+        self.tagTextField.text = [NSString stringWithFormat:@"%@ %d", prevTag,sameTagCount];
+    }else{
+        self.tagTextField.text = [NSString stringWithFormat:@"%@", prevTag];
+    }
+    
+    NSString *prevTagText = self.tagTextField.text;
+    
     [alert addButton:@"Done" actionBlock:^(void) {
+        
+        if([prevTag isEqualToString:@""]){
+            if(![self.tagTextField.text isEqualToString:@""]){
+                prevTag = self.tagTextField.text;
+                sameTagCount++;
+            }
+        }else{
+            if([prevTagText isEqualToString:self.tagTextField.text]){
+                sameTagCount++;
+            }else{
+                sameTagCount = 2;
+                prevTag = self.tagTextField.text;
+            }
+        }
+        
         self.laboratoryDataModel.tag = self.tagTextField.text;
         self.laboratoryDataModel.customer = self.customerTextField.text;
         if(isExport){
