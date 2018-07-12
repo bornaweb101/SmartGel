@@ -181,7 +181,7 @@
                                            @"image": metadata.downloadURL.absoluteString,
                                            @"tag": laboratoryData.tag,
                                            @"islaboratory" : @"1",
-                                           @"customer": laboratoryData.customer,
+                                           @"customer": @"",
                                            @"date": laboratoryData.date,
                                            @"location": laboratoryData.location,
                                            @"blankcolor":[NSString stringWithFormat:@"%lld",laboratoryData.blankColor],

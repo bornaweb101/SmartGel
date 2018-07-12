@@ -207,6 +207,8 @@
     self.laboratoryDataModel.date = [[SGUtil sharedUtil] getCurrentTimeString];
     [self estimateValue:image];
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [self showSaveAlertView:false];
 }
 
 - (void)onDetectedImage:(UIImage *)image{
@@ -218,61 +220,12 @@
 
 
 -(IBAction)launchCameraController{
-    if(isSaved){
-//        SGCustomCameraViewController *customCameraVC = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"SGCustomCameraViewController"];
-//        customCameraVC.delegate = self;
-//        [self.navigationController pushViewController:customCameraVC animated:YES];
-
-        [self capturePhoto];
-    }else{
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
-                                                                       message:@"Do you want to save the Result?"
-                                                                preferredStyle:UIAlertControllerStyleAlert]; // 1
-        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [self showSaveAlertView:false];
-        }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [self capturePhoto];
-        }]];
-        [self presentViewController:alert animated:YES completion:nil];
-    }
-}
-
--(IBAction)choosePhotoPickerController{
-    if(isSaved){
-        [self loadPhoto];
-    }else{
-
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
-                                                                       message:@"Do you want to save the Result?"
-                                                                preferredStyle:UIAlertControllerStyleAlert]; // 1
-        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [self showSaveAlertView:false];
-        }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [self loadPhoto];
-        }]];
-        [self presentViewController:alert animated:YES completion:nil];
-    }
-}
-
--(void)capturePhoto{
     SGCustomCameraViewController *customCameraVC = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"SGCustomCameraViewController"];
     customCameraVC.delegate = self;
     [self.navigationController pushViewController:customCameraVC animated:YES];
-
-//        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-//        imagePickerController.delegate = self;
-//        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-//        [self presentViewController:imagePickerController animated:NO completion:nil];
-//    UIImage *image = [UIImage imageNamed:@"test.png"];
-//    self.laboratoryDataModel.image = image;
-//    self.laboratoryDataModel.date = [self getCurrentTimeString];
-//
-//    [self estimateValue:image];
 }
 
--(void)loadPhoto{
+-(IBAction)choosePhotoPickerController{
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.delegate = self;
     imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -512,7 +465,7 @@
             [self saveLaboratoryDatas];
         }
     }];
-    [alert showEdit:self title:@"TAG YOUR RESULT" subTitle:nil closeButtonTitle:@"Cancel" duration:0.0f];
+    [alert showEdit:self title:@"TAG YOUR RESULT" subTitle:nil closeButtonTitle:nil duration:0.0f];
 }
 
 -(void)saveLaboratoryDatas{
