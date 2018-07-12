@@ -463,31 +463,33 @@
     }else{
         self.tagTextField.text = [NSString stringWithFormat:@"%@", prevTag];
     }
-    
+
+    if(isExport){
+        self.tagTextField.text = [NSString stringWithFormat:@"%@", prevTag];
+    }
+
     NSString *prevTagText = self.tagTextField.text;
     
     [alert addButton:@"Done" actionBlock:^(void) {
-        
-        if([prevTag isEqualToString:@""]){
-            if(![self.tagTextField.text isEqualToString:@""]){
-                prevTag = self.tagTextField.text;
-                sameTagCount++;
-            }
-        }else{
-            if([prevTagText isEqualToString:self.tagTextField.text]){
-                sameTagCount++;
-            }else{
-                sameTagCount = 2;
-                prevTag = self.tagTextField.text;
-            }
-        }
-        
         self.laboratoryDataModel.tag = self.tagTextField.text;
         self.laboratoryDataModel.customer = self.customerTextField.text;
         if(isExport){
             [self shareContent];
         }else{
             [self saveLaboratoryDatas];
+            if([prevTag isEqualToString:@""]){
+                if(![self.tagTextField.text isEqualToString:@""]){
+                    prevTag = self.tagTextField.text;
+                    sameTagCount++;
+                }
+            }else{
+                if([prevTagText isEqualToString:self.tagTextField.text]){
+                    sameTagCount++;
+                }else{
+                    sameTagCount = 2;
+                    prevTag = self.tagTextField.text;
+                }
+            }
         }
     }];
     [alert showEdit:self title:@"TAG YOUR RESULT" subTitle:nil closeButtonTitle:nil duration:0.0f];
