@@ -7,6 +7,7 @@
 //
 
 #import "SGUtil.h"
+#import "SGConstant.h"
 
 @implementation SGUtil
 
@@ -94,6 +95,18 @@
     NSArray *sortedArray = [array sortedArrayUsingDescriptors:@[sortDescriptor]];
     mutableArray = [[NSMutableArray alloc] initWithArray:sortedArray];
     return mutableArray;
+}
+
+-(SCLAlertView *)getSGAlertView{
+    SCLAlertView *alert = [[SCLAlertView alloc] init];
+    alert.customViewColor = SGColorBlack;
+    alert.iconTintColor = [UIColor whiteColor];
+    alert.tintTopCircle = NO;
+    alert.backgroundViewColor = SGColorDarkGray;
+    alert.view.backgroundColor = SGColorDarkGray;
+    alert.backgroundType = SCLAlertViewBackgroundTransparent;
+    alert.labelTitle.textColor = [UIColor whiteColor];
+    return alert;
 }
 
 @end
