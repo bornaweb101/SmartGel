@@ -450,6 +450,7 @@
 - (void)showSaveAlertView:(bool)isExport{
     self.alertView = [[SGUtil sharedUtil] getSGAlertView];
     self.tagTextField = [self.alertView addTextField:@"Type Tag in here!"];
+    self.tagTextField.delegate = self;
     self.tagTextField.text = [self getAlertTagText:isExport];
     __weak typeof(self) weakSelf = self;
 
@@ -555,7 +556,9 @@
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
+    if(self.alertView !=nil){
+        [self.alertView hideView];
+    }
     return YES;
 }
 
