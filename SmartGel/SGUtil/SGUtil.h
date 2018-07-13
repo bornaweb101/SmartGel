@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "SCLAlertView.h"
 
 @interface SGUtil : NSObject
 + (instancetype)sharedUtil;
@@ -22,4 +23,6 @@
 - (NSString *)getDateString:(NSDate*)date;
 - (NSDate *)getDateFromString:(NSString*)dateString;
 - (NSDate *)getLocalTime:(NSDate *)date;
+- (SCLAlertView *)getSGAlertView;
+
 @end

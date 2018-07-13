@@ -14,6 +14,7 @@
 #import "Firebase.h"
 #import "LaboratoryEngine.h"
 #import <MapKit/MapKit.h>
+#import "SCLAlertView.h"
 
 @interface SGLaboratoryViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate,SGCustomCameraViewControllerDelegate>{
     int firstrun;
@@ -27,7 +28,10 @@
     bool isSaved;
     int testImageIndex;
     
+    
     NSString *prevTag;
+    NSString *prevTotalTagText;
+
     int sameTagCount;
 }
 
@@ -50,8 +54,10 @@
 @property (strong, nonatomic) LaboratoryEngine *laboratoryEngine;
 
 
-@property (strong, nonatomic)NSArray *testImageArray;
+@property (strong, nonatomic) NSArray *testImageArray;
 @property (strong, nonatomic) IBOutlet UILabel *testImageLabel;
+
+@property (strong, nonatomic)  SCLAlertView *alertView;
 
 
 @end

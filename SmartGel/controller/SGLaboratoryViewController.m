@@ -7,7 +7,6 @@
 //
 
 #import "SGLaboratoryViewController.h"
-#import "SCLAlertView.h"
 #import "SGConstant.h"
 #import <ContactsUI/ContactsUI.h>
 #import "MBProgressHUD.h"
@@ -167,8 +166,11 @@
 }
 
 -(void)initFlag{
+    
     testImageIndex = 0;
     prevTag = @"";
+    prevTotalTagText = @"";
+    
     sameTagCount = 1;
     isSaved = true;
 }
@@ -446,53 +448,54 @@
 }
 
 - (void)showSaveAlertView:(bool)isExport{
-    
-    SCLAlertView *alert = [[SCLAlertView alloc] init];
-    alert.customViewColor = SGColorBlack;
-    alert.iconTintColor = [UIColor whiteColor];
-    alert.tintTopCircle = NO;
-    alert.backgroundViewColor = SGColorDarkGray;
-    alert.view.backgroundColor = SGColorDarkGray;
-    alert.backgroundType = SCLAlertViewBackgroundTransparent;
-    
-    alert.labelTitle.textColor = [UIColor whiteColor];
-    self.tagTextField = [alert addTextField:@"Type Tag in here!"];
-    
-    if ((sameTagCount != 1) && (![prevTag isEqualToString:@""])){
-        self.tagTextField.text = [NSString stringWithFormat:@"%@ %d", prevTag,sameTagCount];
-    }else{
-        self.tagTextField.text = [NSString stringWithFormat:@"%@", prevTag];
-    }
+    self.alertView = [[SGUtil sharedUtil] getSGAlertView];
+    self.tagTextField = [self.alertView addTextField:@"Type Tag in here!"];
+    self.tagTextField.text = [self getAlertTagText:isExport];
+    __weak typeof(self) weakSelf = self;
 
-    if(isExport){
-        self.tagTextField.text = [NSString stringWithFormat:@"%@", prevTag];
-    }
-
-    NSString *prevTagText = self.tagTextField.text;
-    
-    [alert addButton:@"Done" actionBlock:^(void) {
-        self.laboratoryDataModel.tag = self.tagTextField.text;
-        self.laboratoryDataModel.customer = self.customerTextField.text;
+    [self.alertView addButton:@"Done" actionBlock:^(void) {
         if(isExport){
-            [self shareContent];
+            weakSelf.laboratoryDataModel.tag = weakSelf.tagTextField.text;
+            [weakSelf shareContent];
         }else{
-            [self saveLaboratoryDatas];
-            if([prevTag isEqualToString:@""]){
-                if(![self.tagTextField.text isEqualToString:@""]){
-                    prevTag = self.tagTextField.text;
-                    sameTagCount++;
-                }
-            }else{
-                if([prevTagText isEqualToString:self.tagTextField.text]){
-                    sameTagCount++;
-                }else{
-                    sameTagCount = 2;
-                    prevTag = self.tagTextField.text;
-                }
-            }
+            [weakSelf saveAlertDoneButtonClicked];
         }
     }];
-    [alert showEdit:self title:@"TAG YOUR RESULT" subTitle:nil closeButtonTitle:nil duration:0.0f];
+    
+    [self.alertView showEdit:self title:@"TAG YOUR RESULT" subTitle:nil closeButtonTitle:nil duration:0.0f];
+}
+
+-(NSString *)getAlertTagText:(bool)isExport{
+    if(isExport){
+        prevTotalTagText = [NSString stringWithFormat:@"%@", prevTag];
+    }else{
+        if ((sameTagCount != 1) && (![prevTag isEqualToString:@""])){
+            prevTotalTagText = [NSString stringWithFormat:@"%@ %d", prevTag,sameTagCount];
+        }else{
+            prevTotalTagText = [NSString stringWithFormat:@"%@", prevTag];
+        }
+    }
+    return prevTotalTagText;
+}
+
+-(void)saveAlertDoneButtonClicked{
+    
+    self.laboratoryDataModel.tag = self.tagTextField.text;
+    [self saveLaboratoryDatas];
+    
+    if([prevTag isEqualToString:@""]){
+        if(![self.tagTextField.text isEqualToString:@""]){
+            prevTag = self.tagTextField.text;
+            sameTagCount++;
+        }
+    }else{
+        if([prevTotalTagText isEqualToString:self.tagTextField.text]){
+            sameTagCount++;
+        }else{
+            sameTagCount = 2;
+            prevTag = self.tagTextField.text;
+        }
+    }
 }
 
 -(void)saveLaboratoryDatas{
@@ -550,5 +553,10 @@
     [self presentViewController:avc animated:YES completion:nil];
 }
 
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    return YES;
+}
 
 @end
