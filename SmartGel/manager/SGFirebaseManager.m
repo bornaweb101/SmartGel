@@ -175,9 +175,15 @@
               metadata:nil
             completion:^(FIRStorageMetadata *metadata,NSError *error) {
                 if (error == nil) {
+                    
+                    NSDictionary *infoDictionary = [[NSBundle mainBundle]infoDictionary];
+                    
+                    NSString *version = infoDictionary[@"CFBundleShortVersionString"];
+                    NSString *build = infoDictionary[(NSString*)kCFBundleVersionKey];
+
                     NSDictionary *post = @{
                                            @"value": [NSString stringWithFormat:@"%.2f",laboratoryData.cleanValue],
-                                           @"filtervalue": @"3.0.3",
+                                           @"filtervalue": [NSString stringWithFormat:@"%@.%@",version,build],
                                            @"image": metadata.downloadURL.absoluteString,
                                            @"tag": laboratoryData.tag,
                                            @"islaboratory" : @"1",

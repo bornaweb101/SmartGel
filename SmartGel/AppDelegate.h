@@ -18,7 +18,7 @@
 @property (assign, nonatomic) bool isLoggedIn;
 @property (assign, nonatomic) bool isLaboratory;
 
-- (void)initMenuViewController;
+-(void)initMenuViewController;
 -(void)gotoSignInScreen;
 
 @end
