@@ -85,7 +85,7 @@ DEPENDENCIES:
   - SDWebImage (~> 4.0)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Crashlytics
     - Fabric
     - Firebase
@@ -133,4 +133,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 89a741f348ecbf9f49f367e702b2aed76a553e8e
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

@@ -114,7 +114,11 @@
            selectedTag:(SGTag *)tag
      engineColorOffset:(int)colorOffset
      completionHandler:(void (^)(NSError *error))completionHandler {
-        FIRStorageReference *riversRef = [self.storageRef child:[NSString stringWithFormat:@"%@/%@.png",self.currentUser.userID,estimateImageModel.date]];
+
+        NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
+        NSString *fileName = [NSString stringWithFormat:@"%@_%.2f_%.2f",tag.tagName,estimateImageModel.cleanValue,timeStamp];
+    
+        FIRStorageReference *riversRef = [self.storageRef child:[NSString stringWithFormat:@"%@/%@.jpeg",self.currentUser.userID,fileName]];
         NSData *imageData = UIImageJPEGRepresentation(estimateImageModel.image,0.7);
         [riversRef putData:imageData
                   metadata:nil
