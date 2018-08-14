@@ -59,5 +59,8 @@
 
 @property (strong, nonatomic)  SCLAlertView *alertView;
 
+@property (strong, nonatomic) IBOutlet UILabel *testLabel1;
+@property (strong, nonatomic) IBOutlet UILabel *testLabel2;
+
 
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2Kd-ka-MBi">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2Kd-ka-MBi">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -1242,6 +1242,18 @@
                                                     <constraint firstAttribute="height" constant="90" id="i2j-bb-UYT"/>
                                                 </constraints>
                                             </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5M-sS-ykX">
+                                                <rect key="frame" x="0.0" y="209.5" width="42" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="liQ-jP-N1d">
+                                                <rect key="frame" x="220.5" y="209.5" width="42" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" red="0.078431372549019607" green="0.078431372549019607" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -1252,8 +1264,12 @@
                                             <constraint firstItem="2lZ-2n-vBh" firstAttribute="centerX" secondItem="LW3-Sb-L52" secondAttribute="centerX" id="QEQ-7l-sol"/>
                                             <constraint firstItem="WBi-mO-HMt" firstAttribute="leading" secondItem="LW3-Sb-L52" secondAttribute="leading" id="Rtv-af-OxW"/>
                                             <constraint firstItem="dxx-6W-icy" firstAttribute="width" secondItem="WBi-mO-HMt" secondAttribute="width" id="W1g-JO-2Ga"/>
+                                            <constraint firstItem="v5M-sS-ykX" firstAttribute="top" secondItem="WBi-mO-HMt" secondAttribute="bottom" id="bPh-8q-oOE"/>
                                             <constraint firstAttribute="bottom" secondItem="dxx-6W-icy" secondAttribute="bottom" constant="44" id="dy5-ls-a9b"/>
+                                            <constraint firstItem="liQ-jP-N1d" firstAttribute="top" secondItem="dxx-6W-icy" secondAttribute="bottom" id="efR-v0-h4K"/>
+                                            <constraint firstAttribute="trailing" secondItem="liQ-jP-N1d" secondAttribute="trailing" id="j7q-sk-eCo"/>
                                             <constraint firstAttribute="trailing" secondItem="dxx-6W-icy" secondAttribute="trailing" id="jCU-2d-sxt"/>
+                                            <constraint firstItem="v5M-sS-ykX" firstAttribute="leading" secondItem="LW3-Sb-L52" secondAttribute="leading" id="wfW-7w-tZK"/>
                                             <constraint firstItem="WBi-mO-HMt" firstAttribute="top" secondItem="LW3-Sb-L52" secondAttribute="top" id="zRw-mv-oth"/>
                                         </constraints>
                                     </view>
@@ -1331,7 +1347,7 @@
                                     <action selector="choosePhotoPickerController" destination="o4L-Oo-xZl" eventType="touchUpInside" id="zM0-ve-uvA"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JV-mV-eh9">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JV-mV-eh9">
                                 <rect key="frame" x="16" y="72" width="30" height="30"/>
                                 <color key="backgroundColor" red="0.31372549020000001" green="0.33725490200000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="+">
@@ -1341,7 +1357,7 @@
                                     <action selector="testButtonClicked:" destination="o4L-Oo-xZl" eventType="touchUpInside" id="tRe-DH-Ezo"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jcd-3M-BUj">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jcd-3M-BUj">
                                 <rect key="frame" x="56" y="72" width="30" height="30"/>
                                 <color key="backgroundColor" red="0.31372549020000001" green="0.33725490200000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -1355,7 +1371,7 @@
                                     <action selector="testMinusButtonClicked:" destination="o4L-Oo-xZl" eventType="touchUpInside" id="6zw-Pr-t7M"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mF6-Jp-fWL">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mF6-Jp-fWL">
                                 <rect key="frame" x="100" y="77" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1405,6 +1421,8 @@
                         <outlet property="resultfoxImageView" destination="2lZ-2n-vBh" id="Rsh-Rc-YFg"/>
                         <outlet property="sampleView" destination="dxx-6W-icy" id="rAH-xf-juT"/>
                         <outlet property="testImageLabel" destination="mF6-Jp-fWL" id="PMI-ce-qg7"/>
+                        <outlet property="testLabel1" destination="v5M-sS-ykX" id="tGH-VI-VUP"/>
+                        <outlet property="testLabel2" destination="liQ-jP-N1d" id="qwE-0d-C0z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pZA-3u-Mx8" userLabel="First Responder" sceneMemberID="firstResponder"/>
