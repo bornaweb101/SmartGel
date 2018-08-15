@@ -33,7 +33,14 @@
     
     int widthStart = 0;
     
-    int detectAreaSize = (m_imageWidth/2-m_imageWidth/10 - 15);
+    int detectAreaSize;
+    if (m_imageHeight>m_imageWidth){
+        detectAreaSize = (m_imageWidth/2-m_imageWidth/10 - 15);
+    }else{
+        detectAreaSize = (m_imageHeight/2-m_imageHeight/10 - 15);
+    }
+    
+//    int detectAreaSize = (m_imageWidth/2-m_imageWidth/10 - 15);
     int calculatAreaSize = detectAreaSize/2;
     
     int heightStart = (m_imageHeight-detectAreaSize)/2 + detectAreaSize/4;
