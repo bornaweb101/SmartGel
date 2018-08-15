@@ -1414,12 +1414,12 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="blankView" destination="WBi-mO-HMt" id="Sn2-Kt-Oo4"/>
+                        <outlet property="blankView" destination="dxx-6W-icy" id="Uxt-r8-7JO"/>
                         <outlet property="lbldiam" destination="BlB-3X-Cq7" id="Yti-cl-R4d"/>
                         <outlet property="lblugormg" destination="rQs-fV-BGo" id="hJ6-h4-GRJ"/>
                         <outlet property="resultValueLabel" destination="2AE-LK-ISj" id="nTv-Dt-ew3"/>
                         <outlet property="resultfoxImageView" destination="2lZ-2n-vBh" id="Rsh-Rc-YFg"/>
-                        <outlet property="sampleView" destination="dxx-6W-icy" id="rAH-xf-juT"/>
+                        <outlet property="sampleView" destination="WBi-mO-HMt" id="8Lh-GN-wpg"/>
                         <outlet property="testImageLabel" destination="mF6-Jp-fWL" id="PMI-ce-qg7"/>
                         <outlet property="testLabel1" destination="v5M-sS-ykX" id="tGH-VI-VUP"/>
                         <outlet property="testLabel2" destination="liQ-jP-N1d" id="qwE-0d-C0z"/>

@@ -99,6 +99,58 @@
     }
 }
 
+-(double)getRSFValue:(RGBA)blank
+     withSampleColor:(RGBA)sample{
+    
+    double E535_S,E435_S,E405_S,Mn7_S,Mn6_S,Mn2_S,E535_CS,E435_CS,E405_CS,Mn7_CS,Mn6_CS,Mn2_CS,I,T,RSF;
+//    double mgl_CH2O,ug_cm2,Mn7R,ERR,maxmgl,maxug,RSFGO;
+    I=4.07;
+    T=8.53;
+
+    E535_S = ((-log10(((blank.r/(I-4.0)*((T-4.0)*100.0/16.0*(-0.3327)+107.64)/100.0))/3205.0))*112.0+(-log10(((blank.g/(I-4.0)*((T-4.0)*100.0/16.0*(-0.3327)+107.64)/100.0))/3205.0))*411.0)/100.0;
+    E435_S = ((-log10(((blank.r/(I-4)*((T-4)*100.0/16.0*(-0.3327)+107.64)/100))/3205))*35+(-log10(((blank.b/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*306)/100;
+    E405_S = ((-log10(((blank.r/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*130+(-log10(((blank.b/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*200)/100;
+    
+    // Berechnungsstufe 2_S:
+    
+    Mn7_S = (-1670.2*E535_S-1969.1*E435_S+4201.7*E405_S)/(-26606.7);
+    Mn6_S = (-555.1*E535_S-5931*E435_S+8130.7*E405_S)/(26606.7);
+    Mn2_S = (E535_S-26.6*(-1670.2*E535_S-1969.1*E435_S+4201.7*E405_S)/(-26606.7)-20*(-555.1*E535_S-5931*E435_S+8130.7*E405_S)/(26606.7))/18.3;
+    
+    // Berechnungsstufe 1_CS:
+    
+    E535_CS = ((-log10(((sample.r/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*112+(-log10(((sample.g/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*411)/100;
+    E435_CS = ((-log10(((sample.r/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*35+(-log10(((sample.b/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*306)/100;
+    E405_CS = ((-log10(((sample.r/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*130+(-log10(((sample.b/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*200)/100;
+    
+    // Berechnungsstufe 2_CS:
+    
+    Mn7_CS = (-1670.2*E535_CS-1969.1*E435_CS+4201.7*E405_CS)/(-26606.7);
+    Mn6_CS = (-555.1*E535_CS-5931*E435_CS+8130.7*E405_CS)/(26606.7);
+    Mn2_CS = (E535_CS-26.6*(-1670.2*E535_CS-1969.1*E435_CS+4201.7*E405_CS)/(-26606.7)-20*(-555.1*E535_CS-5931*E435_CS+8130.7*E405_CS)/(26606.7))/18.3;
+    
+    // Berechnungsstufe 3:
+    
+    RSF = (Mn6_S - Mn6_CS) + ((Mn2_S - Mn2_CS)*4);
+//    Mn7R = (Mn7_CS - Mn7_S);
+//    ERR = fabs((Mn7R-RSF)*100/Mn7R);
+    return RSF;
+}
+
+-(int)getColorHighLightStatus:(RGBA)rgbColor{
+    
+    float yellowValue = rgbColor.r + rgbColor.g;
+    float greenValue = rgbColor.g + rgbColor.b;
+    float pinkValue = rgbColor.r + rgbColor.b;
+    
+    if((pinkValue>greenValue)&&(pinkValue>yellowValue)){
+        return PINK;
+    }
+    if((yellowValue>greenValue)&&(yellowValue>pinkValue)){
+        return YELLOW;
+    }
+    return GREEN;
+}
 
 -(float)getDistancebetweenColors:(RGBA *)rgba1
                             with:(RGBA *)rgba2{

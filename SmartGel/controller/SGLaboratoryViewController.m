@@ -63,91 +63,91 @@
 //
 //                           nil];
 
-//    self.testImageArray = [NSArray arrayWithObjects:
-//                           @"28_2_0.01.jpeg",
-//                           @"28_2_0.05.jpeg",
-//                           @"28_2_0.jpeg",
-//
-//                           @"28_5_0.07.jpeg",
-//                           @"28_5_0.08.jpeg",
-//                           @"28_5_0.09.jpeg",
-//                           @"28_5_0.11.jpeg",
-//
-//                           @"28_10_0.17.jpeg",
-//                           @"28_10_0.21.jpeg",
-//                           @"28_10_0.25.jpeg",
-//                           @"28_10_0.26.jpeg",
-//
-//                           @"28_15_0.12.jpeg",
-//                           @"28_15_0.14.jpeg",
-//                           @"28_15_0.18.jpeg",
-//
-//                           @"28_20_0.20.jpeg",
-//                           @"28_20_0.22.jpeg",
-//                           @"28_20_0.23.jpeg",
-//                           @"28_20_0.25.jpeg",
-//                           @"28_20_0.26.jpeg",
-//
-//                           @"28_30_0.27.jpeg",
-//                           @"28_30_0.32.jpeg",
-//                           @"28_30_0.36.jpeg",
-//                           @"28_30_0.37.jpeg",
-//                           @"28_30_0.38.jpeg",
-//
-//                           @"28_40_0.38.jpeg",
-//                           @"28_40_0.41.jpeg",
-//                           @"28_40_0.42.jpeg",
-//                           @"28_40_0.47.jpeg",
-//                           @"28_40_0.48.jpeg",
-//
-//                           @"28_50_0.49.jpeg",
-//                           @"28_50_0.54.jpeg",
-//                           @"28_50_0.57.jpeg",
-//
-//                           @"28_60_0.53.jpeg",
-//                           @"28_60_0.55.jpeg",
-//                           @"28_60_0.62.jpeg",
-//                           @"28_60_0.69.jpeg",
-//                           @"28_60_0.76.jpeg",
-//
-//                           nil];
+    self.testImageArray = [NSArray arrayWithObjects:
+                           @"28_2_0.01.jpeg",
+                           @"28_2_0.05.jpeg",
+                           @"28_2_0.jpeg",
+
+                           @"28_5_0.07.jpeg",
+                           @"28_5_0.08.jpeg",
+                           @"28_5_0.09.jpeg",
+                           @"28_5_0.11.jpeg",
+
+                           @"28_10_0.17.jpeg",
+                           @"28_10_0.21.jpeg",
+                           @"28_10_0.25.jpeg",
+                           @"28_10_0.26.jpeg",
+
+                           @"28_15_0.12.jpeg",
+                           @"28_15_0.14.jpeg",
+                           @"28_15_0.18.jpeg",
+
+                           @"28_20_0.20.jpeg",
+                           @"28_20_0.22.jpeg",
+                           @"28_20_0.23.jpeg",
+                           @"28_20_0.25.jpeg",
+                           @"28_20_0.26.jpeg",
+
+                           @"28_30_0.27.jpeg",
+                           @"28_30_0.32.jpeg",
+                           @"28_30_0.36.jpeg",
+                           @"28_30_0.37.jpeg",
+                           @"28_30_0.38.jpeg",
+
+                           @"28_40_0.38.jpeg",
+                           @"28_40_0.41.jpeg",
+                           @"28_40_0.42.jpeg",
+                           @"28_40_0.47.jpeg",
+                           @"28_40_0.48.jpeg",
+
+                           @"28_50_0.49.jpeg",
+                           @"28_50_0.54.jpeg",
+                           @"28_50_0.57.jpeg",
+
+                           @"28_60_0.53.jpeg",
+                           @"28_60_0.55.jpeg",
+                           @"28_60_0.62.jpeg",
+                           @"28_60_0.69.jpeg",
+                           @"28_60_0.76.jpeg",
+
+                           nil];
 
     
-    self.testImageArray = [NSArray arrayWithObjects:
-                           @"2_0.00_2.jpeg",
-                           @"2_0.00_3.jpeg",
-                           @"2_0.00_5.jpeg",
-                           
-                           @"2_0.00_6.jpeg",
-                           @"2_0.00_7.jpeg",
-                           @"2_0.00_8.jpeg",
-                           @"2_0.01_4.jpeg",
-                           
-                           @"2_0.03.jpeg",
-                           @"4_0.00_3.jpeg",
-                           @"4_0.00_4.jpeg",
-                           @"4_0.01_2.jpeg",
-                           
-                           @"4_0.03_1.jpeg",
-                           @"6_0.02_4.jpeg",
-                           @"6_0.05_5.jpeg",
-                           
-                           @"6_0.05_6.jpeg",
-                           @"6_0.09_2.jpeg",
-                           @"6_0.09_3.jpeg",
-                           @"6_0.10_1.jpeg",
-                           @"8_0.05.jpeg",
-                           
-                           @"8_0.06_1.jpeg",
-                           @"8_0.06_2.jpeg",
-                           @"10_0.00_2.jpeg",
-                           @"10_0.00_3.jpeg",
-                           @"10_0.02_1.jpeg",
-                           
-                           @"12_0.00_1.jpeg",
-                           @"12_0.00_2.jpeg",
-                           @"12_0.00_3.jpeg",
-                           nil];
+//    self.testImageArray = [NSArray arrayWithObjects:
+//                           @"2_0.00_2.jpeg",
+//                           @"2_0.00_3.jpeg",
+//                           @"2_0.00_5.jpeg",
+//
+//                           @"2_0.00_6.jpeg",
+//                           @"2_0.00_7.jpeg",
+//                           @"2_0.00_8.jpeg",
+//                           @"2_0.01_4.jpeg",
+//
+//                           @"2_0.03.jpeg",
+//                           @"4_0.00_3.jpeg",
+//                           @"4_0.00_4.jpeg",
+//                           @"4_0.01_2.jpeg",
+//
+//                           @"4_0.03_1.jpeg",
+//                           @"6_0.02_4.jpeg",
+//                           @"6_0.05_5.jpeg",
+//
+//                           @"6_0.05_6.jpeg",
+//                           @"6_0.09_2.jpeg",
+//                           @"6_0.09_3.jpeg",
+//                           @"6_0.10_1.jpeg",
+//                           @"8_0.05.jpeg",
+//
+//                           @"8_0.06_1.jpeg",
+//                           @"8_0.06_2.jpeg",
+//                           @"10_0.00_2.jpeg",
+//                           @"10_0.00_3.jpeg",
+//                           @"10_0.02_1.jpeg",
+//
+//                           @"12_0.00_1.jpeg",
+//                           @"12_0.00_2.jpeg",
+//                           @"12_0.00_3.jpeg",
+//                           nil];
 
     
     self.laboratoryDataModel = [[LaboratoryDataModel alloc] init];
@@ -279,184 +279,94 @@
 
 - (void)estimateValue:(UIImage *)image{
     firstrun=false;
-    RGBA sampleBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image isSampleColor:false];
-    RGBA mixBAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image isSampleColor:true];
+    RGBA sampleAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image isSampleColor:true];
+    RGBA blankAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image isSampleColor:false];
 
-    self.laboratoryDataModel.sampleColor = ((unsigned)(sampleBAverageColor.r) << 16) + ((unsigned)(sampleBAverageColor.g) << 8) + ((unsigned)(sampleBAverageColor.b) << 0);
-    self.laboratoryDataModel.blankColor =((unsigned)(mixBAverageColor.r) << 16) + ((unsigned)(mixBAverageColor.g) << 8) + ((unsigned)(mixBAverageColor.b) << 0);
+    self.laboratoryDataModel.sampleColor = ((unsigned)(sampleAverageColor.r) << 16) + ((unsigned)(sampleAverageColor.g) << 8) + ((unsigned)(sampleAverageColor.b) << 0);
+    self.laboratoryDataModel.blankColor =((unsigned)(blankAverageColor.r) << 16) + ((unsigned)(blankAverageColor.g) << 8) + ((unsigned)(blankAverageColor.b) << 0);
 
-    self.sampleView.backgroundColor = [UIColor colorWithRed:sampleBAverageColor.r/255.0 green:sampleBAverageColor.g/255.0 blue:sampleBAverageColor.b/255.0 alpha:1];
-    self.blankView.backgroundColor = [UIColor colorWithRed:mixBAverageColor.r/255.0 green:mixBAverageColor.g/255.0 blue:mixBAverageColor.b/255.0 alpha:1];
+    self.sampleView.backgroundColor = [UIColor colorWithRed:sampleAverageColor.r/255.0 green:sampleAverageColor.g/255.0 blue:sampleAverageColor.b/255.0 alpha:1];
+    self.blankView.backgroundColor = [UIColor colorWithRed:blankAverageColor.r/255.0 green:blankAverageColor.g/255.0 blue:blankAverageColor.b/255.0 alpha:1];
 
-    float ssred,ssgreen,ssblue,bbblue,bbgreen,bbred;
-    ssred = sampleBAverageColor.r;
-    ssgreen = sampleBAverageColor.g;
-    ssblue = sampleBAverageColor.b;
-
-    bbred = mixBAverageColor.r;
-    bbgreen = mixBAverageColor.g;
-    bbblue = mixBAverageColor.b;
+    int colorHighLight = [[SGColorUtil sharedColorUtil] getColorHighLightStatus:blankAverageColor];
     
-    float yellowValue = ssred + ssgreen;
-    float greenValue = ssgreen + ssblue;
-    float pinkValue = ssred + ssblue;
-
-//    float colorDistance;
-//    colorDistance = [[SGColorUtil sharedColorUtil] getDistancebetweenColors:&sampleBAverageColor with:&mixBAverageColor];
-//
-//    if((pinkValue>greenValue)&&(pinkValue>yellowValue)){
-//        colorDistance = [[SGColorUtil sharedColorUtil] getDistancebetweenColors:&sampleBAverageColor with:&mixBAverageColor];
-//    }else{
-////
-////        mixBAverageColor.r = 255;
-////        mixBAverageColor.g = 255;
-////        mixBAverageColor.b = 0;
-//
-//        colorDistance = [[SGColorUtil sharedColorUtil] getDistancebetweenColors:&sampleBAverageColor with:&mixBAverageColor];
-//    }
-//
-//    self.resultValueLabel.text = [NSString stringWithFormat:@"%2f",colorDistance];
-
-    double E535_S,E435_S,E405_S,Mn7_S,Mn6_S,Mn2_S,E535_CS,E435_CS,E405_CS,Mn7_CS,Mn6_CS,Mn2_CS,I,T,RSF,mgl_CH2O,ug_cm2,Mn7R,ERR,maxmgl,maxug,RSFGO;
-    I=4.07;
-    T=8.53;
-    // Diamter Berechnung
-    DIA = [[NSUserDefaults standardUserDefaults] integerForKey:@"DIAMETER"];
-    switch (DIA) {
-        case 1:Diam=0.2;
-            break;
-        case 2:Diam=0.35;
-            break;
-        case 3:Diam=0.5;
-            break;
-        case 4:Diam=0.6;
-            break;
-        case 5:Diam=2.5;
-            break;
-        case 6:Diam=0.3175;
-            break;
-        case 7:Diam=0.47625;
-            break;
-        case 8:Diam=0.635;
-            break;
-        case 9:Diam=0.95252;
-            break;
-        case 10:Diam=1.27;
-            break;
-        default:Diam=0.5;
-            break;
-    }
-
-    Diam = 1;
-
-    switch (DIA) {
-        case 1:_diam=@"4mm";
-            break;
-        case 2:_diam=@"7mm";
-            break;
-        case 3:_diam=@"10mm";
-            break;
-        case 4:_diam=@"12mm";
-            break;
-        case 5:_diam=@"50mm";
-            break;
-        case 6:_diam=@"1/4\"";
-            break;
-        case 7:_diam=@"3/8\"";
-            break;
-        case 8:_diam=@"1/2\"";
-            break;
-        case 9:_diam=@"3/4\"";
-            break;
-        case 10:_diam=@"1\"";
-            break;
-        default:_diam=@"10mm";
-            break;
-    }
-
-
-    int colorHiglight = 0;
-    pinkValue = pinkValue + 20;
-    if((pinkValue>greenValue)&&(pinkValue>yellowValue)){
-        colorHiglight = RED;
+    if(colorHighLight == PINK){
+        self.testLabel2.text = @"PINK";
+    }else if(colorHighLight == GREEN){
+        self.testLabel2.text = @"GREEN";
     }else{
-        if((ssblue>=ssgreen)&&(ssblue>=ssred)){
-            colorHiglight = BLUE;
-        }else{
-            colorHiglight = GREEN;
-        }
+        self.testLabel2.text = @"YELLOW";
     }
     
-    if(colorHiglight == RED){
-        ssgreen = (ssgreen+120+120)/3;
-        bbgreen = (bbgreen+120+120)/3;
-        
-        ssblue = (ssblue+140+140)/3;
-        bbblue = (bbblue+140+140)/3;
-    }else{
-        ssgreen = (ssgreen+120)/2;
-        bbgreen = (bbgreen+120)/2;
-        
-        ssblue = (ssblue+140)/2;
-        bbblue = (bbblue+140)/2;
-    }
-//         Berechnungsstufe 1_S:
+    double resultValue = [self calculateResultValue:sampleAverageColor withBlankColor:blankAverageColor];
+    self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",resultValue];
+}
 
-    E535_S = ((-log10(((ssred/(I-4.0)*((T-4.0)*100.0/16.0*(-0.3327)+107.64)/100.0))/3205.0))*112.0+(-log10(((ssgreen/(I-4.0)*((T-4.0)*100.0/16.0*(-0.3327)+107.64)/100.0))/3205.0))*411.0)/100.0;
-    E435_S = ((-log10(((ssred/(I-4)*((T-4)*100.0/16.0*(-0.3327)+107.64)/100))/3205))*35+(-log10(((ssblue/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*306)/100;
-    E405_S = ((-log10(((ssred/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*130+(-log10(((ssblue/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*200)/100;
-
-    // Berechnungsstufe 2_S:
-
-    Mn7_S = (-1670.2*E535_S-1969.1*E435_S+4201.7*E405_S)/(-26606.7);
-    Mn6_S = (-555.1*E535_S-5931*E435_S+8130.7*E405_S)/(26606.7);
-    Mn2_S = (E535_S-26.6*(-1670.2*E535_S-1969.1*E435_S+4201.7*E405_S)/(-26606.7)-20*(-555.1*E535_S-5931*E435_S+8130.7*E405_S)/(26606.7))/18.3;
-
-    // Berechnungsstufe 1_CS:
-
-    E535_CS = ((-log10(((bbred/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*112+(-log10(((bbgreen/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*411)/100;
-    E435_CS = ((-log10(((bbred/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*35+(-log10(((bbblue/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*306)/100;
-    E405_CS = ((-log10(((bbred/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*130+(-log10(((bbblue/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*200)/100;
-
-    // Berechnungsstufe 2_CS:
-
-    Mn7_CS = (-1670.2*E535_CS-1969.1*E435_CS+4201.7*E405_CS)/(-26606.7);
-    Mn6_CS = (-555.1*E535_CS-5931*E435_CS+8130.7*E405_CS)/(26606.7);
-    Mn2_CS = (E535_CS-26.6*(-1670.2*E535_CS-1969.1*E435_CS+4201.7*E405_CS)/(-26606.7)-20*(-555.1*E535_CS-5931*E435_CS+8130.7*E405_CS)/(26606.7))/18.3;
-
-    // Berechnungsstufe 3:
-
-    RSF = (Mn6_S - Mn6_CS) + ((Mn2_S - Mn2_CS)*4);
-    Mn7R = (Mn7_CS - Mn7_S);
-    ERR = fabs((Mn7R-RSF)*100/Mn7R);
+-(double)calculateResultValue: (RGBA)sampleColor
+             withBlankColor: (RGBA)blankColor{
     
-//    if(RSF>0.1){
-//        RSF = 0.1;
-//    }
+    double resultValue = [[SGColorUtil sharedColorUtil] getRSFValue:blankColor withSampleColor:sampleColor];
+    
+    //    int colorHiglight = 0;
+    //    pinkValue = pinkValue + 20;
+    //    if((pinkValue>greenValue)&&(pinkValue>yellowValue)){
+    //        colorHiglight = RED;
+    //    }else{
+    //        if((ssblue>=ssgreen)&&(ssblue>=ssred)){
+    //            colorHiglight = BLUE;
+    //        }else{
+    //            colorHiglight = GREEN;
+    //        }
+    //    }
+    
+    //    if(colorHiglight == RED){
+    //        ssgreen = (ssgreen+120+120)/3;
+    //        bbgreen = (bbgreen+120+120)/3;
+    //
+    //        ssblue = (ssblue+140+140)/3;
+    //        bbblue = (bbblue+140+140)/3;
+    //    }else{
+    //        ssgreen = (ssgreen+120)/2;
+    //        bbgreen = (bbgreen+120)/2;
+    //
+    //        ssblue = (ssblue+140)/2;
+    //        bbblue = (bbblue+140)/2;
+    //    }
+    //         Berechnungsstufe 1_S:
+    
+    
+    //    if(RSF>0.1){
+    //        RSF = 0.1;
+    //    }
+    
+    
+    //    if(colorHiglight == GREEN){
+    ////        RSFGO = (RSF*7.5)*1-0.08;
+    //        RSFGO = (RSF*7.5)*2-0.18;
+    //    }else if(colorHiglight == BLUE){
+    //        RSFGO = (RSF*7.5)/2;
+    //    }else{
+    //        RSFGO = (RSF*7.5)/2;
+    //    }
+    //
+    //    ug_cm2 = (RSFGO*1000)/(2*1000/(Diam));
+    //    maxug = ((0.1*7.5)/2*1000)/(2*1000/(Diam));
+    //
+    //    if(ug_cm2<0){
+    //        ug_cm2 = 0;
+    //    }
+    
+    
+    
+    //    if(RSF == 0.1){
+    //        self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",1.0];
+    //        self.laboratoryDataModel.cleanValue = maxug;
+    //    }else{
+    //        self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",ug_cm2*1.5];
+    //        self.laboratoryDataModel.cleanValue = ug_cm2/0.4975;
+    //    }
 
-    if(colorHiglight == GREEN){
-//        RSFGO = (RSF*7.5)*1-0.08;
-        RSFGO = (RSF*7.5)*2-0.18;
-    }else if(colorHiglight == BLUE){
-        RSFGO = (RSF*7.5)/2;
-    }else{
-        RSFGO = (RSF*7.5)/2;
-    }
-
-    ug_cm2 = (RSFGO*1000)/(2*1000/(Diam));
-    maxug = ((0.1*7.5)/2*1000)/(2*1000/(Diam));
-
-    if(ug_cm2<0){
-        ug_cm2 = 0;
-    }
-
-    if(RSF == 0.1){
-        self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",1.0];
-        self.laboratoryDataModel.cleanValue = maxug;
-    }else{
-        self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",ug_cm2*1.5];
-        self.laboratoryDataModel.cleanValue = ug_cm2/0.4975;
-    }
+    return resultValue;
 }
 
 -(void)customerTextFieldTapped{

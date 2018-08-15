@@ -15,9 +15,9 @@
 #define IS_DIRTY 2
 #define NO_GEL   3
 
-#define RED 1
+#define PINK 1
 #define GREEN 2
-#define BLUE  3
+#define YELLOW  3
 
 #define NO_DIRTY_PIXEL          0x0
 #define PINK_DIRTY_PIXEL        0xFF00FFFF
@@ -68,5 +68,9 @@ typedef struct
 - (RGBA )updateHSBValue:(RGBA )rgbColor
             withHValue :(float)hValue;
 
+- (double)getRSFValue:(RGBA)blank
+     withSampleColor:(RGBA)sample;
+
+- (int)getColorHighLightStatus:(RGBA)rgbColor;
 
 @end
