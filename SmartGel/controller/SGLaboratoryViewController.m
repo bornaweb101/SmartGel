@@ -70,11 +70,12 @@
 
                            @"28_5_0.07.jpeg",
                            @"28_5_0.08.jpeg",
-                           @"28_5_0.09.jpeg",
-                           @"28_5_0.11.jpeg",
+//                           @"28_5_0.09.jpeg",
+//                           @"28_5_0.11.jpeg",
 
-                           @"28_10_0.17.jpeg",
-                           @"28_10_0.21.jpeg",
+                           
+                           //                           @"28_10_0.17.jpeg",
+//                           @"28_10_0.21.jpeg",
                            @"28_10_0.25.jpeg",
                            @"28_10_0.26.jpeg",
 
@@ -82,21 +83,21 @@
                            @"28_15_0.14.jpeg",
                            @"28_15_0.18.jpeg",
 
-                           @"28_20_0.20.jpeg",
-                           @"28_20_0.22.jpeg",
-                           @"28_20_0.23.jpeg",
+//                           @"28_20_0.20.jpeg",
+//                           @"28_20_0.22.jpeg",
+//                           @"28_20_0.23.jpeg",
                            @"28_20_0.25.jpeg",
                            @"28_20_0.26.jpeg",
 
-                           @"28_30_0.27.jpeg",
-                           @"28_30_0.32.jpeg",
-                           @"28_30_0.36.jpeg",
+//                           @"28_30_0.27.jpeg",
+//                           @"28_30_0.32.jpeg",
+//                           @"28_30_0.36.jpeg",
                            @"28_30_0.37.jpeg",
                            @"28_30_0.38.jpeg",
 
-                           @"28_40_0.38.jpeg",
-                           @"28_40_0.41.jpeg",
-                           @"28_40_0.42.jpeg",
+//                           @"28_40_0.38.jpeg",
+//                           @"28_40_0.41.jpeg",
+//                           @"28_40_0.42.jpeg",
                            @"28_40_0.47.jpeg",
                            @"28_40_0.48.jpeg",
 
@@ -297,6 +298,8 @@
         self.testLabel2.text = @"PINK";
     }else if(colorHighLight == GREEN){
         self.testLabel2.text = @"GREEN";
+    }else if(colorHighLight == BLUE){
+        self.testLabel2.text = @"BLUE";
     }else{
         self.testLabel2.text = @"YELLOW";
     }
@@ -307,57 +310,34 @@
            withColorHighLight:(int)colorHighLight{
     
     if(colorHighLight == PINK){
-        double resultValue = [[SGColorUtil sharedColorUtil] getRSFValue:blankColor withSampleColor:sampleColor];
-        return resultValue;
+        double rsf = [[SGColorUtil sharedColorUtil] getRSFValue:blankColor withSampleColor:sampleColor];
+        rsf = (rsf * 7.5 + 0.5)/2;
+        return rsf;  // output value filter
     }else if(colorHighLight == GREEN){
         
-//        sampleColor.g = (sampleColor.g+120)/2;
-//        blankColor.g = (sampleColor.g+120)/2;
-//
-//        sampleColor.b = (sampleColor.b+140)/2;
-//        blankColor.b = (blankColor.b+140)/2;
+        sampleColor.g = (sampleColor.g+120)/2;
+        blankColor.g = (blankColor.g+120)/2;
+
+        sampleColor.b = (sampleColor.b+140)/2;
+        blankColor.b = (blankColor.b+140)/2;
+        double rsf = [[SGColorUtil sharedColorUtil] getRSFValue:blankColor withSampleColor:sampleColor];
+        double resultValue = (rsf - 0.013) * 250  ;
+        
+        return resultValue;
+    }else if(colorHighLight == BLUE){
+        
+        sampleColor.g = (sampleColor.g+120)/2;
+        blankColor.g = (blankColor.g+120)/2;
+        
+        sampleColor.b = (sampleColor.b+140)/2;
+        blankColor.b = (blankColor.b+140)/2;
+        
         double resultValue = [[SGColorUtil sharedColorUtil] getRSFValue:blankColor withSampleColor:sampleColor];
+        resultValue = (resultValue - 0.013 ) * 50 ;
         return resultValue;
     }else{
-        return 10;
+        return 20;
     }
-
-    //    if(colorHiglight == RED){
-    //        ssgreen = (ssgreen+120+120)/3;
-    //        bbgreen = (bbgreen+120+120)/3;
-    //
-    //        ssblue = (ssblue+140+140)/3;
-    //        bbblue = (bbblue+140+140)/3;
-    //    }else{
-    //        ssgreen = (ssgreen+120)/2;
-    //        bbgreen = (bbgreen+120)/2;
-    //
-    //        ssblue = (ssblue+140)/2;
-    //        bbblue = (bbblue+140)/2;
-    //    }
-    //         Berechnungsstufe 1_S:
-    
-    
-    //    if(RSF>0.1){
-    //        RSF = 0.1;
-    //    }
-    
-    
-    //    if(colorHiglight == GREEN){
-    ////        RSFGO = (RSF*7.5)*1-0.08;
-    //        RSFGO = (RSF*7.5)*2-0.18;
-    //    }else if(colorHiglight == BLUE){
-    //        RSFGO = (RSF*7.5)/2;
-    //    }else{
-    //        RSFGO = (RSF*7.5)/2;
-    //    }
-    //
-    //    ug_cm2 = (RSFGO*1000)/(2*1000/(Diam));
-    //    maxug = ((0.1*7.5)/2*1000)/(2*1000/(Diam));
-    //
-    //    if(ug_cm2<0){
-    //        ug_cm2 = 0;
-    //    }
 }
 
 -(void)customerTextFieldTapped{

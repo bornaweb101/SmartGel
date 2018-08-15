@@ -18,6 +18,11 @@
 #define PINK 1
 #define GREEN 2
 #define YELLOW  3
+#define BLUE  4
+
+#define PINK_MAXVALUE 1
+#define GREEN_MAXVALUE 10
+#define YELLOW_VALUE  10
 
 #define NO_DIRTY_PIXEL          0x0
 #define PINK_DIRTY_PIXEL        0xFF00FFFF

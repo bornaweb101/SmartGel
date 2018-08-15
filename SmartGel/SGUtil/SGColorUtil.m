@@ -150,7 +150,12 @@
     if((yellowValue>greenValue)&&(yellowValue>pinkValue)){
         return YELLOW;
     }
-    return GREEN;
+    
+    if((rgbColor.b>=rgbColor.g)&&(rgbColor.b>=rgbColor.r)){
+        return BLUE;
+    }else{
+        return GREEN;
+    }
 }
 
 -(float)getDistancebetweenColors:(RGBA *)rgba1
