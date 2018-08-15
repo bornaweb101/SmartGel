@@ -70,12 +70,12 @@
 
                            @"28_5_0.07.jpeg",
                            @"28_5_0.08.jpeg",
-//                           @"28_5_0.09.jpeg",
-//                           @"28_5_0.11.jpeg",
+                           @"28_5_0.09.jpeg",
+                           @"28_5_0.11.jpeg",
 
-                           
-                           //                           @"28_10_0.17.jpeg",
-//                           @"28_10_0.21.jpeg",
+
+                           @"28_10_0.17.jpeg",
+                           @"28_10_0.21.jpeg",
                            @"28_10_0.25.jpeg",
                            @"28_10_0.26.jpeg",
 
@@ -83,21 +83,21 @@
                            @"28_15_0.14.jpeg",
                            @"28_15_0.18.jpeg",
 
-//                           @"28_20_0.20.jpeg",
-//                           @"28_20_0.22.jpeg",
-//                           @"28_20_0.23.jpeg",
+                           @"28_20_0.20.jpeg",
+                           @"28_20_0.22.jpeg",
+                           @"28_20_0.23.jpeg",
                            @"28_20_0.25.jpeg",
                            @"28_20_0.26.jpeg",
 
-//                           @"28_30_0.27.jpeg",
-//                           @"28_30_0.32.jpeg",
-//                           @"28_30_0.36.jpeg",
+                           @"28_30_0.27.jpeg",
+                           @"28_30_0.32.jpeg",
+                           @"28_30_0.36.jpeg",
                            @"28_30_0.37.jpeg",
                            @"28_30_0.38.jpeg",
 
-//                           @"28_40_0.38.jpeg",
-//                           @"28_40_0.41.jpeg",
-//                           @"28_40_0.42.jpeg",
+                           @"28_40_0.38.jpeg",
+                           @"28_40_0.41.jpeg",
+                           @"28_40_0.42.jpeg",
                            @"28_40_0.47.jpeg",
                            @"28_40_0.48.jpeg",
 
@@ -321,22 +321,18 @@
         sampleColor.b = (sampleColor.b+140)/2;
         blankColor.b = (blankColor.b+140)/2;
         double rsf = [[SGColorUtil sharedColorUtil] getRSFValue:blankColor withSampleColor:sampleColor];
-        double resultValue = (rsf - 0.013) * 250  ;
-        
-        return resultValue;
+
+        if (rsf > 0.02){
+            return (rsf - 0.01) * 100  ;
+        }else{
+            return (rsf/2) * 100;
+        }
     }else if(colorHighLight == BLUE){
-        
-        sampleColor.g = (sampleColor.g+120)/2;
-        blankColor.g = (blankColor.g+120)/2;
-        
-        sampleColor.b = (sampleColor.b+140)/2;
-        blankColor.b = (blankColor.b+140)/2;
-        
-        double resultValue = [[SGColorUtil sharedColorUtil] getRSFValue:blankColor withSampleColor:sampleColor];
-        resultValue = (resultValue - 0.013 ) * 50 ;
-        return resultValue;
+        double rsf = [[SGColorUtil sharedColorUtil] getRSFValue:blankColor withSampleColor:sampleColor];
+        rsf = (rsf * 7.5 + 1)/2;
+        return rsf;
     }else{
-        return 20;
+        return 10;
     }
 }
 
