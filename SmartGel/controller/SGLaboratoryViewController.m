@@ -289,7 +289,10 @@
     self.blankView.backgroundColor = [UIColor colorWithRed:blankAverageColor.r/255.0 green:blankAverageColor.g/255.0 blue:blankAverageColor.b/255.0 alpha:1];
 
     int colorHighLight = [[SGColorUtil sharedColorUtil] getColorHighLightStatus:blankAverageColor];
-    
+
+    double resultValue = [self calculateResultValue:sampleAverageColor withBlankColor:blankAverageColor withColorHighLight:colorHighLight];
+    self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",resultValue];
+
     if(colorHighLight == PINK){
         self.testLabel2.text = @"PINK";
     }else if(colorHighLight == GREEN){
@@ -297,28 +300,28 @@
     }else{
         self.testLabel2.text = @"YELLOW";
     }
-    
-    double resultValue = [self calculateResultValue:sampleAverageColor withBlankColor:blankAverageColor];
-    self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",resultValue];
 }
 
 -(double)calculateResultValue: (RGBA)sampleColor
-             withBlankColor: (RGBA)blankColor{
+             withBlankColor: (RGBA)blankColor
+           withColorHighLight:(int)colorHighLight{
     
-    double resultValue = [[SGColorUtil sharedColorUtil] getRSFValue:blankColor withSampleColor:sampleColor];
-    
-    //    int colorHiglight = 0;
-    //    pinkValue = pinkValue + 20;
-    //    if((pinkValue>greenValue)&&(pinkValue>yellowValue)){
-    //        colorHiglight = RED;
-    //    }else{
-    //        if((ssblue>=ssgreen)&&(ssblue>=ssred)){
-    //            colorHiglight = BLUE;
-    //        }else{
-    //            colorHiglight = GREEN;
-    //        }
-    //    }
-    
+    if(colorHighLight == PINK){
+        double resultValue = [[SGColorUtil sharedColorUtil] getRSFValue:blankColor withSampleColor:sampleColor];
+        return resultValue;
+    }else if(colorHighLight == GREEN){
+        
+//        sampleColor.g = (sampleColor.g+120)/2;
+//        blankColor.g = (sampleColor.g+120)/2;
+//
+//        sampleColor.b = (sampleColor.b+140)/2;
+//        blankColor.b = (blankColor.b+140)/2;
+        double resultValue = [[SGColorUtil sharedColorUtil] getRSFValue:blankColor withSampleColor:sampleColor];
+        return resultValue;
+    }else{
+        return 10;
+    }
+
     //    if(colorHiglight == RED){
     //        ssgreen = (ssgreen+120+120)/3;
     //        bbgreen = (bbgreen+120+120)/3;
@@ -355,18 +358,6 @@
     //    if(ug_cm2<0){
     //        ug_cm2 = 0;
     //    }
-    
-    
-    
-    //    if(RSF == 0.1){
-    //        self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",1.0];
-    //        self.laboratoryDataModel.cleanValue = maxug;
-    //    }else{
-    //        self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",ug_cm2*1.5];
-    //        self.laboratoryDataModel.cleanValue = ug_cm2/0.4975;
-    //    }
-
-    return resultValue;
 }
 
 -(void)customerTextFieldTapped{
