@@ -55,24 +55,28 @@
     float width = self.videoPreviewView.bounds.size.width;
     float height = self.videoPreviewView.bounds.size.height;
     
-    float detectAread_interval = width/10;
-    float detectArea_width = width/2-detectAread_interval-15;
+    float detectAread_interval;
+    float detectArea_width = width/2-width/10-15;
     float detectArea_Height = height/2-height/10-15;
     
     capturedImageSize = self.videoPreviewView.bounds.size;
     
     UIDevice *device = UIDevice.currentDevice;
     if(device.orientation == UIDeviceOrientationPortrait){
+        detectAread_interval = width/10;
         rectSample = CGRectMake(self.view.frame.size.width/2 - detectAread_interval - detectArea_width , (self.view.frame.size.height-detectArea_width)/2, detectArea_width, detectArea_width);
         rectBlank = CGRectMake(self.view.frame.size.width/2 + detectAread_interval, (self.view.frame.size.height-detectArea_width)/2, detectArea_width, detectArea_width);
     }else if(device.orientation == UIDeviceOrientationPortraitUpsideDown){
+        detectAread_interval = width/10;
         rectBlank = CGRectMake(self.view.frame.size.width/2 - detectAread_interval - detectArea_width , (self.view.frame.size.height-detectArea_width)/2, detectArea_width, detectArea_width);
         rectSample = CGRectMake(self.view.frame.size.width/2 + detectAread_interval, (self.view.frame.size.height-detectArea_width)/2, detectArea_width, detectArea_width);
     }else if(device.orientation == UIDeviceOrientationLandscapeLeft){
+        detectAread_interval = height/10;
         rectSample = CGRectMake((self.view.frame.size.width-detectArea_width)/2, self.view.frame.size.height/2 - detectAread_interval - detectArea_Height ,detectArea_width, detectArea_Height);
         rectBlank = CGRectMake((self.view.frame.size.width-detectArea_width)/2, self.view.frame.size.height/2 + detectAread_interval,  detectArea_width, detectArea_Height);
     }
     else{
+        detectAread_interval = height/10;
         rectBlank = CGRectMake((self.view.frame.size.width-detectArea_width)/2, self.view.frame.size.height/2 - detectAread_interval - detectArea_Height ,detectArea_width, detectArea_Height);
         rectSample = CGRectMake((self.view.frame.size.width-detectArea_width)/2, self.view.frame.size.height/2 + detectAread_interval,  detectArea_width, detectArea_Height);
     }

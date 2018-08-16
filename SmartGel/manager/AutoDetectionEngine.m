@@ -90,7 +90,7 @@
         areaWidth = m_imageWidth/2-m_imageWidth/10-15;
         areaHeight = areaWidth;
     }else{
-        detectAread_interval = m_imageHeight/10;
+        detectAread_interval = m_imageWidth/10;
         areaWidth = m_imageWidth/2-m_imageWidth/10-15;
         areaHeight = m_imageHeight/2-m_imageHeight/10-15;
     }
