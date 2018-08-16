@@ -43,11 +43,11 @@
 }
 
 -(bool)analyzeImage:(UIImage *)image
- withDetectAreaSize:(float)detecSize
-withDetectAreaInterval:(float)interval{
+     withSampleRect:(CGRect)sampleRect
+      withBlankRect:(CGRect)blankRect{
     [self importImage:image];
     [self smoothBufferByAverage];
-    bool isDetected = [self detectCleanBottleAreaNew:detecSize withAreaInterval:interval];
+    bool isDetected = [self detectCleanBottleAreaNew:sampleRect withBlankRect:blankRect];
     [self reset];
     return isDetected;
 }
@@ -72,26 +72,47 @@ withDetectAreaInterval:(float)interval{
 }
 
 
-- (bool)detectCleanBottleAreaNew:(float)rectSize
-                withAreaInterval:(float)interval
+- (bool)detectCleanBottleAreaNew:(CGRect)sampleRect
+                   withBlankRect:(CGRect)blankRect
 {
     UInt32 * pPixelBuffer = m_donePreprocess ? m_pOutBuffer : m_pInBuffer;
+    
     float sampleBottleAreaCleanCount = 0;
     float mixBottleAreaDirtyCount = 0;
     float mixBottleAreaCleanCount = 0;
 
-    int sampleBottleYStart = (m_imageHeight-rectSize)/2;
-    int sampleBottleXStart = m_imageWidth/2-m_imageWidth/10-rectSize;
+    float sampleBottleYStart,sampleBottleXStart,mixBottleYStart,mixBottleXStart;
+    float areaWidth, areaHeight,detectAread_interval;
+
+    UIDevice *device = UIDevice.currentDevice;
+    if((device.orientation == UIDeviceOrientationPortrait)||(device.orientation == UIDeviceOrientationPortraitUpsideDown)){
+        detectAread_interval = m_imageWidth/10;
+        areaWidth = m_imageWidth/2-m_imageWidth/10-15;
+        areaHeight = areaWidth;
+    }else{
+        detectAread_interval = m_imageHeight/10;
+        areaWidth = m_imageWidth/2-m_imageWidth/10-15;
+        areaHeight = m_imageHeight/2-m_imageHeight/10-15;
+    }
     
-    int mixBottleYStart = (m_imageHeight-rectSize)/2;
-    int mixBottleXStart =m_imageWidth/2+m_imageWidth/10;
+    sampleBottleXStart = m_imageWidth/2 - detectAread_interval - areaWidth;
+    mixBottleYStart = m_imageWidth/2 + detectAread_interval;
+    sampleBottleYStart = mixBottleYStart = (m_imageHeight-areaHeight)/2;
+    
+    
+    
+//    int sampleBottleYStart = sampleRect.origin.y
+//    int sampleBottleXStart = sampleRect.origin.x;
+//
+//    int mixBottleYStart = (m_imageHeight-rectSize)/2;
+//    int mixBottleXStart =m_imageWidth/2+m_imageWidth/10;
 
     int totalCount = 0;
     int mixTotalCount = 0;
     
-    for (int y = sampleBottleYStart; y < sampleBottleYStart+(int)rectSize; y++)
+    for (int y = sampleBottleYStart; y < sampleBottleYStart+areaHeight; y++)
     {
-        for (int x = sampleBottleXStart; x < sampleBottleXStart+(int)rectSize; x++)
+        for (int x = sampleBottleXStart; x < sampleBottleXStart+areaWidth; x++)
         {
             int index = y * m_imageWidth + x;
             
@@ -105,11 +126,11 @@ withDetectAreaInterval:(float)interval{
         }
     }
     
-    int rectCount = (int)rectSize;
+//    int rectCount = (int)rectSize;
     
-    for (int y = mixBottleYStart; y < mixBottleYStart+rectCount; y++)
+    for (int y = mixBottleYStart; y < mixBottleYStart+areaHeight; y++)
     {
-        for (int x = mixBottleXStart; x < mixBottleXStart+rectCount; x++)
+        for (int x = mixBottleXStart; x < mixBottleXStart+areaWidth; x++)
         {
             int index = y * m_imageWidth + x;
             
@@ -125,8 +146,8 @@ withDetectAreaInterval:(float)interval{
         }
     }
     
-    totalCount =rectCount*rectCount*SAMPLE_MEASURE_OFFSET;
-    mixTotalCount = rectCount*rectCount*MIX_MEASURE_OFFSET;
+    totalCount =areaWidth*areaHeight*SAMPLE_MEASURE_OFFSET;
+    mixTotalCount = areaWidth*areaHeight*MIX_MEASURE_OFFSET;
     
     if (sampleBottleAreaCleanCount>=totalCount){
         if((mixBottleAreaCleanCount+mixBottleAreaDirtyCount)>=mixTotalCount){

@@ -39,7 +39,7 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self initVideoCaptureSession];
-    [self initDetectAreaSize];
+//    [self initDetectAreaSize];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -53,14 +53,32 @@
 
 - (void)initDetectAreaSize{
     float width = self.videoPreviewView.bounds.size.width;
-//    float height = self.videoPreviewView.bounds.size.height;
-    detectAread_interval = width/10;
-    detectArea_size = width/2-detectAread_interval-15;
+    float height = self.videoPreviewView.bounds.size.height;
+    
+    float detectAread_interval = width/10;
+    float detectArea_width = width/2-detectAread_interval-15;
+    float detectArea_Height = height/2-height/10-15;
+    
     capturedImageSize = self.videoPreviewView.bounds.size;
+    
+    UIDevice *device = UIDevice.currentDevice;
+    if(device.orientation == UIDeviceOrientationPortrait){
+        rectSample = CGRectMake(self.view.frame.size.width/2 - detectAread_interval - detectArea_width , (self.view.frame.size.height-detectArea_width)/2, detectArea_width, detectArea_width);
+        rectBlank = CGRectMake(self.view.frame.size.width/2 + detectAread_interval, (self.view.frame.size.height-detectArea_width)/2, detectArea_width, detectArea_width);
+    }else if(device.orientation == UIDeviceOrientationPortraitUpsideDown){
+        rectBlank = CGRectMake(self.view.frame.size.width/2 - detectAread_interval - detectArea_width , (self.view.frame.size.height-detectArea_width)/2, detectArea_width, detectArea_width);
+        rectSample = CGRectMake(self.view.frame.size.width/2 + detectAread_interval, (self.view.frame.size.height-detectArea_width)/2, detectArea_width, detectArea_width);
+    }else if(device.orientation == UIDeviceOrientationLandscapeLeft){
+        rectSample = CGRectMake((self.view.frame.size.width-detectArea_width)/2, self.view.frame.size.height/2 - detectAread_interval - detectArea_Height ,detectArea_width, detectArea_Height);
+        rectBlank = CGRectMake((self.view.frame.size.width-detectArea_width)/2, self.view.frame.size.height/2 + detectAread_interval,  detectArea_width, detectArea_Height);
+    }
+    else{
+        rectBlank = CGRectMake((self.view.frame.size.width-detectArea_width)/2, self.view.frame.size.height/2 - detectAread_interval - detectArea_Height ,detectArea_width, detectArea_Height);
+        rectSample = CGRectMake((self.view.frame.size.width-detectArea_width)/2, self.view.frame.size.height/2 + detectAread_interval,  detectArea_width, detectArea_Height);
+    }
 }
 
--(void)initMarkView:(UIImage *)image{
-    CGRect rect1,rect2;
+-(void)initMarkView{
     if(self.markView1!=nil){
         [self.markView1 removeFromSuperview];
     }
@@ -68,18 +86,9 @@
     if(self.markView2!=nil){
         [self.markView2 removeFromSuperview];
     }
-
-    UIDevice *device = UIDevice.currentDevice;
-    if((device.orientation == UIDeviceOrientationPortrait) || (device.orientation == UIDeviceOrientationPortraitUpsideDown)){
-        rect1 = CGRectMake(self.view.frame.size.width/2 - detectAread_interval - detectArea_size , (self.view.frame.size.height-detectArea_size)/2, detectArea_size, detectArea_size);
-        rect2 = CGRectMake(self.view.frame.size.width/2 + detectAread_interval, (self.view.frame.size.height-detectArea_size)/2, detectArea_size, detectArea_size);
-    }else{
-        rect1 = CGRectMake((self.view.frame.size.width-detectArea_size)/2, self.view.frame.size.height/2 - detectAread_interval - detectArea_size ,detectArea_size, detectArea_size);
-        rect2 = CGRectMake((self.view.frame.size.width-detectArea_size)/2, self.view.frame.size.height/2 + detectAread_interval,  detectArea_size, detectArea_size);
-    }
     
-    self.markView1 = [self drawRectangle:rect1];
-    self.markView2 = [self drawRectangle:rect2];
+    self.markView1 = [self drawRectangle:rectSample withColor:UIColor.redColor];
+    self.markView2 = [self drawRectangle:rectBlank withColor:UIColor.greenColor];
     [self.view addSubview:self.markView1];
     [self.view addSubview:self.markView2];
 }
@@ -104,7 +113,7 @@
 {
     [self.markView1 removeFromSuperview];
     [self.markView2 removeFromSuperview];
-    [self initDetectAreaSize];
+//    [self initDetectAreaSize];
 }
 
 - (void)releasemanager
@@ -149,14 +158,18 @@
         UIImage *uiImage = [[SGImageUtil sharedImageUtil] imageFromCIImage:ciImage withImageSize:capturedImageSize];
         
         __weak typeof(self) wself = self;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self initDetectAreaSize];
+//            [self initMarkView];
+        });
         
-        if([self.autoDetectionEngine analyzeImage:uiImage withDetectAreaSize:detectArea_size withDetectAreaInterval:detectAread_interval]){
+        if([self.autoDetectionEngine analyzeImage:uiImage withSampleRect:rectSample withBlankRect:rectBlank]){
             detectedCount++;
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(wself){
                     [self.statusLabel setText:@"detected clean bottles"];
-                    [self initMarkView:uiImage];
-                    
+                    [self initMarkView];
+
                     if(detectedCount>20){
                         [[self.captureManager session] stopRunning];
                         UIImageWriteToSavedPhotosAlbum(uiImage,nil,nil,nil);
@@ -181,10 +194,11 @@
     }
 }
 
--(UIView *)drawRectangle:(CGRect)rect{
+-(UIView *)drawRectangle:(CGRect)rect
+               withColor:(UIColor*)borderColor{
     UIView *rectView  = [[UIView alloc] initWithFrame:rect];
     rectView.backgroundColor = [UIColor clearColor];
-    rectView.layer.borderColor = [UIColor greenColor].CGColor;
+    rectView.layer.borderColor = borderColor.CGColor;
     rectView.layer.borderWidth = 3.0f;
     [rectView.layer setMasksToBounds:true];
     return rectView;

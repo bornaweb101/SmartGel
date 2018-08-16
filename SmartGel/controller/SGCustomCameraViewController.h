@@ -18,12 +18,18 @@
 @end
 
 @interface SGCustomCameraViewController : SGBaseViewController<AVCamCaptureManagerDelegate,AVCaptureVideoDataOutputSampleBufferDelegate>{
+
     bool isProcessing;
     int detectedCount;
     
-    float detectArea_size;
-    float detectAread_interval;
+//    float detectArea_width;
+//    float detectArea_Height;
+//    
+//    float detectAread_interval;
     CGSize capturedImageSize;
+    
+    CGRect rectSample;
+    CGRect rectBlank;
 }
 
 @property (weak, nonatomic) id<SGCustomCameraViewControllerDelegate> delegate;
