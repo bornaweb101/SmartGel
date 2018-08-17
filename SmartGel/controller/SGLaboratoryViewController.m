@@ -280,12 +280,47 @@
 
 
 -(IBAction)launchCameraController{
+    if(isSaved){
+        [self capturePhoto];
+    }else{
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                       message:@"Do you want to save the Result?"
+                                                                preferredStyle:UIAlertControllerStyleAlert]; // 1
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//            [self showSaveAlertView];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self capturePhoto];
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
+
+-(IBAction)choosePhotoPickerController{
+    if(isSaved){
+        [self loadPhoto];
+    }else{
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                       message:@"Do you want to save the Result?"
+                                                                preferredStyle:UIAlertControllerStyleAlert]; // 1
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//            [self showSaveAlertView];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self loadPhoto];
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
+
+-(void)capturePhoto{
     SGCustomCameraViewController *customCameraVC = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"SGCustomCameraViewController"];
     customCameraVC.delegate = self;
     [self.navigationController pushViewController:customCameraVC animated:YES];
 }
 
--(IBAction)choosePhotoPickerController{
+-(void)loadPhoto{
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.delegate = self;
     imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
