@@ -94,6 +94,38 @@
     return averageRGB;
 }
 
+-(double)calculateResultValue: (RGBA)sampleColor
+               withBlankColor: (RGBA)blankColor
+           withColorHighLight:(int)colorHighLight{
+    
+    if(colorHighLight == PINK){
+        double rsf = [[SGColorUtil sharedColorUtil] getRSFValue:blankColor withSampleColor:sampleColor];
+        rsf = (rsf * 7.5 + 0.5)/2;
+        return rsf;  // output value filter
+    }else if(colorHighLight == GREEN){
+        
+        sampleColor.g = (sampleColor.g+120)/2;
+        blankColor.g = (blankColor.g+120)/2;
+        
+        sampleColor.b = (sampleColor.b+140)/2;
+        blankColor.b = (blankColor.b+140)/2;
+        double rsf = [[SGColorUtil sharedColorUtil] getRSFValue:blankColor withSampleColor:sampleColor];
+        
+        if (rsf > 0.02){
+            return (rsf - 0.01) * 100  ;
+        }else{
+            return ((rsf/2) * 100 + 6)/6;
+        }
+    }else if(colorHighLight == BLUE){
+        double rsf = [[SGColorUtil sharedColorUtil] getRSFValue:blankColor withSampleColor:sampleColor];
+        rsf = (rsf * 7.5 + 1 + 1)/3;
+        return rsf;
+    }else{
+        return 10;
+    }
+}
+
+
 - (void) importImage:(UIImage *)image
 {
     m_imageWidth = image.size.width;

@@ -7,6 +7,7 @@
 //
 
 #import "SGCustomCameraViewController.h"
+#import "LaboratoryEngine.h"
 
 @interface SGCustomCameraViewController ()
 
@@ -164,15 +165,17 @@
         __weak typeof(self) wself = self;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self initDetectAreaSize];
-//            [self initMarkView];
+//            double resultvalue = [self calculateResultValue:uiImage];
+//            self.statusLabel.text = [NSString stringWithFormat:@"%.2f",resultvalue];
         });
         
         if([self.autoDetectionEngine analyzeImage:uiImage withSampleRect:rectSample withBlankRect:rectBlank]){
             detectedCount++;
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(wself){
-                    [self.statusLabel setText:@"detected clean bottles"];
                     [self initMarkView];
+//                    double resultvalue = [self calculateResultValue:uiImage];
+//                    self.statusLabel.text = [NSString stringWithFormat:@"%.2f",resultvalue];
 
                     if(detectedCount>20){
                         [[self.captureManager session] stopRunning];
@@ -190,7 +193,6 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(wself){
                     [self removeMarkView];
-                    [self.statusLabel setText:@"no clean bottles"];
                 }
             });
             isProcessing = false;
@@ -207,5 +209,16 @@
     [rectView.layer setMasksToBounds:true];
     return rectView;
 }
+
+-(double)calculateResultValue: (UIImage *)image{
+    
+    LaboratoryEngine *laboratoryEngine= [[LaboratoryEngine alloc] init];
+    RGBA sampleColor = [laboratoryEngine getCropAreaAverageColor:image isSampleColor:true];
+    RGBA blankColor = [laboratoryEngine getCropAreaAverageColor:image isSampleColor:false];
+    int colorHighLight = [[SGColorUtil sharedColorUtil] getColorHighLightStatus:blankColor];
+    
+    return [laboratoryEngine calculateResultValue:sampleColor withBlankColor:blankColor withColorHighLight:colorHighLight];
+}
+
 
 @end

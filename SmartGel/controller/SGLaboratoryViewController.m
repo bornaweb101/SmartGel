@@ -63,92 +63,106 @@
 //
 //                           nil];
 
-//    self.testImageArray = [NSArray arrayWithObjects:
-//                           @"28_2_0.01.jpeg",
-//                           @"28_2_0.05.jpeg",
-//                           @"28_2_0.jpeg",
-//
-//                           @"28_5_0.07.jpeg",
-//                           @"28_5_0.08.jpeg",
-//                           @"28_5_0.09.jpeg",
-//                           @"28_5_0.11.jpeg",
-//
-//
-//                           @"28_10_0.17.jpeg",
-//                           @"28_10_0.21.jpeg",
-//                           @"28_10_0.25.jpeg",
-//                           @"28_10_0.26.jpeg",
-//
-//                           @"28_15_0.12.jpeg",
-//                           @"28_15_0.14.jpeg",
-//                           @"28_15_0.18.jpeg",
-//
-//                           @"28_20_0.20.jpeg",
-//                           @"28_20_0.22.jpeg",
-//                           @"28_20_0.23.jpeg",
-//                           @"28_20_0.25.jpeg",
-//                           @"28_20_0.26.jpeg",
-//
-//                           @"28_30_0.27.jpeg",
-//                           @"28_30_0.32.jpeg",
-//                           @"28_30_0.36.jpeg",
-//                           @"28_30_0.37.jpeg",
-//                           @"28_30_0.38.jpeg",
-//
-//                           @"28_40_0.38.jpeg",
-//                           @"28_40_0.41.jpeg",
-//                           @"28_40_0.42.jpeg",
-//                           @"28_40_0.47.jpeg",
-//                           @"28_40_0.48.jpeg",
-//
-//                           @"28_50_0.49.jpeg",
-//                           @"28_50_0.54.jpeg",
-//                           @"28_50_0.57.jpeg",
-//
-//                           @"28_60_0.53.jpeg",
-//                           @"28_60_0.55.jpeg",
-//                           @"28_60_0.62.jpeg",
-//                           @"28_60_0.69.jpeg",
-//                           @"28_60_0.76.jpeg",
-//
-//                           nil];
+    self.testImageArray = [NSArray arrayWithObjects:
+                           @"28_2_0.01.jpeg",
+                           @"28_2_0.05.jpeg",
+                           @"28_2_0.jpeg",
+
+                           @"28_5_0.07.jpeg",
+                           @"28_5_0.08.jpeg",
+                           @"28_5_0.09.jpeg",
+                           @"28_5_0.11.jpeg",
+
+
+                           @"28_10_0.17.jpeg",
+                           @"28_10_0.21.jpeg",
+                           @"28_10_0.25.jpeg",
+                           @"28_10_0.26.jpeg",
+
+                           @"28_15_0.12.jpeg",
+                           @"28_15_0.14.jpeg",
+                           @"28_15_0.18.jpeg",
+
+                           @"28_20_0.20.jpeg",
+                           @"28_20_0.22.jpeg",
+                           @"28_20_0.23.jpeg",
+                           @"28_20_0.25.jpeg",
+                           @"28_20_0.26.jpeg",
+
+                           @"28_30_0.27.jpeg",
+                           @"28_30_0.32.jpeg",
+                           @"28_30_0.36.jpeg",
+                           @"28_30_0.37.jpeg",
+                           @"28_30_0.38.jpeg",
+
+                           @"28_40_0.38.jpeg",
+                           @"28_40_0.41.jpeg",
+                           @"28_40_0.42.jpeg",
+                           @"28_40_0.47.jpeg",
+                           @"28_40_0.48.jpeg",
+
+                           @"28_50_0.49.jpeg",
+                           @"28_50_0.54.jpeg",
+                           @"28_50_0.57.jpeg",
+
+                           @"28_60_0.53.jpeg",
+                           @"28_60_0.55.jpeg",
+                           @"28_60_0.62.jpeg",
+                           @"28_60_0.69.jpeg",
+                           @"28_60_0.76.jpeg",
+
+                           nil];
 //
     
-    self.testImageArray = [NSArray arrayWithObjects:
-                           @"2_0.00_2.jpeg",
-                           @"2_0.00_3.jpeg",
-                           @"2_0.00_5.jpeg",
+//    self.testImageArray = [NSArray arrayWithObjects:
+//                           @"2_0.00_2.jpeg",
+//                           @"2_0.00_3.jpeg",
+//                           @"2_0.00_5.jpeg",
+//
+//                           @"2_0.00_6.jpeg",
+//                           @"2_0.00_7.jpeg",
+//                           @"2_0.00_8.jpeg",
+//                           @"2_0.01_4.jpeg",
+//
+//                           @"2_0.03.jpeg",
+//                           @"4_0.00_3.jpeg",
+//                           @"4_0.00_4.jpeg",
+//                           @"4_0.01_2.jpeg",
+//
+//                           @"4_0.03_1.jpeg",
+//                           @"6_0.02_4.jpeg",
+//                           @"6_0.05_5.jpeg",
+//
+//                           @"6_0.05_6.jpeg",
+//                           @"6_0.09_2.jpeg",
+//                           @"6_0.09_3.jpeg",
+//                           @"6_0.10_1.jpeg",
+//                           @"8_0.05.jpeg",
+//
+//                           @"8_0.06_1.jpeg",
+//                           @"8_0.06_2.jpeg",
+//                           @"10_0.00_2.jpeg",
+//                           @"10_0.00_3.jpeg",
+//                           @"10_0.02_1.jpeg",
+//
+//                           @"12_0.00_1.jpeg",
+//                           @"12_0.00_2.jpeg",
+//                           @"12_0.00_3.jpeg",
+//                           nil];
+    
+//    self.testImageArray = [NSArray arrayWithObjects:
+//                           @"2.JPG",
+//                           @"5.JPG",
+//                           @"10.JPG",
+//                           @"15.JPG",
+//                           @"20.JPG",
+//                           @"30.JPG",
+//                           @"40.JPG",
+//                           @"50.JPG",
+//                           @"60.JPG",
+//                           @"70.JPG",
+//                           nil];
 
-                           @"2_0.00_6.jpeg",
-                           @"2_0.00_7.jpeg",
-                           @"2_0.00_8.jpeg",
-                           @"2_0.01_4.jpeg",
-
-                           @"2_0.03.jpeg",
-                           @"4_0.00_3.jpeg",
-                           @"4_0.00_4.jpeg",
-                           @"4_0.01_2.jpeg",
-
-                           @"4_0.03_1.jpeg",
-                           @"6_0.02_4.jpeg",
-                           @"6_0.05_5.jpeg",
-
-                           @"6_0.05_6.jpeg",
-                           @"6_0.09_2.jpeg",
-                           @"6_0.09_3.jpeg",
-                           @"6_0.10_1.jpeg",
-                           @"8_0.05.jpeg",
-
-                           @"8_0.06_1.jpeg",
-                           @"8_0.06_2.jpeg",
-                           @"10_0.00_2.jpeg",
-                           @"10_0.00_3.jpeg",
-                           @"10_0.02_1.jpeg",
-
-                           @"12_0.00_1.jpeg",
-                           @"12_0.00_2.jpeg",
-                           @"12_0.00_3.jpeg",
-                           nil];
 
     
     self.laboratoryDataModel = [[LaboratoryDataModel alloc] init];
@@ -291,7 +305,8 @@
 
     int colorHighLight = [[SGColorUtil sharedColorUtil] getColorHighLightStatus:blankAverageColor];
 
-    double resultValue = [self calculateResultValue:sampleAverageColor withBlankColor:blankAverageColor withColorHighLight:colorHighLight];
+    double resultValue = [self.laboratoryEngine calculateResultValue:sampleAverageColor withBlankColor:blankAverageColor withColorHighLight:colorHighLight];
+    
     self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",resultValue];
 
     if(colorHighLight == PINK){
@@ -302,37 +317,6 @@
         self.testLabel2.text = @"BLUE";
     }else{
         self.testLabel2.text = @"YELLOW";
-    }
-}
-
--(double)calculateResultValue: (RGBA)sampleColor
-             withBlankColor: (RGBA)blankColor
-           withColorHighLight:(int)colorHighLight{
-    
-    if(colorHighLight == PINK){
-        double rsf = [[SGColorUtil sharedColorUtil] getRSFValue:blankColor withSampleColor:sampleColor];
-        rsf = (rsf * 7.5 + 0.5)/2;
-        return rsf;  // output value filter
-    }else if(colorHighLight == GREEN){
-        
-        sampleColor.g = (sampleColor.g+120)/2;
-        blankColor.g = (blankColor.g+120)/2;
-
-        sampleColor.b = (sampleColor.b+140)/2;
-        blankColor.b = (blankColor.b+140)/2;
-        double rsf = [[SGColorUtil sharedColorUtil] getRSFValue:blankColor withSampleColor:sampleColor];
-
-        if (rsf > 0.02){
-            return (rsf - 0.01) * 100  ;
-        }else{
-            return ((rsf/2) * 100 + 6)/6;
-        }
-    }else if(colorHighLight == BLUE){
-        double rsf = [[SGColorUtil sharedColorUtil] getRSFValue:blankColor withSampleColor:sampleColor];
-        rsf = (rsf * 7.5 + 1 + 1)/3;
-        return rsf;
-    }else{
-        return 10;
     }
 }
 

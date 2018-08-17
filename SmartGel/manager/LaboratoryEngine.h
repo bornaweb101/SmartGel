@@ -22,4 +22,8 @@
 -(RGBA)getCropAreaAverageColor:(UIImage *)image
                  isSampleColor:(bool)isSampleColor;
 
+-(double)calculateResultValue: (RGBA)sampleColor
+               withBlankColor: (RGBA)blankColor
+           withColorHighLight:(int)colorHighLight;
+
 @end
