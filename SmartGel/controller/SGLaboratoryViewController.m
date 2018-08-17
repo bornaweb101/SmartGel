@@ -268,7 +268,7 @@
     [self estimateValue:image];
     [self dismissViewControllerAnimated:YES completion:nil];
     
-    [self showSaveAlertView:false];
+//    [self showSaveAlertView:false];
 }
 
 - (void)onDetectedImage:(UIImage *)image{
@@ -340,9 +340,9 @@
 
     int colorHighLight = [[SGColorUtil sharedColorUtil] getColorHighLightStatus:blankAverageColor];
 
-    double resultValue = [self.laboratoryEngine calculateResultValue:sampleAverageColor withBlankColor:blankAverageColor withColorHighLight:colorHighLight];
+    self.laboratoryDataModel.cleanValue = [self.laboratoryEngine calculateResultValue:sampleAverageColor withBlankColor:blankAverageColor withColorHighLight:colorHighLight];
     
-    self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",resultValue];
+    self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",self.laboratoryDataModel.cleanValue];
 
     if(colorHighLight == PINK){
         self.testLabel2.text = @"PINK";

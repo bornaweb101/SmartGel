@@ -115,10 +115,8 @@
      engineColorOffset:(int)colorOffset
      completionHandler:(void (^)(NSError *error))completionHandler {
 
-        NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
-        NSString *fileName = [NSString stringWithFormat:@"%@_%.2f_%.2f",tag.tagName,estimateImageModel.cleanValue,timeStamp];
     
-        FIRStorageReference *riversRef = [self.storageRef child:[NSString stringWithFormat:@"%@/%@.jpeg",self.currentUser.userID,fileName]];
+        FIRStorageReference *riversRef = [self.storageRef child:[NSString stringWithFormat:@"%@/%@.png",self.currentUser.userID,estimateImageModel.date]];
         NSData *imageData = UIImageJPEGRepresentation(estimateImageModel.image,0.7);
         [riversRef putData:imageData
                   metadata:nil
@@ -161,6 +159,7 @@
 -(void)removeSmartGelHistory:(EstimateImageModel *)estimateImageModel
            completionHandler:(void (^)(NSError *error))completionHandler {
     NSString *userID = [FIRAuth auth].currentUser.uid;
+
     FIRStorageReference *desertRef = [self.storageRef child:[NSString stringWithFormat:@"%@/%@.png",userID,estimateImageModel.date]];
     [desertRef deleteWithCompletion:^(NSError *error){
         if (error == nil) {
@@ -173,7 +172,11 @@
 -(void)saveLaboratoryResult:(LaboratoryDataModel *)laboratoryData
      completionHandler:(void (^)(NSError *error))completionHandler {
     NSString *userID = [FIRAuth auth].currentUser.uid;
-    FIRStorageReference *riversRef = [self.storageRef child:[NSString stringWithFormat:@"%@/%@.png",userID,laboratoryData.date]];
+    
+    NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
+    NSString *fileName = [NSString stringWithFormat:@"%@_%.2f_%.2f",laboratoryData.tag,laboratoryData.cleanValue,timeStamp];
+
+    FIRStorageReference *riversRef = [self.storageRef child:[NSString stringWithFormat:@"%@/%@.jpeg",userID,fileName]];
     NSData *imageData = UIImageJPEGRepresentation(laboratoryData.image,0.7);
     [riversRef putData:imageData
               metadata:nil
