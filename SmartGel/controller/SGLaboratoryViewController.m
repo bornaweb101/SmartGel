@@ -287,7 +287,7 @@
                                                                        message:@"Do you want to save the Result?"
                                                                 preferredStyle:UIAlertControllerStyleAlert]; // 1
         [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//            [self showSaveAlertView];
+            [self showSaveAlertView:false];
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self capturePhoto];
@@ -305,7 +305,7 @@
                                                                        message:@"Do you want to save the Result?"
                                                                 preferredStyle:UIAlertControllerStyleAlert]; // 1
         [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//            [self showSaveAlertView];
+            [self showSaveAlertView:false];
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self loadPhoto];
@@ -377,7 +377,7 @@
     if(self.laboratoryDataModel.image==nil)
         [self showAlertdialog:nil message:@"Please take a photo."];
     else
-        [self showSaveAlertView:true];
+        [self showSaveAlertView:false];
 }
 
 - (void)showSaveAlertView:(bool)isExport{
@@ -457,6 +457,8 @@
                                               }
                                           }];
 }
+
+
 
 ///test function
 
