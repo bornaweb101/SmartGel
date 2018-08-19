@@ -1702,15 +1702,15 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iBn-hP-0br">
                                 <rect key="frame" x="16" y="0.0" width="240" height="236"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tm_smart_gel.png" translatesAutoresizingMaskIntoConstraints="NO" id="v8K-4S-Ce0">
-                                        <rect key="frame" x="45" y="40" width="150" height="100"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_company" translatesAutoresizingMaskIntoConstraints="NO" id="v8K-4S-Ce0">
+                                        <rect key="frame" x="63.5" y="90" width="113" height="24"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="KxA-BG-wNA"/>
-                                            <constraint firstAttribute="width" constant="150" id="bTL-Kf-gWH"/>
+                                            <constraint firstAttribute="height" constant="24" id="CNe-3Y-1Rk"/>
+                                            <constraint firstAttribute="width" constant="113" id="WJ2-ho-LaL"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TM Smart Gel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceH-8e-HVZ">
-                                        <rect key="frame" x="42.5" y="156" width="155.5" height="33"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Smart Gel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceH-8e-HVZ">
+                                        <rect key="frame" x="64" y="132" width="112.5" height="33"/>
                                         <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="24"/>
                                         <color key="textColor" red="0.69803921570000005" green="0.70588235290000001" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1720,9 +1720,9 @@
                                 <constraints>
                                     <constraint firstItem="ceH-8e-HVZ" firstAttribute="centerX" secondItem="iBn-hP-0br" secondAttribute="centerX" id="92Q-64-kre"/>
                                     <constraint firstAttribute="height" constant="236" id="Ey9-wI-sDa"/>
-                                    <constraint firstItem="v8K-4S-Ce0" firstAttribute="top" secondItem="iBn-hP-0br" secondAttribute="top" constant="40" id="MD8-2B-vYx"/>
-                                    <constraint firstItem="ceH-8e-HVZ" firstAttribute="top" secondItem="v8K-4S-Ce0" secondAttribute="bottom" constant="16" id="cp3-Eg-QaO"/>
-                                    <constraint firstItem="v8K-4S-Ce0" firstAttribute="centerX" secondItem="iBn-hP-0br" secondAttribute="centerX" id="dNB-0M-9Hn"/>
+                                    <constraint firstItem="v8K-4S-Ce0" firstAttribute="top" secondItem="iBn-hP-0br" secondAttribute="top" constant="90" id="Pme-fP-EUV"/>
+                                    <constraint firstItem="ceH-8e-HVZ" firstAttribute="top" secondItem="v8K-4S-Ce0" secondAttribute="bottom" constant="18" id="SvV-wj-eh2"/>
+                                    <constraint firstItem="v8K-4S-Ce0" firstAttribute="centerX" secondItem="iBn-hP-0br" secondAttribute="centerX" id="bsR-Cu-oKt"/>
                                     <constraint firstAttribute="width" constant="240" id="wEg-jk-wvM"/>
                                 </constraints>
                             </view>
@@ -2481,7 +2481,7 @@
         <image name="ic_menu" width="19" height="20"/>
         <image name="ic_sort" width="25" height="25"/>
         <image name="ic_take_photo" width="35" height="30"/>
-        <image name="logo" width="150" height="150"/>
-        <image name="tm_smart_gel.png" width="310" height="233"/>
+        <image name="icon_company" width="227" height="48"/>
+        <image name="logo" width="113" height="24"/>
     </resources>
 </document>
