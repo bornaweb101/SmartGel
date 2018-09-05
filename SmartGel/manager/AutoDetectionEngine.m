@@ -120,7 +120,7 @@
             memcpy(&rgba, &pPixelBuffer[index], sizeof(RGBA));
             
             UInt32 dirtyPixel = [[SGColorUtil sharedColorUtil] getDirtyPixelLaboratory:&rgba];
-            if (dirtyPixel == IS_CLEAN ){
+            if (dirtyPixel == IS_CLEAN){
                 sampleBottleAreaCleanCount ++;
             }
         }
