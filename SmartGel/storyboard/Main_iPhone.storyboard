@@ -474,7 +474,7 @@
                                             <constraint firstItem="ulI-8p-Wja" firstAttribute="top" secondItem="Auh-yR-Erq" secondAttribute="bottom" constant="5" id="kfI-tb-3lQ"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o00-4A-rDk">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o00-4A-rDk">
                                         <rect key="frame" x="16" y="521" width="33" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Test">
