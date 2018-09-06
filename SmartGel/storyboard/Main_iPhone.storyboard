@@ -474,16 +474,28 @@
                                             <constraint firstItem="ulI-8p-Wja" firstAttribute="top" secondItem="Auh-yR-Erq" secondAttribute="bottom" constant="5" id="kfI-tb-3lQ"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o00-4A-rDk">
+                                        <rect key="frame" x="16" y="521" width="33" height="33"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Test">
+                                            <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="buttonClicked_Test" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rfs-As-kVL"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.14901960784313725" green="0.1764705882352941" blue="0.21176470588235294" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="XlK-fN-2iW" firstAttribute="top" secondItem="FWX-hx-Z4y" secondAttribute="bottom" constant="3" id="3oE-Ql-DZ9"/>
                                     <constraint firstItem="M1e-FX-kfH" firstAttribute="centerY" secondItem="0fD-uU-AHP" secondAttribute="centerY" id="4yA-vk-dMd"/>
+                                    <constraint firstAttribute="bottom" secondItem="o00-4A-rDk" secondAttribute="bottom" constant="49" id="AGd-FS-2Eb"/>
                                     <constraint firstItem="JpM-gS-PVb" firstAttribute="top" secondItem="854-Yh-x7d" secondAttribute="bottom" constant="16" id="Eco-EU-TId"/>
                                     <constraint firstItem="ShP-eE-Uoi" firstAttribute="leading" secondItem="0fD-uU-AHP" secondAttribute="leading" id="Fo8-k1-bqs"/>
                                     <constraint firstItem="ATX-MJ-DUv" firstAttribute="leading" secondItem="0fD-uU-AHP" secondAttribute="leading" id="IuH-Za-PYV"/>
                                     <constraint firstItem="JpM-gS-PVb" firstAttribute="centerX" secondItem="0fD-uU-AHP" secondAttribute="centerX" id="Mr1-iK-0TF"/>
                                     <constraint firstItem="swC-qe-Hh8" firstAttribute="centerX" secondItem="0fD-uU-AHP" secondAttribute="centerX" id="NAN-XF-V8y"/>
+                                    <constraint firstItem="o00-4A-rDk" firstAttribute="centerX" secondItem="0fD-uU-AHP" secondAttribute="centerX" id="NoQ-S7-kdh"/>
                                     <constraint firstAttribute="trailing" secondItem="ATX-MJ-DUv" secondAttribute="trailing" id="PMj-w5-JZz"/>
                                     <constraint firstItem="gDd-A5-Ob0" firstAttribute="centerX" secondItem="0fD-uU-AHP" secondAttribute="centerX" id="RLh-hP-hEc"/>
                                     <constraint firstItem="FWX-hx-Z4y" firstAttribute="centerX" secondItem="0fD-uU-AHP" secondAttribute="centerX" id="buS-BJ-zaF"/>

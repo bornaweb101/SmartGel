@@ -38,6 +38,9 @@ typedef enum {
     
     BOOL isFullScreen;
     CGRect prevFrame;
+    
+    int testImageIndex;
+
 }
 
 @property (strong, nonatomic) IBOutlet UILabel *valueLabel;
@@ -84,4 +87,7 @@ typedef enum {
 @property (strong, nonatomic) SGTag *selectedTag;
 
 @property (assign) int addingType;
+
+@property (strong, nonatomic) NSArray *testImageArray;
+
 @end
