@@ -28,6 +28,7 @@
      name:UIDeviceOrientationDidChangeNotification
      object:[UIDevice currentDevice]];
     isProcessing = false;
+    isStartTracking = false;
 }
 
 
@@ -35,7 +36,6 @@
     [super viewWillAppear:animated];
     self.appDelegate.isLaboratory = false;
     detectedCount = 0;
-    isStartTracking = false;
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -174,10 +174,10 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(wself){
                     [self initMarkView];
-//                    double resultvalue = [self calculateResultValue:uiImage];
-//                    self.statusLabel.text = [NSString stringWithFormat:@"%.2f",resultvalue];
+                    double resultvalue = [self calculateResultValue:uiImage];
+                    self.statusLabel.text = [NSString stringWithFormat:@"%.2f",resultvalue];
 
-                    if(detectedCount>1){
+                    if(detectedCount>10){
                         detectedCount =  0;
                         [[self.captureManager session] stopRunning];
                         UIImageWriteToSavedPhotosAlbum(uiImage,nil,nil,nil);
@@ -227,7 +227,7 @@
         [self.startButton setTitle:@"Start Tracking" forState:UIControlStateNormal];
         isStartTracking = false;
     }else{
-        self.navigationItem.title = @"Started Tracking";
+        self.navigationItem.title = @"Tracking...";
         [self.startButton setTitle:@"Stop tracking" forState:UIControlStateNormal];
         isStartTracking = true;
     }
