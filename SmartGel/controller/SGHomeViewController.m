@@ -31,6 +31,17 @@
     }
     [self.manualModeView setAlpha:0.2];
     [self disableAllButtons];
+    [self initTestImageArray];
+}
+
+- (void)initTestImageArray{
+    self.testImageArray = [NSArray arrayWithObjects:
+                           @"1.png",
+                           @"2.png",
+                           @"3.png",
+                           @"4.png",
+
+                           nil];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -640,6 +651,35 @@
     }else{
         self.editedShareImage =[[SGImageUtil sharedImageUtil] getImageFromUIView:self.cleanEditView.manualImgview];
     }
+}
+
+-(IBAction)buttonClicked_Test{
+    
+    NSString *imageFileName = [self.testImageArray objectAtIndex:testImageIndex];
+    UIImage *image = [UIImage imageNamed:imageFileName];
+    testImageIndex++;
+    if(testImageIndex == self.testImageArray.count)
+        testImageIndex =0;
+
+    self.originalImage = image;
+    self.estimateImage = [[EstimateImageModel alloc] initWithImage:image];
+    self.manualEstimateImage = [[EstimateImageModel alloc] initWithImage:image];
+    
+    if(isSelectedFromCamera){
+        UIImageWriteToSavedPhotosAlbum(image,nil,nil,nil);
+    }
+    isTakenPhoto = true;
+    [self.dateLabel setText:[[SGUtil sharedUtil] getCurrentTimeString]];
+    
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+    if(isTakenPhoto){
+        isTakenPhoto = false;
+        [self initDataUiWithTakenImage:^(NSString *result) {
+            [hud hideAnimated:false];
+        }];
+    }
+
 }
 
 
