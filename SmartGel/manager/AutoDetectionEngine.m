@@ -91,8 +91,9 @@
         areaHeight = areaWidth;
     }else{
         detectAread_interval = m_imageWidth/10;
-        areaWidth = m_imageWidth/2-m_imageWidth/10-15;
+//        areaWidth = m_imageWidth/2-m_imageWidth/10-15;
         areaHeight = m_imageHeight/2-m_imageHeight/10-15;
+        areaWidth = areaHeight;
     }
     
     sampleBottleXStart = m_imageWidth/2 - detectAread_interval - areaWidth;

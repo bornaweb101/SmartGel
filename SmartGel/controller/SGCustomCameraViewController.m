@@ -29,6 +29,7 @@
      object:[UIDevice currentDevice]];
     isProcessing = false;
     isStartTracking = false;
+    self.navigationItem.title = @"Stopped Tracking";
 }
 
 
@@ -41,7 +42,9 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self initVideoCaptureSession];
+
 //    [self initDetectAreaSize];
+//    [self initMarkView];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -74,13 +77,13 @@
         rectSample = CGRectMake(self.view.frame.size.width/2 + detectAread_interval, (self.view.frame.size.height-detectArea_width)/2, detectArea_width, detectArea_width);
     }else if(device.orientation == UIDeviceOrientationLandscapeLeft){
         detectAread_interval = height/10;
-        rectSample = CGRectMake((self.view.frame.size.width-detectArea_width)/2, self.view.frame.size.height/2 - detectAread_interval - detectArea_Height ,detectArea_width, detectArea_Height);
-        rectBlank = CGRectMake((self.view.frame.size.width-detectArea_width)/2, self.view.frame.size.height/2 + detectAread_interval,  detectArea_width, detectArea_Height);
+        rectSample = CGRectMake((self.view.frame.size.width-detectArea_width)/2, self.view.frame.size.height/2 - detectAread_interval - detectArea_width ,detectArea_width, detectArea_width);
+        rectBlank = CGRectMake((self.view.frame.size.width-detectArea_width)/2, self.view.frame.size.height/2 + detectAread_interval,  detectArea_width, detectArea_width);
     }
     else{
         detectAread_interval = height/10;
-        rectBlank = CGRectMake((self.view.frame.size.width-detectArea_width)/2, self.view.frame.size.height/2 - detectAread_interval - detectArea_Height ,detectArea_width, detectArea_Height);
-        rectSample = CGRectMake((self.view.frame.size.width-detectArea_width)/2, self.view.frame.size.height/2 + detectAread_interval,  detectArea_width, detectArea_Height);
+        rectBlank = CGRectMake((self.view.frame.size.width-detectArea_width)/2, self.view.frame.size.height/2 - detectAread_interval - detectArea_width ,detectArea_width, detectArea_width);
+        rectSample = CGRectMake((self.view.frame.size.width-detectArea_width)/2, self.view.frame.size.height/2 + detectAread_interval,  detectArea_width, detectArea_width);
     }
 }
 
@@ -93,10 +96,12 @@
         [self.markView2 removeFromSuperview];
     }
     
-    self.markView1 = [self drawRectangle:rectSample withColor:UIColor.redColor];
-    self.markView2 = [self drawRectangle:rectBlank withColor:UIColor.greenColor];
-    [self.view addSubview:self.markView1];
-    [self.view addSubview:self.markView2];
+    if(isStartTracking){
+        self.markView1 = [self drawRectangle:rectSample withColor:UIColor.redColor];
+        self.markView2 = [self drawRectangle:rectBlank withColor:UIColor.greenColor];
+        [self.view addSubview:self.markView1];
+        [self.view addSubview:self.markView2];
+    }
 }
 
 -(void)removeMarkView{
@@ -178,7 +183,6 @@
                     self.statusLabel.text = [NSString stringWithFormat:@"%.2f",resultvalue];
 
                     if(detectedCount>10){
-                        detectedCount =  0;
                         [[self.captureManager session] stopRunning];
                         UIImageWriteToSavedPhotosAlbum(uiImage,nil,nil,nil);
                         if(self.delegate){
@@ -231,6 +235,8 @@
         [self.startButton setTitle:@"Stop tracking" forState:UIControlStateNormal];
         isStartTracking = true;
     }
+    [self removeMarkView];
+    detectedCount = 0;
 }
 
 @end
