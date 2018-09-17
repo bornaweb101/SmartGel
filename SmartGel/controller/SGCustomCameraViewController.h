@@ -20,6 +20,8 @@
 @interface SGCustomCameraViewController : SGBaseViewController<AVCamCaptureManagerDelegate,AVCaptureVideoDataOutputSampleBufferDelegate>{
 
     bool isProcessing;
+    bool isStartTracking;
+
     int detectedCount;
     
 //    float detectArea_width;
@@ -41,6 +43,8 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 @property (strong, nonatomic) AutoDetectionEngine *autoDetectionEngine;
+
+@property (strong, nonatomic) IBOutlet UIButton *startButton;
 
 @property (strong, nonatomic) UIView *markView1;
 @property (strong, nonatomic) UIView *markView2;

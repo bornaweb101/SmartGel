@@ -48,13 +48,7 @@
         if(pinkValue>(yellowValue-colorOffset))
             return PINK_DIRTY_PIXEL;
         else
-            return BLUE_DIRTY_PIXEL;
-        //        float distance = [self getDistanceWithPinkColor:rgba];
-        //        if(distance<PINK_COLOR_OFFSET)
-        //            return PINK_DIRTY_PIXEL;
-        //        else
-        //            return NO_DIRTY_PIXEL;
-        
+            return BLUE_DIRTY_PIXEL;        
     }
     else //means green serial
     {

@@ -35,6 +35,7 @@
     [super viewWillAppear:animated];
     self.appDelegate.isLaboratory = false;
     detectedCount = 0;
+    isStartTracking = false;
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -127,7 +128,6 @@
     self.captureManager = nil;
     [self.captureVideoPreviewLayer removeFromSuperlayer];
     self.captureVideoPreviewLayer = nil;
-    
 }
 
 - (void)initVideoCaptureSession{
@@ -157,7 +157,7 @@
 }
 
 - (void) captureManagerRealTimeImageCaptured:(CVImageBufferRef )imageBuffer withTimeStamp:(CMTime)timeStamp{
-    if(!isProcessing){
+    if((isStartTracking) && (!isProcessing)){
         isProcessing = true;
         CIImage *ciImage = [[CIImage alloc] initWithCVImageBuffer:imageBuffer];
         UIImage *uiImage = [[SGImageUtil sharedImageUtil] imageFromCIImage:ciImage withImageSize:capturedImageSize];
@@ -177,7 +177,8 @@
 //                    double resultvalue = [self calculateResultValue:uiImage];
 //                    self.statusLabel.text = [NSString stringWithFormat:@"%.2f",resultvalue];
 
-                    if(detectedCount>10){
+                    if(detectedCount>1){
+                        detectedCount =  0;
                         [[self.captureManager session] stopRunning];
                         UIImageWriteToSavedPhotosAlbum(uiImage,nil,nil,nil);
                         if(self.delegate){
@@ -220,5 +221,16 @@
     return [laboratoryEngine calculateResultValue:sampleColor withBlankColor:blankColor withColorHighLight:colorHighLight];
 }
 
+-(IBAction)startTrackingButtonClicked{
+    if(isStartTracking){
+        self.navigationItem.title = @"Stopped Tracking";
+        [self.startButton setTitle:@"Start Tracking" forState:UIControlStateNormal];
+        isStartTracking = false;
+    }else{
+        self.navigationItem.title = @"Started Tracking";
+        [self.startButton setTitle:@"Stop tracking" forState:UIControlStateNormal];
+        isStartTracking = true;
+    }
+}
 
 @end

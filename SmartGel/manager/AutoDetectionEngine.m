@@ -133,7 +133,6 @@
         for (int x = mixBottleXStart; x < mixBottleXStart+areaWidth; x++)
         {
             int index = y * m_imageWidth + x;
-            
             RGBA rgba;
             memcpy(&rgba, &pPixelBuffer[index], sizeof(RGBA));
             
