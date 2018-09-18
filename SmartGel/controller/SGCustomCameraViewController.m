@@ -88,6 +88,7 @@
 }
 
 -(void)initMarkView{
+    
     if(self.markView1!=nil){
         [self.markView1 removeFromSuperview];
     }
@@ -124,6 +125,14 @@
 {
     [self.markView1 removeFromSuperview];
     [self.markView2 removeFromSuperview];
+    
+    
+    UIDevice *device = UIDevice.currentDevice;
+    if(device.orientation == UIDeviceOrientationLandscapeLeft ||
+       device.orientation == UIDeviceOrientationLandscapeRight){
+        [self showAlert];
+        [self stopTracking];
+    }
 //    [self initDetectAreaSize];
 }
 
@@ -226,17 +235,45 @@
 }
 
 -(IBAction)startTrackingButtonClicked{
+    
     if(isStartTracking){
-        self.navigationItem.title = @"Stopped Tracking";
-        [self.startButton setTitle:@"Start Tracking" forState:UIControlStateNormal];
-        isStartTracking = false;
+        [self stopTracking];
     }else{
-        self.navigationItem.title = @"Tracking...";
-        [self.startButton setTitle:@"Stop tracking" forState:UIControlStateNormal];
-        isStartTracking = true;
+        [self startTracking];
     }
     [self removeMarkView];
     detectedCount = 0;
+}
+
+- (void)stopTracking{
+    self.navigationItem.title = @"Stopped Tracking";
+    [self.startButton setTitle:@"Start Tracking" forState:UIControlStateNormal];
+    isStartTracking = false;
+}
+
+-(void)startTracking{
+    self.navigationItem.title = @"Tracking...";
+    [self.startButton setTitle:@"Stop tracking" forState:UIControlStateNormal];
+    isStartTracking = true;
+}
+
+-(void)showAlert{
+    if(!isShowAlert){
+        self.oriWariningalert = [UIAlertController
+                                     alertControllerWithTitle:@"Stopped Tracking"
+                                     message:@"Auto tracking is only available in portrait screen. Please keep with portrait mode and try to track again."
+                                     preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction* yesButton = [UIAlertAction
+                                    actionWithTitle:@"OK"
+                                    style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {
+                                        isShowAlert = false;
+                                    }];
+        [self.oriWariningalert addAction:yesButton];
+        [self presentViewController:self.oriWariningalert animated:YES completion:nil];
+        isShowAlert = true;
+    }
 }
 
 @end

@@ -21,7 +21,8 @@
 
     bool isProcessing;
     bool isStartTracking;
-
+    bool isShowAlert;
+    
     int detectedCount;
     
 //    float detectArea_width;
@@ -49,4 +50,5 @@
 @property (strong, nonatomic) UIView *markView1;
 @property (strong, nonatomic) UIView *markView2;
 
+@property (strong, nonatomic) UIAlertController *oriWariningalert;
 @end
