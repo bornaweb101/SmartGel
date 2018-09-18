@@ -813,7 +813,7 @@
             </objects>
             <point key="canvasLocation" x="1101.5625" y="117.18749999999999"/>
         </scene>
-        <!--SmartGel-2.0.7-->
+        <!--SmartGel-->
         <scene sceneID="Z7y-Zc-fMl">
             <objects>
                 <viewController storyboardIdentifier="SGLaboratoryViewController" id="o4L-Oo-xZl" customClass="SGLaboratoryViewController" sceneMemberID="viewController">
@@ -949,7 +949,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="SmartGel-2.0.7" id="92k-8X-ysZ">
+                    <navigationItem key="navigationItem" title="SmartGel" id="92k-8X-ysZ">
                         <barButtonItem key="leftBarButtonItem" image="ic_menu" id="djQ-aN-Ugw">
                             <connections>
                                 <action selector="presentLeftMenuViewController:" destination="o4L-Oo-xZl" id="1gd-qs-HCK"/>
