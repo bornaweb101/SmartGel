@@ -1462,7 +1462,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcA-Et-kOm">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcA-Et-kOm">
                                         <rect key="frame" x="127.5" y="537" width="120" height="50"/>
                                         <color key="backgroundColor" red="0.90196078430000004" green="0.33333333329999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>

@@ -30,6 +30,7 @@
     isProcessing = false;
     isStartTracking = false;
     self.navigationItem.title = @"Stopped Tracking";
+    [self startTracking];
 }
 
 
@@ -191,7 +192,7 @@
                     double resultvalue = [self calculateResultValue:uiImage];
                     self.statusLabel.text = [NSString stringWithFormat:@"%.2f",resultvalue];
 
-                    if(detectedCount>10){
+                    if(detectedCount>20){
                         [[self.captureManager session] stopRunning];
                         UIImageWriteToSavedPhotosAlbum(uiImage,nil,nil,nil);
                         if(self.delegate){

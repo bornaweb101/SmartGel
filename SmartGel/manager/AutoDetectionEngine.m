@@ -97,7 +97,7 @@
     }
     
     sampleBottleXStart = m_imageWidth/2 - detectAread_interval - areaWidth;
-    mixBottleYStart = m_imageWidth/2 + detectAread_interval;
+    mixBottleXStart = m_imageWidth/2 + detectAread_interval;
     sampleBottleYStart = mixBottleYStart = (m_imageHeight-areaHeight)/2;
     
     

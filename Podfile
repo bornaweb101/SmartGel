@@ -8,7 +8,7 @@ target 'SmartGel' do
   # Pods for SmartGel
 pod 'RESideMenu', '~> 4.0.7'
 pod 'MBProgressHUD', '~> 1.0.0'
-pod 'Firebase/Core'
+pod 'Firebase/Core', '~> 4.13.0'
 pod 'Firebase/Database'	
 pod 'Firebase/Auth'
 pod 'Firebase/Storage'	
@@ -16,7 +16,7 @@ pod 'Firebase/DynamicLinks'
 pod 'GPUImage', '~> 0.1.4'
 pod 'SDWebImage', '~> 4.0'
 pod 'SCLAlertView-Objective-C'
-pod "PFNavigationDropdownMenu"
+pod 'PFNavigationDropdownMenu'
 pod 'GLCalendarView', '~> 1.0.0'
 
 pod 'Fabric', '~> 1.7.7'
