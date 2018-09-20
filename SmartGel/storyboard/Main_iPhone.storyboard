@@ -1485,12 +1485,37 @@
                                     <constraint firstAttribute="bottom" secondItem="dcA-Et-kOm" secondAttribute="bottom" constant="16" id="muZ-Se-WnZ"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Gw-MH-PTj">
+                                <rect key="frame" x="0.0" y="513" width="375" height="90"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsM-Su-6iL">
+                                        <rect key="frame" x="157" y="15" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="3w9-vg-pNS"/>
+                                            <constraint firstAttribute="width" constant="60" id="PU1-K6-rzh"/>
+                                        </constraints>
+                                        <state key="normal" image="ic_camera_burst"/>
+                                        <connections>
+                                            <action selector="manualCaptureButtonClick" destination="cuJ-Ju-dbr" eventType="touchUpInside" id="0CM-VU-lcg"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="zsM-Su-6iL" firstAttribute="centerY" secondItem="8Gw-MH-PTj" secondAttribute="centerY" id="0k0-yZ-iSy"/>
+                                    <constraint firstItem="zsM-Su-6iL" firstAttribute="centerX" secondItem="8Gw-MH-PTj" secondAttribute="centerX" id="Xo5-UA-VUj"/>
+                                    <constraint firstAttribute="height" constant="90" id="YCU-JU-ZAj"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="ZyN-No-XNL" secondAttribute="trailing" id="7eb-G3-CoJ"/>
                             <constraint firstItem="ZyN-No-XNL" firstAttribute="leading" secondItem="ZNp-dT-I8y" secondAttribute="leading" id="ecl-yx-D8A"/>
                             <constraint firstItem="ZyN-No-XNL" firstAttribute="top" secondItem="r15-vX-2Ua" secondAttribute="bottom" id="era-Sy-FRV"/>
+                            <constraint firstAttribute="trailing" secondItem="8Gw-MH-PTj" secondAttribute="trailing" id="fjo-KX-EXy"/>
+                            <constraint firstItem="HXZ-ub-L0K" firstAttribute="top" secondItem="8Gw-MH-PTj" secondAttribute="bottom" id="sqI-ag-FwH"/>
+                            <constraint firstItem="8Gw-MH-PTj" firstAttribute="leading" secondItem="ZNp-dT-I8y" secondAttribute="leading" id="u1Q-QL-7e1"/>
                             <constraint firstItem="HXZ-ub-L0K" firstAttribute="top" secondItem="ZyN-No-XNL" secondAttribute="bottom" id="uoE-hD-qpF"/>
                         </constraints>
                     </view>
@@ -2504,6 +2529,7 @@
         <image name="ic_auto_detect" width="50" height="50"/>
         <image name="ic_back" width="18" height="18"/>
         <image name="ic_calendar" width="25" height="25"/>
+        <image name="ic_camera_burst" width="62" height="62"/>
         <image name="ic_crop" width="25" height="25"/>
         <image name="ic_indicatior" width="25" height="25"/>
         <image name="ic_manual" width="25" height="25"/>

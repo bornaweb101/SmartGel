@@ -50,5 +50,8 @@
 @property (strong, nonatomic) UIView *markView1;
 @property (strong, nonatomic) UIView *markView2;
 
+@property (strong, nonatomic) UIImage *capturedImage;
+
+
 @property (strong, nonatomic) UIAlertController *oriWariningalert;
 @end

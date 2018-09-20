@@ -133,8 +133,14 @@
        device.orientation == UIDeviceOrientationLandscapeRight){
         [self showAlert];
         [self stopTracking];
+    }else{
+        [self startTracking];
+        if(isShowAlert){
+            [self dismissViewControllerAnimated:YES completion:nil];
+            isShowAlert = false;
+        }
     }
-//    [self initDetectAreaSize];
+    [self initDetectAreaSize];
 }
 
 - (void)releasemanager
@@ -175,7 +181,7 @@
     if((isStartTracking) && (!isProcessing)){
         isProcessing = true;
         CIImage *ciImage = [[CIImage alloc] initWithCVImageBuffer:imageBuffer];
-        UIImage *uiImage = [[SGImageUtil sharedImageUtil] imageFromCIImage:ciImage withImageSize:capturedImageSize];
+        self.capturedImage = [[SGImageUtil sharedImageUtil] imageFromCIImage:ciImage withImageSize:capturedImageSize];
         
         __weak typeof(self) wself = self;
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -184,19 +190,19 @@
 //            self.statusLabel.text = [NSString stringWithFormat:@"%.2f",resultvalue];
         });
         
-        if([self.autoDetectionEngine analyzeImage:uiImage withSampleRect:rectSample withBlankRect:rectBlank]){
+        if([self.autoDetectionEngine analyzeImage:self.capturedImage withSampleRect:rectSample withBlankRect:rectBlank]){
             detectedCount++;
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(wself){
                     [self initMarkView];
-                    double resultvalue = [self calculateResultValue:uiImage];
+                    double resultvalue = [self calculateResultValue:self.capturedImage];
                     self.statusLabel.text = [NSString stringWithFormat:@"%.2f",resultvalue];
 
                     if(detectedCount>20){
                         [[self.captureManager session] stopRunning];
-                        UIImageWriteToSavedPhotosAlbum(uiImage,nil,nil,nil);
+                        UIImageWriteToSavedPhotosAlbum(self.capturedImage,nil,nil,nil);
                         if(self.delegate){
-                            [self.delegate onDetectedImage:uiImage];
+                            [self.delegate onDetectedImage:self.capturedImage];
                         }
                         [self.navigationController popViewControllerAnimated:YES];
                     }
@@ -274,6 +280,17 @@
         [self.oriWariningalert addAction:yesButton];
         [self presentViewController:self.oriWariningalert animated:YES completion:nil];
         isShowAlert = true;
+    }
+}
+
+-(IBAction)manualCaptureButtonClick{
+    if (self.capturedImage != nil){
+        [[self.captureManager session] stopRunning];
+        UIImageWriteToSavedPhotosAlbum(self.capturedImage,nil,nil,nil);
+        if(self.delegate){
+            [self.delegate onDetectedImage:self.capturedImage];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
