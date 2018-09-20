@@ -54,9 +54,20 @@
 
 - (UInt32) getDirtyPixelLaboratory:(RGBA *)rgba
 {
-    UInt8 minValue = 0x4F;
-    if (rgba->r < minValue && rgba->g < minValue && rgba->b < minValue)
-        return IS_DIRTY;
+    UInt8 maxValue = 0xE0;
+    if (rgba->r > maxValue && rgba->g > maxValue && rgba->b > maxValue){
+        return NO_GEL;
+    }
+    
+    UInt8 minValue = 0x5f;
+    if (rgba->r < minValue && rgba->g < minValue && rgba->b < minValue){
+        UInt8 dirtyMaxValue = 0x19;
+        if (rgba->r < dirtyMaxValue && rgba->g < dirtyMaxValue && rgba->b < dirtyMaxValue){
+            return NO_GEL;
+        }else{
+            return IS_DIRTY;
+        }
+    }
     
     int yellowValue = rgba->r + rgba->g;
     int greenValue = rgba->g + rgba->b;
@@ -65,10 +76,11 @@
     BOOL isPinkSerial = pinkValue > greenValue;
     if (isPinkSerial)
     {
-        if(pinkValue>yellowValue)
+        if(pinkValue>(yellowValue-5))
             return IS_CLEAN;
-        else
+        else{
             return IS_DIRTY;
+        }
     }
     else //means green serial
     {
