@@ -13,4 +13,6 @@
 
 @interface SGMenuViewController : SGBaseViewController
 @property (strong, nonatomic) IBOutlet UITableView *menuTableView;
+@property (strong, nonatomic) IBOutlet UILabel *versionLabel;
+
 @end

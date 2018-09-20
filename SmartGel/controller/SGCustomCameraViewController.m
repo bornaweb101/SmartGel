@@ -198,7 +198,7 @@
                     double resultvalue = [self calculateResultValue:self.capturedImage];
                     self.statusLabel.text = [NSString stringWithFormat:@"%.2f",resultvalue];
 
-                    if(detectedCount>10){
+                    if(detectedCount>5){
                         [[self.captureManager session] stopRunning];
                         UIImageWriteToSavedPhotosAlbum(self.capturedImage,nil,nil,nil);
                         if(self.delegate){

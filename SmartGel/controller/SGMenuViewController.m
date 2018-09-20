@@ -29,6 +29,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.menuTableView registerNib:[UINib nibWithNibName:@"SGMenuTableViewCell" bundle:nil] forCellReuseIdentifier:@"SGMenuTableViewCell"];
+    
+    NSDictionary *infoDictionary = [[NSBundle mainBundle]infoDictionary];
+
+    NSString *version = infoDictionary[@"CFBundleShortVersionString"];
+    NSString *build = infoDictionary[(NSString*)kCFBundleVersionKey];
+    self.versionLabel.text = [NSString stringWithFormat:@"%@.%@",version,build];
 }
 
 - (void)didReceiveMemoryWarning {

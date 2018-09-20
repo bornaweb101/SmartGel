@@ -1769,11 +1769,19 @@
                                         <color key="textColor" red="0.69803921570000005" green="0.70588235290000001" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v1.0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cdt-Pe-mVs">
+                                        <rect key="frame" x="99" y="165" width="43.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
+                                        <color key="textColor" red="0.69803921570000005" green="0.70588235290000001" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="Cdt-Pe-mVs" firstAttribute="centerX" secondItem="iBn-hP-0br" secondAttribute="centerX" id="4gj-bN-1OW"/>
                                     <constraint firstItem="ceH-8e-HVZ" firstAttribute="centerX" secondItem="iBn-hP-0br" secondAttribute="centerX" id="92Q-64-kre"/>
                                     <constraint firstAttribute="height" constant="236" id="Ey9-wI-sDa"/>
+                                    <constraint firstItem="Cdt-Pe-mVs" firstAttribute="top" secondItem="ceH-8e-HVZ" secondAttribute="bottom" id="IpD-Ir-GmB"/>
                                     <constraint firstItem="v8K-4S-Ce0" firstAttribute="top" secondItem="iBn-hP-0br" secondAttribute="top" constant="90" id="Pme-fP-EUV"/>
                                     <constraint firstItem="ceH-8e-HVZ" firstAttribute="top" secondItem="v8K-4S-Ce0" secondAttribute="bottom" constant="18" id="SvV-wj-eh2"/>
                                     <constraint firstItem="v8K-4S-Ce0" firstAttribute="centerX" secondItem="iBn-hP-0br" secondAttribute="centerX" id="bsR-Cu-oKt"/>
@@ -1803,6 +1811,7 @@
                     </view>
                     <connections>
                         <outlet property="menuTableView" destination="kMc-LX-aRm" id="bIa-dG-qqO"/>
+                        <outlet property="versionLabel" destination="Cdt-Pe-mVs" id="vyi-Cq-C6Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YUe-9D-2cf" userLabel="First Responder" sceneMemberID="firstResponder"/>

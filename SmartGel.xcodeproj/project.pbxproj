@@ -8,10 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4D9EC0022FB45DA54B97CB5C /* libPods-SmartGel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7E78BA3CDC73ED1A175E361 /* libPods-SmartGel.a */; };
-		528AA7B421414C2F000E8F42 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 528AA7B021414C2E000E8F42 /* 2.png */; };
-		528AA7B521414C2F000E8F42 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 528AA7B121414C2F000E8F42 /* 4.png */; };
-		528AA7B621414C2F000E8F42 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 528AA7B221414C2F000E8F42 /* 1.png */; };
-		528AA7B721414C2F000E8F42 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 528AA7B321414C2F000E8F42 /* 3.png */; };
 		8D199ED61FCC4AB300704CE2 /* SGSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D199ED51FCC4AB300704CE2 /* SGSettingViewController.m */; };
 		8D199ED91FCD56E200704CE2 /* SGHistoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D199ED81FCD56E200704CE2 /* SGHistoryDetailViewController.m */; };
 		8D1CC8DB209780D400949745 /* SGCustomCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1CC8DA209780D400949745 /* SGCustomCameraViewController.m */; };
@@ -75,10 +71,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		528AA7B021414C2E000E8F42 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 2.png; path = test_image/home/2.png; sourceTree = SOURCE_ROOT; };
-		528AA7B121414C2F000E8F42 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 4.png; path = test_image/home/4.png; sourceTree = SOURCE_ROOT; };
-		528AA7B221414C2F000E8F42 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1.png; path = test_image/home/1.png; sourceTree = SOURCE_ROOT; };
-		528AA7B321414C2F000E8F42 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 3.png; path = test_image/home/3.png; sourceTree = SOURCE_ROOT; };
 		6058976D360D4762C162A03D /* Pods-SmartGel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartGel.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartGel/Pods-SmartGel.release.xcconfig"; sourceTree = "<group>"; };
 		8D199ED41FCC4AB300704CE2 /* SGSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGSettingViewController.h; path = controller/SGSettingViewController.h; sourceTree = "<group>"; };
 		8D199ED51FCC4AB300704CE2 /* SGSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGSettingViewController.m; path = controller/SGSettingViewController.m; sourceTree = "<group>"; };
@@ -563,10 +555,6 @@
 		8DD3118F20246D950054DBF2 /* test_image */ = {
 			isa = PBXGroup;
 			children = (
-				528AA7B221414C2F000E8F42 /* 1.png */,
-				528AA7B021414C2E000E8F42 /* 2.png */,
-				528AA7B321414C2F000E8F42 /* 3.png */,
-				528AA7B121414C2F000E8F42 /* 4.png */,
 			);
 			name = test_image;
 			sourceTree = "<group>";
@@ -661,7 +649,6 @@
 			files = (
 				8D24C5081FC510B300D6C070 /* smartgel-tests.json in Resources */,
 				8D56625E1FD8247C008DFED2 /* Smiley_pink.png in Resources */,
-				528AA7B421414C2F000E8F42 /* 2.png in Resources */,
 				8D486CE81F87D67100CE0D4B /* GoogleService-Info.plist in Resources */,
 				8D5662621FD8247C008DFED2 /* Smiley_(.png in Resources */,
 				8DDC4FDB1F944ED400C92EEB /* tm_smart_gel.png in Resources */,
@@ -670,13 +657,10 @@
 				8D5662631FD8247C008DFED2 /* Smiley_.png in Resources */,
 				8D5662611FD8247C008DFED2 /* puriSCOPE_logo_color_190x30px.png in Resources */,
 				8D26D14A1FFCBC05002BFAB8 /* SGTagCollectionViewCell.xib in Resources */,
-				528AA7B721414C2F000E8F42 /* 3.png in Resources */,
-				528AA7B621414C2F000E8F42 /* 1.png in Resources */,
 				8D56625D1FD8247C008DFED2 /* Smiley_yellow.png in Resources */,
 				8DB412251FFC84B100ED5550 /* LaunchScreen.storyboard in Resources */,
 				8DA331FE1F7C8F3C0066148E /* Assets.xcassets in Resources */,
 				8D80B2DA1F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.xib in Resources */,
-				528AA7B521414C2F000E8F42 /* 4.png in Resources */,
 				8D63C9D420065AB400C2387A /* Main_iPhone.storyboard in Resources */,
 				8D5662601FD8247C008DFED2 /* Smiley_).png in Resources */,
 				8DB669F51FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.xib in Resources */,
