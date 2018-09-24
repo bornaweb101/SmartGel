@@ -54,12 +54,12 @@
 
 - (UInt32) getDirtyPixelLaboratory:(RGBA *)rgba
 {
-    UInt8 maxValue = 0xc7;
+    UInt8 maxValue = 0xB0;
     if (rgba->r > maxValue && rgba->g > maxValue && rgba->b > maxValue){
         return NO_GEL;
     }
     
-    UInt8 minValue = 0x57;
+    UInt8 minValue = 0x6f;
     if (rgba->r < minValue && rgba->g < minValue && rgba->b < minValue){
         UInt8 dirtyMaxValue = 0x19;
         if (rgba->r < dirtyMaxValue && rgba->g < dirtyMaxValue && rgba->b < dirtyMaxValue){
