@@ -131,13 +131,19 @@
     float yellowValue = rgbColor.r + rgbColor.g;
     float greenValue = rgbColor.g + rgbColor.b;
     float pinkValue = rgbColor.r + rgbColor.b;
+    
+    yellowValue = yellowValue + 50;
+
+    if((yellowValue>greenValue)&&(yellowValue>pinkValue)){
+        return YELLOW;
+    }
+    
+    yellowValue = yellowValue -50;
+
     pinkValue = pinkValue + 50;
     
     if((pinkValue>greenValue)&&(pinkValue>yellowValue)){
         return PINK;
-    }
-    if((yellowValue>greenValue)&&(yellowValue>pinkValue)){
-        return YELLOW;
     }
     
     if((rgbColor.b>=rgbColor.g)&&(rgbColor.b>=rgbColor.r)){
