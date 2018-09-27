@@ -132,20 +132,21 @@
     float greenValue = rgbColor.g + rgbColor.b;
     float pinkValue = rgbColor.r + rgbColor.b;
     float addingpinkValue = pinkValue + 50;
+    float addingYelloValue = yellowValue + 50;
 
     
     if((addingpinkValue>greenValue)&&(pinkValue>yellowValue)){
         return PINK;
     }
     
+    if((addingYelloValue>greenValue)&&(yellowValue>pinkValue)){
+        return YELLOW;
+    }
+    
     if((rgbColor.b>=rgbColor.g)&&(rgbColor.b>=rgbColor.r)){
         return BLUE;
     }else{
-        if((yellowValue>greenValue)&&(yellowValue>pinkValue)){
-            return YELLOW;
-        }else{
-            return GREEN;
-        }
+        return GREEN;
     }
 }
 
@@ -328,8 +329,8 @@
     CGFloat alpha;
     BOOL success = [color getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
     NSLog(@"success: %i hue: %0.2f, saturation: %0.2f, brightness: %0.2f, alpha: %0.2f", success, hue, saturation, brightness, alpha);
-    hue = hue - (float)hValue/360;
-    
+//    hue = hue - (float)hValue/360;
+    hue = (float)hValue/360;
     UIColor *newColor = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:alpha];
 
     CGFloat red;

@@ -22,6 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initFlag];
+    
+    /////////626 test images///////////////////////////////////
+
 //    self.testImageArray = [NSArray arrayWithObjects:
 //
 //                           @"2mg_0.04.jpeg",
@@ -116,7 +119,7 @@
 
                            nil];
 
-    ///////////////924 test images////////////////////////////
+    /////////////924 test images////////////////////////////
 //    self.testImageArray = [NSArray arrayWithObjects:
 //                           @"2_0.45.jpeg",
 //                           @"2_0.46.jpeg",
@@ -186,6 +189,41 @@
 //                           @"60.JPG",
 //                           @"70.JPG",
 //                           nil];
+    
+    
+    ///green color images//////////
+//    self.testImageArray = [NSArray arrayWithObjects:
+//                           @"28_15_0.12.jpeg",
+////                           @"28_15_0.14.jpeg",
+//                           @"28_15_0.18.jpeg",
+//
+//                           @"15_4.06.jpeg",
+//                           @"15_4.27.jpeg",
+////                           @"15_4.42.jpeg",
+////                           @"15_4.45.jpeg",
+////                           @"15_4.57.jpeg",
+////                           @"15_4.58.jpeg",
+//                           @"15_4.64.jpeg",
+//
+//                           @"28_20_0.20.jpeg",
+//                           @"28_20_0.22.jpeg",
+////                           @"28_20_0.23.jpeg",
+////                           @"28_20_0.25.jpeg",
+//                           @"28_20_0.26.jpeg",
+//
+//                           @"28_30_0.27.jpeg",
+////                           @"28_30_0.32.jpeg",
+////                           @"28_30_0.36.jpeg",
+////                           @"28_30_0.37.jpeg",
+//                           @"28_30_0.38.jpeg",
+//
+//                           @"28_40_0.38.jpeg",
+////                           @"28_40_0.41.jpeg",
+////                           @"28_40_0.42.jpeg",
+////                           @"28_40_0.47.jpeg",
+//                           @"28_40_0.48.jpeg",
+//                           nil];
+//
 
 
     
@@ -366,7 +404,7 @@
 
     self.laboratoryDataModel.cleanValue = [self.laboratoryEngine calculateResultValue:sampleAverageColor withBlankColor:blankAverageColor withColorHighLight:colorHighLight];
     
-    self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",self.laboratoryDataModel.cleanValue];
+    self.resultValueLabel.text =[ NSString stringWithFormat:@"%.1f",self.laboratoryDataModel.cleanValue];
 
     if(colorHighLight == PINK){
         self.testLabel2.text = @"PINK";
@@ -492,13 +530,20 @@
     [self estimateValue:image];
     self.testImageLabel.text = imageFileName;
     testImageIndex++;
-    if(testImageIndex == self.testImageArray.count)
+    if(testImageIndex == self.testImageArray.count-1)
         testImageIndex =0;
+    
 }
 
 -(IBAction)testMinusButtonClicked:(id)sender{
     if(testImageIndex != 0){
         testImageIndex--;
+        NSString *imageFileName = [self.testImageArray objectAtIndex:testImageIndex];
+        UIImage *image = [UIImage imageNamed:imageFileName];
+        [self estimateValue:image];
+        self.testImageLabel.text = imageFileName;
+    }else{
+        testImageIndex = self.testImageArray.count-1;
         NSString *imageFileName = [self.testImageArray objectAtIndex:testImageIndex];
         UIImage *image = [UIImage imageNamed:imageFileName];
         [self estimateValue:image];

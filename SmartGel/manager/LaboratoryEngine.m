@@ -110,17 +110,19 @@
         sampleColor.b = (sampleColor.b+140)/2;
         blankColor.b = (blankColor.b+140)/2;
         
+//        blankColor = [[SGColorUtil sharedColorUtil] updateHSBValue:blankColor withHValue:305];
+        
         double rsf = [[SGColorUtil sharedColorUtil] getRSFValue:blankColor withSampleColor:sampleColor];
-        rsf = (rsf * 75);
-        return rsf;  // output value filter
+//        rsf = (rsf * 75);
+//        return rsf;  // output value filter
 
-//        double rsf = [[SGColorUtil sharedColorUtil] getRSFValue:blankColor withSampleColor:sampleColor];
-//
-//        if (rsf > 0.02){
-//            return (rsf - 0.01) * 100;
-//        }else{
-//            return ((rsf/2) * 100 + 6)/6;
-//        }
+
+        if (rsf > 0.03){
+            return rsf * 50;
+        }else{
+            return 1.5 + rsf*20;
+        }
+        
     }else if(colorHighLight == BLUE){
         double rsf = [[SGColorUtil sharedColorUtil] getRSFValue:blankColor withSampleColor:sampleColor];
         rsf = (rsf * 7.5 + 1 + 1)/3;
