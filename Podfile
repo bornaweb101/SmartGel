@@ -21,6 +21,7 @@ pod 'GLCalendarView', '~> 1.0.0'
 
 pod 'Fabric', '~> 1.7.7'
 pod 'Crashlytics', '~> 3.10.2'
+pod 'Realm'
 
 post_install do |installer|
     installer.pods_project.targets.each do |target|

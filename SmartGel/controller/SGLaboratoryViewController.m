@@ -23,6 +23,20 @@
     [super viewDidLoad];
     [self initFlag];
     
+    //////////sample images //////////////////////////
+        self.testImageArray = [NSArray arrayWithObjects:
+                               @"2.JPG",
+                               @"5.JPG",
+                               @"10.JPG",
+                               @"15.JPG",
+                               @"20.JPG",
+                               @"30.JPG",
+                               @"40.JPG",
+                               @"50.JPG",
+                               @"60.JPG",
+                               @"70.JPG",
+                               nil];
+
     /////////626 test images///////////////////////////////////
 
 //    self.testImageArray = [NSArray arrayWithObjects:
@@ -69,55 +83,55 @@
     
     /////////628 test images///////////////////////////////////
 
-    self.testImageArray = [NSArray arrayWithObjects:
-                           @"28_2_0.01.jpeg",
-                           @"28_2_0.05.jpeg",
-                           @"28_2_0.jpeg",
-
-                           @"28_5_0.07.jpeg",
-                           @"28_5_0.08.jpeg",
-                           @"28_5_0.09.jpeg",
-                           @"28_5_0.11.jpeg",
-
-
-                           @"28_10_0.17.jpeg",
-                           @"28_10_0.21.jpeg",
-                           @"28_10_0.25.jpeg",
-                           @"28_10_0.26.jpeg",
-
-                           @"28_15_0.12.jpeg",
-                           @"28_15_0.14.jpeg",
-                           @"28_15_0.18.jpeg",
-
-                           @"28_20_0.20.jpeg",
-                           @"28_20_0.22.jpeg",
-                           @"28_20_0.23.jpeg",
-                           @"28_20_0.25.jpeg",
-                           @"28_20_0.26.jpeg",
-
-                           @"28_30_0.27.jpeg",
-                           @"28_30_0.32.jpeg",
-                           @"28_30_0.36.jpeg",
-                           @"28_30_0.37.jpeg",
-                           @"28_30_0.38.jpeg",
-
-                           @"28_40_0.38.jpeg",
-                           @"28_40_0.41.jpeg",
-                           @"28_40_0.42.jpeg",
-                           @"28_40_0.47.jpeg",
-                           @"28_40_0.48.jpeg",
-
-                           @"28_50_0.49.jpeg",
-                           @"28_50_0.54.jpeg",
-                           @"28_50_0.57.jpeg",
-
-                           @"28_60_0.53.jpeg",
-                           @"28_60_0.55.jpeg",
-                           @"28_60_0.62.jpeg",
-                           @"28_60_0.69.jpeg",
-                           @"28_60_0.76.jpeg",
-
-                           nil];
+//    self.testImageArray = [NSArray arrayWithObjects:
+//                           @"28_2_0.01.jpeg",
+//                           @"28_2_0.05.jpeg",
+//                           @"28_2_0.jpeg",
+//
+//                           @"28_5_0.07.jpeg",
+//                           @"28_5_0.08.jpeg",
+//                           @"28_5_0.09.jpeg",
+//                           @"28_5_0.11.jpeg",
+//
+//
+//                           @"28_10_0.17.jpeg",
+//                           @"28_10_0.21.jpeg",
+//                           @"28_10_0.25.jpeg",
+//                           @"28_10_0.26.jpeg",
+//
+//                           @"28_15_0.12.jpeg",
+//                           @"28_15_0.14.jpeg",
+//                           @"28_15_0.18.jpeg",
+//
+//                           @"28_20_0.20.jpeg",
+//                           @"28_20_0.22.jpeg",
+//                           @"28_20_0.23.jpeg",
+//                           @"28_20_0.25.jpeg",
+//                           @"28_20_0.26.jpeg",
+//
+//                           @"28_30_0.27.jpeg",
+//                           @"28_30_0.32.jpeg",
+//                           @"28_30_0.36.jpeg",
+//                           @"28_30_0.37.jpeg",
+//                           @"28_30_0.38.jpeg",
+//
+//                           @"28_40_0.38.jpeg",
+//                           @"28_40_0.41.jpeg",
+//                           @"28_40_0.42.jpeg",
+//                           @"28_40_0.47.jpeg",
+//                           @"28_40_0.48.jpeg",
+//
+//                           @"28_50_0.49.jpeg",
+//                           @"28_50_0.54.jpeg",
+//                           @"28_50_0.57.jpeg",
+//
+//                           @"28_60_0.53.jpeg",
+//                           @"28_60_0.55.jpeg",
+//                           @"28_60_0.62.jpeg",
+//                           @"28_60_0.69.jpeg",
+//                           @"28_60_0.76.jpeg",
+//
+//                           nil];
 
     /////////////924 test images////////////////////////////
 //    self.testImageArray = [NSArray arrayWithObjects:
@@ -177,19 +191,6 @@
 //                           @"12_0.00_3.jpeg",
 //                           nil];
     
-//    self.testImageArray = [NSArray arrayWithObjects:
-//                           @"2.JPG",
-//                           @"5.JPG",
-//                           @"10.JPG",
-//                           @"15.JPG",
-//                           @"20.JPG",
-//                           @"30.JPG",
-//                           @"40.JPG",
-//                           @"50.JPG",
-//                           @"60.JPG",
-//                           @"70.JPG",
-//                           nil];
-    
     
     ///green color images//////////
 //    self.testImageArray = [NSArray arrayWithObjects:
@@ -225,6 +226,49 @@
 //                           nil];
 //
 
+    /////////////927 test images////////////////////////////
+//    self.testImageArray = [NSArray arrayWithObjects:
+//                           @"2mg_new_1.jpeg",
+//                           @"2mg_new_2.jpeg",
+//                           @"2mg_new_3.jpeg",
+//
+//                           @"5mg_new_1.jpeg",
+//                           @"5mg_new_2.jpeg",
+//                           @"5mg_new_3.jpeg",
+//
+//                           @"8mg_new_1.jpeg",
+//                           @"8mg_new_2.jpeg",
+//                           @"8mg_new_3.jpeg",
+//                           @"8mg_new_6.jpeg",
+//
+//                           @"10mg_new_1.jpeg",
+//                           @"10mg_new_2.jpeg",
+//                           @"10mg_new_3.jpeg",
+//
+//                           @"15mg_new_1.jpeg",
+//                           @"15mg_new_2.jpeg",
+//                           @"15mg_new_3.jpeg",
+//
+//                           @"20mg_new_1.jpeg",
+//                           @"20mg_new_2.jpeg",
+//                           @"20mg_new_3.jpeg",
+//
+//                           @"30mg_new_1.jpeg",
+//                           @"30mg_new_2.jpeg",
+//                           @"30mg_new_3.jpeg",
+//
+//                           @"40mg_new_1.jpeg",
+//                           @"40mg_new_2.jpeg",
+//                           @"40mg_new_3.jpeg",
+//
+//                           @"50mg_new_1.jpeg",
+//                           @"50mg_new_2.jpeg",
+//                           @"50mg_new_3.jpeg",
+//
+//                           @"60mg_new_1.jpeg",
+//                           @"60mg_new_2.jpeg",
+//                           @"60mg_new_3.jpeg",
+//                           nil];
 
     
     self.laboratoryDataModel = [[LaboratoryDataModel alloc] init];
@@ -404,7 +448,7 @@
 
     self.laboratoryDataModel.cleanValue = [self.laboratoryEngine calculateResultValue:sampleAverageColor withBlankColor:blankAverageColor withColorHighLight:colorHighLight];
     
-    self.resultValueLabel.text =[ NSString stringWithFormat:@"%.1f",self.laboratoryDataModel.cleanValue];
+    self.resultValueLabel.text =[ NSString stringWithFormat:@"%.5f",self.laboratoryDataModel.cleanValue];
 
     if(colorHighLight == PINK){
         self.testLabel2.text = @"PINK";
