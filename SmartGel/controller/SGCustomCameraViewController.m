@@ -186,6 +186,7 @@
         __weak typeof(self) wself = self;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self initDetectAreaSize];
+            [self initMarkView];
 //            double resultvalue = [self calculateResultValue:uiImage];
 //            self.statusLabel.text = [NSString stringWithFormat:@"%.2f",resultvalue];
         });
@@ -194,7 +195,7 @@
             detectedCount++;
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(wself){
-                    [self initMarkView];
+                    
                     double resultvalue = [self calculateResultValue:self.capturedImage];
                     self.statusLabel.text = [NSString stringWithFormat:@"%.2f",resultvalue];
 
@@ -211,11 +212,11 @@
             isProcessing = false;
         }else{
             detectedCount =  0;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if(wself){
-                    [self removeMarkView];
-                }
-            });
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                if(wself){
+//                    [self removeMarkView];
+//                }
+//            });
             isProcessing = false;
         }
     }
