@@ -30,4 +30,8 @@
            withColorHighLight:(int)colorHighLight;
 -(double)calculateResultValueWithSample:(RGBA)solutionColor;
 
+-(void)calculateResultValueWithFIR:(RGBA)solutionColor
+                           withTag:(NSString *)tag
+                    withCompletion: (void (^)(NSError *error, double resultValue))completionHandler;
+
 @end

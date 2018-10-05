@@ -208,6 +208,35 @@
             }];
 }
 
+-(void)saveLaboratorySample:(SGLabSampleFIR *)labSample{
+    NSDictionary *post = @{
+                               @"value":[NSString stringWithFormat:@"%.2f",labSample.value],
+                               @"r": [NSString stringWithFormat:@"%d",labSample.r],
+                               @"g": [NSString stringWithFormat:@"%d",labSample.g],
+                               @"b": [NSString stringWithFormat:@"%d",labSample.b],
+                               @"tag" : labSample.tag ,
+                               @"date" : labSample.date
+                           };
+    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"%@/%@/%@",@"engines", @"tag1",labSample.date]: post};
+    [self.dataBaseRef updateChildValues:childUpdates];
+}
+
+-(void)getLaboratorySampleValues:(NSString *)tag
+            withCompletion:(void (^)(NSError *error,NSMutableArray* array))completionHandler{
+    
+    [[[self.dataBaseRef child:@"engines"] child:tag] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        NSMutableArray *labSampleArray = [NSMutableArray array];
+        for(snapshot in snapshot.children){
+            SGLabSampleFIR *labSample =  [[SGLabSampleFIR alloc] initWithSnapshot:snapshot];
+            [labSampleArray addObject:labSample];
+        }
+        completionHandler(nil,labSampleArray);
+    } withCancelBlock:^(NSError * _Nonnull error) {
+        completionHandler(error,nil);
+    }];
+
+}
+
 -(void)getLaboratoryHistorys:(void (^)(NSError *error,NSMutableArray* array))completionHandler {
     [[[[self.dataBaseRef child:@"users"] child:[FIRAuth auth].currentUser.uid] child:@"laboratories"] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSMutableArray *estimateImageArray = [NSMutableArray array];

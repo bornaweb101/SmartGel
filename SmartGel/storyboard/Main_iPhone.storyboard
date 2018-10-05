@@ -1359,7 +1359,7 @@
                                     <action selector="choosePhotoPickerController" destination="o4L-Oo-xZl" eventType="touchUpInside" id="zM0-ve-uvA"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JV-mV-eh9">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JV-mV-eh9">
                                 <rect key="frame" x="16" y="72" width="30" height="30"/>
                                 <color key="backgroundColor" red="0.31372549020000001" green="0.33725490200000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="+">
@@ -1369,7 +1369,7 @@
                                     <action selector="testButtonClicked:" destination="o4L-Oo-xZl" eventType="touchUpInside" id="tRe-DH-Ezo"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jcd-3M-BUj">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jcd-3M-BUj">
                                 <rect key="frame" x="56" y="72" width="30" height="30"/>
                                 <color key="backgroundColor" red="0.31372549020000001" green="0.33725490200000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -1383,9 +1383,15 @@
                                     <action selector="testMinusButtonClicked:" destination="o4L-Oo-xZl" eventType="touchUpInside" id="6zw-Pr-t7M"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mF6-Jp-fWL">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mF6-Jp-fWL">
                                 <rect key="frame" x="100" y="77" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are in &quot;Value Input&quot; mode." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZc-a7-HHr">
+                                <rect key="frame" x="38.5" y="320" width="298.5" height="27.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1395,11 +1401,13 @@
                             <constraint firstItem="eJF-Zf-Gt4" firstAttribute="width" secondItem="mti-JJ-TNl" secondAttribute="width" id="3VM-XR-Pca"/>
                             <constraint firstItem="eJF-Zf-Gt4" firstAttribute="centerX" secondItem="1Pi-zq-pTs" secondAttribute="centerX" id="6ST-9A-kGF"/>
                             <constraint firstItem="9JV-mV-eh9" firstAttribute="leading" secondItem="1Pi-zq-pTs" secondAttribute="leading" constant="16" id="7gG-Aq-GoC"/>
+                            <constraint firstItem="eZc-a7-HHr" firstAttribute="centerX" secondItem="1Pi-zq-pTs" secondAttribute="centerX" id="8FN-6c-V24"/>
                             <constraint firstItem="l5s-OR-tih" firstAttribute="centerX" secondItem="1Pi-zq-pTs" secondAttribute="centerX" id="93k-yf-651"/>
                             <constraint firstItem="l5s-OR-tih" firstAttribute="top" secondItem="5iw-2K-Hjr" secondAttribute="bottom" constant="40" id="DYT-BS-sTt"/>
                             <constraint firstItem="mti-JJ-TNl" firstAttribute="width" secondItem="l5s-OR-tih" secondAttribute="width" id="IU4-dL-HJU"/>
                             <constraint firstItem="mti-JJ-TNl" firstAttribute="top" secondItem="eJF-Zf-Gt4" secondAttribute="bottom" constant="20" id="LdL-hG-KBV"/>
                             <constraint firstItem="l5s-OR-tih" firstAttribute="width" secondItem="1Pi-zq-pTs" secondAttribute="width" multiplier="0.7" id="Rma-RH-b7I"/>
+                            <constraint firstItem="eZc-a7-HHr" firstAttribute="centerY" secondItem="1Pi-zq-pTs" secondAttribute="centerY" id="Vur-Rr-HH5"/>
                             <constraint firstItem="mti-JJ-TNl" firstAttribute="centerX" secondItem="1Pi-zq-pTs" secondAttribute="centerX" id="ayB-i4-Zhk"/>
                             <constraint firstItem="Jcd-3M-BUj" firstAttribute="leading" secondItem="9JV-mV-eh9" secondAttribute="trailing" constant="10" id="bYo-ez-cKT"/>
                             <constraint firstItem="mF6-Jp-fWL" firstAttribute="top" secondItem="5iw-2K-Hjr" secondAttribute="bottom" constant="13" id="dHs-v9-rOs"/>
@@ -1417,16 +1425,25 @@
                                 <action selector="presentLeftMenuViewController:" destination="o4L-Oo-xZl" id="1gd-qs-HCK"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="rwR-qU-1Dg">
-                            <connections>
-                                <action selector="uploadImage" destination="o4L-Oo-xZl" id="id8-nh-3cn"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="action" id="rwR-qU-1Dg">
+                                <connections>
+                                    <action selector="uploadImage" destination="o4L-Oo-xZl" id="id8-nh-3cn"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="edit" id="EJ6-4l-5fn">
+                                <connections>
+                                    <action selector="editButtonClicked" destination="o4L-Oo-xZl" id="lcn-lR-QAN"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="blankView" destination="dxx-6W-icy" id="Uxt-r8-7JO"/>
+                        <outlet property="bottleView" destination="hlt-rA-KL6" id="0JT-Sc-sIo"/>
+                        <outlet property="inputModeNotificationLabel" destination="eZc-a7-HHr" id="U09-jV-Hcw"/>
                         <outlet property="lbldiam" destination="BlB-3X-Cq7" id="Yti-cl-R4d"/>
                         <outlet property="lblugormg" destination="rQs-fV-BGo" id="hJ6-h4-GRJ"/>
                         <outlet property="resultValueLabel" destination="2AE-LK-ISj" id="nTv-Dt-ew3"/>

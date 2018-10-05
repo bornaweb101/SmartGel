@@ -150,21 +150,23 @@
     }
 }
 
--(float)getDistancebetweenColors:(RGBA *)rgba1
-                            with:(RGBA *)rgba2{
-    
-    XYZ xyzPink = [self getXYZfromRGB:rgba2];
-    XYZ xyz1 = [self getXYZfromRGB:rgba1];
-    LAB labPink = [self getLABfromXYZ:xyzPink];
-    LAB lab1 = [self getLABfromXYZ:xyz1];
-    
-    //    float l = labPink.l - lab1.l;
-    //    float a = labPink.a - lab1.a;
-    //    float b = labPink.b - lab1.b;
-    
-    //    float distance = sqrt((l*l)+(a*a)+(b*b));
-    float distance = [self getDeltaE:labPink withLab2:lab1];
+-(float)getDistancebetweenColors:(RGBA)rgba1
+                            with:(RGBA)rgba2{
+    float l = rgba1.r - rgba2.r;
+    float a = rgba1.g - rgba2.g;
+    float b = rgba1.b - rgba2.b;
+
+    float distance = sqrt((l*l)+(a*a)+(b*b));
     return distance;
+
+    
+//    XYZ xyzPink = [self getXYZfromRGB:rgba2];
+//    XYZ xyz1 = [self getXYZfromRGB:rgba1];
+//    LAB labPink = [self getLABfromXYZ:xyzPink];
+//    LAB lab1 = [self getLABfromXYZ:xyz1];
+//
+//    float distance = [self getDeltaE:labPink withLab2:lab1];
+//    return distance;
 }
 
 - (CGContextRef) createARGBBitmapContextFromImage:(CGImageRef) inImage {

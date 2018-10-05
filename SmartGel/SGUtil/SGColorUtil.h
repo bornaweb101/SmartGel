@@ -65,8 +65,9 @@ typedef struct
 - (UInt32)   getDirtyPixel:(RGBA *)rgba
            withColorOffset:(int)colorOffset;
 
--(float)getDistancebetweenColors:(RGBA *)rgba1
-                            with:(RGBA *)rgba2;
+-(float)getDistancebetweenColors:(RGBA)rgba1
+                            with:(RGBA)rgba2;
+
 - (CGContextRef) createARGBBitmapContextFromImage:(CGImageRef) inImage;
 - (UInt32)getDirtyPixelLaboratory:(RGBA *)rgba;
 

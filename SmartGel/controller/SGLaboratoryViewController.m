@@ -387,7 +387,7 @@
 
 
 -(IBAction)launchCameraController{
-    if(isSaved){
+    if(isSaved || isInputMode){
         [self capturePhoto];
     }else{
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
@@ -441,19 +441,32 @@
     self.laboratoryDataModel.sampleColor = ((unsigned)(sampleAverageColor.r) << 16) + ((unsigned)(sampleAverageColor.g) << 8) + ((unsigned)(sampleAverageColor.b) << 0);
     self.laboratoryDataModel.blankColor =((unsigned)(blankAverageColor.r) << 16) + ((unsigned)(blankAverageColor.g) << 8) + ((unsigned)(blankAverageColor.b) << 0);
 
+    self.sampleView.backgroundColor = [UIColor colorWithRed:sampleAverageColor.r/255.0 green:sampleAverageColor.g/255.0 blue:sampleAverageColor.b/255.0 alpha:1];
+    self.blankView.backgroundColor = [UIColor colorWithRed:blankAverageColor.r/255.0 green:blankAverageColor.g/255.0 blue:blankAverageColor.b/255.0 alpha:1];
+
     if (isInputMode){
         [self showSampleDataInputDialog:blankAverageColor];
     }else{
         
-        self.sampleView.backgroundColor = [UIColor colorWithRed:sampleAverageColor.r/255.0 green:sampleAverageColor.g/255.0 blue:sampleAverageColor.b/255.0 alpha:1];
-        self.blankView.backgroundColor = [UIColor colorWithRed:blankAverageColor.r/255.0 green:blankAverageColor.g/255.0 blue:blankAverageColor.b/255.0 alpha:1];
         
-        int colorHighLight = [[SGColorUtil sharedColorUtil] getColorHighLightStatus:blankAverageColor];
+//        int colorHighLight = [[SGColorUtil sharedColorUtil] getColorHighLightStatus:blankAverageColor];
         
 //        self.laboratoryDataModel.cleanValue = [self.laboratoryEngine calculateResultValue:sampleAverageColor withBlankColor:blankAverageColor withColorHighLight:colorHighLight];
         self.laboratoryDataModel.cleanValue = [self.laboratoryEngine calculateResultValueWithSample:blankAverageColor];
 
-        self.resultValueLabel.text =[ NSString stringWithFormat:@"%.1f",self.laboratoryDataModel.cleanValue];
+//        self.resultValueLabel.text =[ NSString stringWithFormat:@"%.1f",self.laboratoryDataModel.cleanValue];
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+        [self.laboratoryEngine calculateResultValueWithFIR:blankAverageColor withTag:@"tag1" withCompletion:^(NSError *error,double resultValue) {
+            [hud hideAnimated:false];
+            if(error==nil){
+                self.resultValueLabel.text = [ NSString stringWithFormat:@"%.1f",resultValue];
+            }else{
+                [self showAlertdialog:@"" message:error.localizedDescription];
+            }
+        }];
+        
 //        if(colorHighLight == PINK){
 //            self.testLabel2.text = @"PINK";
 //        }else if(colorHighLight == GREEN){
@@ -618,25 +631,45 @@
 
 
 -(void)showSampleDataInputDialog:(RGBA) inputBlankColor{
-    self.alertView = [[SGUtil sharedUtil] getSGAlertView];
-    self.sampleValueTextField = [self.alertView addTextField:@"Type value in here!"];
+    self.sampleInputAlertView = [[SGUtil sharedUtil] getSGAlertView];
+    self.sampleValueTextField = [self.sampleInputAlertView addTextField:@"Type value in here!"];
     self.sampleValueTextField.delegate = self;
 
     __weak typeof(self) weakSelf = self;
     
-    [self.alertView addButton:@"Done" actionBlock:^(void) {
-        SGLaboratorySample  *sampleData = [[SGLaboratorySample alloc] init];
-        sampleData.value = [weakSelf.sampleValueTextField.text doubleValue];
-        sampleData.rgbValue = weakSelf.laboratoryDataModel.blankColor;
-        
-        sampleData.r = inputBlankColor.r;
-        sampleData.g = inputBlankColor.g;
-        sampleData.b = inputBlankColor.b;
+    [self.sampleInputAlertView addButton:@"Done" actionBlock:^(void) {
+//        SGLaboratorySample  *sampleData = [[SGLaboratorySample alloc] init];
+//        sampleData.value = [weakSelf.sampleValueTextField.text doubleValue];
+//        sampleData.rgbValue = weakSelf.laboratoryDataModel.blankColor;
+//
+//        sampleData.r = inputBlankColor.r;
+//        sampleData.g = inputBlankColor.g;
+//        sampleData.b = inputBlankColor.b;
+//        [[SGRealmManager sharedManager] addLaboartorySampleData:sampleData];
 
-        [[SGRealmManager sharedManager] addLaboartorySampleData:sampleData];
+        SGLabSampleFIR *sgLabSampleFIR = [[SGLabSampleFIR alloc] init];
+        sgLabSampleFIR.value = [weakSelf.sampleValueTextField.text doubleValue];
+        sgLabSampleFIR.r = inputBlankColor.r;
+        sgLabSampleFIR.g = inputBlankColor.g;
+        sgLabSampleFIR.b = inputBlankColor.b;
+        sgLabSampleFIR.tag = @"tag1";
+        sgLabSampleFIR.date = [[SGUtil sharedUtil] getCurrentTimeString];
+        [[SGFirebaseManager sharedManager] saveLaboratorySample:sgLabSampleFIR];
     }];
-    
-    [self.alertView showEdit:self title:@"Input value" subTitle:nil closeButtonTitle:nil duration:0.0f];
+
+    [self.sampleInputAlertView showEdit:self title:@"Input value" subTitle:nil closeButtonTitle:@"Cancel" duration:0.0f];
+}
+
+-(IBAction)editButtonClicked{
+    if(isInputMode){
+        isInputMode = false;
+        self.bottleView.alpha = 1;
+        [self.inputModeNotificationLabel setHidden:true];
+    }else{
+        isInputMode = true;
+        self.bottleView.alpha = 0.2;
+        [self.inputModeNotificationLabel setHidden:false];
+    }
 }
 
 @end

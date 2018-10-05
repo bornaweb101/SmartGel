@@ -88,6 +88,7 @@
 		5204E60B2165C0DD004B1277 /* 5.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 5204E6012165C0DD004B1277 /* 5.JPG */; };
 		5204E61321668DF7004B1277 /* SGRealmManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5204E61221668DF7004B1277 /* SGRealmManager.m */; };
 		5204E616216693E8004B1277 /* SGLaboratorySample.m in Sources */ = {isa = PBXBuildFile; fileRef = 5204E615216693E8004B1277 /* SGLaboratorySample.m */; };
+		5204E619216714E2004B1277 /* SGLabSampleFIR.m in Sources */ = {isa = PBXBuildFile; fileRef = 5204E618216714E2004B1277 /* SGLabSampleFIR.m */; };
 		5233DBCB2159D9A90000B112 /* 28_10_0.17.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 5233DBA62159D9A70000B112 /* 28_10_0.17.jpeg */; };
 		5233DBCC2159D9A90000B112 /* 28_5_0.07.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 5233DBA72159D9A70000B112 /* 28_5_0.07.jpeg */; };
 		5233DBCD2159D9A90000B112 /* 28_15_0.14.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 5233DBA82159D9A70000B112 /* 28_15_0.14.jpeg */; };
@@ -318,6 +319,8 @@
 		5204E61221668DF7004B1277 /* SGRealmManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGRealmManager.m; path = manager/SGRealmManager.m; sourceTree = "<group>"; };
 		5204E614216693E8004B1277 /* SGLaboratorySample.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGLaboratorySample.h; path = model/SGLaboratorySample.h; sourceTree = "<group>"; };
 		5204E615216693E8004B1277 /* SGLaboratorySample.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGLaboratorySample.m; path = model/SGLaboratorySample.m; sourceTree = "<group>"; };
+		5204E617216714E2004B1277 /* SGLabSampleFIR.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGLabSampleFIR.h; path = model/SGLabSampleFIR.h; sourceTree = "<group>"; };
+		5204E618216714E2004B1277 /* SGLabSampleFIR.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGLabSampleFIR.m; path = model/SGLabSampleFIR.m; sourceTree = "<group>"; };
 		5233DBA62159D9A70000B112 /* 28_10_0.17.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 28_10_0.17.jpeg; path = test_image/laboratory/628/28_10_0.17.jpeg; sourceTree = SOURCE_ROOT; };
 		5233DBA72159D9A70000B112 /* 28_5_0.07.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 28_5_0.07.jpeg; path = test_image/laboratory/628/28_5_0.07.jpeg; sourceTree = SOURCE_ROOT; };
 		5233DBA82159D9A70000B112 /* 28_15_0.14.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 28_15_0.14.jpeg; path = test_image/laboratory/628/28_15_0.14.jpeg; sourceTree = SOURCE_ROOT; };
@@ -925,6 +928,8 @@
 				8D26D14C1FFCC146002BFAB8 /* SGTag.m */,
 				5204E614216693E8004B1277 /* SGLaboratorySample.h */,
 				5204E615216693E8004B1277 /* SGLaboratorySample.m */,
+				5204E617216714E2004B1277 /* SGLabSampleFIR.h */,
+				5204E618216714E2004B1277 /* SGLabSampleFIR.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -1493,6 +1498,7 @@
 				8DFCFD7F1FE6764C0074663B /* SGForgotPasswordViewController.m in Sources */,
 				8D56D5531FED090A0051EE76 /* SGFirebaseManager.m in Sources */,
 				5204E61321668DF7004B1277 /* SGRealmManager.m in Sources */,
+				5204E619216714E2004B1277 /* SGLabSampleFIR.m in Sources */,
 				8DFCFD791FE665FD0074663B /* SGUserSignUpViewController.m in Sources */,
 				8DA3320D1F7C90430066148E /* SGHomeViewController.m in Sources */,
 				8D56D5571FED0CB10051EE76 /* SGUtil.m in Sources */,

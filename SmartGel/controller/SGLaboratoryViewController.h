@@ -71,4 +71,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *testLabel1;
 @property (strong, nonatomic) IBOutlet UILabel *testLabel2;
 
+@property (strong, nonatomic) IBOutlet UIView *bottleView;
+@property (strong, nonatomic) IBOutlet UILabel *inputModeNotificationLabel;
+
+
 @end

@@ -10,6 +10,7 @@
 #import "SGConstant.h"
 #import "GPUImage.h"
 #include <math.h>
+#import "SGFirebaseManager.h"
 
 @implementation LaboratoryEngine
 
@@ -128,25 +129,58 @@
 }
 
 -(double)calculateResultValueWithSample:(RGBA)solutionColor{
-    double maxdistance = 0xffffff;
-    double resultValue = 0;
-    RLMResults<SGLaboratorySample *> *sampleDatas = [[SGRealmManager sharedManager] getAllLabortorySampleDatas];
-    for(int i=0; i<sampleDatas.count; i++){
-        SGLaboratorySample *sampleData = [sampleDatas objectAtIndex:i];
-        RGBA sampleRGBA;
-        sampleRGBA.r = sampleData.r;
-        sampleRGBA.g = sampleData.g;
-        sampleRGBA.b = sampleData.b;
-
-        double colordistance = [[SGColorUtil sharedColorUtil] getDistancebetweenColors:&solutionColor with:&sampleRGBA];
-        if(colordistance<maxdistance){
-            maxdistance = colordistance;
-            resultValue = sampleData.value;
-        }
-    }
-    
-    return resultValue;
+//    double maxdistance = 0xffffff;
+//    double resultValue = 0;
+//
+//    RLMResults<SGLaboratorySample *> *sampleDatas = [[SGRealmManager sharedManager] getAllLabortorySampleDatas];
+//    for(int i=0; i<sampleDatas.count; i++){
+//        SGLaboratorySample *sampleData = [sampleDatas objectAtIndex:i];
+//        RGBA sampleRGBA;
+//        sampleRGBA.r = sampleData.r;
+//        sampleRGBA.g = sampleData.g;
+//        sampleRGBA.b = sampleData.b;
+//
+//        double colordistance = [[SGColorUtil sharedColorUtil] getDistancebetweenColors:solutionColor with:sampleRGBA];
+//        if(colordistance<maxdistance){
+//            maxdistance = colordistance;
+//            resultValue = sampleData.value;
+//        }
+//    }
+//    return resultValue;
+    return 0;
 }
+
+
+-(void)calculateResultValueWithFIR:(RGBA)solutionColor
+                           withTag:(NSString *)tag
+                    withCompletion: (void (^)(NSError *error, double resultValue))completionHandler{
+    
+    [[SGFirebaseManager sharedManager] getLaboratorySampleValues:tag withCompletion:^(NSError *error,NSMutableArray* array) {
+        if(error==nil){
+            double maxdistance = 0xffffff;
+            double resultValue = 0;
+            for(int i=0; i<array.count; i++){
+                SGLabSampleFIR *sampleData = [array objectAtIndex:i];
+                RGBA sampleRGBA;
+                sampleRGBA.r = sampleData.r;
+                sampleRGBA.g = sampleData.g;
+                sampleRGBA.b = sampleData.b;
+                
+                double colordistance = [[SGColorUtil sharedColorUtil] getDistancebetweenColors:solutionColor with:sampleRGBA];
+                if(colordistance<maxdistance){
+                    maxdistance = colordistance;
+                    resultValue = sampleData.value;
+                }
+            }
+            completionHandler(nil,resultValue);
+        }else{
+            completionHandler(error,0);
+        }
+    }];
+}
+
+
+
 
 - (void) importImage:(UIImage *)image
 {

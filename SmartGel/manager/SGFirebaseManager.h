@@ -12,6 +12,7 @@
 #import "EstimateImageModel.h"
 #import "LaboratoryDataModel.h"
 #import "SGTag.h"
+#import "SGLabSampleFIR.h"
 
 @interface SGFirebaseManager : NSObject
 + (instancetype)sharedManager;
@@ -59,5 +60,10 @@
 
 -(void)removeTag:(SGTag *)tag
 completionHandler:(void (^)(NSError *error))completionHandler;
+
+
+-(void)saveLaboratorySample:(SGLabSampleFIR *)labSample;
+-(void)getLaboratorySampleValues:(NSString *)tag
+                  withCompletion:(void (^)(NSError *error,NSMutableArray* array))completionHandler;
 
 @end
