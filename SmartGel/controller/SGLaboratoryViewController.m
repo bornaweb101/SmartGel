@@ -24,18 +24,18 @@
     [self initFlag];
     
     //////////sample images //////////////////////////
-        self.testImageArray = [NSArray arrayWithObjects:
-                               @"2.JPG",
-                               @"5.JPG",
-                               @"10.JPG",
-                               @"15.JPG",
-                               @"20.JPG",
-                               @"30.JPG",
-                               @"40.JPG",
-                               @"50.JPG",
-                               @"60.JPG",
-                               @"70.JPG",
-                               nil];
+//        self.testImageArray = [NSArray arrayWithObjects:
+//                               @"2.JPG",
+//                               @"5.JPG",
+//                               @"10.JPG",
+//                               @"15.JPG",
+//                               @"20.JPG",
+//                               @"30.JPG",
+//                               @"40.JPG",
+//                               @"50.JPG",
+//                               @"60.JPG",
+//                               @"70.JPG",
+//                               nil];
 
     /////////626 test images///////////////////////////////////
 
@@ -227,48 +227,48 @@
 //
 
     /////////////927 test images////////////////////////////
-//    self.testImageArray = [NSArray arrayWithObjects:
-//                           @"2mg_new_1.jpeg",
-//                           @"2mg_new_2.jpeg",
-//                           @"2mg_new_3.jpeg",
-//
-//                           @"5mg_new_1.jpeg",
-//                           @"5mg_new_2.jpeg",
-//                           @"5mg_new_3.jpeg",
-//
-//                           @"8mg_new_1.jpeg",
-//                           @"8mg_new_2.jpeg",
-//                           @"8mg_new_3.jpeg",
-//                           @"8mg_new_6.jpeg",
-//
-//                           @"10mg_new_1.jpeg",
-//                           @"10mg_new_2.jpeg",
-//                           @"10mg_new_3.jpeg",
-//
-//                           @"15mg_new_1.jpeg",
-//                           @"15mg_new_2.jpeg",
-//                           @"15mg_new_3.jpeg",
-//
-//                           @"20mg_new_1.jpeg",
-//                           @"20mg_new_2.jpeg",
-//                           @"20mg_new_3.jpeg",
-//
-//                           @"30mg_new_1.jpeg",
-//                           @"30mg_new_2.jpeg",
-//                           @"30mg_new_3.jpeg",
-//
-//                           @"40mg_new_1.jpeg",
-//                           @"40mg_new_2.jpeg",
-//                           @"40mg_new_3.jpeg",
-//
-//                           @"50mg_new_1.jpeg",
-//                           @"50mg_new_2.jpeg",
-//                           @"50mg_new_3.jpeg",
-//
-//                           @"60mg_new_1.jpeg",
-//                           @"60mg_new_2.jpeg",
-//                           @"60mg_new_3.jpeg",
-//                           nil];
+    self.testImageArray = [NSArray arrayWithObjects:
+                           @"2mg_new_1.jpeg",
+                           @"2mg_new_2.jpeg",
+                           @"2mg_new_3.jpeg",
+
+                           @"5mg_new_1.jpeg",
+                           @"5mg_new_2.jpeg",
+                           @"5mg_new_3.jpeg",
+
+                           @"8mg_new_1.jpeg",
+                           @"8mg_new_2.jpeg",
+                           @"8mg_new_3.jpeg",
+                           @"8mg_new_6.jpeg",
+
+                           @"10mg_new_1.jpeg",
+                           @"10mg_new_2.jpeg",
+                           @"10mg_new_3.jpeg",
+
+                           @"15mg_new_1.jpeg",
+                           @"15mg_new_2.jpeg",
+                           @"15mg_new_3.jpeg",
+
+                           @"20mg_new_1.jpeg",
+                           @"20mg_new_2.jpeg",
+                           @"20mg_new_3.jpeg",
+
+                           @"30mg_new_1.jpeg",
+                           @"30mg_new_2.jpeg",
+                           @"30mg_new_3.jpeg",
+
+                           @"40mg_new_1.jpeg",
+                           @"40mg_new_2.jpeg",
+                           @"40mg_new_3.jpeg",
+
+                           @"50mg_new_1.jpeg",
+                           @"50mg_new_2.jpeg",
+                           @"50mg_new_3.jpeg",
+
+                           @"60mg_new_1.jpeg",
+                           @"60mg_new_2.jpeg",
+                           @"60mg_new_3.jpeg",
+                           nil];
 
     
     self.laboratoryDataModel = [[LaboratoryDataModel alloc] init];
@@ -331,6 +331,7 @@
     
     sameTagCount = 1;
     isSaved = true;
+    isInputMode = false;
 }
 
 -(void)initLocationManager{
@@ -437,28 +438,33 @@
     firstrun=false;
     RGBA sampleAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image isSampleColor:true];
     RGBA blankAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image isSampleColor:false];
-
     self.laboratoryDataModel.sampleColor = ((unsigned)(sampleAverageColor.r) << 16) + ((unsigned)(sampleAverageColor.g) << 8) + ((unsigned)(sampleAverageColor.b) << 0);
     self.laboratoryDataModel.blankColor =((unsigned)(blankAverageColor.r) << 16) + ((unsigned)(blankAverageColor.g) << 8) + ((unsigned)(blankAverageColor.b) << 0);
 
-    self.sampleView.backgroundColor = [UIColor colorWithRed:sampleAverageColor.r/255.0 green:sampleAverageColor.g/255.0 blue:sampleAverageColor.b/255.0 alpha:1];
-    self.blankView.backgroundColor = [UIColor colorWithRed:blankAverageColor.r/255.0 green:blankAverageColor.g/255.0 blue:blankAverageColor.b/255.0 alpha:1];
-
-    int colorHighLight = [[SGColorUtil sharedColorUtil] getColorHighLightStatus:blankAverageColor];
-
-    self.laboratoryDataModel.cleanValue = [self.laboratoryEngine calculateResultValue:sampleAverageColor withBlankColor:blankAverageColor withColorHighLight:colorHighLight];
-    
-    self.resultValueLabel.text =[ NSString stringWithFormat:@"%.5f",self.laboratoryDataModel.cleanValue];
-
-    if(colorHighLight == PINK){
-        self.testLabel2.text = @"PINK";
-    }else if(colorHighLight == GREEN){
-        self.testLabel2.text = @"GREEN";
-    }else if(colorHighLight == BLUE){
-        self.testLabel2.text = @"BLUE";
+    if (isInputMode){
+        [self showSampleDataInputDialog:blankAverageColor];
     }else{
-        self.testLabel2.text = @"YELLOW";
+        
+        self.sampleView.backgroundColor = [UIColor colorWithRed:sampleAverageColor.r/255.0 green:sampleAverageColor.g/255.0 blue:sampleAverageColor.b/255.0 alpha:1];
+        self.blankView.backgroundColor = [UIColor colorWithRed:blankAverageColor.r/255.0 green:blankAverageColor.g/255.0 blue:blankAverageColor.b/255.0 alpha:1];
+        
+        int colorHighLight = [[SGColorUtil sharedColorUtil] getColorHighLightStatus:blankAverageColor];
+        
+//        self.laboratoryDataModel.cleanValue = [self.laboratoryEngine calculateResultValue:sampleAverageColor withBlankColor:blankAverageColor withColorHighLight:colorHighLight];
+        self.laboratoryDataModel.cleanValue = [self.laboratoryEngine calculateResultValueWithSample:blankAverageColor];
+
+        self.resultValueLabel.text =[ NSString stringWithFormat:@"%.1f",self.laboratoryDataModel.cleanValue];
+//        if(colorHighLight == PINK){
+//            self.testLabel2.text = @"PINK";
+//        }else if(colorHighLight == GREEN){
+//            self.testLabel2.text = @"GREEN";
+//        }else if(colorHighLight == BLUE){
+//            self.testLabel2.text = @"BLUE";
+//        }else{
+//            self.testLabel2.text = @"YELLOW";
+//        }
     }
+
 }
 
 -(void)customerTextFieldTapped{
@@ -608,6 +614,29 @@
         [self.alertView hideView];
     }
     return YES;
+}
+
+
+-(void)showSampleDataInputDialog:(RGBA) inputBlankColor{
+    self.alertView = [[SGUtil sharedUtil] getSGAlertView];
+    self.sampleValueTextField = [self.alertView addTextField:@"Type value in here!"];
+    self.sampleValueTextField.delegate = self;
+
+    __weak typeof(self) weakSelf = self;
+    
+    [self.alertView addButton:@"Done" actionBlock:^(void) {
+        SGLaboratorySample  *sampleData = [[SGLaboratorySample alloc] init];
+        sampleData.value = [weakSelf.sampleValueTextField.text doubleValue];
+        sampleData.rgbValue = weakSelf.laboratoryDataModel.blankColor;
+        
+        sampleData.r = inputBlankColor.r;
+        sampleData.g = inputBlankColor.g;
+        sampleData.b = inputBlankColor.b;
+
+        [[SGRealmManager sharedManager] addLaboartorySampleData:sampleData];
+    }];
+    
+    [self.alertView showEdit:self title:@"Input value" subTitle:nil closeButtonTitle:nil duration:0.0f];
 }
 
 @end

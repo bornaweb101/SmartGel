@@ -15,6 +15,8 @@
 #import "LaboratoryEngine.h"
 #import <MapKit/MapKit.h>
 #import "SCLAlertView.h"
+#import "SGLaboratorySample.h"
+#import "SGRealmManager.h"
 
 @interface SGLaboratoryViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate,SGCustomCameraViewControllerDelegate>{
     int firstrun;
@@ -33,6 +35,8 @@
     NSString *prevTotalTagText;
 
     int sameTagCount;
+    bool isInputMode;
+    RGBA inputBlankColor;
 }
 
 @property (strong, nonatomic) LaboratoryDataModel *laboratoryDataModel;
@@ -59,8 +63,12 @@
 
 @property (strong, nonatomic)  SCLAlertView *alertView;
 
+@property (strong, nonatomic)  SCLAlertView *sampleInputAlertView;
+@property (strong, nonatomic)  UITextField *sampleValueTextField;
+@property (strong, nonatomic)  UITextField *sampleTagTextField;
+
+
 @property (strong, nonatomic) IBOutlet UILabel *testLabel1;
 @property (strong, nonatomic) IBOutlet UILabel *testLabel2;
-
 
 @end

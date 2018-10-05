@@ -14,10 +14,11 @@
 
 @interface SGRealmManager : NSObject
 
-@property (strong, nonatomic) RLMRealm *realm;
-@property (strong, nonnull) RLMResults *sampleDatas;
+@property (strong, nonnull) RLMRealm *realm;
+@property (strong, nonnull) RLMResults<SGLaboratorySample *> *sampleDatas;
 
-+ (instancetype)sharedManager;
-
++ (instancetype _Nullable )sharedManager;
+-(void)addLaboartorySampleData :(nullable SGLaboratorySample *)sampleData;
+-(RLMResults<SGLaboratorySample *> *)getAllLabortorySampleDatas;
 
 @end

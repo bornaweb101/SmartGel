@@ -127,6 +127,27 @@
     }
 }
 
+-(double)calculateResultValueWithSample:(RGBA)solutionColor{
+    double maxdistance = 0xffffff;
+    double resultValue = 0;
+    RLMResults<SGLaboratorySample *> *sampleDatas = [[SGRealmManager sharedManager] getAllLabortorySampleDatas];
+    for(int i=0; i<sampleDatas.count; i++){
+        SGLaboratorySample *sampleData = [sampleDatas objectAtIndex:i];
+        RGBA sampleRGBA;
+        sampleRGBA.r = sampleData.r;
+        sampleRGBA.g = sampleData.g;
+        sampleRGBA.b = sampleData.b;
+
+        double colordistance = [[SGColorUtil sharedColorUtil] getDistancebetweenColors:&solutionColor with:&sampleRGBA];
+        if(colordistance<maxdistance){
+            maxdistance = colordistance;
+            resultValue = sampleData.value;
+        }
+    }
+    
+    return resultValue;
+}
+
 - (void) importImage:(UIImage *)image
 {
     m_imageWidth = image.size.width;

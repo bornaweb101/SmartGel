@@ -29,9 +29,9 @@
     }];
 }
 
--(void)getAllLabortorySampleDatas{
+-(RLMResults<SGLaboratorySample *> *)getAllLabortorySampleDatas{
     self.sampleDatas = [SGLaboratorySample allObjects];
-
+    return self.sampleDatas;
 }
 
 

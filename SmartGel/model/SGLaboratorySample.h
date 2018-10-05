@@ -12,6 +12,10 @@
 @interface SGLaboratorySample : RLMObject
 @property NSString *tag;
 @property NSInteger rgbValue;
-@property NSString *value;
+@property double value;
+
+@property NSInteger b;
+@property NSInteger g;
+@property NSInteger r;
 
 @end

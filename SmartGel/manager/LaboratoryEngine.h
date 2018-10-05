@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "DirtyExtractor.h"
+#import <Realm/RLMRealm.h>
+#import <Realm/RLMResults.h>
+#import "SGRealmManager.h"
 
 @interface LaboratoryEngine : NSObject{
     UInt32 *    m_pInBuffer;
@@ -25,5 +28,6 @@
 -(double)calculateResultValue: (RGBA)sampleColor
                withBlankColor: (RGBA)blankColor
            withColorHighLight:(int)colorHighLight;
+-(double)calculateResultValueWithSample:(RGBA)solutionColor;
 
 @end
