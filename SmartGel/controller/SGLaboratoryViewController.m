@@ -272,50 +272,14 @@
 
     
     self.laboratoryDataModel = [[LaboratoryDataModel alloc] init];
+    self.laboratoryDataModel.productName = @"TM DESANA MAX FP";
+    self.laboratoryDataModel.panelName = @"Light Panel1";
+    
+    self.productNameLabel.text = self.laboratoryDataModel.productName;
+    self.panelNameLabel.text = self.laboratoryDataModel.panelName;
+    
     self.laboratoryEngine = [[LaboratoryEngine alloc] init];
     [self initLocationManager];
-
-    DIA = [[NSUserDefaults standardUserDefaults] integerForKey:@"DIAMETER"];
-    if( [[NSUserDefaults standardUserDefaults] integerForKey:@"ugormg"]==0)
-    {
-        ugormg=FALSE;
-        self.lblugormg.text = @"ug/cm2 Organic";
-    }
-    else
-    {
-        ugormg=TRUE;
-        self.lblugormg.text = @"mg/l Organic";
-    }
-    
-    vgood = [[NSUserDefaults standardUserDefaults] floatForKey:@"vgood"];
-    satis = [[NSUserDefaults standardUserDefaults] floatForKey:@"satis"];
-    vgoodlab = [[NSUserDefaults standardUserDefaults] stringForKey:@"vgoodlab"];
-    satislab = [[NSUserDefaults standardUserDefaults] stringForKey:@"satislab"];
-    inadeqlab = [[NSUserDefaults standardUserDefaults] stringForKey:@"inadeqlab"];
-    
-    R = [[NSUserDefaults standardUserDefaults] floatForKey:@"BlankR"];
-    G = [[NSUserDefaults standardUserDefaults] floatForKey:@"BlankG"];
-    B = [[NSUserDefaults standardUserDefaults] floatForKey:@"BlankB"];
-    
-    firstrun=true;
-    
-    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) objectAtIndex:0];
-    thePath = [rootPath stringByAppendingPathComponent:@"Data.xml"];
-    
-    NSMutableArray *bData = [[NSMutableArray alloc] initWithContentsOfFile:thePath];
-    //NSLog(@"bd:%@",bData);
-    
-    int len;
-    len = [bData count];
-    
-    if(len<=1)
-    {
-        //Ausgabe mit RGB
-        NSArray *plistentries = [[NSArray alloc] initWithObjects:@"Date",@"Customer",@"Tag",@"Diameter",@"Result",@"UgorMg",@"BlankR",@"BlankG",@"BlankB",@"SampleR",@"SampleG",@"SampleB",nil];
-        NSMutableArray *dData= [[NSMutableArray alloc] init];
-        [dData addObject:plistentries];
-        [dData writeToFile:thePath atomically:YES];
-    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -374,8 +338,6 @@
     self.laboratoryDataModel.date = [[SGUtil sharedUtil] getCurrentTimeString];
     [self estimateValue:image];
     [self dismissViewControllerAnimated:YES completion:nil];
-    
-//    [self showSaveAlertView:false];
 }
 
 - (void)onDetectedImage:(UIImage *)image{
@@ -435,7 +397,6 @@
 }
 
 - (void)estimateValue:(UIImage *)image{
-    firstrun=false;
     RGBA sampleAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image isSampleColor:true];
     RGBA blankAverageColor = [self.laboratoryEngine getCropAreaAverageColor:image isSampleColor:false];
     self.laboratoryDataModel.sampleColor = ((unsigned)(sampleAverageColor.r) << 16) + ((unsigned)(sampleAverageColor.g) << 8) + ((unsigned)(sampleAverageColor.b) << 0);
@@ -452,13 +413,13 @@
 //        int colorHighLight = [[SGColorUtil sharedColorUtil] getColorHighLightStatus:blankAverageColor];
         
 //        self.laboratoryDataModel.cleanValue = [self.laboratoryEngine calculateResultValue:sampleAverageColor withBlankColor:blankAverageColor withColorHighLight:colorHighLight];
-        self.laboratoryDataModel.cleanValue = [self.laboratoryEngine calculateResultValueWithSample:blankAverageColor];
+//        self.laboratoryDataModel.cleanValue = [self.laboratoryEngine calculateResultValueWithSample:blankAverageColor];
 
 //        self.resultValueLabel.text =[ NSString stringWithFormat:@"%.1f",self.laboratoryDataModel.cleanValue];
         
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
-        [self.laboratoryEngine calculateResultValueWithFIR:blankAverageColor withTag:@"tag1" withCompletion:^(NSError *error,double resultValue) {
+        [self.laboratoryEngine calculateResultValueWithFIR:blankAverageColor withTag:[NSString stringWithFormat:@"%@_%@",self.laboratoryDataModel.productName, self.laboratoryDataModel.panelName] withCompletion:^(NSError *error,double resultValue) {
             [hud hideAnimated:false];
             if(error==nil){
                 self.resultValueLabel.text = [ NSString stringWithFormat:@"%.1f",resultValue];
@@ -466,18 +427,7 @@
                 [self showAlertdialog:@"" message:error.localizedDescription];
             }
         }];
-        
-//        if(colorHighLight == PINK){
-//            self.testLabel2.text = @"PINK";
-//        }else if(colorHighLight == GREEN){
-//            self.testLabel2.text = @"GREEN";
-//        }else if(colorHighLight == BLUE){
-//            self.testLabel2.text = @"BLUE";
-//        }else{
-//            self.testLabel2.text = @"YELLOW";
-//        }
     }
-
 }
 
 -(void)customerTextFieldTapped{
@@ -652,7 +602,7 @@
         sgLabSampleFIR.r = inputBlankColor.r;
         sgLabSampleFIR.g = inputBlankColor.g;
         sgLabSampleFIR.b = inputBlankColor.b;
-        sgLabSampleFIR.tag = @"tag1";
+        sgLabSampleFIR.tag = [NSString stringWithFormat:@"%@_%@",weakSelf.laboratoryDataModel.productName, weakSelf.laboratoryDataModel.panelName];
         sgLabSampleFIR.date = [[SGUtil sharedUtil] getCurrentTimeString];
         [[SGFirebaseManager sharedManager] saveLaboratorySample:sgLabSampleFIR];
     }];
@@ -674,11 +624,26 @@
 
 -(IBAction)productSettingClicked{
     SGProductSettingViewController *productVC = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"SGProductSettingViewController"];
+    productVC.delegate = self;
+    productVC.selectedProductName = self.productNameLabel.text;
     [self.navigationController pushViewController:productVC animated:YES];
 }
 
 -(IBAction)lightSettingClicked{
     SGLPSettingViewController *lpVC = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"SGLPSettingViewController"];
+    lpVC.delegate = self;
+    lpVC.selectedPanelName = self.panelNameLabel.text;
     [self.navigationController pushViewController:lpVC animated:YES];
 }
+
+- (void)didSelectProduct:(NSString *)productName{
+    self.laboratoryDataModel.productName = productName;
+    self.productNameLabel.text = self.laboratoryDataModel.productName;
+}
+
+- (void)didSelectLightPannel:(NSString *)panelName{
+    self.laboratoryDataModel.panelName = panelName;
+    self.panelNameLabel.text = self.laboratoryDataModel.panelName;
+}
+
 @end

@@ -1539,6 +1539,8 @@
                         <outlet property="blankView" destination="dxx-6W-icy" id="Uxt-r8-7JO"/>
                         <outlet property="bottleView" destination="hlt-rA-KL6" id="0JT-Sc-sIo"/>
                         <outlet property="inputModeNotificationLabel" destination="eZc-a7-HHr" id="U09-jV-Hcw"/>
+                        <outlet property="panelNameLabel" destination="RNr-Ae-lCr" id="lAo-Gw-beG"/>
+                        <outlet property="productNameLabel" destination="b33-8Q-4Bt" id="9nH-a8-oqK"/>
                         <outlet property="resultValueLabel" destination="2AE-LK-ISj" id="nTv-Dt-ew3"/>
                         <outlet property="sampleView" destination="WBi-mO-HMt" id="8Lh-GN-wpg"/>
                         <outlet property="testImageLabel" destination="mF6-Jp-fWL" id="PMI-ce-qg7"/>

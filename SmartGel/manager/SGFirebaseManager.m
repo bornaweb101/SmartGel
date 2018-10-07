@@ -199,7 +199,9 @@
                                            @"location": laboratoryData.location,
                                            @"blankcolor":[NSString stringWithFormat:@"%lld",laboratoryData.blankColor],
                                            @"samplecolor":[NSString stringWithFormat:@"%lld",laboratoryData.sampleColor],
-                                           @"resultstate":[NSString stringWithFormat:@"%d",laboratoryData.resultState]
+                                           @"resultstate":[NSString stringWithFormat:@"%d",laboratoryData.resultState],
+                                           @"product": laboratoryData.productName,
+                                           @"panel": laboratoryData.panelName,
                                            };
                     NSDictionary *childUpdates = @{[NSString stringWithFormat:@"%@/%@/%@/%@",@"users", userID, @"laboratories",laboratoryData.date]: post};
                     [self.dataBaseRef updateChildValues:childUpdates];
@@ -217,7 +219,7 @@
                                @"tag" : labSample.tag ,
                                @"date" : labSample.date
                            };
-    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"%@/%@/%@",@"engines", @"tag1",labSample.date]: post};
+    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"%@/%@/%@",@"engines", labSample.tag, labSample.date]: post};
     [self.dataBaseRef updateChildValues:childUpdates];
 }
 

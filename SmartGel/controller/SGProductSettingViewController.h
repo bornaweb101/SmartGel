@@ -15,12 +15,13 @@
 
 @protocol SGProductSettingViewControllerDelegate <NSObject>
 @required
-- (void)onSelectProduct;
+- (void)didSelectProduct:(NSString *)productName;
 @end
 
 @interface SGProductSettingViewController : SGBaseViewController<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *productTableView;
 @property (strong, nonatomic) NSMutableArray *tagArray;
+@property (strong, nonatomic) NSString *selectedProductName;
 
 @property (weak, nonatomic) id<SGProductSettingViewControllerDelegate> delegate;
 

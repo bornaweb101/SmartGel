@@ -13,12 +13,14 @@
 
 @protocol SGLPSettingViewControllerDelegate <NSObject>
 @required
-- (void)onSelectLightPannel;
+- (void)didSelectLightPannel:(NSString *)panelName;
 @end
 
 @interface SGLPSettingViewController : SGBaseViewController
 @property (strong, nonatomic) IBOutlet UITableView *lpTableView;
 @property (strong, nonatomic) NSMutableArray *tagArray;
+
+@property (strong, nonatomic) NSString *selectedPanelName;
 
 @property (weak, nonatomic) id<SGLPSettingViewControllerDelegate> delegate;
 

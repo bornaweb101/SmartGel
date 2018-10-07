@@ -20,9 +20,7 @@
 #import "SGLPSettingViewController.h"
 #import "SGProductSettingViewController.h"
 
-@interface SGLaboratoryViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate,SGCustomCameraViewControllerDelegate>{
-    int firstrun;
-    float vgood,good,satis,adeq,R,G,B,blankR,blankG,blankB,sampleR,sampleG,sampleB;
+@interface SGLaboratoryViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate,SGCustomCameraViewControllerDelegate,SGProductSettingViewControllerDelegate,SGLPSettingViewControllerDelegate>{
     uint DIA;
     double Diam;
     NSString *_diam;
@@ -31,7 +29,6 @@
     MBProgressHUD *hud;
     bool isSaved;
     int testImageIndex;
-    
     
     NSString *prevTag;
     NSString *prevTotalTagText;
@@ -47,15 +44,12 @@
 @property (strong, nonatomic) IBOutlet UIView *blankView;
 @property (strong, nonatomic) IBOutlet UIView *sampleView;
 @property (strong, nonatomic) IBOutlet UILabel *resultValueLabel;
-@property (strong, nonatomic) IBOutlet UILabel *lbldiam;
-@property (strong, nonatomic) IBOutlet UILabel *lblugormg;
 
 @property (strong, nonatomic) UITextField *customerTextField;
 @property (strong, nonatomic) UITextField *tagTextField;
 
 //@property (strong, nonatomic) IBOutlet UILabel *timeLabel;
 
-@property (strong, nonatomic) IBOutlet UIImageView *resultfoxImageView;
 
 @property (strong, nonatomic) LaboratoryEngine *laboratoryEngine;
 
@@ -75,6 +69,10 @@
 
 @property (strong, nonatomic) IBOutlet UIView *bottleView;
 @property (strong, nonatomic) IBOutlet UILabel *inputModeNotificationLabel;
+
+@property (strong, nonatomic) IBOutlet UILabel *productNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *panelNameLabel;
+
 
 
 @end

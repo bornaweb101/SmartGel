@@ -28,6 +28,9 @@
 @property (assign, nonatomic) int resultState;
 @property (assign, nonatomic) bool islaboratory;
 
+@property (strong, nonatomic) NSString *productName;
+@property (strong, nonatomic) NSString *panelName;
+
 -(instancetype)initWithSnapshot:(FIRDataSnapshot *) snapshot;
 
 @end
