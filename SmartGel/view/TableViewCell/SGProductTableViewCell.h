@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SGTag.h"
 
 @interface SGProductTableViewCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UILabel *itemLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *checkBox;
 
+-(void)setCell:(SGTag *)sgTag;
 @end

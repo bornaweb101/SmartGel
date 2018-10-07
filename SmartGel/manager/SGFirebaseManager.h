@@ -66,4 +66,7 @@ completionHandler:(void (^)(NSError *error))completionHandler;
 -(void)getLaboratorySampleValues:(NSString *)tag
                   withCompletion:(void (^)(NSError *error,NSMutableArray* array))completionHandler;
 
+-(void)getProducts:(NSString *)itemName withCompletion:(void (^)(NSError *error,NSMutableArray* array))completionHandler;
+-(void)addProduct:(NSString *)productName;
+
 @end

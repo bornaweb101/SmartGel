@@ -18,4 +18,8 @@
     [super setSelected:selected animated:animated];
 }
 
+-(void)setCell:(SGTag *)sgTag{
+    self.itemLabel.text = sgTag.tagName;
+}
+
 @end

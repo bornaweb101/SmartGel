@@ -279,6 +279,30 @@
     [self.dataBaseRef updateChildValues:childUpdates];
 }
 
+-(void)addProduct:(NSString *)productName{
+    NSString *currentTimeStirng = [SGUtil.sharedUtil getCurrentTimeString];
+    NSDictionary *post = @{
+                            @"name": productName,
+                           };
+//    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"%@/%@",@"products",currentTimeStirng]: post};
+    [[[self.dataBaseRef child:@"panels"] child:currentTimeStirng] setValue:post];
+}
+
+-(void)getProducts:(NSString *)itemName
+    withCompletion:(void (^)(NSError *error,NSMutableArray* array))completionHandler {
+    [[self.dataBaseRef child:itemName]  observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        NSMutableArray *productArray = [NSMutableArray array];
+        for(snapshot in snapshot.children){
+            SGTag *sgTag =  [[SGTag alloc] initWithSnapshotName:snapshot];
+            [productArray addObject:sgTag];
+        }
+        completionHandler(nil,productArray);
+    } withCancelBlock:^(NSError * _Nonnull error) {
+        completionHandler(error,nil);
+    }];
+}
+
+
 -(void)removeTag:(SGTag *)tag
 completionHandler:(void (^)(NSError *error))completionHandler{
     NSString *userID = [FIRAuth auth].currentUser.uid;

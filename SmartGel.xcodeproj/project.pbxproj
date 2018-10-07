@@ -92,7 +92,6 @@
 		5204E621216A0695004B1277 /* SGProductSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5204E620216A0695004B1277 /* SGProductSettingViewController.m */; };
 		5204E624216A06B1004B1277 /* SGLPSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5204E623216A06B1004B1277 /* SGLPSettingViewController.m */; };
 		5204E628216A0BDD004B1277 /* SGProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5204E627216A0BDD004B1277 /* SGProductTableViewCell.m */; };
-		5204E62B216A0BFA004B1277 /* SGLabSettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5204E62A216A0BFA004B1277 /* SGLabSettingTableViewCell.m */; };
 		5233DBCB2159D9A90000B112 /* 28_10_0.17.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 5233DBA62159D9A70000B112 /* 28_10_0.17.jpeg */; };
 		5233DBCC2159D9A90000B112 /* 28_5_0.07.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 5233DBA72159D9A70000B112 /* 28_5_0.07.jpeg */; };
 		5233DBCD2159D9A90000B112 /* 28_15_0.14.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 5233DBA82159D9A70000B112 /* 28_15_0.14.jpeg */; };
@@ -331,8 +330,6 @@
 		5204E623216A06B1004B1277 /* SGLPSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGLPSettingViewController.m; path = controller/SGLPSettingViewController.m; sourceTree = "<group>"; };
 		5204E626216A0BDD004B1277 /* SGProductTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGProductTableViewCell.h; path = view/TableViewCell/SGProductTableViewCell.h; sourceTree = "<group>"; };
 		5204E627216A0BDD004B1277 /* SGProductTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGProductTableViewCell.m; path = view/TableViewCell/SGProductTableViewCell.m; sourceTree = "<group>"; };
-		5204E629216A0BFA004B1277 /* SGLabSettingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGLabSettingTableViewCell.h; path = view/TableViewCell/SGLabSettingTableViewCell.h; sourceTree = "<group>"; };
-		5204E62A216A0BFA004B1277 /* SGLabSettingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGLabSettingTableViewCell.m; path = view/TableViewCell/SGLabSettingTableViewCell.m; sourceTree = "<group>"; };
 		5233DBA62159D9A70000B112 /* 28_10_0.17.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 28_10_0.17.jpeg; path = test_image/laboratory/628/28_10_0.17.jpeg; sourceTree = SOURCE_ROOT; };
 		5233DBA72159D9A70000B112 /* 28_5_0.07.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 28_5_0.07.jpeg; path = test_image/laboratory/628/28_5_0.07.jpeg; sourceTree = SOURCE_ROOT; };
 		5233DBA82159D9A70000B112 /* 28_15_0.14.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 28_15_0.14.jpeg; path = test_image/laboratory/628/28_15_0.14.jpeg; sourceTree = SOURCE_ROOT; };
@@ -690,8 +687,6 @@
 			children = (
 				5204E626216A0BDD004B1277 /* SGProductTableViewCell.h */,
 				5204E627216A0BDD004B1277 /* SGProductTableViewCell.m */,
-				5204E629216A0BFA004B1277 /* SGLabSettingTableViewCell.h */,
-				5204E62A216A0BFA004B1277 /* SGLabSettingTableViewCell.m */,
 			);
 			name = SGLabSetting;
 			sourceTree = "<group>";
@@ -1523,7 +1518,6 @@
 				8DCA169520A3866B00720FB3 /* SGColorUtil.m in Sources */,
 				8D5662531FD719D1008DFED2 /* SGLaboratoryViewController.m in Sources */,
 				8D26D1501FFDC197002BFAB8 /* SGSharedManager.m in Sources */,
-				5204E62B216A0BFA004B1277 /* SGLabSettingTableViewCell.m in Sources */,
 				8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */,
 				8D1CC8DB209780D400949745 /* SGCustomCameraViewController.m in Sources */,
 				8DB669F91FDE8B6100BB3966 /* SGLaboratoryItemViewController.m in Sources */,

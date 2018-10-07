@@ -20,6 +20,15 @@
     return self;
 }
 
+-(instancetype)initWithSnapshotName:(FIRDataSnapshot *) snapshot{
+    self = [super init];
+    if(self){
+        self.tagName = snapshot.value[@"name"];
+    }
+    return self;
+}
+
+
 -(instancetype)init{
     
     self = [super init];

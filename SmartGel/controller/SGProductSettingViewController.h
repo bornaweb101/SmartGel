@@ -7,8 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SGProductTableViewCell.h"
+#import "SGTag.h"
+#import "SGFirebaseManager.h"
+#import "MBProgressHUD.h"
+#import "SGBaseViewController.h"
 
-@interface SGProductSettingViewController : UIViewController
+@protocol SGProductSettingViewControllerDelegate <NSObject>
+@required
+- (void)onSelectProduct;
+@end
+
+@interface SGProductSettingViewController : SGBaseViewController<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *productTableView;
+@property (strong, nonatomic) NSMutableArray *tagArray;
+
+@property (weak, nonatomic) id<SGProductSettingViewControllerDelegate> delegate;
 
 @end

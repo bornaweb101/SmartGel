@@ -7,7 +7,6 @@
 //
 
 #import "SGProductSettingViewController.h"
-#import "SGProductTableViewCell.h"
 
 @interface SGProductSettingViewController ()
 
@@ -17,15 +16,35 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tagArray = [NSMutableArray array];
+    [self getTagArrays];
+//    [[SGFirebaseManager sharedManager] addProduct:@"TM DESANA MAX FP"];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
+-(void)getTagArrays{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    __weak typeof(self) wself = self;
+    [[SGFirebaseManager sharedManager] getProducts:@"products" withCompletion:^(NSError *error,NSMutableArray* array) {
+        __strong typeof(wself) sself = wself;
+        [hud hideAnimated:false];
+        if (sself) {
+            if(error==nil){
+                sself.tagArray = array;
+                [sself.productTableView reloadData];
+            }else{
+                [sself showAlertdialog:@"Error!" message:error.localizedDescription];
+            }
+        }
+    }];
+}
+
 #pragma mark - Table View Data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return self.tagArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -35,11 +54,21 @@
     if (cell == nil) {
         cell = [[SGProductTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    cell.textLabel.text = @"TM DESENA MAX FP";
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    SGTag *sgTag = [self.tagArray objectAtIndex:indexPath.row];
+    [cell setCell:sgTag];
     return cell;
 }
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 0;
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
 }
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
+}
+
 
 @end

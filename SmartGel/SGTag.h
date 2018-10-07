@@ -21,5 +21,6 @@
 
 -(instancetype)initWithSnapshot:(FIRDataSnapshot *) snapshot;
 -(void)updateSelectedState;
+-(instancetype)initWithSnapshotName:(FIRDataSnapshot *) snapshot;
 
 @end
