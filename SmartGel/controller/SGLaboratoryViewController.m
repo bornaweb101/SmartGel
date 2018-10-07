@@ -672,4 +672,13 @@
     }
 }
 
+-(IBAction)productSettingClicked{
+    SGProductSettingViewController *productVC = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"SGProductSettingViewController"];
+    [self.navigationController pushViewController:productVC animated:YES];
+}
+
+-(IBAction)lightSettingClicked{
+    SGLPSettingViewController *lpVC = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"SGLPSettingViewController"];
+    [self.navigationController pushViewController:lpVC animated:YES];
+}
 @end

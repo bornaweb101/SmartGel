@@ -17,6 +17,8 @@
 #import "SCLAlertView.h"
 #import "SGLaboratorySample.h"
 #import "SGRealmManager.h"
+#import "SGLPSettingViewController.h"
+#import "SGProductSettingViewController.h"
 
 @interface SGLaboratoryViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate,SGCustomCameraViewControllerDelegate>{
     int firstrun;
