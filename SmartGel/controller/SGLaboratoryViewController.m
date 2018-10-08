@@ -613,6 +613,7 @@
 -(IBAction)editButtonClicked{
     if(isInputMode){
         isInputMode = false;
+        isSaved = true;
         self.bottleView.alpha = 1;
         [self.inputModeNotificationLabel setHidden:true];
     }else{
